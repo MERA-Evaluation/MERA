@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pyre type checker
+.pyre/
+
+# vim stuff
+*.ropeproject
+*.swp
+
+# intellij
+*.idea
+*.run
+
+# models
+*.model
+*.pt
+*.pth
+*.ckpt
+*.bin
+.s3_cache/
+
+# MAC
+.DS_Store
+
+
+env
+*.ipynb_checkpoints
+*.pyc
+output/
+lm_cache
+lm_data
+private_scripts
+build
+dist
+*.egg-info
+venv
+.vscode/
+temp
+# IPython
+profile_default/
+ipython_config.py
+# don't track (the default location of) the cached requests
+lm_eval/caching/.cache
+# don't track files created by wandb
+wandb
+examples/wandb
