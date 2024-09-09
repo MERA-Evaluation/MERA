@@ -1,10 +1,9 @@
 # inherit from right to left
 include: [../letter_choice_gen_task.yaml, mamuramu.yaml]
-group:
+tag:
   - mera_gen
   - mera_all
 task: mamuramu_gen
-training_split: train
 process_results: !function utils.process_results
 metric_list:
   - metric: em

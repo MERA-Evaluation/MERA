@@ -1,10 +1,9 @@
 include: ../custom_loglikelihood_task.yaml
-group:
+tag:
   - mera
   - mera_all
 task: mamuramu
 dataset_name: mamuramu
-training_split: train
 fewshot_config:
   sampler: !function ../custom_samplers.FewshotSampler  # processes no instruction doc and changes doc_to_text
   doc_to_text_without_instruction: "{{'{text}\nA) {option_a}\nB) {option_b}\nC) {option_c}\nD) {option_d}\nОтвет:'.format(**inputs).lstrip()}}"

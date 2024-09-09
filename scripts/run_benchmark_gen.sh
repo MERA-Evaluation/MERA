@@ -11,12 +11,14 @@ FEWSHOTS=(
  2
  1
  0
+ 1
 )
 
 TASKS=(
 "simplear"
 "bps_gen lcs_gen chegeka mathlogicqa_gen parus_gen rcb_gen rudetox ruhatespeech_gen rummlu_gen ruworldtree_gen ruopenbookqa_gen rumultiar use rwsd_gen  mamuramu_gen"
 "multiq rumodar ruethics_gen ruhhh_gen rutie_gen ruhumaneval rucodeeval"
+"rutie_gen"
 )
 
 for fewshot_idx in "${!FEWSHOTS[@]}"

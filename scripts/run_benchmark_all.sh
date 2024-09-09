@@ -11,12 +11,14 @@ FEWSHOTS=(
  2
  1
  0
+ 1
 )
 
 TASKS=(
 "simplear"
 "bps lcs bps_gen lcs_gen chegeka mathlogicqa mathlogicqa_gen parus rcb parus_gen rcb_gen rudetox ruhatespeech ruhatespeech_gen rummlu rummlu_gen ruworldtree ruopenbookqa ruworldtree_gen ruopenbookqa_gen rumultiar use rwsd rwsd_gen mamuramu mamuramu_gen"
-"multiq rumodar ruethics ruethics_gen ruhhh ruhhh_gen rutie rutie_gen ruhumaneval rucodeeval"
+"multiq rumodar ruethics ruethics_gen ruhhh ruhhh_gen ruhumaneval rucodeeval"
+"rutie rutie_gen"
 )
 
 for fewshot_idx in "${!FEWSHOTS[@]}"

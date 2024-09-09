@@ -1,0 +1,6 @@
+include: mamuramu_gen.yaml
+tag:
+  - mera_all_local
+  - mera_gen_local
+task: mamuramu_gen_localscore
+test_split: train
