@@ -29,12 +29,23 @@ do
         GEN_KWARGS=${RUHUMANEVAL_GEN_KWARGS}; else
         GEN_KWARGS=${GENERATION_KWARGS}; fi
 
-    HF_DATASETS_CACHE="${MERA_FOLDER}/ds_cache" TOKENIZERS_PARALLELISM=false HF_DATASETS_IN_MEMORY_MAX_SIZE=23400000 \
-    CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES  PYTHONPATH=$PWD \
-    lm_eval --model hf --model_args "${MERA_MODEL_STRING}" --tasks $cur_task \
-    --num_fewshot=${FEWSHOTS[$fewshot_idx]} --gen_kwargs="${GEN_KWARGS}" \
-    --output_path="${MERA_FOLDER}" ${MERA_COMMON_SETUP} \
-    --include_path=./benchmark_tasks
+    if test -z "${SYSTEM_PROMPT}"
+    then
+        HF_DATASETS_CACHE="${MERA_FOLDER}/ds_cache" TOKENIZERS_PARALLELISM=false HF_DATASETS_IN_MEMORY_MAX_SIZE=23400000 \
+        CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES  PYTHONPATH=$PWD \
+        lm_eval --model hf --model_args "${MERA_MODEL_STRING}" --tasks $cur_task \
+        --num_fewshot=${FEWSHOTS[$fewshot_idx]} --gen_kwargs="${GEN_KWARGS}" \
+        --output_path="${MERA_FOLDER}" ${MERA_COMMON_SETUP} \
+        --include_path=./benchmark_tasks
+    else
+        PROCESSED_SYSTEM=$(printf "%b" "$SYSTEM_PROMPT")
+        HF_DATASETS_CACHE="${MERA_FOLDER}/ds_cache" TOKENIZERS_PARALLELISM=false HF_DATASETS_IN_MEMORY_MAX_SIZE=23400000 \
+        CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES  PYTHONPATH=$PWD \
+        lm_eval --model hf --model_args "${MERA_MODEL_STRING}" --tasks $cur_task \
+        --num_fewshot=${FEWSHOTS[$fewshot_idx]} --gen_kwargs="${GEN_KWARGS}" \
+        --output_path="${MERA_FOLDER}" ${MERA_COMMON_SETUP} --system_instruction="${PROCESSED_SYSTEM}" \
+        --include_path=./benchmark_tasks
+    fi
 
   done
 done
