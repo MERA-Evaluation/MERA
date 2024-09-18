@@ -7,8 +7,6 @@ The dataset is aimed at measuring the functional correctness of code generation 
 
 **Warning:** to avoid data leakage for ruHumanEval, we created the NEW closed test set that follows the original HumanEval design. Thus, **results on the HumanEval and ruHumanEval datasets cannot be directly compared with each other.**
 
-**Warning:** open data is the public test set of the original ruHumanEval dataset. Do not use it in train purposes!
-
 **Warning:** This is a diagnostic dataset with an open test and is not used for general model evaluation on the benchmark.
 
 **Keywords:** PLP, programming, Python
