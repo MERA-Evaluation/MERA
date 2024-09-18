@@ -1,12 +1,9 @@
-# **ruHumanEval**
+# **ruCodeEval**
 
 ## Task Description
 
-Russian HumanEval (ruHumanEval) is the Russian analogue of the original HumanEval dataset, created to evaluate the ability of language models to generate code in the Python programming language to solve simple problems.
+Russian Code Evaluation (ruCodeEval) is the Russian analogue of the original HumanEval dataset, created to evaluate the ability of language models to generate code in the Python programming language to solve simple problems.
 The dataset is aimed at measuring the functional correctness of code generation based on information from the function's documentation lines — a text description of the function's operation and several examples of results for different input data.
-
-**Warning:** This is a diagnostic dataset with an open test and is not used for general model evaluation on the benchmark. Results on the HumanEval and the ruHumanEval datasets cannot be directly compared with each other. Open data is the public test set of the original ruHumanEval dataset. Do not use it in train purposes!
-
 
 **Keywords:** PLP, programming, Python
 
@@ -62,7 +59,7 @@ Below is an example from the dataset:
 
 ### Data Splits
 
-The public test contains `164` tasks with test cases and answers from the original dataset. The closed test set contains `164` tasks with closed answers specially collected by authors for this benchmark. For the test set, we provide only test cases without outputs and solutions.
+The closed test set contains `164` tasks with closed answers specially collected by authors for this benchmark. For the test set, we provide only test cases without outputs and solutions.
 
 ### Prompts
 
@@ -72,9 +69,7 @@ For this task 10 prompts of varying difficulty were created. Example:
 
 ### Dataset Creation
 
-The open set was translated into Russian from the dataset [openai_humaneval](https://huggingface.co/datasets/openai_humaneval). We corrected typos in the docstring and canonical solutions and made the corrections described in [2].
-
-The test set was manually collected from open sources according to the format of the original open set and also adjusted to avoid data leakage in training.
+The test set was manually collected from open sources according to the format of the original open set [openai_humaneval](https://huggingface.co/datasets/openai_humaneval), adjusted the dataset to avoid data leakage in training and took into account the corrections described in [2].
 
 ## Evaluation
 
