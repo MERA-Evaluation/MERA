@@ -4,7 +4,9 @@
 
 Original **Massive Multitask Language Understanding (MMLU)** translated into Russian. This dataset is designed to measure model professional knowledge acquired during pretraining in various fields. The task covers 57 subjects (subdomains) across different topics (domains): HUMANITIES; SOCIAL SCIENCE; SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS (STEM); OTHER. The dataset was translated into Russian from original MMLU dataset proposed in [1] and presented in instruction format. Each example contains a question from one of the categories with four possible answers, only one of which is correct.
 
-**Warning:** **results on the MMLU and ruMMLU datasets cannot be directly compared with each other.** 
+**Warning:** results on the MMLU and ruMMLU datasets cannot be directly compared with each other.
+
+**Warning:** This is a diagnostic dataset with an open test and is not used for general model evaluation on the benchmark. Open data is the public test set of the original ruHumanEval dataset. Do not use it in train purposes!
 
 **Keywords**: logic, world knowledge, factual, expert knowledge
 
