@@ -1,16 +1,16 @@
-# **MMLU**
+# **MaMuRAMu**
 
 ## Task Description
 
-Original **Massive Multitask Language Understanding (MMLU)** translated into Russian. This dataset is designed to measure model professional knowledge acquired during pretraining in various fields. The task covers 57 subjects (subdomains) across different topics (domains): HUMANITIES; SOCIAL SCIENCE; SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS (STEM); OTHER. The dataset was translated into Russian from original MMLU dataset proposed in [1] and presented in instruction format. Each example contains a question from one of the categories with four possible answers, only one of which is correct.
+**Massive Multitask Russian AMplified Understudy  (MaMuRAMu)** is a dataset designed to measure model professional knowledge acquired during pretraining in various fields. The task covers 57 subjects (subdomains) across different topics (domains): HUMANITIES; SOCIAL SCIENCE; SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS (STEM); OTHER. The dataset was created based on the English MMLU proposed in [1] and follows its methodology in instruction format. Each example contains a question from one of the categories with four possible answers, only one of which is correct.
 
-**Warning:** **results on the MMLU and ruMMLU datasets cannot be directly compared with each other.** 
+**Warning:** to avoid data leakage for MaMuRAMu, we created the NEW closed dataset that follows the original MMLU design. Thus, **results on the MMLU and MaMuRAMu datasets cannot be directly compared with each other.**
 
 **Keywords**: logic, world knowledge, factual, expert knowledge
 
 ### Motivation
 
-This set is a continuation of the idea GLUE [2] and SuperGLUE [3] benchmarks, which focus on generalized assessment of tasks for understanding the language (NLU). Unlike sets like ruWorldTree and ruOpenBookQA (where questions are similar to MMLU format), which cover tests of the school curriculum and elementary knowledge, MMLU is designed to test professional knowledge in various fields. We provide public test version of MMLU in Russian for testing models.
+This set is a continuation of the idea GLUE [2] and SuperGLUE [3] benchmarks, which focus on generalized assessment of tasks for understanding the language (NLU). Unlike sets like ruWorldTree and ruOpenBookQA (where questions are similar to MMLU format), which cover tests of the school curriculum and elementary knowledge, MaMuRAMu is designed to test professional knowledge in various fields.
 
 ## Dataset Description
 
@@ -37,24 +37,24 @@ Below is an example from the dataset:
 {
     "instruction": "Задание содержит вопрос по теме {subject} и 4 варианта ответа A, B, C, D, из которых только один правильный.\n{text}\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nЗапишите букву правильного ответа\nОтвет:",
     "inputs": {
-        "text": "Найдите характеристику кольца 2Z.",
-        "option_a": "0",
-        "option_b": "3",
-        "option_c": "12",
-        "option_d": "30",
+        "text": "Чему равен косинус угла 0 градусов?",
+        "option_a": "-1",
+        "option_b": "0",
+        "option_c": "1",
+        "option_d": "π/2",
         "subject": "Математика"
     },
-    "outputs": "A",
+    "outputs": "C",
     "meta": {
-        "id": 4,
-        "domain": "abstract_algebra"
+        "id": 6,
+        "domain": "high_school_mathematics"
     }
 }
 ```
 
 ### Data Splits
 
-The test set contains`14012` hand-written translated examples of MMLU test. The few-shot train set `285` hand-written translated examples of MMLU dev.
+The private test set (test split) contains `4250` examples. The few-shot set (train split) `285` hand-written examples.
 
 ### Prompts
 
@@ -64,7 +64,7 @@ For this task 5 prompts of varying difficulty were created. Example:
 
 ### Dataset Creation
 
-The [original MMLU dataset](https://github.com/hendrycks/test) was translated using the following pipeline: 1) the test and dev part of MMLU was translated into Russian using automatic translation; 2) the translations were verified on the Yandex.Toloka platform; 3) the data that did not pass verification was manually validated and Russified. 
+The test set is based on the [the original MMLU dataset](https://github.com/hendrycks/test) methodology. The set was assembled manually according to the original format with domains as close as possible to the original set. The set is adapted for the Russian language and culture. The distribution of tasks across individual specific domains and subjects are balanced and corresponds to the distribution of the original MMLU.
 
 ## Evaluation
 
@@ -81,7 +81,7 @@ Accuracy of the annotation on the test set is `84.4%`.
 
 ## Limitations
 
-The questions relate to human knowledge relevant on January 1, 2020.
+The questions relate to human knowledge relevant on October 31, 2023.
 
 ## References
 
