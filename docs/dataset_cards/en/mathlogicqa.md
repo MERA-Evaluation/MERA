@@ -39,19 +39,19 @@ Below is an example from the dataset:
 
 ```json
 {
-    "instruction": "Задача: {text}\nВарианты ответа:\nA) {option_a}\nB) {option_b}\nC) {option_c}\nD) {option_d}\nКакой ответ является правильным? Запишите только букву верного варианта: A, B, C или D.\nОтвет: ",
-    "inputs": {
-        "text": "Если из 839 вычесть 924, то получится -17, умноженное на w. Каково значение переменной w?",
-        "option_a": "0",
-        "option_b": "1",
-        "option_c": "-5",
-        "option_d": "5"
-    },
-    "outputs": "D",
-    "meta": {
-        "id": 4,
-        "task": "math"
-    }
+	"instruction": "{text}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nУкажите только букву правильного ответа.\nОтвет:",
+	"inputs": {
+		"text": "Если из 17 вычесть 26, то получится 3, умноженное на q. Рассчитайте значение переменной q.",
+		"option_a": "-3",
+		"option_b": "3",
+		"option_c": "14",
+		"option_d": "14.3"
+	},
+	"outputs": "A",
+	"meta": {
+		"id": 1,
+		"task": "math"
+	}
 }
 ```
 
@@ -62,7 +62,9 @@ The train set consists of  `680` examples. The test set consists of `1143` examp
 ### Prompts
 10 prompts of varying difficulty were created for this task. Example:
 
- `"Прочитайте математическую задачу и варианты ответа. Неизвестные переменные в задаче могут выражаться любыми латинскими буквами.\nЗадача: {text}\nВарианты ответа:\nA) {option_a}\nB) {option_b}\nC) {option_c}\nD) {option_d}\nРешите задачу и запишите в качестве ответа только букву верного варианта: A, B, C или D без дополнительных символов.\nОтвет:"`
+```json
+"Решите математичеcкую задачу: {text}\nA) {option_a}\nB) {option_b}\nC) {option_c}\nD) {option_d}\nВыберите один правильный ответ. В ответе укажите только букву правильного ответа.\nОтвет:"
+```
 
 ### Dataset Creation
 
