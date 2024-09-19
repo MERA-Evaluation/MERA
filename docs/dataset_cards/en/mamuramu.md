@@ -37,17 +37,17 @@ Below is an example from the dataset:
 {
     "instruction": "Задание содержит вопрос по теме {subject} и 4 варианта ответа A, B, C, D, из которых только один правильный.\n{text}\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nЗапишите букву правильного ответа\nОтвет:",
     "inputs": {
-        "text": "Чему равен косинус угла 0 градусов?",
-        "option_a": "-1",
-        "option_b": "0",
-        "option_c": "1",
-        "option_d": "π/2",
+        "text": "Какое число больше остальных: 73; 52,5; -5; 75; 32,83?",
+        "option_a": "73",
+        "option_b": "52,5",
+        "option_c": "-5",
+        "option_d": "75",
         "subject": "Математика"
     },
-    "outputs": "C",
+    "outputs": "D",
     "meta": {
-        "id": 6,
-        "domain": "high_school_mathematics"
+        "id": 0,
+        "domain": "elementary_mathematics"
     }
 }
 ```
@@ -60,7 +60,9 @@ The private test set (test split) contains `4248` examples. The few-shot set (tr
 
 For this task 10 prompts of varying difficulty were created. Example:
 
-`"Ниже приведен вопрос на определенную профессиональную тематику {subject} и даны варианты ответа A, B, C, D. Гарантируется, что только один из ответов правильный.\nПравильно ответьте на вопрос, выбрав букву A, B, C или D:\n{text}\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nОтвет:"`.
+```json
+"Вопрос:\n{text}. Варианты ответа:\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nИспользуй знания по теме {subject} и выбери правильный ответ. Выведи только одну букву. Ответ:"
+```
 
 ### Dataset Creation
 
