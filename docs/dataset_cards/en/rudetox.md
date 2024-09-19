@@ -52,7 +52,7 @@ The task includes a train and a test set containing 6948 and 800 examples, respe
 
 ### Prompts
 
-For this task 8 prompts of varying difficulty were created. Example:
+For this task 10 prompts of varying difficulty were created. Example:
 
 `"Токсичное утверждение: "{toxic_comment}"\nПерепиши это утверждение так, чтобы оно стало уважительным и не содержало оскорблений, но при этом передавало бы тот же смысл и сохраняло орфографию и пунктуацию. Ответ:"`.
 
