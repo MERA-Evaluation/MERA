@@ -91,7 +91,6 @@
 
 ![https://mera.a-ai.ru/storage/editor/sbCvfIHvx7bb4OYHurmj2S53VgKL90aXb7eyKtxx.png](https://mera.a-ai.ru/storage/editor/sbCvfIHvx7bb4OYHurmj2S53VgKL90aXb7eyKtxx.png)
 
-Select an Image
 
 Обозначения: n - общее количество сгенерированных вариантов решений, c - число решений, которые являются корректными, k - выбираемый показатель, сколько вариантов учитываем.
 
