@@ -55,6 +55,8 @@ Below is an example from the dataset:
     }
 }
 
+```
+
 ### Data Splits
 
 The closed test set contains `164` tasks with closed answers specially collected by authors for this benchmark. For the test set, we provide only test cases without outputs and solutions.
