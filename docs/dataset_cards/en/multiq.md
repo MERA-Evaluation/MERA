@@ -66,7 +66,7 @@ The dataset consists of `1056` training examples (train set) and `900` test exam
 
 ### Prompts
 
-We prepared 5 different prompts of various difficulties for this task.
+We prepared 10 different prompts of various difficulties for this task.
 An example of the prompt is given below:
 
 `"Прочитайте два текста и ответьте на вопрос.\nТекст 1: {support_text}\nТекст 2: {text}\nВопрос: {question}\nОтвет:"`.
