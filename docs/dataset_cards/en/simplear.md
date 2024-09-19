@@ -43,7 +43,7 @@ The train set consists of `1000` examples of arithmetic expressions. The test se
 
 ### Prompts
 
-The number of prompts used for the task: 6. The following prompts for the task are used:
+The number of prompts used for the task is 10. The following prompts for the task are used:
 
 ```json
 [
