@@ -2,8 +2,8 @@
 
 ## Task Description
 
-Russian Code Evaluation (ruCodeEval) is the Russian analogue of the original HumanEval dataset, created to evaluate the ability of language models to generate code in the Python programming language to solve simple problems.
-The dataset is aimed at measuring the functional correctness of code generation based on information from the function's documentation lines — a text description of the function's operation and several examples of results for different input data.
+Russian Code Evaluation (ruCodeEval) is the Russian analog of the original HumanEval dataset, created to evaluate the ability of language models to generate code in the Python programming language to solve simple problems.
+The dataset aims to measure the functional correctness of code generation based on information from the function's documentation lines—a text description of the function's operation and several examples of results for different input data.
 
 **Keywords:** PLP, programming, Python
 
@@ -84,7 +84,7 @@ Notation: *n* is the total number of generated solution options, *c* is the numb
 To calculate `pass@k`, `n ≥ k` solutions are generated for each problem and are run through test cases (we use n = 10 and k ≤ 10 and an average of 10 test cases per problem). Then, the number of the correct solutions is calculated (`c ≤ n`). The solution is considered to be correct if it passes all test cases. That means the result of running solutions on test cases should be equal to the correct answers (outputs) for one problem. Such an evaluation process yields an unbiased score.
 
 ### Human evaluation
-Dataset includes algorithmic problems that require knowledge of the Python programming language, which is too complex skill for an average annotator. All problems have strict solutions, therefore all human evaluation metrics are taken as `1.0`.
+The dataset includes algorithmic problems that require knowledge of the Python programming language, which is too complex for an average annotator. All problems have strict solutions, so all human evaluation metrics are taken as `1.0`.
 
 ## References
 
