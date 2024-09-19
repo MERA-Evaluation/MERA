@@ -63,40 +63,48 @@ The dataset explores:
 
 One complete example of a task is one dialogue. Formally, the dialogue looks like this:
 
-```
+```json
 [
-    {
-        "instruction": "Вам дан диалог, в котором необходимо продолжить реплики. Учитывая контекст диалога, и два варианта ответа на реплику (вопрос) ответьте на последний вопрос.\n{context}\n{question}\n1. {choice1}\n2. {choice2}\nКакой ответ наиболее правильный?",
-        "inputs": {
-            "question": "Сколько ног у человека?",
-            "choice1": "Две",
-            "choice2": "Четыре"
-        },
-        "outputs": "1",
-        "meta": {
-            "dialog_id": 0,
-            "question_id": 0,
-            "category": ["world"],
-            "use_context": false,
-            "turing_imitation": ["facts"]
-        }
-    },
-    {
-        "instruction": "Вам дан диалог, в котором необходимо продолжить реплики. Учитывая предыдущий контекст диалога, и два варианта ответа на вопрос ответьте на последний.\n{context}\n{question}\n1) {choice1}\n2) {choice2}\nКакой ответ наиболее правильный?",
-        "inputs": {
-            "question": "А у муравья?",
-            "choice1": "Две",
-            "choice2": "Шесть"
-        },
-        "outputs": "2",
-        "meta": {
-            "dialog_id": 0,
-            "question_id": 1,
-            "category": ["world", "memory"],
-            "use_context": true,
-            "turing_imitation": ["facts"]
-        }
-    }
+  {
+      "instruction": "Вам дан диалог и два варианта ответа. Учитывая контекст диалога, ответьте на последний вопрос, поставив только цифру 1 или 2.\n{context}\n{question}\n1. {choice1}\n2. {choice2}\nКакой ответ из двух наиболее правильный?",
+      "inputs": {
+          "question": "Сколько ног у человека?",
+          "choice1": "Две",
+          "choice2": "Четыре"
+      },
+      "outputs": "1",
+      "meta": {
+          "dialog_id": 0,
+          "question_id": 0,
+          "category": [
+              "world"
+          ],
+          "use_context": false,
+          "turing_imitation": [
+              "facts"
+          ]
+      }
+  },
+  {
+      "instruction": "Вам дан диалог, в котором необходимо продолжить реплики. Учитывая контекст диалога, и два варианта ответа на реплику (вопрос) ответьте на последний вопрос.\n{context}\n{question}\n1. {choice1}\n2. {choice2}\nКакой ответ наиболее правильный? Укажите только номер ответа без дополнительных пояснений.",
+      "inputs": {
+          "question": "А у муравья?",
+          "choice1": "Две",
+          "choice2": "Шесть"
+      },
+      "outputs": "2",
+      "meta": {
+          "dialog_id": 0,
+          "question_id": 1,
+          "category": [
+              "world"
+          ],
+          "use_context": true,
+          "turing_imitation": [
+              "facts"
+          ]
+      }
+  }
 ]
 ```
 
@@ -108,12 +116,11 @@ To run the model on the dataset, you need to consistently submit replies by `que
 
     ```
     Вам дан диалог, в котором необходимо продолжить реплики. Учитывая предыдущий контекст диалога, и два варианта ответа на вопрос ответьте на последний.
-    Сколько ног у человека?
-    Четыре
     {question}
     1) {choice1}
     2) {choice2}
     Какой ответ наиболее правильный?
+    Ответ:
     ```
 
 - Next, it is necessary to substitute by analogy the question and answer options of the following ordinal example from the dataset and send them to the model:
@@ -121,11 +128,15 @@ To run the model on the dataset, you need to consistently submit replies by `que
     ```
     Вам дан диалог, в котором необходимо продолжить реплики. Учитывая предыдущий контекст диалога, и два варианта ответа на вопрос ответьте на последний.
     Сколько ног у человека?
-    Четыре
+    1. Две
+    2. Четыре
+    Ответ: 1
+
     А у муравья?
     1) Две
     2) Шесть
     Какой ответ наиболее правильный?
+    Ответ:
     ```
 
 - And so forth until the end of the dialogue.
@@ -140,8 +151,9 @@ The first version of the dataset consists of only one long dialogue of length `5
 
 The instruction (prompt) is sent to the entire dataset, and not to each replica. We created 10 different prompts, such as:
 
-`"Вам дан диалог, в котором необходимо продолжить реплики. Учитывая контекст диалога, и два варианта ответа на реплику (вопрос) ответьте на последний вопрос.\n{context}\n{question}\n1. {choice1}\n2. {choice2}\n
-Какой ответ наиболее правильный?"`.
+```json
+"Ниже приведен диалог, в котором последней репликой является вопрос. Выберите ответ на этот вопрос из двух приведенных вариантов, укажите только цифру 1 или 2.\nДиалог:\n{context}\n{question}\nВарианты ответа:1. {choice1}\n2. {choice2}\nОтвет:"
+```
 
 ### Dataset Creation
 
