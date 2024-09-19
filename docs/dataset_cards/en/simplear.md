@@ -28,11 +28,11 @@ Below is an example from the dataset:
 
 ```json
 {
-    "instruction": "Выполните арифметическую операцию.\n{inputs}",
-    "inputs": "901 + 164 = ",
-    "outputs": "1065",
+    "instruction": "Напишите ответ для математического выражения.\n{inputs}",
+    "inputs": "663 + 806 = ",
+    "outputs": "1469",
     "meta": {
-        "id": 679
+        "id": 412
     }
 }
 ```
@@ -43,17 +43,10 @@ The train set consists of `1000` examples of arithmetic expressions. The test se
 
 ### Prompts
 
-The number of prompts used for the task is 10. The following prompts for the task are used:
+The number of prompts used for the task is 10. Example:
 
 ```json
-[
-    "Вычислите математическое выражение:\n{inputs}",
-    "Выполните арифметическую операцию.\n{inputs}",
-    "Напишите ответ для математического выражения.\n{inputs}",
-    "Сложите два числа:\n{inputs}",
-    "Сложите первое и второе слагаемые: {inputs} и напишите ответ.",
-    "Выполните арифметическую операцию. В качестве ответа напишите число, которое получается после ее выполнения.\n{inputs}"
-]
+"Реши математическую задачу на сложение чисел. Выведи ответ в формате \"number\", где number - число, которое является результатом сложения.\nОтвет:"
 ```
 
 ### Dataset Creation
