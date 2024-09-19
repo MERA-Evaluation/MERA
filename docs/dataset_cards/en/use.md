@@ -367,7 +367,7 @@ Dev set consists of 30 complete versions of exam tests. In total, it included `9
 Test set consists of 30 complete versions of exam tests. In total, it included `900` tasks: 30 tasks of the **matching** type, 630 tasks of the **multiple_choice** type, 240 tasks of the **text** type.
 
 ### Prompts
-Number of prompts per sub-tasks multiplied by the number of sub-tasks 3x5. Example for sub-task:
+Number of prompts per sub-tasks multiplied by the number of sub-tasks 3x10. Example for sub-task:
 ```json
 {
     "multiple_choice": {
