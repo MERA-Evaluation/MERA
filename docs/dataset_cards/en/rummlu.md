@@ -39,17 +39,17 @@ Below is an example from the dataset:
 {
     "instruction": "Задание содержит вопрос по теме {subject} и 4 варианта ответа A, B, C, D, из которых только один правильный.\n{text}\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nЗапишите букву правильного ответа\nОтвет:",
     "inputs": {
-        "text": "Пусть A - множество всех упорядоченных пар целых чисел (m, n), таких, что 7m + 12n = 22. Какое наибольшее отрицательное число в множестве B = {m + n : (m, n) \\in A}?\n",
-        "option_a": "-5",
-        "option_b": "-4",
-        "option_c": "-3",
-        "option_d": "-2",
-        "subject": "математика"
+        "text": "Найдите все c в Z_3 таким образом, чтобы Z_3[x]/(x ^ 2 + c) было полем.",
+        "option_a": "0",
+        "option_b": "1",
+        "option_c": "2",
+        "option_d": "3",
+        "subject": "Математика"
     },
     "outputs": "B",
     "meta": {
-        "id": 666,
-        "domain": "college_mathematics"
+        "id": 0,
+        "domain": "abstract_algebra"
     }
 }
 ```
@@ -62,7 +62,9 @@ The public test set contains `14012` examples translated from the original MMLU 
 
 For this task 10 prompts of varying difficulty were created. Example:
 
-`"Ниже приведен вопрос на определенную профессиональную тематику {subject} и даны варианты ответа A, B, C, D. Гарантируется, что только один из ответов правильный.\nПравильно ответьте на вопрос, выбрав букву A, B, C или D:\n{text}\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nОтвет:"`.
+```json
+"Дан вопрос по теме {subject}: {text}. Варианты ответа:\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nОпредели, какой вариант ответа правильный. Напиши только букву этого ответа: A, B, C, D. Ответ:"
+```
 
 ### Dataset Creation
 
