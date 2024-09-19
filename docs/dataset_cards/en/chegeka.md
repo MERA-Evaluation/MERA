@@ -33,17 +33,17 @@ Each instance in the dataset contains an instruction, a question, the topic of t
 
 ```json
 {
-    "instruction": "Вы участвуете в викторине “Что? Где? Когда?”. Внимательно прочитайте вопрос из категории \"{topic}\" и ответьте на него.\nВопрос: {text}\nВ качестве ответа запишите только ваш вариант без дополнительных объяснений.\nОтвет:",
+    "instruction": "Вы участвуете в викторине “Что? Где? Когда?”. Категория вопроса: {topic}\nВнимательно прочитайте и ответьте на него только словом или фразой. Вопрос: {text}\nОтвет:",
     "inputs": {
-        "text": "В корриде, кроме быка, он тоже играет одну из главных ролей.",
-        "topic": "\"ТОР\""
+        "text": "Веку ожерелий (вулкан).",
+        "topic": "ГЕОГРАФИЧЕСКИЕ КУБРАЕЧКИ"
     },
-    "outputs": "Тореадор",
+    "outputs": "Эре|бус",
     "meta": {
-        "id": 7571,
-        "author": "Максим Стасюк",
-        "tour_name": "Своя игра. ШДК им. Рабиндраната Дебендранатовича Тагора",
-        "tour_link": "https://db.chgk.info/tour/tagor02"
+        "id": 2,
+        "author": "Борис Шойхет",
+        "tour_name": "Карусель. Командное Jeopardy. Кишинёв - 1996.",
+        "tour_link": "https://db.chgk.info/tour/karus96"
     }
 }
 ```
@@ -56,7 +56,9 @@ The dataset consists of 29376 training examples (train set) and 416 test example
 
 We use 10 different prompts written in natural language for this task. An example of the prompt is given below:
 
-`"Вы участвуете в викторине “Что? Где? Когда?”. Категория вопроса: {topic}\nВнимательно прочитайте вопрос и ответьте на него: {text}\nОтвет:"`.
+```json
+"Прочитайте вопрос из викторины \"Что? Где? Когда?\" категории \"{topic}\" и ответьте на него. Вопрос: {text}\nОтвет:"
+```
 
 ### Dataset Creation
 
