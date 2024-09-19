@@ -24,38 +24,24 @@ Question-answering has been an essential task in natural language processing and
     - `text` is the main text line;
     - `support_text` is a line with additional text;
     - `question` is the question, the answer to which is contained in these texts;
-- `outputs` is the answer information:
-    - `label` is the answer label;
-    - `length` is the answer length;
-    - `offset` is the answer start index;
-    - `segment` is a string containing the answer.
+- `outputs` is a string containing the answer.
 
 ### Data Instances
 
 Each dataset sample consists of two texts (the main and the supporting ones) and a question based on these two texts. Below is an example from the dataset:
 
-```
+```json
 {
-    "instruction": "Прочитайте два текста и ответьте на вопрос.\nТекст 1: {support_text}\nТекст 2: {text}\nВопрос: {question}\nОтвет:",
+    "instruction": "Даны два текста:\nТекст 1: {support_text}\nТекст 2: {text}\nОпираясь на данные тексты, ответьте на вопрос: {question}\nВаш ответ не должен содержать дополнительные объяснения.\nОтвет:",
     "inputs": {
-        "question": "В какую реку впадает река, притоком которой является Висвож?",
-        "support_text": "Висвож — река в России, протекает по Республике Коми. Устье реки находится в 6 км по левому берегу реки Кыбантывис. Длина реки составляет 24 км.",
-        "text": "Кыбантывис (Кабан-Тывис) — река в России, протекает по Республике Коми. Левый приток Айювы. Длина реки составляет 31 км. Система водного объекта: Айюва → Ижма → Печора → Баренцево море."
+        "text": "Нижний Новгород (в разговорной речи часто — \"Нижний\", c XIII по XVII век — Новгород Низовской земли, с 7 октября 1932 по 22 октября 1990 года — Горький) — город в центральной России, административный центр Приволжского федерального округа и Нижегородской области. Второй по численности населения город в Приволжском федеральном округе и на реке Волге.\\n\\nКультура.\\nИсторический центр Нижнего Новгорода, расположенный в Нагорной части города, несмотря на значительные перестройки, сохранил значительное число исторических гражданских строений XVIII — начала XX веков, включая многочисленные памятники деревянного зодчества. Дмитриевская башня Кремля выходит на историческую площадь Минина и Пожарского. Нижегородский кремль является официальной резиденцией Городской думы Нижнего Новгорода и правительства Нижегородской области. Зоопарк \"Лимпопо\". Зоопарк \"Лимпопо\" — первый частный зоопарк в России, расположенный в Московском районе.",
+        "support_text": "Евгений Владимирович Крестьянинов (род. 12 июля 1948, Горький) — российский государственный деятель.",
+        "question": "Как называется законодательный орган города, где родился Евгений Владимирович Крестьянинов?"
     },
-    "outputs": [{
-        "label": "answer",
-        "length": 5,
-        "offset": 85,
-        "segment": "Айювы"
-    }],
+    "outputs": "Городской думы",
     "meta": {
-        "id": 9,
-        "bridge_answers": [{
-            "label": "passage",
-            "length": 10,
-            "offset": 104,
-            "segment": "Кыбантывис"
-        }]
+        "id": 0,
+        "bridge_answers": "Горький"
     }
 }
 ```
@@ -69,7 +55,9 @@ The dataset consists of `1056` training examples (train set) and `900` test exam
 We prepared 10 different prompts of various difficulties for this task.
 An example of the prompt is given below:
 
-`"Прочитайте два текста и ответьте на вопрос.\nТекст 1: {support_text}\nТекст 2: {text}\nВопрос: {question}\nОтвет:"`.
+```json
+"Текст 1: {support_text}\nТекст 2: {text}\nОпираясь на данные тексты, ответьте на вопрос: {question}\nЗапишите только ответ без дополнительных объяснений.\nОтвет:"
+```
 
 ### Dataset Creation
 
