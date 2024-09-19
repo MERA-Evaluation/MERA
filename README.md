@@ -27,7 +27,7 @@ MERA benchmark brings together all industry and academic players in one place to
 
 Our contributions to this project are:
 
-- Instruction-based tasks available on 🤗 HuggingFace [dataset card](https://huggingface.co/datasets/ai-forever/MERA).
+- Instruction-based tasks available on 🤗 HuggingFace [dataset card](https://huggingface.co/datasets/MERA-evaluation/MERA).
 - Customized version of LM-Harness evaluation code for models (`v0.4.4`).
 - Benchmark website with the [Leaderboard](https://mera.a-ai.ru/en/leaderboard) and the scoring submission system.
 - Baselines of the open models and Human Benchmark.
@@ -86,7 +86,7 @@ The repository has the following structure:
 
 
 ## The process of submission is the following:
-- to view the datasets use the [HuggingFace preview](https://huggingface.co/datasets/ai-forever/MERA/viewer/ruethics);
+- to view the datasets use the [HuggingFace preview](https://huggingface.co/datasets/MERA-evaluation/MERA/viewer/ruethics);
 - clone MERA benchmark [repository](https://github.com/MERA-Evaluation/MERA) with submodules using the following code:
 
 ```bash
