@@ -56,7 +56,7 @@ The dataset contains `438` training samples, `220` validation samples, and `438`
 
 ### Prompts
 
-We prepare 9 different prompts of various difficulties for this task.
+We prepare 10 different prompts of various difficulties for this task.
 
 An example of the prompt is given below:
 
