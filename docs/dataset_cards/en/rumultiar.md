@@ -46,7 +46,7 @@ The dataset consists of a training set (`1039` samples) with labeled examples an
 
 ### Prompts
 
-6 prompts of varying difficulty were created for this task. Example:
+10 prompts of varying difficulty were created for this task. Example:
 
 `"Выполни следующие базовые арифметические операции в правильном порядке, в том числе учитывая порядок скобок, и напиши результат вычисления выражения в виде одного числа:\n{inputs}"`
 
