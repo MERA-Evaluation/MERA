@@ -34,29 +34,28 @@ Below is an example from the dataset:
 
 ```json
 {
-    "instruction": "На вход подается функция с описанием в виде строки docstring. В соответствии с описанием вам необходимо реализовать функцию на основе шаблона:\n{function}",
-    "inputs": {
-        "function": "
-                    def greatest_common_divisor(a: int, b: int) -> int:
-                        '''Верните наибольший общий делитель двух целых чисел a и b.
-                        Примеры:
-                            greatest_common_divisor(3, 5)
-                            1
-                            greatest_common_divisor(25, 15)
-                            5
-                        '''
-            ",
-        "tests": [{"a": 3, "b": 7}, {"a": 10, "b": 15}, {"a": 49, "b": 14}, {"a": 144, "b": 60}]
-    },
-    "outputs": [1, 5, 7, 12],
-    "meta": {
-        "id": 666,
-        "canonical_solution": "
-                def query_gcd(a: int, b: int) -> int:
-                        return a if b == 0 else query_gcd(b, a % b)
-                    return query_gcd(a, b)",
-        "entry_point": "greatest_common_divisor"
-    }
+	"instruction": "На вход подается функция(ии) с описанием в виде строки docstring. В соответствии с описанием вам необходимо реализовать функцию(ии)\n{function}",
+	"inputs": {
+		"function": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\"Входными данными для этой функции является строка, представленная несколькими группами вложенных круглых скобок, разделенных пробелами. Для каждой группы выведите самый глубокий уровень вложенности круглых скобок. Например, (()()) имеет максимум два уровня вложенности, в то время как ((())) имеет три.\n    Примеры: \n        parse_nested_parens('(()()) ((())) () ((())()())') \n        [2, 3, 1, 3]\n    \"\"\"",
+		"tests": "[{'paren_string': ''}, {'paren_string': '((()))'}, {'paren_string': '(())(()())'}, {'paren_string': '(())(()(()))((()()))'}, {'paren_string': '(()()(((())))(()(())))()'}, {'paren_string': '()((()))'}, {'paren_string': '(())'}, {'paren_string': '()()()'}, {'paren_string': '()(())'}, {'paren_string': '((())()) ()(()()) ((())) ((())())'}]"
+	},
+	"outputs": [
+		"[]",
+		"[3]",
+		"[2]",
+		"[3]",
+		"[5]",
+		"[3]",
+		"[2]",
+		"[1]",
+		"[2]",
+		"[3, 2, 3, 3]"
+	],
+	"meta": {
+		"id": 6,
+		"canonical_solution": "\n    \n    def count_depth(s: str) -> int:\n        max_depth, cnt = 0, 0\n        for ch in s:\n            if ch == \"(\": cnt += 1\n            if ch == \")\": cnt -= 1\n            max_depth = max(max_depth, cnt)\n        return max_depth\n    \n    return [count_depth(s) for s in paren_string.split(\" \") if s != \"\"]\n\n",
+		"entry_point": "parse_nested_parens"
+	}
 }
 ```
 
@@ -68,7 +67,9 @@ The public test contains `164` tasks with test cases and answers from the origin
 
 For this task 10 prompts of varying difficulty were created. Example:
 
-`"На вход подается функция с описанием в виде строки docstring. В соответствии с описанием вам необходимо реализовать функцию на основе шаблона:\n{function}"`.
+```json
+"Дан шаблон функции(ий) с описанием работы этой функции в качестве условия задачи. Допишите программу\n{function}"
+```
 
 ### Dataset Creation
 
