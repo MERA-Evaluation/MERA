@@ -10,8 +10,8 @@
     <a href="https://opensource.org/licenses/MIT">
     <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow.svg">
     </a>
-    <a href="https://github.com/ai-forever/MERA/releases">
-    <img alt="Release" src="https://img.shields.io/badge/release-v1.1.0-blue">
+    <a href="https://github.com/MERA-Evaluation/MERA/releases">
+    <img alt="Release" src="https://img.shields.io/badge/release-v1.2.0-blue">
     </a>
 
 </p>
@@ -23,12 +23,12 @@
 
 ## About MERA
 
-MERA benchmark brings together all industry and academic players in one place to study the capabilities of fundamental models, draw attention to AI problems, develop collaboration within the Russian Federation and in the international arena and create an independent unified system for measuring all current models. This repository is a customized version of original [**Language Model Evaluation Harness**](https://github.com/EleutherAI/lm-evaluation-harness) (**LM-Harness** `v0.4.2`).
+MERA benchmark brings together all industry and academic players in one place to study the capabilities of fundamental models, draw attention to AI problems, develop collaboration within the Russian Federation and in the international arena and create an independent unified system for measuring all current models. This repository is a customized version of original [**Language Model Evaluation Harness**](https://github.com/EleutherAI/lm-evaluation-harness) (**LM-Harness** `v0.4.4`).
 
 Our contributions to this project are:
 
 - Instruction-based tasks available on 🤗 HuggingFace [dataset card](https://huggingface.co/datasets/ai-forever/MERA).
-- Customized version of LM-Harness evaluation code for models (`v0.4.2`).
+- Customized version of LM-Harness evaluation code for models (`v0.4.4`).
 - Benchmark website with the [Leaderboard](https://mera.a-ai.ru/en/leaderboard) and the scoring submission system.
 - Baselines of the open models and Human Benchmark.
 
@@ -88,10 +88,10 @@ The repository has the following structure:
 
 ## The process of submission is the following:
 - to view the datasets use the [HuggingFace preview](https://huggingface.co/datasets/ai-forever/MERA/viewer/ruethics)  or run the prepared [instruction](./examples/instruction.ipynb);
-- clone MERA benchmark [repository](https://github.com/ai-forever/MERA) with submodules using the following code:
+- clone MERA benchmark [repository](https://github.com/MERA-Evaluation/MERA) with submodules using the following code:
 
 ```bash
-git clone --recurse-submodules -j8 https://github.com/ai-forever/MERA.git
+git clone --recurse-submodules -j8 https://github.com/MERA-Evaluation/MERA.git
 ```
 
 If you have cloned the repository with no submodlues downloaded (empty directory), run this code to fix it from the root directory:
@@ -124,16 +124,37 @@ Feel free to ask any questions regarding our work, write on email mera@a-ai.ru. 
 ## Cite as
 
 ```
-@misc{fenogenova2024mera,
-    title={{MERA}: A Comprehensive {LLM} Evaluation in {Russian}},
-    author={Alena Fenogenova and Artem Chervyakov and Nikita Martynov and Anastasia Kozlova and Maria Tikhonova and Albina Akhmetgareeva and Anton Emelyanov and Denis Shevelev and Pavel Lebedev and Leonid Sinev and Ulyana Isaeva and Katerina Kolomeytseva and Daniil Moskovskiy and Elizaveta Goncharova and Nikita Savushkin and Polina Mikhailova and Denis Dimitrov and Alexander Panchenko and Sergei Markov},
-    year={2024},
-    eprint={2401.04531},
-    url = {https://arxiv.org/abs/2401.04531},
-    eprinttype={arXiv},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL},
-    journal={arXiv},
-    volume={2401.04531}
+@inproceedings{fenogenova-etal-2024-mera,
+    title = "{MERA}: A Comprehensive {LLM} Evaluation in {R}ussian",
+    author = "Fenogenova, Alena  and
+      Chervyakov, Artem  and
+      Martynov, Nikita  and
+      Kozlova, Anastasia  and
+      Tikhonova, Maria  and
+      Akhmetgareeva, Albina  and
+      Emelyanov, Anton  and
+      Shevelev, Denis  and
+      Lebedev, Pavel  and
+      Sinev, Leonid  and
+      Isaeva, Ulyana  and
+      Kolomeytseva, Katerina  and
+      Moskovskiy, Daniil  and
+      Goncharova, Elizaveta  and
+      Savushkin, Nikita  and
+      Mikhailova, Polina  and
+      Minaeva, Anastasia  and
+      Dimitrov, Denis  and
+      Panchenko, Alexander  and
+      Markov, Sergey",
+    editor = "Ku, Lun-Wei  and
+      Martins, Andre  and
+      Srikumar, Vivek",
+    booktitle = "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.acl-long.534",
+    pages = "9920--9948",
 }
 ```
