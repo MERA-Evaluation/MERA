@@ -27,7 +27,7 @@ MERA benchmark brings together all industry and academic players in one place to
 
 Our contributions to this project are:
 
-- Instruction-based tasks available on 🤗 HuggingFace [dataset card](https://huggingface.co/datasets/ai-forever/MERA).
+- Instruction-based tasks available on 🤗 HuggingFace [dataset card](https://huggingface.co/datasets/MERA-evaluation/MERA).
 - Customized version of LM-Harness evaluation code for models (`v0.4.4`).
 - Benchmark website with the [Leaderboard](https://mera.a-ai.ru/en/leaderboard) and the scoring submission system.
 - Baselines of the open models and Human Benchmark.
@@ -79,7 +79,6 @@ MERA is a collaborative project created in a union of industry and academia with
 The repository has the following structure:
 
 - [`benchmark_tasks`](benchmark_tasks) — the tasks for evaluation of language models.
-- [`examples`](examples/instruction.ipynb) — the examples of loading and using data.
 - [`humanbenchmarks`](humanbenchmarks/README.md) — materials and code for human evaluation.
 - [`modules`](modules/scoring/README.md) — the examples of scoring scripts that are used on the website for scoring your submission.
 - [`lm-evaluation-harness`](https://github.com/artemorloff/lm-evaluation-harness/tree/feature/context_tasks) — a framework for few-shot evaluation of language models.
@@ -87,11 +86,11 @@ The repository has the following structure:
 
 
 ## The process of submission is the following:
-- to view the datasets use the [HuggingFace preview](https://huggingface.co/datasets/ai-forever/MERA/viewer/ruethics)  or run the prepared [instruction](./examples/instruction.ipynb);
+- to view the datasets use the [HuggingFace preview](https://huggingface.co/datasets/MERA-evaluation/MERA/viewer/ruethics);
 - clone MERA benchmark [repository](https://github.com/MERA-Evaluation/MERA) with submodules using the following code:
 
 ```bash
-git clone --recurse-submodules -j8 https://github.com/MERA-Evaluation/MERA.git
+git clone --recurse-submodules https://github.com/MERA-Evaluation/MERA.git
 ```
 
 If you have cloned the repository with no submodlues downloaded (empty directory), run this code to fix it from the root directory:
