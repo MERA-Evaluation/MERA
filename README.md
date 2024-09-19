@@ -90,7 +90,7 @@ The repository has the following structure:
 - clone MERA benchmark [repository](https://github.com/MERA-Evaluation/MERA) with submodules using the following code:
 
 ```bash
-git clone --recurse-submodules -j8 https://github.com/MERA-Evaluation/MERA.git
+git clone --recurse-submodules https://github.com/MERA-Evaluation/MERA.git
 ```
 
 If you have cloned the repository with no submodlues downloaded (empty directory), run this code to fix it from the root directory:
