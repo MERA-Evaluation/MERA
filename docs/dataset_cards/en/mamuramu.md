@@ -58,7 +58,7 @@ The private test set (test split) contains `4250` examples. The few-shot set (tr
 
 ### Prompts
 
-For this task 5 prompts of varying difficulty were created. Example:
+For this task 10 prompts of varying difficulty were created. Example:
 
 `"Ниже приведен вопрос на определенную профессиональную тематику {subject} и даны варианты ответа A, B, C, D. Гарантируется, что только один из ответов правильный.\nПравильно ответьте на вопрос, выбрав букву A, B, C или D:\n{text}\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nОтвет:"`.
 
