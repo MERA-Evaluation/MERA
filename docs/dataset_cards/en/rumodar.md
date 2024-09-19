@@ -46,7 +46,7 @@ The dataset consists of a public test (`6000` samples) with labeled examples and
 
 ### Prompts
 
-5 prompts of varying difficulty were created for this task. Example:
+10 prompts of varying difficulty were created for this task. Example:
 
 `В следующих строках символ -> представляет собой одну простую математическую операцию. Вычисли последний пример с учетом результатов вычисленных выражений:\n{inputs}`
 
