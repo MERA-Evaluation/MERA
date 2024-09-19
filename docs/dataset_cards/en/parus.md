@@ -56,7 +56,7 @@ The dataset consists of `400` train samples, `100` dev samples, and `500` privat
 
 ### Prompts
 
-We prepare 10 different prompts of various difficulty for this task. Prompts are presented separately for the `cause` and for the `effect`, e.g.:
+We prepare 10 different prompts of various difficulty for the `cause` and for the `effect` parts of this task:
 
 For cause: `"Дано описание ситуации:\n'{premise}'\nи два фрагмента текста:\n1. {choice1}\n2. {choice2}\nОпредели, какой из двух фрагментов является причиной описанной ситуации? Ответь одной цифрой 1 или 2, ничего не добавляя."`.
 
