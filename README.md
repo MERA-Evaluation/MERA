@@ -10,8 +10,8 @@
     <a href="https://opensource.org/licenses/MIT">
     <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow.svg">
     </a>
-    <a href="https://github.com/ai-forever/MERA/releases">
-    <img alt="Release" src="https://img.shields.io/badge/release-v1.1.0-blue">
+    <a href="https://github.com/MERA-Evaluation/MERA/releases">
+    <img alt="Release" src="https://img.shields.io/badge/release-v1.2.0-blue">
     </a>
 
 </p>
