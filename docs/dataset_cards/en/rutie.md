@@ -134,7 +134,7 @@ To run the model on the dataset, you need to consistently submit replies by `que
 
 ### Data Splits
 
-The first version of the dataset consists of only one long dialogue of length `430` for the training public set, and one dialogue of length `430` for the test dataset.
+The first version of the dataset consists of only one long dialogue of length `500` for the training public set, and one dialogue of length `4500` for the test dataset.
 
 ### Prompts
 
