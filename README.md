@@ -88,10 +88,10 @@ The repository has the following structure:
 
 ## The process of submission is the following:
 - to view the datasets use the [HuggingFace preview](https://huggingface.co/datasets/ai-forever/MERA/viewer/ruethics)  or run the prepared [instruction](./examples/instruction.ipynb);
-- clone MERA benchmark [repository](https://github.com/ai-forever/MERA) with submodules using the following code:
+- clone MERA benchmark [repository](https://github.com/MERA-Evaluation/MERA) with submodules using the following code:
 
 ```bash
-git clone --recurse-submodules -j8 https://github.com/ai-forever/MERA.git
+git clone --recurse-submodules -j8 https://github.com/MERA-Evaluation/MERA.git
 ```
 
 If you have cloned the repository with no submodlues downloaded (empty directory), run this code to fix it from the root directory:
