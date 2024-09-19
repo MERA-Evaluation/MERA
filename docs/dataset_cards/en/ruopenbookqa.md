@@ -31,19 +31,19 @@ RuOpenBookQA is mainly based on the work [1]. The original OpenBookQA is a new k
 
 Below is an example from the dataset:
 
-```
+```json
 {
-    "instruction": "{text}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nКакой ответ является правильным? В качестве ответа запишите только букву верного варианта: A, B, C или D без дополнительных объяснений.\nОтвет: ",
+    "instruction": "Опираясь на логику и общеизвестные факты, ответьте на вопрос: {question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nВ качестве ответа запишите только букву верного варианта: A, B, C или D без дополнительных объяснений.\nОтвет:",
     "inputs": {
-        "text": "Что вращается вокруг своей оси?",
-        "option_a": "океаны",
-        "option_b": "ветры",
-        "option_c": "шар голубой",
-        "option_d": "люди"
+        "question": "Кто, вероятно, использует свою кровеносную систему?",
+        "option_a": "лошадь после гонки",
+        "option_b": "дерево, стоящее в лесу",
+        "option_c": "машина во время автосоревнования",
+        "option_d": "скала на молекулярном уровне"
     },
-    "outputs": "C",
+    "outputs": "A",
     "meta": {
-        "id": "14-167"
+        "id": 0
     }
 }
 ```
@@ -58,9 +58,13 @@ We prepared ten different prompts of various difficulties for this task.
 
 Examples of the prompt are given below:
 
-`"{text}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nКакой ответ является правильным? В качестве ответа запишите только букву верного варианта: A, B, C или D без дополнительных объяснений.\nОтвет:"`,
+```json
+"Опираясь на логику и общеизвестные факты, ответьте на вопрос: {question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nВ качестве ответа запишите только букву верного варианта: A, B, C или D без дополнительных объяснений.\nОтвет:"
+```
 
-`"Опираясь на логику и общеизвестные факты, ответьте на вопрос: {text}\nA) {option_a}\nB) {option_b}\nC) {option_c}\nD) {option_d}\nВ качестве ответа запишите только букву верного варианта: A, B, C или D без дополнительных объяснений.\nОтвет:"`.
+```json
+"{question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\n Отвечая на вопрос, запишите только букву верного варианта: A, B, C или D.\nОтвет:"
+```
 
 ### Dataset Creation
 
