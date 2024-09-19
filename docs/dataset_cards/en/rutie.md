@@ -138,7 +138,7 @@ The first version of the dataset consists of only one long dialogue of length `4
 
 ### Prompts
 
-The instruction (prompt) is sent to the entire dataset, and not to each replica. We created 5 different prompts, such as:
+The instruction (prompt) is sent to the entire dataset, and not to each replica. We created 10 different prompts, such as:
 
 `"Вам дан диалог, в котором необходимо продолжить реплики. Учитывая контекст диалога, и два варианта ответа на реплику (вопрос) ответьте на последний вопрос.\n{context}\n{question}\n1. {choice1}\n2. {choice2}\n
 Какой ответ наиболее правильный?"`.
