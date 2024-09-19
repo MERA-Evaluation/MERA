@@ -60,7 +60,7 @@ The public test set contains `10033` examples. The closed test set `961` hand-wr
 
 ### Prompts
 
-For this task 5 prompts of varying difficulty were created. Example:
+For this task 10 prompts of varying difficulty were created. Example:
 
 `"Ниже приведен вопрос на определенную профессиональную тематику {subject} и даны варианты ответа A, B, C, D. Гарантируется, что только один из ответов правильный.\nПравильно ответьте на вопрос, выбрав букву A, B, C или D:\n{text}\nA {option_a}\nB {option_b}\nC {option_c}\nD {option_d}\nОтвет:"`.
 
