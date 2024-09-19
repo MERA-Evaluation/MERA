@@ -56,7 +56,7 @@ Below is an example from the dataset:
 
 ### Data Splits
 
-The public test set contains `10033` examples. The closed test set `961` hand-written examples.
+The public test set contains `14012` examples translated from the original MMLU dataset. The train part for few-shor examples contains `285` examples translated from the dev part of the original MMLU.
 
 ### Prompts
 
