@@ -30,11 +30,11 @@ Below is an example from the dataset:
 
 ```json
 {
-    "instruction": "Даны две строки: \"{inputs}\"\nОпределите длину их самой длинной общей подпоследовательности.",
-    "inputs": "DFHFTUUZTMEGMHNEFPZ IFIGWCNVGEDBBTFDUNHLNNNIAJ",
-    "outputs": "5",
+    "instruction": "Запишите в виде одного числа длину самой длинной общей подпоследовательности для следующих строк: \"{inputs}\".\nОтвет:",
+    "inputs": "RSEZREEVCIVIVPHVLSH VDNCOFYJVZNQV",
+    "outputs": "4",
     "meta": {
-        "id": 186
+        "id": 138
     }
 }
 ```
@@ -47,7 +47,9 @@ The public test includes `320` examples, and the closed test set includes `500` 
 
 10 prompts of varying difficulty were created for this task. Example:
 
-`"Для двух строк: \"{inputs}\" найдите длину наибольшей общей подпоследовательности. Пересекающиеся символы должны идти в том же порядке, но могут быть разделены другими символами."`.
+```json
+"Решите задачу нахождения длины наибольшей общей подпоследовательности для следующих строк:\n\"{inputs}\"\nОтвет (в виде одного числа):".
+```
 
 ### Dataset Creation
 
