@@ -54,7 +54,7 @@ Below is an example from the dataset:
 
 ### Data Splits
 
-The private test set (test split) contains `4250` examples. The few-shot set (train split) `285` hand-written examples.
+The private test set (test split) contains `4248` examples. The few-shot set (train split) `285` hand-written examples.
 
 ### Prompts
 
