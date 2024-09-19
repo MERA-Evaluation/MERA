@@ -34,20 +34,20 @@ The WorldTree design was initially proposed in [1]. The WorldTree dataset starts
 
 Below is the example from the dataset:
 
-```
+```json
 {
-    "instruction": "{text}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nКакой ответ является правильным? В качестве ответа запишите только букву верного варианта: A, B, C или D без дополнительных объяснений.\nОтвет: ",
+    "instruction": "{question}\nA) {option_a}\nB) {option_b}\nC) {option_c}\nD) {option_d}\nЗапишите только букву верного варианта: A, B, C или D.\nОтвет:",
     "inputs": {
-        "question": "Какие из следующих структур развиваются у лягушки, когда она превращается из головастика во взрослую лягушку?",
-        "option_a": "глаза",
-        "option_b": "сердце",
-        "option_c": "легкие",
-        "option_d": "хвост"
+        "question": "Персиковые деревья имеют сладко пахнущие цветы и приносят богатые плоды. Каково основное назначение цветов персикового дерева?",
+        "option_a": "питание для перелетных птиц",
+        "option_b": "для создания цветочных композиций",
+        "option_c": "для защиты дерева от болезней",
+        "option_d": "для привлечения пчел для опыления"
     },
-    "outputs": "C",
+    "outputs": "D",
     "meta": {
-        "id": 5,
-        "exam_name": "MCAS",
+        "id": 0,
+        "exam_name": "California Standards Test - Science",
         "school_grade": 5,
         "knowledge_type": "PROCESS"
     }
@@ -64,9 +64,13 @@ We prepared ten different prompts of various difficulties for this task.
 
 Examples of the prompt are given below:
 
-`"{question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nВыберите ответ из списка.\nОтвет:"`,
+```json
+"{question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nКакой ответ является правильным? В качестве ответа запишите только букву верного варианта: A, B, C или D без дополнительных объяснений.\nОтвет:"
+```
 
-`"Опираясь на логику и общеизвестные факты, ответьте на вопрос: {question}\nA) {option_a}\nB) {option_b}\nC) {option_c}\nD) {option_d}\nОтвет:"`.
+```json
+"Опираясь на логику и общеизвестные факты, ответьте на вопрос: {question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nВ качестве ответа запишите только букву верного варианта: A, B, C или D без дополнительных объяснений.\nОтвет:"
+```
 
 ### Dataset Creation
 
