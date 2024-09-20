@@ -167,7 +167,15 @@ The dataset is a full-fledged long dialogue, with binary tasks on various topics
 
 ### Human benchmark
 
-Accuracy for this task is `0.942`.
+To evaluate the human level, we measured human performance on one of the test dialogues of 430 examples. For this, we designed 2 projects on the crowdsourcing platform:
+
+1) when a person  sees previous history;
+
+2) without the context visible, the question should be asked in consecutive order. Thus, in this setting, people have to rely on their memory.
+
+Accuracy for the first setting (1) with answer history = 0.942.
+
+Accuracy for the second setting (2) without answer history = 0.976.
 
 ## Limitations
 
