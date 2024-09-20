@@ -59,7 +59,7 @@ We prepare 10 different prompts of various difficulty for this task.
 An example of the prompt is given below:
 
 ```json
-"Дан небольшой текст и два выделенных в нем фрагмента, \"{span1_text}\" и \"{span2_text}\". Текст: \"{text}\" Ответь, относится ли \"{span2_text}\" к \"{span1_text}\" в этом тексте? Напиши Да, если относится, если не относится — напиши Нет.""
+"Дан небольшой текст и два выделенных в нем фрагмента, \"{span1_text}\" и \"{span2_text}\". Текст: \"{text}\" Ответь, относится ли \"{span2_text}\" к \"{span1_text}\" в этом тексте? Напиши Да, если относится, если не относится — напиши Нет."
 ```
 
 ### Dataset creation
