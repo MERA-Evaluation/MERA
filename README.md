@@ -17,13 +17,13 @@
 </p>
 
 <h2 align="center">
-    <p> MERA (Multimodal Evaluation for Russian-language Architectures) is a new open benchmark for the Russian language for evaluating fundamental models.
+    <p> MERA (Multimodal Evaluation for Russian-language Architectures) is a new open benchmark for the Russian language for evaluating SOTA models.
 </p>
 </h2>
 
 ## About MERA
 
-MERA benchmark brings together all industry and academic players in one place to study the capabilities of fundamental models, draw attention to AI problems, develop collaboration within the Russian Federation and in the international arena and create an independent unified system for measuring all current models. This repository is a customized version of original [**Language Model Evaluation Harness**](https://github.com/EleutherAI/lm-evaluation-harness) (**LM-Harness** `v0.4.4`).
+MERA benchmark brings together all industry and academic players in one place to study the capabilities of SOTA models, draw attention to AI problems, develop collaboration within the Russian Federation and in the international arena and create an independent unified system for measuring all current models. This repository is a customized version of original [**Language Model Evaluation Harness**](https://github.com/EleutherAI/lm-evaluation-harness) (**LM-Harness** `v0.4.4`).
 
 Our contributions to this project are:
 
