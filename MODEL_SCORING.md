@@ -64,9 +64,8 @@ Running specific benchmark available with `lm_eval` module.
 Example:
 ```shell
 CUDA_VISIBLE_DEVICES=3 lm_eval --model hf --model_args pretrained=mistralai/Mistral-7B-v0.1,dtype=auto,max_length=11500 \
---device cuda --output_base_path="$PWD/mera_results/Mistral-7B-v0.1_defaults" --batch_size=1 \
---predict_only --log_samples --seed 1234,1234,None --tasks rummlu --num_fewshot=5 \
---output_path="$PWD/mera_results/Mistral-7B-v0.1_defaults/rummlu_result.json"
+--device cuda --output_path="$PWD/mera_results/Mistral-7B-v0.1_defaults" --batch_size=1 \
+--predict_only --log_samples --seed 1234 --tasks rummlu --num_fewshot=5
 ```
 
 #### Notes on `lm_eval` settings
