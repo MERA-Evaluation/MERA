@@ -50,7 +50,7 @@ bash scripts/run_benchmark.sh
 
 Running HuggingFace models with Multi-GPU:
 ```shell
-CUDA_VISIBLE_DEVICES=0 \
+CUDA_VISIBLE_DEVICES=0,1 \
 MERA_FOLDER="$PWD/mera_results/Qwen1.5-32B-Chat_defaults" \
 MERA_MODEL_STRING="pretrained=Qwen/Qwen1.5-32B-Chat,dtype=auto,parallelize=True" \
 bash scripts/run_benchmark.sh
