@@ -57,17 +57,6 @@ of loglikelihood tasks), use `scripts/run_benchmark_gen.sh` script. To run all e
 execute `scripts/run_benchmark_all.sh`. This way two separate submissions will be created: one for regular
 MERA tasks (loglikelihood and generative tasks), one for generative MERA tasks only.
 
-#### Running OpenAI models
-
-Sample command for running benchmark with OpenAI API GPT-3 based models with `run_benchmark_openai_api.sh` script:
-
-```linux
-MERA_FOLDER="$PWD/mera_results/davinci-002_defaults" MERA_MODEL_STRING="model=davinci-002" OPENAI_API_KEY=*YOUR API KEY* bash scripts/run_benchmark_openai_api.sh
-```
-
-Paste your OpenAI API key instead of `*YOUR API KEY*`. Script runs only GPT-3 based models like `davinci-002` or `babbage-002`.
-Running of deprecated models is not guaranteed!
-
 ### Run specific bencmark manually (ruMMLU example)
 
 Running specific benchmark available with `lm_eval` module.
