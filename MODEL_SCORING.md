@@ -136,7 +136,8 @@ OPENAI_API_KEY="" lm_eval --model openai-chat-completions \
 
 1. Use `CUDA_VISIBLE_DEVICES` to set cuda device visibility (setting `--device cuda:3` works inconsisitently).
 
-2. MERA_MODEL_STRING acts like `--model_args MERA_MODEL_STRING` arguements
+2. `MERA_MODEL_STRING` acts like `--model_args MERA_MODEL_STRING` arguements
+
 `--model_args` is for comma separated parameters of `from_pretrained` method of autoclass. One should be aware of
 hardware requirements to run big models and limit maximum input length of models with parameter `max_length`
 to avoid out-of-memory errors during run. Also `model_args` may depend on the architecture you have chosen. For example:
@@ -149,7 +150,8 @@ Commonly used parameters of `model_args` or `MERA_MODEL_STRING`:
 - `dtype=VALUE` - the precision of the weights of the model. E.g. `bfloat16`, `float32`.
 
 
-3. MERA_COMMON_SETUP parameters:
+3. `MERA_COMMON_SETUP` parameters:
+
 3.1 `--model NAME` parameter defines the architecture to be used to run the model
 - `--model hf` is used for models compatible with transformers' `AutoModelForCausalLM` or `AutoModelForSeq2SeqLM` class;
 - `--model vllm` is used for vLLM compatible models;
@@ -189,7 +191,7 @@ Avoiding this argument will run all tasks with same provided settings.
 
 3.11 `--verbosity VALUE` is meant to define the level of logging the details of the lm-eval running. We recommend using either `INFO` or `ERROR` values.
 
-3.12 ``seed VALUE` sets random, numpy, torch and fewshot seed equal to some value. Alternatively, you can pass `seed 1,2,3,4` four values to define each seed manually.
+3.12 `--seed VALUE` sets random, numpy, torch and fewshot seed equal to some value. Alternatively, you can pass `seed 1,2,3,4` four values to define each seed manually.
 
 More information about specific flags and parameters can be found in [lm-evaluation-harness documentation](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/docs).
 
