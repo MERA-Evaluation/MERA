@@ -113,6 +113,22 @@ of loglikelihood tasks), use `scripts/run_benchmark_gen.sh` script. To run all e
 execute `scripts/run_benchmark_all.sh`. This way two separate submissions will be created: one for regular
 MERA tasks (loglikelihood and generative tasks), one for generative MERA tasks only.
 
+#### System prompt usage
+
+If you want to pass some system prompt to use it for all tasks of MERA benchmark, you are supposed to pass this prompt as environmental variable `SYSTEM_PROMPT` along with other variables for any shell script. 
+Pay attention that `SYSTEM_PROMPT` is passed in singular quotes to preserve all special symbols.
+
+Example of running HuggingFace model on vLLM engine with special tokens, chat template and multi-turn enabled and system prompt stated with generative setup:
+
+```shell
+CUDA_VISIBLE_DEVICES=0,1 \
+SYSTEM_PROMPT='You are a helpful assistant' \
+MERA_FOLDER="$PWD/mera_results/Llama-3.1-8B-Instruct" \
+MERA_MODEL_STRING="pretrained=meta-llama/Llama-3.1-8B-Instruct,dtype=bfloat16,tensor_parallel_size=2,gpu_memory_utilization=0.45,add_bos_token=True" \
+MERA_COMMON_SETUP="--model vllm --device cuda --batch_size=1 --predict_only --log_samples --seed 1234 --verbosity ERROR --apply_chat_template --fewshot_as_multiturn" \
+bash scripts/run_benchmark_gen.sh
+```
+
 ### Run specific bencmark manually (ruMMLU example)
 
 Running specific benchmark available with `lm_eval` module.
