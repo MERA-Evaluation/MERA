@@ -25,6 +25,7 @@ for fewshot_idx in "${!FEWSHOTS[@]}"
 do
   for cur_task in ${TASKS[$fewshot_idx]}
   do
+    printf "task: %s \n" "$cur_task"
     if [[ "$cur_task" == "ruhumaneval" || "$cur_task" == "rucodeeval" ]]; then
         GEN_KWARGS=${RUHUMANEVAL_GEN_KWARGS}; else
         GEN_KWARGS=${GENERATION_KWARGS}; fi
