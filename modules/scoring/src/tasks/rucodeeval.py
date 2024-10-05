@@ -6,7 +6,7 @@ import numpy as np
 
 
 @register_task
-class ruHumanEval(Task):
+class ruCodeEval(Task):
 
     def aggregation(self):
         return {f"pass@{k}": mean for k in self.task_conf.ks}

@@ -14,8 +14,12 @@ import datasets
 
 class Task(Base, metaclass=ABCMeta):
     @property
+    def gold_dir(self):
+        return os.path.abspath("datasets/")
+
+    @property
     def local_path(self):
-        return self.task_conf.origin_repo_path
+        return os.path.join(self.gold_dir, self.__class__.__name__, "task.json")
 
     @property
     def task_conf_path(self):
@@ -27,9 +31,13 @@ class Task(Base, metaclass=ABCMeta):
 
     def __init__(self, conf):
         super().__init__(conf)
-        self.task_conf = load_yaml(self.task_conf_path)
+        if os.path.exists(self.task_conf_path):
+            self.task_conf = load_yaml(self.task_conf_path)
+        else:
+            self.task_conf = load_yaml("configs/default_task.yaml")
         self.gold: Union[Dataset, None] = None
         self.split = self.task_conf.split
+        os.makedirs(self.gold_dir, exist_ok=True)
         update_seed(self.conf.args.seed)
         self._aggregation = None
 
@@ -59,13 +67,8 @@ class Task(Base, metaclass=ABCMeta):
             dataset = load_json(local_path)
         except:
             self.log(f"{Errors.unreadable_file} {self.name}")
-            errors.append(
-                {
-                    "type": str(Errors.unreadable_file),
-                    "local_path": local_path,
-                    "trace": traceback.format_exc(),
-                }
-            )
+            errors.append({
+                "type": str(Errors.unreadable_file), "local_path": local_path, "trace": traceback.format_exc()})
             return dataset, errors
         if "data" not in dataset:
             self.log(f"{Errors.no_data_field} {self.name}")
@@ -78,32 +81,20 @@ class Task(Base, metaclass=ABCMeta):
             for idx, example in enumerate(dataset["data"][self.split]):
                 try:
                     _ = self.doc_to_y_pred(example)
-                except KeyError:
+                except:
                     self.log(f"{Errors.no_outputs_field_for_doc} {self.name}")
-                    errors.append(
-                        {
-                            "type": str(Errors.no_outputs_field_for_doc),
-                            "example_number": idx,
-                        }
-                    )
+                    errors.append({"type": str(Errors.no_outputs_field_for_doc), "example_number": idx})
                 try:
                     _ = self.doc_to_meta(example)
-                except KeyError:
+                except:
                     self.log(f"{Errors.no_meta_field_for_doc} {self.name}")
-                    errors.append(
-                        {
-                            "type": str(Errors.no_meta_field_for_doc),
-                            "example_number": idx,
-                        }
-                    )
+                    errors.append({"type": str(Errors.no_meta_field_for_doc), "example_number": idx})
                     continue
                 try:
                     doct_id = self.doc_to_id(example)
-                except KeyError:
+                except:
                     self.log(f"{Errors.no_id_field_for_doc} {self.name}")
-                    errors.append(
-                        {"type": str(Errors.no_id_field_for_doc), "example_number": idx}
-                    )
+                    errors.append({"type": str(Errors.no_id_field_for_doc), "example_number": idx})
                     continue
                 examples[doct_id] = example
             if not len(errors):
@@ -111,7 +102,7 @@ class Task(Base, metaclass=ABCMeta):
                     local_path=local_path,
                     name=self.name,
                     log=self.log,
-                    examples=examples,
+                    examples=examples
                 )
         return dataset, errors
 
@@ -123,31 +114,31 @@ class Task(Base, metaclass=ABCMeta):
         # Calculate metrics
         if not len(errors):
             for doc_id in self.gold.doc_ids():
-                if doc_id not in dataset.examples:
-                    self.log(f"{Errors.no_id} {self.name}")
-                    errors.append({"type": str(Errors.no_id), "doc_id": doc_id})
-                elif not isinstance(
-                    self.doc_to_y_pred(dataset[doc_id]),
-                    type(self.doc_to_y_true(self.gold[doc_id])),
-                ):
-                    errors.append(
-                        {"type": str(Errors.doc_output_type_error), "doc_id": doc_id}
-                    )
-                else:
-                    try:
-                        metrics = self.process_results(
-                            doc_true=self.gold[doc_id], doc_pred=dataset[doc_id]
-                        )
-                        for metric, value in metrics.items():
-                            vals[metric].append(value)
-                    except:
-                        errors.append(
-                            {
+                try:
+                    if doc_id not in dataset.examples:
+                        self.log(f"{Errors.no_id} {self.name}")
+                        errors.append({"type": str(Errors.no_id), "doc_id": doc_id})
+                    elif not isinstance(
+                            self.doc_to_y_pred(dataset[doc_id]), type(self.doc_to_y_true(self.gold[doc_id]))):
+                        errors.append({"type": str(Errors.doc_output_type_error), "doc_id": doc_id})
+                    else:
+                        try:
+                            metrics = self.process_results(doc_true=self.gold[doc_id], doc_pred=dataset[doc_id])
+                            for metric, value in metrics.items():
+                                vals[metric].append(value)
+                        except:
+                            errors.append({
                                 "type": str(Errors.doc_parse_output_error),
                                 "doc_id": doc_id,
-                                "trace": traceback.format_exc(),
-                            }
-                        )
+                                "trace": traceback.format_exc()
+                            })
+                except:
+                    errors.append({
+                        "type": str(Errors.doc_parse_output_error),
+                        "doc_id": doc_id,
+                        "trace": traceback.format_exc()
+                    })
+
         # Aggregate metrics
         if not len(errors):
             for metric, items in vals.items():
@@ -168,33 +159,43 @@ class Task(Base, metaclass=ABCMeta):
 
     @abstractmethod
     def aggregation(self) -> Dict:
-        raise NotImplementedError
+        raise NotImplemented
 
     @abstractmethod
     def process_results(self, doc_true, doc_pred) -> Dict:
-        raise NotImplementedError
+        raise NotImplemented
 
     def sample_submission(self):
         res = []
         for doc_id in self.gold.doc_ids():
             doc = {
                 "outputs": str(np.random.choice(self.choices)),
-                "meta": {"id": doc_id},
+                "meta": {"id": doc_id}
             }
             res.append(doc)
         return {"data": {self.split: res}}
 
+    def remove_outputs(self):
+        task = load_json(self.task_conf.origin_repo_path)
+        for idx in range(len(task["data"]["test"])):
+            task["data"]["test"][idx]["outputs"] = ""
+        return task
+
     def average_results(self, metrics: Dict) -> float:
         return mean([v for k, v in metrics.items() if "." not in k])
 
+    def zero_results(self):
+        return {k: 0 for k in self.aggregation()}
+
 
 class NotImplementedTask(Task):
+
     def load_gold(self):
         return []
 
     @abstractmethod
     def evaluate(self, local_path):
-        raise NotImplementedError
+        raise NotImplemented
 
     def sample_submission(self):
         return {"data": {"test": [{"outputs": "1", "inputs": "1", "meta": {"id": 1}}]}}

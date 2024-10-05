@@ -2,23 +2,27 @@ import random
 from typing import Dict
 from src.registry import register_task
 from src.tasks.task import Task
-from collections import defaultdict
 import numpy as np
 import re
 
 
 @register_task
 class USE(Task):
+
     def process_results(self, doc_true, doc_pred) -> Dict:
         id_task = doc_true["meta"]["id_task"]
         task_type = doc_true["meta"]["type"]
         variant = doc_true["meta"]["variant"]
+        max_score = doc_true["meta"]["score"]
         answer = doc_true["outputs"]
         prediction = doc_pred["outputs"]
 
         score = self.get_scores(task_type, id_task, answer, prediction)
 
-        return {"grade_norm": (score, variant)}
+        return {
+            "grade_norm": (score, variant, max_score),
+            f"grade_norm.task{id_task}": (score, id_task, max_score)
+        }
 
     @staticmethod
     def multiple_choice_score(answer: str, prediction: str, is_task16=False) -> int:
@@ -69,24 +73,44 @@ class USE(Task):
             score = self.multiple_choice_score(answer, prediction, is_task16)
         return score
 
-    def overall_score(self, items):
-        overall_scores = defaultdict(float)
+    @staticmethod
+    def overall_score(items):
+        overall_scores = {}
+        overall_max_scores = {}
         for item in items:
-            score, variant = item[0], item[1]
+            score, variant, max_score = item[0], item[1], item[2]
+            if variant not in overall_scores:
+                overall_scores[variant] = 0
             overall_scores[variant] += score
+            if variant not in overall_max_scores:
+                overall_max_scores[variant] = 0
+            overall_max_scores[variant] += max_score
 
         average_overall_score = np.mean(
-            [
-                score / self.task_conf.max_grade_point
-                for score in overall_scores.values()
-            ]
+            [score / overall_max_scores[variant] for variant, score in overall_scores.items()]
         )
         return average_overall_score
 
+    @staticmethod
+    def task_score(items):
+        overall_scores = []
+        for item in items:
+            score, id_task, max_score = item[0], item[1], item[2]
+            overall_scores.append(score / max_score)
+
+        average_overall_score = np.mean(overall_scores)
+        return average_overall_score
+
     def aggregation(self):
-        return {
+        res = {
             "grade_norm": self.overall_score,
         }
+        for idx in range(1, 27):
+            res[f"grade_norm.task{idx}"] = self.task_score
+        res.pop("grade_norm.task8")
+        for idx in range(5):
+            res[f"grade_norm.task8_{idx}"] = self.task_score
+        return res
 
     def sample_submission(self):
         res = []
@@ -96,13 +120,11 @@ class USE(Task):
                 "meta": {
                     "id": doc_id,
                     "id_task": origin_doc["meta"]["id_task"],
-                    "variant": origin_doc["meta"]["variant"],
+                    "variant": origin_doc["meta"]["variant"]
                 }
             }
             if origin_doc["meta"]["type"] == "text":
-                doc["outputs"] = str(
-                    np.random.choice(origin_doc["inputs"]["text"].split())
-                )
+                doc["outputs"] = str(np.random.choice(origin_doc["inputs"]["text"].split()))
             else:
                 doc["outputs"] = str(random.randint(1, 4))
                 if random.random() < 0.5:

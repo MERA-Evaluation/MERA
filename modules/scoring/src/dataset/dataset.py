@@ -1,5 +1,13 @@
+
+
 class Dataset(object):
-    def __init__(self, local_path: str, name: str, log, examples: dict):
+    def __init__(
+            self,
+            local_path: str,
+            name: str,
+            log,
+            examples: dict
+    ):
         self.local_path = local_path
         self.name = name
         self.log = log
