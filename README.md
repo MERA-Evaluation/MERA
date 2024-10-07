@@ -37,27 +37,31 @@ The MERA benchmark includes 21 text tasks (17 base tasks + 4 diagnostic tasks). 
 
 | Name | Task Name | Task Type | Test Size | N-shots | Metrics |
 | --- | --- | --- | --- | --- | --- |
-| MathLogicQA | mathlogicqa | Math, Logic | 1143 | 5 | Acc |
+| MathLogicQA | mathlogicqa | Math, Logic | 1143 | 1 | Acc |
 | MultiQ | multiq | Reasoning | 900 | 0 | EM / F1 |
-| PARus | parus | Common Sense | 500 | 0 | Acc |
-| RCB | rcb | NLI | 438 | 0 | Acc / F1_macro |
+| PARus | parus | Common Sense | 500 | 1 | Acc |
+| RCB | rcb | NLI | 438 | 1 | Acc / F1_macro |
 | ruModAr | rumodar | Math, Logic | 6000 | 0 | EM |
-| ruMultiAr | rumultiar | Math | 1024 | 5 | EM |
-| ruOpenBookQA | ruopenbookqa | World Knowledge | 400 | 5 | Acc / F1_macro |
-| ruTiE | rutie | Reasoning, Dialogue Context, Memory | 430 | 0 | Acc |
-| ruWorldTree | ruworldtree | World Knowledge | 525 | 5 | Acc / F1_macro |
-| RWSD | rwsd | Reasoning | 260 | 0 | Acc |
-| SimpleAr | simplear | Math | 1000 | 5 | EM |
-| BPS | bps | Code, Math | 1000 | 2 | Acc |
-| CheGeKa | chegeka | World Knowledge | 416 | 4 | EM / F1 |
-| LCS | lcs | Code, Math | 500 | 2 | Acc |
+| ruMultiAr | rumultiar | Math | 1024 | 1 | EM |
+| ruOpenBookQA | ruopenbookqa | World Knowledge | 400 | 1 | Acc / F1_macro |
+| ruTiE | rutie | Reasoning, Dialogue Context, Memory | 430 | 1* | Acc |
+| ruWorldTree | ruworldtree | World Knowledge | 525 | 1 | Acc / F1_macro |
+| RWSD | rwsd | Reasoning | 260 | 1 | Acc |
+| SimpleAr | simplear | Math | 1000 | 2 | EM |
+| BPS | bps | Code, Math | 1000 | 1 | Acc |
+| CheGeKa | chegeka | World Knowledge | 416 | 1 | EM / F1 |
+| LCS | lcs | Code, Math | 500 | 1 | Acc |
 | ruHumanEval | ruhumaneval | Code | 164 | 0 | Pass@k |
-| ruMMLU | rummlu | Reasoning | 961 | 5 | Acc |
-| USE | use | Exam | 900 | 0 | Grade_norm |
-| ruDetox | rudetox | Ethics | 800 | 0 | J(STA, SIM, FL) |
+| ruCodeEval | rucodeeval | Code | 164 | 0 | Pass@k |
+| ruMMLU | rummlu | Reasoning | 14012 | 1 | Acc |
+| MaMuRAMu | mamuramu | Reasoning | 4248 | 1 | Acc |
+| USE | use | Exam | 900 | 1 | Grade_norm |
+| ruDetox | rudetox | Ethics | 800 | 1 | J(STA, SIM, FL) |
 | ruEthics | ruethics | Ethics | 1935 | 0 | 5 MCC |
-| ruHateSpeech | ruhatespeech | Ethics | 265 | 0 | Acc |
+| ruHateSpeech | ruhatespeech | Ethics | 265 | 1 | Acc |
 | ruHHH | ruhhh | Ethics | 178 | 0 | Acc |
+
+*"artificial" few-shot that is meant to make the task work correct
 
 Our aim is to evaluate all the models:
 
