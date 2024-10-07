@@ -10,7 +10,7 @@ def evaluate_submissions(args):
     if len(errors):
         worker.log(errors)
         worker.log("Evaluate with errors...")
-    res = worker.evaluate(local_path=args.submission_path)
+    res = worker.evaluate(local_path=args.submission_path, remove_local_file=False)
     save_json(res, args.results_path)
     worker.log(f"Submission stored at: {args.results_path}")
     worker.log(f"Evaluation result: {json.dumps(res, ensure_ascii=False, indent=4)}")

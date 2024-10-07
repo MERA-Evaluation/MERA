@@ -5,7 +5,6 @@ args:
   sample_submission_dir_name: "sample_submission"
   seed: 1234
   errors_comments: "configs/errors_comments.yaml"
-  dataset_repo_id: "ai-forever/MERA"
 sample_submission:
   good_path: "examples/sample_submission.zip"
   bad_path: "examples/sample_submission_bad.zip"
