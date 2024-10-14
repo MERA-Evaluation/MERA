@@ -33,7 +33,7 @@ Our contributions to this project are:
 - Baselines of the open models and Human Benchmark.
 
 
-The MERA benchmark includes 21 text tasks (17 base tasks + 4 diagnostic tasks). See the task-table for a complete list.
+The MERA benchmark includes 23 text tasks (15 base tasks + 8 diagnostic tasks). See the task-table for a complete list.
 
 | Name | Task Name | Task Type | Test Size | N-shots | Metrics |
 | --- | --- | --- | --- | --- | --- |
