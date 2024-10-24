@@ -27,7 +27,7 @@ pip install -e ".[auto-gptq]"
 To use vLLM, do 
 ```bash
 cd lm-evaluation-harness
-pip install lm_eval[vllm]
+pip install -e ".[vllm]"
 ```
 
 These commands are to be run from `lm-evaluation-harness` directory of this repository.
@@ -101,6 +101,7 @@ MERA_MODEL_STRING="model=meta-llama/Meta-Llama-3.1-405B-Instruct,num_concurrent=
 MERA_COMMON_SETUP="--model openai-completions --batch_size=1 --predict_only --log_samples --seed 1234 --verbosity INFO" \
 bash scripts/run_benchmark.sh
 ```
+
 
 Parameters of shell scripts:
 - `CUDA_VISIBLE_DEVICES` to set cuda device visibility, 
