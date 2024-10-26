@@ -27,7 +27,7 @@ pip install -e ".[auto-gptq]"
 To use vLLM, do 
 ```bash
 cd lm-evaluation-harness
-pip install lm_eval[vllm]
+pip install -e ".[vllm]"
 ```
 
 These commands are to be run from `lm-evaluation-harness` directory of this repository.
