@@ -5,3 +5,4 @@ tag:
 task: rutie_gen_localscore
 test_split: train
 fewshot_split: train
+doc_to_target: "{{'{target}'.format(target=outputs)}}"
