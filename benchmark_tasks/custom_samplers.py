@@ -1,5 +1,10 @@
 from lm_eval.api.samplers import ContextSampler
 from lm_eval.utils import apply_template
+import logging
+import warnings
+from typing import Optional
+
+eval_logger = logging.getLogger("lm-eval")
 
 
 class FewshotSampler(ContextSampler):
@@ -26,7 +31,9 @@ class FewshotSampler(ContextSampler):
             return docs_for_sampling[:n]
         return self.rnd.sample(docs_for_sampling, n)
 
-    def get_context(self, doc, num_fewshot):
+    def get_context(self, doc, num_fewshot, gen_prefix: str = None):
+        prefix = gen_prefix + " " if gen_prefix else ""
+
         # draw an extra fewshot sample if using same split as evaluating on
         n_samples = (
             num_fewshot + 1
@@ -64,15 +71,35 @@ class FewshotSampler(ContextSampler):
                 if idx == 0
                 else apply_template(no_instruction_template, doc)
             )
-            labeled_examples += self.target_delimiter
-            labeled_examples += (
-                str(doc_target[0])
-                if isinstance(doc_target, list)
-                else doc_target
-                if self.config.doc_to_choice is None or isinstance(doc_target, str)
-                else str(self.doc_to_choice(doc)[doc_target])
-            )
-            labeled_examples += self.fewshot_delimiter
+
+            if doc_target != "":
+                if self.target_delimiter.isspace() and str(doc_target)[0].isspace():
+                    # TODO: add logger warn once here.
+                    warnings.warn(
+                        "Both target_delimiter and target start with a space. This may cause issues.",
+                        Warning,
+                        stacklevel=2,
+                    )
+                labeled_examples += self.target_delimiter
+                labeled_examples += prefix
+                labeled_examples += (
+                    str(doc_target[0])
+                    if isinstance(doc_target, list)
+                    else doc_target
+                    if self.config.doc_to_choice is None or isinstance(doc_target, str)
+                    else str(self.doc_to_choice(doc)[doc_target])
+                )
+                labeled_examples += self.fewshot_delimiter
+
+            # labeled_examples += self.target_delimiter
+            # labeled_examples += (
+            #     str(doc_target[0])
+            #     if isinstance(doc_target, list)
+            #     else doc_target
+            #     if self.config.doc_to_choice is None or isinstance(doc_target, str)
+            #     else str(self.doc_to_choice(doc)[doc_target])
+            # )
+            # labeled_examples += self.fewshot_delimiter
 
         # set doc_to_text to be instructionless to be usable with the next sample
         self.task.config.doc_to_text = no_instruction_template
@@ -85,7 +112,9 @@ class FewshotSampler(ContextSampler):
         doc,
         num_fewshot,
         fewshot_as_multiturn: bool = False,
+        gen_prefix: Optional[str] = None,
     ):
+        prefix = gen_prefix + " " if gen_prefix else ""
         chat_history = []
         # draw an extra fewshot sample if using same split as evaluating on
         n_samples = (
@@ -131,18 +160,23 @@ class FewshotSampler(ContextSampler):
                 chat_history.append(
                     {
                         "role": "assistant",
-                        "content": str(doc_target[0])
+                        "content": prefix + str(doc_target[0])
                         if isinstance(doc_target, list)
-                        else doc_target
+                        else prefix + doc_target
                         if self.config.doc_to_choice is None
                         or isinstance(doc_target, str)
-                        else str(self.doc_to_choice(doc)[doc_target]),
+                        else prefix + str(self.doc_to_choice(doc)[doc_target]),
                     }
                 )
         else:
             # get fewshot context as one user turn
             chat_history.append(
-                {"role": "user", "content": self.get_context(doc, num_fewshot)}
+                {
+                    "role": "user",
+                    "content": self.get_context(
+                        doc, num_fewshot, gen_prefix=gen_prefix
+                    ),
+                }
             )
 
         # set doc_to_text to be instructionless to be usable with the next sample

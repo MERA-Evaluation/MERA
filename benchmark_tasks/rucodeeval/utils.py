@@ -76,7 +76,7 @@ def preprocess_generation(generation):
         begin_pattern = first * 3 + "python"
         end_pattern = first * 3
         if generation.startswith(begin_pattern) and generation.endswith(end_pattern):
-            return generation[len(begin_pattern):-len(end_pattern)]
+            return generation[len(begin_pattern) : -len(end_pattern)]
     return generation
 
 

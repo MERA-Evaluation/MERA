@@ -1,4 +1,5 @@
 from lm_eval.api.samplers import ContextSampler
+from typing import Optional
 
 ### Copy of code from lm_eval_utils
 from jinja2 import BaseLoader, Environment, StrictUndefined
@@ -68,7 +69,8 @@ class ruTiEContextFormer(ContextSampler):
         samples = self.docs[start_idx:end_idx]
         return samples
 
-    def get_context(self, doc, num_fewshot):
+    def get_context(self, doc, num_fewshot, gen_prefix: str = None):
+        prefix = gen_prefix + " " if gen_prefix else ""
         # draw `n_samples` docs from fewshot_docs
         fewshotex = self.sample(num_fewshot, doc)
 
@@ -117,7 +119,9 @@ class ruTiEContextFormer(ContextSampler):
         doc,
         num_fewshot,
         fewshot_as_multiturn: bool = False,
+        gen_prefix: Optional[str] = None,
     ):
+        prefix = gen_prefix + " " if gen_prefix else ""
         chat_history = []
 
         # draw `n_samples` docs from fewshot_docs

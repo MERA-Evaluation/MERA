@@ -16,6 +16,6 @@ process_docs: !function utils.process_docs
 doc_to_text: "{{instruction.replace('{', '{{').replace('}', '}}').replace('{{question}}', '{question}').replace('{{choice1}}', '{choice1}').replace('{{choice2}}', '{choice2}').format(**inputs).strip()}}"
 doc_to_target: "{{'RUTIE_TARGET_{idx}'.format(idx=meta['question_id'])}}"
 doc_to_choice: ["1", "2"]
-num_fewshot: null
+num_fewshot: 1
 metadata:
   version: 1.0
