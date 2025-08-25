@@ -21,6 +21,43 @@
 </p>
 </h2>
 
+
+## **🔔 CALL FOR NEW DATASETS: Help Expand Our Benchmark!**
+
+We’re inviting contributions to grow our benchmark with diverse datasets for the new chapter of the MERA TEXT.
+
+### 🎯 Submission Guidelines
+
+The tests needs to be HARD for the latest models!
+
+***💡 Suggested Tasks***
+- Dialogue / Conversational Skills
+- Reasoning Tasks
+- Instruction Following / Alignment
+- Creativity & Generation
+- Reflection
+- Safety & Ethics
+- Evolving / Adaptation
+- Empathy / Theory of Mind / Emotional Intelligence
+- Advanced & Meta-Cognitive Abilities
+etc.
+
+**🚀 How to Contribute?**
+
+0. Develop your dataset according to the text LLM evaluation criteria ([see requirements](docs/dataset_review.md)).
+1. Format your dataset to our specifications ([format instruction](docs/dataset_formatting.md)) and upload it to the 🤗 Hugging Face Hub ([instruction](docs/dataset_hf.md](docs/dataset_formatting.md))). 
+2.  Integrate your dataset into our codebase using the instructions above. Check that it works by running the baselines! ([instruction](docs/task_codebase.md)).
+3. Submit a **Pull Request** with your dataset to this repository.
+
+We will review your submission and, upon approval, add it to New MERA TEXT.
+
+**❓ Questions?**
+Open an [Issue](https://github.com/MERA-Evaluation/MERA/issues) or discuss in our [Community Forum](https://t.me/+XkBIbHFg8s5iNGIy).  
+*Let’s build a more representative benchmark together!* ✨  
+
+Feel free to email any questions & feedback regarding our work at mera@a-ai.ru. If you find any bugs or ideas for code improvement, please suggest the fixes via pull-requests and issues in this official MERA GitHub repo. We will be glad to get your feedback!
+
+
 ## About MERA
 
 MERA benchmark brings together all industry and academic players in one place to study the capabilities of SOTA models, draw attention to AI problems, develop collaboration within the Russian Federation and in the international arena and create an independent unified system for measuring all current models. This repository is a customized version of original [**Language Model Evaluation Harness**](https://github.com/EleutherAI/lm-evaluation-harness) (**LM-Harness** `v0.4.8`).
