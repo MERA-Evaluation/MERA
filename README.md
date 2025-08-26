@@ -28,7 +28,7 @@ We’re inviting contributions to grow our benchmark with diverse datasets for t
 
 ### 🎯 Submission Guidelines
 
-The tests needs to be HARD for the latest models!
+The tests needs to be HARD for the latest models! MERA TEXT targets primarily the Russian language tests.
 
 ***💡 Suggested Tasks***
 - Dialogue / Conversational Skills
