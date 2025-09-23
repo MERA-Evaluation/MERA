@@ -1,0 +1,75 @@
+{
+    "dataset_name": "ruAIME",
+    "license": "American Invitational Mathematics Examination (AIME) — Problems 1983-2025.\n© 1983-2025 Mathematical Association of America (AMC). All rights reserved.\nUsed for educational, noncommercial purposes.\nSource: AIME 1983-2025.",
+    "dataset_size": "len(DATA)",
+    "description": "Russian-translated AIME mathematical problems (1983-2025) covering algebra, geometry, calculus, combinatorics, number theory, and probability.",
+    "modalities": ["text"],
+    "skills": ["Mathematical reasoning", "Problem solving", "Algebraic manipulation", "Multistep deduction", "Pattern recognition"],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": "list(set(sample['meta']['domain'] for sample in DATA))",
+    "data_example": {
+        "instruction": "ТОЛЬКО РЕЗУЛЬТАТ! Разберись с задачей: {question}. Выведи только числовой результат, комментариев и пояснений давать не нужно!",
+        "inputs": {
+            "question": "В окружности проведены две пересекающиеся хорды. Радиус окружности равен 5, BC=6, и AD делится пополам хордой BC. Найдите произведение mn, где m/n - несократимая дробь, представляющая синус центрального угла малой дуги AB."
+        },
+        "outputs": "175",
+        "meta": {
+            "id": 999,
+            "url": "https://artofproblemsolving.com/wiki/index.php/2024_AIME_Problems/Problem_0",
+            "categories": {
+                "contest_type": "AIME",
+                "year": 2024,
+                "problem_id": 0,
+                "math_domain": "Геометрия"
+            },
+            "solutions": {
+                "solution_i": {
+                    "id": 1,
+                    "text": "Пусть O - центр окружности. Поскольку BC=6, расстояние от O до BC равно 4. Рассмотрим геометрическое место середин хорд из A - это окружность с диаметром AO. Условие единственности означает, что эта окружность касается BC. Проведя необходимые вычисления, получаем sin(∠AOB) = 7/25. Таким образом, m=7, n=25, и их произведение равно 175."
+                }
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {"ru": "Инструкция для решения задачи", "en": "Instruction for solving the problem"},
+        "inputs": {
+            "question": {"ru": "Текст математической задачи", "en": "Mathematical problem statement"}
+        },
+        "outputs": {"ru": "Числовой ответ на задачу", "en": "Numeric answer to the problem"},
+        "meta": {
+            "id": {"ru": "Уникальный идентификатор задачи в датасете", "en": "Unique problem identifier in dataset"},
+            "url": {"ru": "URL исходной задачи на AoPS Wiki", "en": "URL of original problem on AoPS Wiki"},
+            "categories": {
+                "contest_type": {"ru": "Тип математического соревнования", "en": "Type of mathematical competition"},
+                "year": {"ru": "Год проведения соревнования", "en": "Contest year"},
+                "problem_id": {"ru": "Номер задачи в соревновании", "en": "Problem number in contest"},
+                "math_domain": {"ru": "Математическая область задачи", "en": "Mathematical domain of the problem"}
+            },
+            "solutions": {
+                "solution_i": {
+                    "id": {"ru": "Идентификатор варианта решения", "en": "Solution variant identifier"},
+                    "text": {"ru": "Текст решения задачи", "en": "Problem solution text"}
+                }
+            }
+        }
+    },
+    "prompts": [
+        "ТОЛЬКО ЧИСЛО! Реши задачу: {question}. В ответе напиши только число, без объяснений!",
+        "ВЫВЕДИ ЧИСЛО! Прочитай условие: {question}. Укажи исключительно числовой ответ без каких-либо пояснений!",
+        "ЦИФРОВОЙ ОТВЕТ! Математическая задача: {question}. Ответ должен быть числом, никаких пояснений!",
+        "ТОЛЬКО РЕЗУЛЬТАТ! Разберись с задачей: {question}. Выведи только числовой результат, комментариев и пояснений давать не нужно!",
+        "ЧИСЛО! Внимательно прочитай условие: {question}. Дай лишь число в ответе, без текста, комментариев, объяснений!",
+        "ВЫВЕДИ ТОЛЬКО ЧИСЛО! Реши задачу: {question}. Немедленно выведи только числовой ответ, без комментариев!",
+        "БЕЗ РЕШЕНИЯ, ТОЛЬКО ЧИСЛОВОЙ ОТВЕТ! Внимательно проанализируй: {question}. Только число в ответе, никаких слов!",
+        "ЧИСЛОВОЙ РЕЗУЛЬТАТ! Изучи задачу: {question}. Выведи исключительно число, без объяснений!",
+        "ТОЧНОЕ ЧИСЛО! Обработай задачу: {question}. В ответе числовой результат, без решения и пояснений!",
+        "ФИНАЛЬНЫЙ ЧИСЛОВОЙ ОТВЕТ! Реши и выведи: {question}. Ничего кроме числового результата!"
+    ],
+    "metrics": {
+        "Accuracy": {"ru": "Точность числового ответа", "en": "Numeric answer accuracy"}
+    },
+    "human_benchmark": {
+        "Accuracy": "TODO"
+    }
+}
