@@ -100,6 +100,12 @@ The collection and validation process included:
 4. Translating the problem statements and solutions into Russian.
 5. Structuring the data into a unified JSON format with clear separation into problem statements, solutions, and meta-information.
 
+The translation into Russian was performed using the DeepSeek Reasoner API. The main objective was to create a parallel English-Russian corpus of mathematical texts while preserving formula accuracy and language naturalness.
+
+The translation process was carried out by a specialized script that processed text files with problems. The model received clear instructions to translate only the text between special markers, preserving all mathematical expressions in LaTeX format, boxed{} tags, and the original structure. The script was configured to handle large volumes of data with the capability to pause and resume processing.
+
+For quality control, selective manual verification of translations was conducted, which confirmed the correct processing of mathematical expressions and compliance with requirements. As a result, a complete parallel corpus of high-quality translations was obtained, ready for training Russian-language models.
+
 
 ## Evaluation
 
