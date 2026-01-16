@@ -111,6 +111,7 @@ class FewshotSampler(ContextSampler):
         self,
         doc,
         num_fewshot,
+        pass_multimodal_args_to_chat_history: bool = True,
         fewshot_as_multiturn: bool = False,
         gen_prefix: Optional[str] = None,
     ):
@@ -182,4 +183,4 @@ class FewshotSampler(ContextSampler):
         # set doc_to_text to be instructionless to be usable with the next sample
         self.task.config.doc_to_text = no_instruction_template
 
-        return chat_history
+        return chat_history, {}
