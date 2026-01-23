@@ -118,6 +118,7 @@ class ruTiEContextFormer(ContextSampler):
         self,
         doc,
         num_fewshot,
+        pass_multimodal_args_to_chat_history: bool = True,
         fewshot_as_multiturn: bool = False,
         gen_prefix: Optional[str] = None,
     ):
@@ -171,4 +172,4 @@ class ruTiEContextFormer(ContextSampler):
                         ]
                     )
 
-        return chat_history
+        return chat_history, {}
