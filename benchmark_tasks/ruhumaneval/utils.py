@@ -14,6 +14,7 @@ import numpy as np
 
 from lm_eval.api.filter import Filter
 from lm_eval.api.registry import register_filter
+from lm_eval.api.registry import FILTER_REGISTRY
 
 
 def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
@@ -40,27 +41,28 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     }  # if no label provided (test answers are secret)
 
 
-@register_filter("ruhumanevalscoring")
-class ruHumanEvalScoring(Filter):
-    def __init__(self) -> None:
-        """
-        Can define custom behavior here, if an individual instantiation of a Filter class should have state.
-        """
+if not FILTER_REGISTRY.get("ruhumanevalscoring", None):
+    @register_filter("ruhumanevalscoring")
+    class ruHumanEvalScoring(Filter):
+        def __init__(self) -> None:
+            """
+            Can define custom behavior here, if an individual instantiation of a Filter class should have state.
+            """
 
-    def apply(self, resps, docs):
-        """
-        Assuming each entry of `resps` is a list of model responses, we discard all but the first response.
-        """
-        # resps: List[List[str]] - list of lists of generations
-        code_results = []
-        for idx, sample in enumerate(resps):
-            sample_metrics = []
-            for completion in sample:
-                processed_completion = preprocess_generation(completion)
-                result = execute_function(processed_completion, docs[idx])  # List
-                sample_metrics.extend([result])
-            code_results.extend([sample_metrics])
-        return code_results
+        def apply(self, resps, docs):
+            """
+            Assuming each entry of `resps` is a list of model responses, we discard all but the first response.
+            """
+            # resps: List[List[str]] - list of lists of generations
+            code_results = []
+            for idx, sample in enumerate(resps):
+                sample_metrics = []
+                for completion in sample:
+                    processed_completion = preprocess_generation(completion)
+                    result = execute_function(processed_completion, docs[idx])  # List
+                    sample_metrics.extend([result])
+                code_results.extend([sample_metrics])
+            return code_results
 
 
 def preprocess_generation(generation):
