@@ -1,0 +1,23 @@
+dataset_path: MERA-evaluation/MERA
+dataset_name: SAGE
+task: sage
+
+test_split: test
+
+output_type: generate_until
+
+doc_to_text: "{{instruction.format(**inputs).strip()}}"
+
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: "take_first"
+
+
+process_results: !function utils.process_results
+metric_list:
+  - metric: errant
+    aggregation: mean
+    higher_is_better: true
+
+num_fewshot: null
