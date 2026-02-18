@@ -6,7 +6,7 @@ Install the required packages:
 
 ```bash
 python -m spacy download ru_core_news_lg
-pip install sage-spelling[errant]
+pip install "sage-spelling[errant]"
 ```
 
 ## Description
