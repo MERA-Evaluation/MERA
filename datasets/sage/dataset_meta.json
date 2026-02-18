@@ -1,0 +1,88 @@
+{
+    "dataset_name": "SAGE",
+    "license": "MERA_private",
+    "dataset_size": 500,
+    "description": "Russian text error correction dataset. The task is to transform an input text containing errors into a natural, grammatically correct version.",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "Grammatical error correction",
+        "Spelling correction",
+        "Punctuation correction",
+        "Casing correction",
+        "Error detection",
+        "Text editing"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "ЗАДАЧА\nИсправь орфографические, пунктуационные и грамматические ошибки в тексте, а также ошибки регистра букв.\n\nФОРМАТ ОТВЕТА\nВыведи только исправленный текст без пояснений и комментариев.\n\nТЕКСТ\n{source}",
+        "inputs": {
+            "source": "Очень жалею что сделала заказ в этом магазине. Вещи абсолютно не соответствуют описанию в профиле продавца. Деньги можно просто выкинуть на помойку, а не ждать, когда придёт посылка, ибо при примерке и после шока, вы все равно эту вещь выкинете в мусорку. Сшито криво-косо-размер не соответствует. Вещи из этого магазина можно, не сомневаясь, отправлять в обзор 'Ожидание и реальность от Aliexpress - смех и разочарование'. Короткая и квадратная, как будто сшита вместо наволочки на подушку. Не рекомендую."
+        },
+        "outputs": "Очень жалею, что сделала заказ в этом магазине. Вещи абсолютно не соответствуют описанию в профиле продавца. Деньги можно просто выкинуть на помойку, а не ждать, когда придёт посылка, ибо при примерке и после шока вы всё равно эту вещь выкинете в мусорку. Сшито криво-косо, размер не соответствует. Вещи из этого магазина можно не сомневаясь отправлять в обзор «Ожидание и реальность от Aliexpress — смех и разочарование». Короткая и квадратная, как будто сшита вместо наволочки на подушку. Не рекомендую.",
+        "meta": {
+            "id": 1
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "source": {
+                "ru": "Текст с ошибками, который необходимо исправить.",
+                "en": "Text containing errors that must be corrected."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            }
+        }
+    },
+    "prompts": [
+        "ЗАДАЧА\nИсправь орфографические, пунктуационные и грамматические ошибки в тексте, а также ошибки регистра букв.\n\nФОРМАТ ОТВЕТА\nВыведи только исправленный текст без пояснений и комментариев.\n\nТЕКСТ\n{source}",
+        "ИНСТРУКЦИЯ\nИсправьте ошибки в тексте.\n\nТРЕБОВАНИЕ\nИсправьте орфографию, пунктуацию, грамматику и регистр букв (например, заглавные/строчные буквы).\n\nФОРМАТ ОТВЕТА\nОтвет должен содержать только исправленный текст.\n\nТЕКСТ\n{source}",
+        "ЗАДАНИЕ\nНеобходимо исправить ошибки в тексте.\n\nПОЯСНЕНИЕ\nИсправьте орфографические, пунктуационные и грамматические ошибки, а также ошибки в регистре букв.\n\nФОРМАТ ВЫВОДА\nВерните только исправленный вариант текста.\n\nИСХОДНЫЙ ТЕКСТ\n{source}",
+        "РОЛЬ\nВы редактор текста.\n\nЗАДАЧА\nОтредактируйте текст: исправьте орфографические, пунктуационные и грамматические ошибки, а также приведите регистр букв к норме.\n\nФОРМАТ ОТВЕТА\nНапишите только исправленный текст без комментариев.\n\nТЕКСТ\n{source}",
+        "ЗАДАЧА\nИсправь ошибки в тексте.\n\nКАК ИСПРАВЛЯТЬ\nИсправь орфографические, пунктуационные, грамматические ошибки и ошибки регистра букв.\n\nФОРМАТ\nВыведи только исправленный текст.\n\nТЕКСТ\n{source}"
+    ],
+    "metrics": {
+        "CASE_F1": {
+            "en": "CASE_F1 measures the F1-score for edits related to letter case correction (uppercase and lowercase). The metric is computed based on edit-level precision and recall within this category.",
+            "ru": "Метрика CASE_F1 измеряет F1-оценку по правкам, связанным с исправлением регистра букв (заглавные и строчные). Метрика рассчитывается на уровне правок через precision и recall внутри данной категории."
+        },
+        "YO_F1": {
+            "en": "YO_F1 measures the F1-score for edits related to correcting the use of the letters 'е' and 'ё'. The metric is computed based on edit-level precision and recall within this category.",
+            "ru": "Метрика YO_F1 измеряет F1-оценку по правкам, связанным с исправлением употребления букв «е» и «ё». Метрика рассчитывается на уровне правок через precision и recall внутри данной категории."
+        },
+        "SPELL_F1": {
+            "en": "SPELL_F1 measures the F1-score for spelling-related edits. The metric is computed based on edit-level precision and recall within this category.",
+            "ru": "Метрика SPELL_F1 измеряет F1-оценку по орфографическим правкам. Метрика рассчитывается на уровне правок через precision и recall внутри данной категории."
+        },
+        "PUNCT_F1": {
+            "en": "PUNCT_F1 measures the F1-score for punctuation-related edits. The metric is computed based on edit-level precision and recall within this category.",
+            "ru": "Метрика PUNCT_F1 измеряет F1-оценку по пунктуационным правкам. Метрика рассчитывается на уровне правок через precision и recall внутри данной категории."
+        },
+        "errant": {
+            "en": "errant is a weighted aggregated F1-score across error categories (CASE, YO, SPELL, PUNCT). Each category-specific F1-score is weighted proportionally to its distribution in the dataset and normalized by the sum of weights. The metric reflects the overall quality of text correction while accounting for the relative frequency of different error types.",
+            "ru": "Метрика errant представляет собой взвешенную агрегированную F1-оценку по категориям ошибок (CASE, YO, SPELL, PUNCT). Каждая категория имеет вес, пропорциональный её распределению в датасете, с последующей нормировкой по сумме весов. Метрика отражает общее качество исправления текста с учётом относительной частоты различных типов ошибок."
+        }
+    },
+    "human_benchmark": {
+        "CASE_F1": 0.0,
+        "YO_F1": 0.0,
+        "SPELL_F1": 0.0,
+        "PUNCT_F1": 0.0,
+        "errant": 0.0
+    }
+}
