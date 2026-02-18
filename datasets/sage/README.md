@@ -7,7 +7,11 @@ The SAGE dataset is designed to evaluate the ability of language models to autom
 
 The task is formulated as transforming a text containing errors into a grammatically correct and natural version. Models are expected to correct spelling, punctuation, grammar, and letter case errors without adding any comments or explanations.
 
-This dataset is an enhanced version of the open SAGE dataset (v1.1.0), published on Hugging Face: https://huggingface.co/ai-forever/sage-v1.1.0.
+This dataset is an enhanced version of the original SAGE dataset (v1.1.0). 
+
+For detailed information about the SAGE project, see the official project page on Hugging Face:
+https://huggingface.co/ai-forever/sage-v1.1.0
+
 
 The benchmark is oriented toward text-to-text models and enables quantitative evaluation of automatic text correction quality.
 
