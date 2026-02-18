@@ -1,0 +1,79 @@
+{
+    "dataset_name": "XXX",
+    "license": "MERA_private",
+    "dataset_size": "len(DATA)",
+    "description": "Example dataset description (up to 200 characters).",
+    "modalities": ["text", "image"],
+    "skills": ["Counterfactual robustness", "Static counting"],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": "list(set(sample['meta']['image']['synt_source'] for sample in DATA))",
+    "data_example": {
+        "instruction": "Посмотри на картинку <image> и ответь на вопрос, выбрав вариант ответа из предложенных. Напиши только букву правильного ответа.\nВопрос: {question}.\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d)\nОтвет:",
+        "inputs": {
+            "question": "Сколько автомобилей изображено на фото?",
+            "image": "image0001.jpg",
+            "option_a": "три",
+            "option_b": "два",
+            "option_c": "ни одного",
+            "option_d": "пять"
+        },
+        "outputs": "C",
+        "meta": {
+            "id": 1,
+            "categories": {
+                "task_type": "counterfactual"
+            },
+            "image": {
+                "synt_source": ["model-name"],
+                "source": ["photo"],
+                "type": ["visual"],
+                "content": ["view", "objects"],
+                "context": ["no_context"]
+            }
+        }
+    },
+    "data_field_descriptions": {
+            "instruction": {"ru": "default", "en": "default"},
+            "inputs": {
+                "question": {"ru": "default", "en": "default"},
+                "image": {"ru": "default", "en": "default"},
+                "option_a": {"ru": "default", "en": "default"},
+                "option_b": {"ru": "default", "en": "default"},
+                "option_c": {"ru": "default", "en": "default"},
+                "option_d": {"ru": "default", "en": "default"}
+            },
+            "outputs": {"ru": "default", "en": "default"},
+            "meta": {
+                "id": {"ru": "default", "en": "default"},
+                "categories": {
+                    "task_type": {"ru": "Тип задач в соответствии с классификацией задач в датасете XXX", "en": "Task type according to the task classification in the XXX dataset"}
+                },
+                "image": {
+                    "synt_source": {"ru": "default", "en": "default"},
+                    "source": {"ru": "default", "en": "default"},
+                    "type": {"ru": "default", "en": "default"},
+                    "content": {"ru": "default", "en": "default"},
+                    "context": {"ru": "default", "en": "default"}
+                }
+            }
+    },
+    "prompts": [
+        "prompt_0",
+        "prompt_1",
+        "prompt_2",
+        "prompt_3",
+        "prompt_4",
+        "prompt_5",
+        "prompt_6",
+        "prompt_7",
+        "prompt_8",
+        "prompt_9"
+    ],
+    "metrics": {
+        "Accuracy": {"ru": "default", "en": "default"}
+    },
+    "human_benchmark": {
+        "Accuracy": 1.0
+    }
+}
