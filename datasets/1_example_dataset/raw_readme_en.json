@@ -1,0 +1,7 @@
+{
+    "Task description": "Task description.",
+    "Motivation": "This section should comprehensively answer the question “Why is this task important?”. Guiding questions (refer to [ECBD](https://aclanthology.org/2024.acl-long.861/) for details on benchmark design motivation):\n- What models is this dataset oriented towards evaluating? For which models is it NOT suitable (limitations)?\n- What users are the evaluation results targeted at? How will these users interpret the results obtained from evaluating on this dataset?\n- What model capabilities does the task assess? What exactly is meant by these capabilities? Not just language understanding, but specifically what and in what context? Why evaluate these particular capabilities?\n- How are the questions in the dataset structured, and why are they structured this way? How can one understand that this specific task design evaluates the model capabilities that need to be assessed? Experimental validity.\n- How are the metrics chosen (especially when the metric is not simply the proportion of correct answers), and why are they the way they are? How does this choice of metrics help the user interpret the results?",
+    "Dataset creation": "Dataset creation methodology.",
+    "Human baseline": "Human baseline evaluation methodology.",
+    "Contributors": "Name Surname, Name Surname"
+}
