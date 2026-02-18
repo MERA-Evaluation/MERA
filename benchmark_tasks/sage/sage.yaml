@@ -19,5 +19,17 @@ metric_list:
   - metric: errant
     aggregation: mean
     higher_is_better: true
+  - metric: CASE_F1
+    aggregation: mean
+    higher_is_better: true
+  - metric: YO_F1
+    aggregation: mean
+    higher_is_better: true
+  - metric: SPELL_F1
+    aggregation: mean
+    higher_is_better: true
+  - metric: PUNCT_F1
+    aggregation: mean
+    higher_is_better: true
 
 num_fewshot: null

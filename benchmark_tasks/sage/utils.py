@@ -42,4 +42,8 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
 
     return {
         "errant": errant,
+        "CASE_F1": case_f1,
+        "YO_F1": yo_f1,
+        "SPELL_F1": spell_f1,
+        "PUNCT_F1": punct_f1
     }
