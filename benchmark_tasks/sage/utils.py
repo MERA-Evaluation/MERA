@@ -1,9 +1,9 @@
 from typing import Dict, List
-from sage.evaluation.scorer import Scorer
 
-scorer = Scorer()
 
 def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
+    from sage.evaluation.scorer import Scorer
+    scorer = Scorer()
 
 
     # распределение ошибок в датасете (в процентах)
