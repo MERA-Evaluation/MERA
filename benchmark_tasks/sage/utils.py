@@ -1,8 +1,22 @@
 from typing import Dict, List
+import warnings
+
+try:
+    from sage.evaluation.scorer import Scorer
+except ImportError:
+    Scorer = None
+    warnings.warn(
+        "SAGE is not installed. It is required to compute metrics for the SAGE task.\n\n"
+        "If you are running with --predict_only or not evaluating this task, "
+        "this warning can be ignored.\n\n"
+        "To install SAGE, run:\n"
+        "  pip install sage-spelling[errant]\n"
+        "  python -m spacy download ru_core_news_lg",
+        RuntimeWarning,
+    )
 
 
 def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
-    from sage.evaluation.scorer import Scorer
     scorer = Scorer()
 
 
