@@ -17,6 +17,9 @@ except ImportError:
 
 
 def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
+    if Scorer is None:
+        return {}
+
     scorer = Scorer()
 
 
