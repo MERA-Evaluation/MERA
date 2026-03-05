@@ -1,25 +1,23 @@
 from typing import Dict, List
 from lm_eval.api.filter import Filter
 from lm_eval.api.registry import register_filter
-import warnings
+import logging
+
+eval_logger = logging.getLogger(__name__)
+
 
 try:
     from sage.evaluation.scorer import Scorer
 except ImportError:
     Scorer = None
-    warnings.warn(
-    """SAGE is not installed. It is required to compute metrics for the SAGE task.
-
-If you are running with --predict_only or not evaluating this task,
-this warning can be ignored.
-
-To install SAGE, run:
-  pip install "sage-spelling[errant]"
-  python -m spacy download ru_core_news_lg
-""",
-    RuntimeWarning,
+    eval_logger.warning(
+    "SAGE is not installed. It is required to compute metrics for the SAGE task.\n\n"
+    "If you are running with --predict_only or are not evaluating this task, "
+    "you can safely ignore this warning.\n\n"
+    "To install SAGE and its dependencies, run the following commands:\n"
+    "  pip install 'sage-spelling[errant]'\n"
+    "  python -m spacy download ru_core_news_lg"
 )
-
 
 def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     if Scorer is None:
