@@ -1,0 +1,56 @@
+{
+    "dataset_name": "MMReD",
+    "license": "Apache-2.0",
+    "dataset_size": 750,
+    "description": "A synthetic benchmark for evaluating long-context dense reasoning in vision-language models over room occupancy sequences.",
+    "modalities": ["text"],
+    "skills": ["Long-context reasoning", "Dense aggregation", "Counting", "Temporal tracking"],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": 0,
+        "inputs": {
+            "context": "Step 1: Kitchen: [Sandra, Daniel]; Bathroom: [Mary]; Garden: []; Office: [John]; Bedroom: [Michael]; Hallway: []\nStep 2: Kitchen: [Sandra]; Bathroom: []; Garden: [Daniel]; Office: [John, Mary]; Bedroom: [Michael]; Hallway: []",
+            "question": "Who spent the most time alone in the rooms?"
+        },
+        "outputs": "Michael",
+        "meta": {
+            "id": 1,
+            "categories": {
+                "task_type": "DC-SA-C",
+                "seq_len": 2,
+                "atype": "person"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {"ru": "default", "en": "default"},
+        "inputs": {
+            "context": {"ru": "Текстовое описание последовательности расположения персонажей в комнатах", "en": "Text description of character positions in rooms across steps"},
+            "question": {"ru": "default", "en": "default"}
+        },
+        "outputs": {"ru": "default", "en": "default"},
+        "meta": {
+            "id": {"ru": "default", "en": "default"},
+            "categories": {
+                "task_type": {"ru": "Код типа задачи (DC-SA-C, DC-SR-I, DC-CC-I, DC-WS-R, DC-WHS-C)", "en": "Task type code (DC-SA-C, DC-SR-I, DC-CC-I, DC-WS-R, DC-WHS-C)"},
+                "seq_len": {"ru": "Длина последовательности (количество шагов)", "en": "Sequence length (number of steps)"},
+                "atype": {"ru": "Тип ответа: person, room или number", "en": "Answer type: person, room, or number"}
+            }
+        }
+    },
+    "prompts": [
+        "Вы анализируете последовательность состояний комнат, где указано, какие персонажи находятся в каких комнатах на каждом шаге.\n\n{context}\n\nВопрос: {question}\n\nОтветьте одним словом или числом.",
+        "Изучите описание расположения персонажей в комнатах.\n\n{context}\n\nНа основе этой информации ответьте на вопрос.\n{question}\n\nУкажите ответ одним словом или числом.",
+        "Ниже представлена последовательность шагов. На каждом шаге указано, кто в какой комнате находится.\n\n{context}\n\n{question}\nОтвет (одно слово или число):",
+        "Прочитайте описание перемещений персонажей по комнатам и ответьте на вопрос.\n\n{context}\n\nВопрос: {question}\nНапишите только ответ — одно слово или число.",
+        "Вам дана последовательность шагов с расположением персонажей в комнатах. Внимательно проанализируйте данные и ответьте.\n\n{context}\n\n{question}\nОтвет:"
+    ],
+    "metrics": {
+        "Exact Match": {"en": "default", "ru": "default"}
+    },
+    "human_benchmark": {
+        "Exact Match": 0.0
+    }
+}

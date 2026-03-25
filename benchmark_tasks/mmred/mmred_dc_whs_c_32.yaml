@@ -1,0 +1,7 @@
+include: mmred_base.yaml
+task: mmred_dc_whs_c_32
+dataset_name: mmred_dc_whs_c_32
+metadata:
+  version: 1.0
+  qtype: who_spend
+  seq_len: 32

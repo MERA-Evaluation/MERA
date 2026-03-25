@@ -1,0 +1,7 @@
+include: mmred_base.yaml
+task: mmred_dc_sr_i_32
+dataset_name: mmred_dc_sr_i_32
+metadata:
+  version: 1.0
+  qtype: steps_in_room
+  seq_len: 32

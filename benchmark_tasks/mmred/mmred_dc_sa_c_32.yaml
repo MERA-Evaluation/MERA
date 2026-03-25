@@ -1,0 +1,7 @@
+include: mmred_base.yaml
+task: mmred_dc_sa_c_32
+dataset_name: mmred_dc_sa_c_32
+metadata:
+  version: 1.0
+  qtype: spend_alone
+  seq_len: 32

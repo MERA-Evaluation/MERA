@@ -1,0 +1,23 @@
+group: mmred
+group_alias: MMReD Dense Context Reasoning
+task:
+  - mmred_dc_sa_c_32
+  - mmred_dc_sa_c_64
+  - mmred_dc_sa_c_128
+  - mmred_dc_sr_i_32
+  - mmred_dc_sr_i_64
+  - mmred_dc_sr_i_128
+  - mmred_dc_cc_i_32
+  - mmred_dc_cc_i_64
+  - mmred_dc_cc_i_128
+  - mmred_dc_ws_r_32
+  - mmred_dc_ws_r_64
+  - mmred_dc_ws_r_128
+  - mmred_dc_whs_c_32
+  - mmred_dc_whs_c_64
+  - mmred_dc_whs_c_128
+aggregate_metric_list:
+  - metric: em_dc_weighted
+    aggregation: !function utils.weighted_length_aggregate
+    weight: 1.0
+    higher_is_better: true

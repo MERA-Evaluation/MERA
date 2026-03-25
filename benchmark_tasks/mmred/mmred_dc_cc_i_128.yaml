@@ -1,0 +1,7 @@
+include: mmred_base.yaml
+task: mmred_dc_cc_i_128
+dataset_name: mmred_dc_cc_i_128
+metadata:
+  version: 1.0
+  qtype: crowd_count
+  seq_len: 128
