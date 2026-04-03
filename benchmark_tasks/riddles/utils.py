@@ -19,7 +19,7 @@ def process_results(doc: Dict, results: List[str]) -> Dict:
     pred = results[0]
 
     gold_variants = [
-        normalize(x) for x in gold.split(",")
+        normalize(x) for x in re.split(r"[;,]", gold) if x.strip()
     ]
 
     pred = normalize(pred)
