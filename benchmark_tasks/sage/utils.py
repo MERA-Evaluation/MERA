@@ -1,6 +1,7 @@
-from typing import Dict, List
+from typing import Dict, List, Any
 from lm_eval.api.filter import Filter
 from lm_eval.api.registry import register_filter
+from transformers.data.metrics import squad_metrics
 import logging
 
 eval_logger = logging.getLogger(__name__)
@@ -19,6 +20,9 @@ except ImportError:
     "  python -m spacy download ru_core_news_lg"
 )
 
+def doc_to_text(doc: Dict[str, Any]) -> str:
+    return doc["instruction"].format(**doc["inputs"])
+
 def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     if Scorer is None:
         return {}
@@ -26,46 +30,31 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     scorer = Scorer()
 
 
-    # распределение ошибок в датасете (в процентах)
-    weights = {
-        "CASE_F1": 13.6,
-        "YO_F1": 33.2,
-        "SPELL_F1": 58.0,
-        "PUNCT_F1": 43.2,
-    }
-
-    total_weight = sum(weights.values())
-
+    gold = doc["outputs"]
+    pred = results[0]
     source = doc["inputs"]["source"]
-    reference = doc["outputs"]
 
-    prediction = results[0]
+    pred = results[0] if results and results[0] else ""
+
+    if not pred or not pred.strip():
+        return {"errant_f1": 0.0, "em": 0.0}
 
     metric = scorer.score(
-        [source],
-        [reference],
-        [prediction],
-        metrics=["errant"]
+    [source],
+    [gold],
+    [pred],
+    metrics=["errant"]
     )
 
-    case_f1 = metric.get("CASE_F1", 0.0) / 100.0
-    yo_f1 = metric.get("YO_F1", 0.0) / 100.0
     spell_f1 = metric.get("SPELL_F1", 0.0) / 100.0
     punct_f1 = metric.get("PUNCT_F1", 0.0) / 100.0
 
-    errant = (
-        case_f1 * weights["CASE_F1"] +
-        yo_f1 * weights["YO_F1"] +
-        spell_f1 * weights["SPELL_F1"] +
-        punct_f1 * weights["PUNCT_F1"]
-    ) / total_weight
+    combined_f1 = (spell_f1 + punct_f1) / 2
 
-    return {
-        "errant": errant,
-        "CASE_F1": case_f1,
-        "YO_F1": yo_f1,
-        "SPELL_F1": spell_f1,
-        "PUNCT_F1": punct_f1
+
+    em = squad_metrics.compute_exact(gold, pred)
+
+    return {"errant_f1": combined_f1, "em": em}
     }
 
 @register_filter("remove_whitespace_and_nones")
