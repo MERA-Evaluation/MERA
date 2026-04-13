@@ -3,39 +3,31 @@
 
 ## Task description
 
-The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text.
-
-The task is formulated as transforming a text containing errors into a grammatically correct and natural version. Models are expected to correct spelling, punctuation, grammar, and letter case errors without adding any comments or explanations.
-
-This dataset is an enhanced version of the original SAGE dataset (v1.1.0). 
-
-For detailed information about the SAGE project, see the official project page on Hugging Face:
-https://huggingface.co/ai-forever/sage-v1.1.0
-
-
-The benchmark is oriented toward text-to-text models and enables quantitative evaluation of automatic text correction quality.
+The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text. The task is formulated as a text-to-text transformation problem: converting erroneous text into its corrected version. Models are expected to correct spelling, punctuation, grammar, and letter casing errors without adding comments or explanations. This dataset is an improved version of the publicly available SAGE dataset (v1.1.0), published on Hugging Face: https://huggingface.co/ai-forever/sage-v1.1.0. The dataset is intended for text-to-text models and enables quantitative evaluation of automatic text correction quality.
 
 Evaluated skills: Grammatical error correction, Spelling correction, Punctuation correction, Casing correction, Error detection, Text editing
+
+Contributors: Danil Astafurov, Ulyana Isaeva, Alena Fenogenova, Anastasia Mordasheva, Natalia Atnagulova, Olga Kun, Olga Tabolina, Kristina Eremeeva, Nikita Martynov, Alexander Astafurov
 
 
 ## Motivation
 
 ### Target models
-The dataset is intended for generative language models capable of editing text and performing automatic error correction.
+The dataset is intended for generative language models capable of text editing and automatic error correction.
 
 ### Evaluated capabilities
-The benchmark evaluates a model’s ability to:
+The task evaluates a model’s ability to:
 - detect different types of errors
 - correct them accurately
 - preserve the original meaning of the text
 
-This task goes beyond basic language understanding and focuses on language editing capabilities.
+This goes beyond basic language understanding and focuses on practical text editing ability.
 
-### Target audience
-The results are intended for NLP researchers and developers evaluating text generation and post-editing performance.
+### Intended users
+The results are intended for NLP researchers and practitioners evaluating text generation and post-processing quality.
 
 ### Interpretation of metrics
-The metrics reflect correction quality across different error categories (letter case, spelling, punctuation, etc.), enabling analysis of model strengths and weaknesses.
+The metrics reflect correction quality across different error categories (letter case, spelling, punctuation, etc.), allowing analysis of model strengths and weaknesses.
 
 
 ## Data description
@@ -56,11 +48,11 @@ Each dataset question includes data in the following fields:
 
 ```json
 {
-    "instruction": "ЗАДАЧА\nИсправь орфографические, пунктуационные и грамматические ошибки в тексте, а также ошибки регистра букв.\n\nФОРМАТ ОТВЕТА\nВыведи только исправленный текст без пояснений и комментариев.\n\nТЕКСТ\n{source}",
+    "instruction": "<role>\nТы — идеальный спеллчекер.\n</role>\n\n<task>\nИсправь ошибки в тексте, сохранив смысл и стиль автора.\n</task>\n\n<input_text>\n{source}\n</input_text>\n\n<rules>\nИсправляй:\n- орфографические\n- пунктуационные\n- синтаксические\n- морфологические\n- лексические ошибки\n\nНе исправляй:\n- стиль и формулировки\n- сленг, разговорную речь, диалектизмы\n- эмоции и намеренные искажения\n- логические или фактические ошибки\n- текст не на русском языке\n</rules>\n\n<constraints>\n- не добавляй и не удаляй слова без необходимости\n- не делай первую букву заглавной без причины\n- не добавляй точку в конце\n- всегда используй \"ё\"\n- сохраняй форматирование\n</constraints>\n\n<output_format>\nВерни только исправленный текст.\n</output_format>",
     "inputs": {
-        "source": "Очень жалею что сделала заказ в этом магазине. Вещи абсолютно не соответствуют описанию в профиле продавца. Деньги можно просто выкинуть на помойку, а не ждать, когда придёт посылка, ибо при примерке и после шока, вы все равно эту вещь выкинете в мусорку. Сшито криво-косо-размер не соответствует. Вещи из этого магазина можно, не сомневаясь, отправлять в обзор 'Ожидание и реальность от Aliexpress - смех и разочарование'. Короткая и квадратная, как будто сшита вместо наволочки на подушку. Не рекомендую."
+        "source": "Я заказала размер 35, себя замерив, почитая отзывы. На рос. размер 50-52 заказала, но не посоветовавшись со мной продавец отправил 36 размер. Ну, ооочень большой, одела с застегнутым замком, а пуговицы вообще не застегнула, так как петли не прорезаны. Я выразила претензию. Продавец долго морочил мне голову, что мой заказ мне должен подойти, не спросив даже мой размер. Короче, предложил взамен 3 доллара, я возмутилась и открыла спор. Спасибо AliExpress, вернули деньги полностью. Джинсы валяются, запах ужасный, хорошо, хоть деньги вернули"
     },
-    "outputs": "Очень жалею, что сделала заказ в этом магазине. Вещи абсолютно не соответствуют описанию в профиле продавца. Деньги можно просто выкинуть на помойку, а не ждать, когда придёт посылка, ибо при примерке и после шока вы всё равно эту вещь выкинете в мусорку. Сшито криво-косо, размер не соответствует. Вещи из этого магазина можно не сомневаясь отправлять в обзор «Ожидание и реальность от Aliexpress — смех и разочарование». Короткая и квадратная, как будто сшита вместо наволочки на подушку. Не рекомендую.",
+    "outputs": "Я заказала размер 35, себя замерив, прочитав отзывы. На рос. размер 50–52 заказала, но, не посоветовавшись со мной, продавец отправил 36 размер. Ну ооочень большой, надела с застёгнутым замком, а пуговицы вообще не застегнула, так как петли не прорезаны. Я выразила претензию. Продавец долго морочил мне голову, что мой заказ мне должен подойти, не спросив даже мой размер. Короче, предложил взамен 3 доллара, я возмутилась и открыла спор. Спасибо AliExpress, вернули деньги полностью. Джинсы валяются, запах ужасный, хорошо хоть деньги вернули",
     "meta": {
         "id": 1
     }
@@ -75,40 +67,64 @@ For the task, 5 prompts were prepared and evenly distributed among the questions
 Prompt example:
 
 ```
-ЗАДАЧА
-Исправь орфографические, пунктуационные и грамматические ошибки в тексте, а также ошибки регистра букв.
+<role>
+Ты — идеальный спеллчекер.
+</role>
 
-ФОРМАТ ОТВЕТА
-Выведи только исправленный текст без пояснений и комментариев.
+<task>
+Исправь ошибки в тексте, сохранив смысл и стиль автора.
+</task>
 
-ТЕКСТ
+<input_text>
 {source}
+</input_text>
+
+<rules>
+Исправляй:
+- орфографические
+- пунктуационные
+- синтаксические
+- морфологические
+- лексические ошибки
+
+Не исправляй:
+- стиль и формулировки
+- сленг, разговорную речь, диалектизмы
+- эмоции и намеренные искажения
+- логические или фактические ошибки
+- текст не на русском языке
+</rules>
+
+<constraints>
+- не добавляй и не удаляй слова без необходимости
+- не делай первую букву заглавной без причины
+- не добавляй точку в конце
+- всегда используй "ё"
+- сохраняй форматирование
+</constraints>
+
+<output_format>
+Верни только исправленный текст.
+</output_format>
 ```
 
 
 ### Dataset creation
 
-### Data sources
-The data were collected from various Russian-language text sources, including open corpora, internet texts, user-generated content, and synthetically generated examples.
+### Data Sources
+The data is collected from various Russian-language text sources, including open corpora, web texts and user queries.
 
 ### Annotation
-A portion of the dataset was manually re-annotated to ensure the correctness of reference corrections.
+The dataset was manually re-annotated to ensure the correctness of reference corrections.
 
-### Data cleaning
+### Data Cleaning
 Empty, duplicate, and invalid samples were removed from the dataset.
 
-### Error categories
-The dataset includes the following error categories (percentage of samples containing at least one error of the given type):
+### Error Types
+The dataset includes various types of errors, such as spelling, punctuation, incorrect use of "е/ё", and letter case issues. Multiple error types may appear within a single sample.
 
-- CASE — letter case errors (uppercase/lowercase mismatch): 13.6%
-- YO — incorrect usage of the letters 'е' and 'ё': 33.2%
-- SPELL — spelling errors: 58.0%
-- PUNCT — punctuation errors: 43.2%
-
-The percentages reflect the proportion of samples containing at least one error of the corresponding type. A single sample may contain multiple error types simultaneously.
-
-### Dataset splitting
-After preprocessing, the data were randomly shuffled and divided into the final evaluation splits.
+### Data Splitting
+After preprocessing, the data was shuffled and split into final evaluation sets.
 
 
 ## Evaluation
@@ -118,8 +134,4 @@ After preprocessing, the data were randomly shuffled and divided into the final 
 
 Metrics for aggregated evaluation of responses:
 
-- `CASE_F1`: CASE_F1 measures the F1-score for edits related to letter case correction (uppercase and lowercase). The metric is computed based on edit-level precision and recall within this category.
-- `YO_F1`: YO_F1 measures the F1-score for edits related to correcting the use of the letters 'е' and 'ё'. The metric is computed based on edit-level precision and recall within this category.
-- `SPELL_F1`: SPELL_F1 measures the F1-score for spelling-related edits. The metric is computed based on edit-level precision and recall within this category.
-- `PUNCT_F1`: PUNCT_F1 measures the F1-score for punctuation-related edits. The metric is computed based on edit-level precision and recall within this category.
-- `errant`: errant is a weighted aggregated F1-score across error categories (CASE, YO, SPELL, PUNCT). Each category-specific F1-score is weighted proportionally to its distribution in the dataset and normalized by the sum of weights. The metric reflects the overall quality of text correction while accounting for the relative frequency of different error types.
+- `ERRANT_F1`: ERRANT_F1 measures the overall F1-score for spelling and punctuation corrections by averaging edit-level F1-scores across these categories.
