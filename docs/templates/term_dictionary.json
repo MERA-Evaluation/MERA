@@ -1,0 +1,152 @@
+{
+    "metrics": {
+        "Accuracy": {
+            "en": "Accuracy is the proportion of correct model predictions among the total number of cases processed.",
+            "ru": "Метрика Accuracy вычисляет долю правильных предсказаний модели среди всех обработанных вопросов.",
+            "short": "Acc"
+        },
+        "Exact match": {
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise.",
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "short": "EM"
+        },
+        "pass@1": {
+            "en": "Pass@1 measures the proportion of problems where the model's first generated solution passes all test cases.",
+            "ru": "Метрика pass@1 измеряет долю задач, для которых первое сгенерированное моделью решение проходит все тесты.",
+            "short": "pass@1"
+        },
+        "compile@1": {
+            "en": "compile@1 is the proportion of generated code that successfully compiles without errors.",
+            "ru": "Метрика compile@1 показывает долю сгенерированного кода, который успешно компилируется без ошибок.",
+            "short": "compile@1"
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "_desc": {
+                "en": "Instruction prompt template with question elements placeholders.",
+                "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса."
+            }
+        },
+        "inputs": {
+            "_desc": {
+                "en": "Input data that forms the task for the model. Can include one or multiple modalities - video, audio, image, text.",
+                "ru": "Вводные данные, формирующие задание для модели. Могут включать одну или несколько модальностей - видео, аудио, изображение, текст."
+            },
+            "video": {
+                "_desc": {
+                    "en": "Path to the video file related to the question.",
+                    "ru": "Путь к файлу с видео, к которому относится вопрос."
+                }
+            },
+            "audio": {
+                "_desc": {
+                    "en": "Path to the audio file related to the question.",
+                    "ru": "Путь к файлу с аудио, к которому относится вопрос."
+                }
+            },
+            "image": {
+                "_desc": {
+                    "en": "Path to the image file related to the question.",
+                    "ru": "Путь к файлу с изображением, к которому относится вопрос."
+                }
+            },
+            "question": {
+                "_desc": {
+                    "en": "Text of the question.",
+                    "ru": "Текст вопроса."
+                }
+            },
+            "option_a": {
+                "_desc": {
+                    "en": "Answer option A.",
+                    "ru": "Вариант ответа A."
+                }
+            },
+            "option_b": {
+                "_desc": {
+                    "en": "Answer option B.",
+                    "ru": "Вариант ответа B."
+                }
+            },
+            "option_c": {
+                "_desc": {
+                    "en": "Answer option C.",
+                    "ru": "Вариант ответа C."
+                }
+            },
+            "option_d": {
+                "_desc": {
+                    "en": "Answer option D.",
+                    "ru": "Вариант ответа D."
+                }
+            },
+            "option_e": {
+                "_desc": {
+                    "en": "Answer option E.",
+                    "ru": "Вариант ответа E."
+                }
+            }
+        },
+        "outputs": {
+            "_desc": {
+                "en": "The correct answer to the question.",
+                "ru": "Правильный ответ на вопрос."
+            }
+        },
+        "meta": {
+            "_desc": {
+                "en": "Metadata related to the test example, not used in the question (hidden from the tested model).",
+                "ru": "Метаданные, относящиеся к тестовому примеру, но не используемые в вопросе (скрытые от тестируемой модели)."
+            },
+            "id": {
+                "_desc": {
+                    "en": "Identification number of the question in the dataset.",
+                    "ru": "Номер-идентификатор вопроса в датасете."
+                }
+            },
+            "categories": {
+                "_desc": {
+                    "en": "Categorial features characterizing the test example.",
+                    "ru": "Категории признаков, характеризующих тестовый пример."
+                }
+            },
+            "image": {
+                "_desc": {
+                    "en": "Image metadata.",
+                    "ru": "Метаданные, относящиеся к изображению."
+                },
+                "synt_source": {
+                    "_desc": {
+                        "en": "Sources used to generate or recreate data for the question, including names of generative models.",
+                        "ru": "Источники, с помощью которых сгенерированы или воссозданы данные для формирования вопроса, в том числе названия генеративных моделей."
+                    }
+                },
+                "source": {
+                    "_desc": {
+                        "en": "Information about the origin of the image — according to the image classification for MERA datasets.",
+                        "ru": "Информация о происхождении изображения — согласно классификации изображений для датасетов MERA."
+                    }
+                },
+                "type": {
+                    "_desc": {
+                        "en": "Image type — according to the image classification for MERA datasets.",
+                        "ru": "Тип изображения — согласно классификации изображений для датасетов MERA."
+                    }
+                },
+                "content": {
+                    "_desc": {
+                        "en": "Image content — according to the image classification for MERA datasets.",
+                        "ru": "Содержание изображения — согласно классификации изображений для датасетов MERA."
+                    }
+                },
+                "context": {
+                    "_desc": {
+                        "en": "Accompanying context present in the image — according to the image classification for MERA datasets.",
+                        "ru": "Сопроводительный контекст, присутствующий на изображении, — согласно классификации изображений для датасетов MERA."
+                    }
+                }
+            }
+        }
+    }
+}
