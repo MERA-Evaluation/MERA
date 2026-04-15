@@ -31,7 +31,6 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
 
 
     gold = doc["outputs"]
-    pred = results[0]
     source = doc["inputs"]["source"]
 
     pred = results[0] if results and results[0] else ""
@@ -54,8 +53,9 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
 
     em = squad_metrics.compute_exact(gold, pred)
 
-    return {"errant_f1": combined_f1, "em": em}
-    }
+    return {"spell_f1": spell_f1,
+            "punct_f1": punct_f1,
+            "errant_f1": combined_f1, "em": em}
 
 @register_filter("remove_whitespace_and_nones")
 class RemoveWhitespaceAndNones(Filter):
