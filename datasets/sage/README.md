@@ -27,7 +27,7 @@ This goes beyond basic language understanding and focuses on practical text edit
 The results are intended for NLP researchers and practitioners evaluating text generation and post-processing quality.
 
 ### Interpretation of metrics
-The metrics reflect correction quality across different error categories (letter case, spelling, punctuation, etc.), allowing analysis of model strengths and weaknesses.
+The metrics reflect the quality of correcting spelling and punctuation errors, allowing evaluation of model strengths and weaknesses.
 
 
 ## Data description
