@@ -121,7 +121,7 @@ The dataset was manually re-annotated to ensure the correctness of reference cor
 Empty, duplicate, and invalid samples were removed from the dataset.
 
 ### Error Types
-The dataset includes various types of errors, such as spelling, punctuation, incorrect use of "е/ё", and letter case issues. Multiple error types may appear within a single sample.
+The dataset includes two types of errors: spelling and punctuation errors. Multiple error types may appear within a single text.
 
 ### Data Splitting
 After preprocessing, the data was shuffled and split into final evaluation sets.
@@ -134,4 +134,7 @@ After preprocessing, the data was shuffled and split into final evaluation sets.
 
 Metrics for aggregated evaluation of responses:
 
-- `ERRANT_F1`: ERRANT_F1 measures the overall F1-score for spelling and punctuation corrections by averaging edit-level F1-scores across these categories.
+- `SPELL_F1`: F1 score measuring the quality of spelling error correction.  
+- `PUNCT_F1`: F1 score measuring the quality of punctuation error correction.  
+- `ERRANT_F1:` an aggregated metric defined as the average of spell_f1 and punct_f1, reflecting the overall quality of text correction.  
+- `EM`: the proportion of exact matches between the model prediction and the reference answer.
