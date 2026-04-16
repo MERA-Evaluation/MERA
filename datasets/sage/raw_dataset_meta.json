@@ -55,12 +55,27 @@
     "<role>\nВы — эксперт по правописанию.\n</role>\n\n<task>\nИсправьте ошибки в тексте.\n</task>\n\n<rules>\nИсправляйте только ошибки:\nорфографические, пунктуационные, грамматические, лексические.\n\nНе исправляйте:\nстиль, сленг, эмоции, намеренные искажения, логические ошибки, не русский текст.\n</rules>\n\n<constraints>\n- не переписывать текст\n- не изменять структуру\n- не добавлять слова\n- не менять регистр первой буквы без причины\n- не добавлять точку в конце\n- использовать \"ё\"\n- сохранять форматирование\n</constraints>\n\n<input_text>\n{source}\n</input_text>\n\n<output_format>\nВыведите только исправленный текст.\n</output_format>"
     ],
    "metrics": {
+    "SPELL_F1": {
+        "en": "SPELL_F1 measures the F1-score for spelling error correction.",
+        "ru": "Метрика SPELL_F1 измеряет F1-оценку качества исправления орфографических ошибок."
+    },
+    "PUNCT_F1": {
+        "en": "PUNCT_F1 measures the F1-score for punctuation error correction.",
+        "ru": "Метрика PUNCT_F1 измеряет F1-оценку качества исправления пунктуационных ошибок."
+    },
     "ERRANT_F1": {
-    "en": "ERRANT_F1 measures the overall F1-score for spelling and punctuation corrections by averaging edit-level F1-scores across these categories.",
-    "ru": "Метрика ERRANT_F1 измеряет общее качество исправления орфографических и пунктуационных ошибок, усредняя F1-оценки, рассчитанные на уровне правок для этих категорий."
-}
+        "en": "ERRANT_F1 measures the overall F1-score for text correction as the average of SPELL_F1 and PUNCT_F1.",
+        "ru": "Метрика ERRANT_F1 измеряет общее качество исправления текста как среднее значение SPELL_F1 и PUNCT_F1."
+    },
+    "EM": {
+        "en": "EM measures the proportion of exact matches between the model prediction and the reference answer.",
+        "ru": "Метрика EM измеряет долю точных совпадений между предсказанием модели и эталонным ответом."
+    }
 },
     "human_benchmark": {
-    "ERRANT_F1": 0.0
-  }
+        "SPELL_F1": 0.0,
+        "PUNCT_F1": 0.0,
+        "ERRANT_F1": 0.0,
+        "EM": 0.0
+    }
 }
