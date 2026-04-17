@@ -3,7 +3,7 @@
 
 ## Task description
 
-The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text. The task is formulated as a text-to-text transformation problem: converting erroneous text into its corrected version. Models are expected to correct spelling, punctuation, grammar, and letter casing errors without adding comments or explanations. This dataset is an improved version of the publicly available SAGE dataset (v1.1.0), published on Hugging Face: https://huggingface.co/ai-forever/sage-v1.1.0. The dataset is intended for text-to-text models and enables quantitative evaluation of automatic text correction quality.
+The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text. The task is formulated as a text-to-text transformation problem: converting erroneous text into its corrected version. Models are expected to correct spelling and punctuation errors without adding comments or explanations. This dataset is an improved version of the publicly available SAGE dataset (v1.1.0), published on Hugging Face: https://huggingface.co/ai-forever/sage-v1.1.0. The dataset is intended for text-to-text models and enables quantitative evaluation of automatic text correction quality.
 
 Evaluated skills: Grammatical error correction, Spelling correction, Punctuation correction, Casing correction, Error detection, Text editing
 
