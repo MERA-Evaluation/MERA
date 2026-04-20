@@ -1,7 +1,6 @@
 from typing import Dict, List, Any
 from lm_eval.api.filter import Filter
 from lm_eval.api.registry import register_filter
-from transformers.data.metrics import squad_metrics
 import logging
 
 eval_logger = logging.getLogger(__name__)
@@ -36,7 +35,7 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     pred = results[0] if results and results[0] else ""
 
     if not pred or not pred.strip():
-        return {"errant_f1": 0.0, "em": 0.0}
+        return {"errant_f1": 0.0, "spell_f1": 0.0, "punct_f1": 0.0}
 
     metric = scorer.score(
     [source],
@@ -51,11 +50,9 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     combined_f1 = (spell_f1 + punct_f1) / 2
 
 
-    em = squad_metrics.compute_exact(gold, pred)
-
     return {"spell_f1": spell_f1,
             "punct_f1": punct_f1,
-            "errant_f1": combined_f1, "em": em}
+            "errant_f1": combined_f1}
 
 @register_filter("remove_whitespace_and_nones")
 class RemoveWhitespaceAndNones(Filter):

@@ -7,10 +7,8 @@
         "text"
     ],
     "skills": [
-        "Grammatical error correction",
         "Spelling correction",
         "Punctuation correction",
-        "Casing correction",
         "Error detection",
         "Text editing"
     ],
@@ -68,16 +66,11 @@
     "ERRANT_F1": {
         "en": "ERRANT_F1 measures the overall F1-score for text correction as the average of SPELL_F1 and PUNCT_F1.",
         "ru": "Метрика ERRANT_F1 измеряет общее качество исправления текста как среднее значение SPELL_F1 и PUNCT_F1."
-    },
-    "EM": {
-        "en": "EM measures the proportion of exact matches between the model prediction and the reference answer.",
-        "ru": "Метрика EM измеряет долю точных совпадений между предсказанием модели и эталонным ответом."
     }
 },
     "human_benchmark": {
         "SPELL_F1": 0.0,
         "PUNCT_F1": 0.0,
-        "ERRANT_F1": 0.0,
-        "EM": 0.0
+        "ERRANT_F1": 0.0
     }
 }

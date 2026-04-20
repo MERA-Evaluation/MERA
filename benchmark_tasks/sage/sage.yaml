@@ -30,9 +30,6 @@ metric_list:
   - metric: punct_f1
     aggregation: mean
     higher_is_better: true
-  - metric: em
-    aggregation: mean
-    higher_is_better: true
 
 num_fewshot: null
 metadata:

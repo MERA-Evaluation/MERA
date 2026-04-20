@@ -5,7 +5,7 @@
 
 The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text. The task is formulated as a text-to-text transformation problem: converting erroneous text into its corrected version. Models are expected to correct spelling and punctuation errors without adding comments or explanations. This dataset is an improved version of the publicly available SAGE dataset (v1.1.0), published on Hugging Face: https://huggingface.co/ai-forever/sage-v1.1.0. The dataset is intended for text-to-text models and enables quantitative evaluation of automatic text correction quality.
 
-Evaluated skills: Grammatical error correction, Spelling correction, Punctuation correction, Casing correction, Error detection, Text editing
+Evaluated skills: Spelling correction, Punctuation correction, Error detection, Text editing
 
 Contributors: Danil Astafurov, Ulyana Isaeva, Alena Fenogenova, Anastasia Mordasheva, Natalia Atnagulova, Olga Kun, Olga Tabolina, Kristina Eremeeva, Nikita Martynov, Alexander Astafurov
 
@@ -136,5 +136,4 @@ Metrics for aggregated evaluation of responses:
 
 - `SPELL_F1`: F1 score measuring the quality of spelling error correction.  
 - `PUNCT_F1`: F1 score measuring the quality of punctuation error correction.  
-- `ERRANT_F1:` an aggregated metric defined as the average of spell_f1 and punct_f1, reflecting the overall quality of text correction.  
-- `EM`: the proportion of exact matches between the model prediction and the reference answer.
+- `ERRANT_F1:` an aggregated metric defined as the average of spell_f1 and punct_f1, reflecting the overall quality of text correction.
