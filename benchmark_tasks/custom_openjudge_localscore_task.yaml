@@ -1,0 +1,4 @@
+include: ./custom_openjudge_task.yaml
+tag:
+  - mera_openjudge
+  - mera_openjudge_local
