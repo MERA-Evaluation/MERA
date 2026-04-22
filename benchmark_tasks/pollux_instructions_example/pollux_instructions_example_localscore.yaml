@@ -1,0 +1,5 @@
+include: pollux_instructions_example.yaml
+tag:
+  - mera_openjudge_example_local
+task: pollux_instructions_example_localscore
+test_split: train
