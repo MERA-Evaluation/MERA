@@ -1,0 +1,30 @@
+include: ../custom_generate_task.yaml
+tag:
+  - mera
+  - mera_gen
+  - mera_all
+task: cellpicturebench
+dataset_path: Alikata/CellPictureBench
+training_split: null
+test_split: train
+process_docs: !function utils.process_docs
+doc_to_text: !function utils.doc_to_text
+doc_to_target: "answer"
+num_fewshot: null
+generation_kwargs:
+  do_sample: false
+  max_new_tokens: 512
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_punctuation: false
+    ignore_case: true
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: cellpicturebench_extract
+      - function: "take_first"
+metadata:
+  version: 1.0
+  hf_dataset: Alikata/CellPictureBench
