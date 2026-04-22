@@ -1,0 +1,29 @@
+task: logic_stories
+task_alias: logic_stories
+
+# path to load dataset like you pass for datasets.load_dataset
+dataset_path: MERA-evaluation/logis_stories
+
+
+# test data to pick samples for model assessment
+test_split: test
+
+# type of requests: generate_until | multiple_choice
+output_type: generate_until
+
+# function to form the prompt for each sample (could be jinja2 template)
+doc_to_text: "{{inputs}}"
+
+# how target from validation_split is passed to form fewshot
+doc_to_target: "{{outputs}}"
+
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+
+# any metadata you need. Does not affect how the task is processed
+metadata:
+  version: 1.0
