@@ -22,6 +22,9 @@ class Errors(EnumBase):
     no_id = "no_id"
     doc_output_type_error = "doc_output_type_error"
     doc_parse_output_error = "doc_parse_output_error"
+    judge_backend_error = "judge_backend_error"
+    judge_parse_error = "judge_parse_error"
+    judge_config_error = "judge_config_error"
     task_system_error = "task_system_error"
 
 

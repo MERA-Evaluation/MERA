@@ -1,11 +1,9 @@
 from src.registry import register_task
 from src.tasks.task import Task
 from src.metrics import mean
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 from typing_extensions import TypedDict
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, PreTrainedTokenizer
-from scipy.interpolate import interp1d
-from sklearn.isotonic import IsotonicRegression
 import numpy as np
 import torch
 from src.utils import load_pickle
@@ -175,7 +173,7 @@ class CalibratorParams(TypedDict):
     y_thresholds_: np.ndarray
     y_max: float
     y_min: float
-    f_: interp1d
+    f_: Any
     increasing_: bool
 
 
@@ -187,6 +185,14 @@ class CalibratorSignature(TypedDict):
 
 
 def get_calibrator():
+    try:
+        from scipy.interpolate import interp1d
+        from sklearn.isotonic import IsotonicRegression
+    except ModuleNotFoundError as exc:
+        raise ModuleNotFoundError(
+            "ruDetox scoring requires scipy and scikit-learn to build the calibrator."
+        ) from exc
+
     func_params: InterpolationParams = {
         "axis": 0,
         "bounds_error": False,

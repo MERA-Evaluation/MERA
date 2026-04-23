@@ -10,3 +10,11 @@ sample_submission:
   bad_path: "examples/sample_submission_bad.zip"
   good_resp_path: "examples/sample_response.json"
   bad_resp_path: "examples/sample_response_bad.json"
+judges:
+  pollux:
+    backend: hf
+    model_name: ai-forever/pollux-judge-7b
+    device: cuda
+    batch_size: 8
+    max_new_tokens: 128
+    temperature: 0.1

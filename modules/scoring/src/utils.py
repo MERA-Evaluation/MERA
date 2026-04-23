@@ -1,9 +1,39 @@
-from omegaconf import OmegaConf
 import os
 import json
 import random
 import numpy as np
 import pickle
+
+try:
+    from omegaconf import OmegaConf
+except ModuleNotFoundError:
+    import yaml
+
+    class _AttrDict(dict):
+        def __getattr__(self, item):
+            try:
+                return self[item]
+            except KeyError as exc:
+                raise AttributeError(item) from exc
+
+        def __setattr__(self, key, value):
+            self[key] = value
+
+    def _wrap_omegaconf_like(value):
+        if isinstance(value, dict):
+            wrapped = _AttrDict()
+            for key, item in value.items():
+                wrapped[key] = _wrap_omegaconf_like(item)
+            return wrapped
+        if isinstance(value, list):
+            return [_wrap_omegaconf_like(item) for item in value]
+        return value
+
+    class OmegaConf:
+        @staticmethod
+        def load(path):
+            with open(path, "r", encoding="utf-8") as file:
+                return _wrap_omegaconf_like(yaml.safe_load(file) or {})
 
 
 class Singleton(type):

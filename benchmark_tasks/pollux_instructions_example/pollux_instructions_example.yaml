@@ -1,0 +1,25 @@
+include: ../custom_openjudge_task.yaml
+tag:
+  - mera_openjudge_example
+task: pollux_instructions_example
+dataset_path: ai-forever/POLLUX-instructions
+dataset_name: default
+test_split: train
+process_docs: !function utils.process_docs
+doc_to_text: "{{instruction}}"
+generation_kwargs:
+  do_sample: false
+process_results: !function utils.process_results
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: polluxinstructionsexamplescoring
+metric_list:
+  - metric: judge_avg
+    aggregation: mean
+    higher_is_better: true
+  - metric: judge_depth
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0
