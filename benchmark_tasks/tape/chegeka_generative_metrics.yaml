@@ -1,0 +1,76 @@
+# CheGeKa with extended MERA generative metrics (max over ;-separated references).
+# Scoring: benchmark_tasks/tape/utils.py — process_results_generative_metrics
+#
+# Includes: em, f1, f1_gen, exact_match, rouge1/2/L, sentence_bleu, levenshtein,
+# token_overlap_f1, meteor, bertscore, comet, bleurt, embedding_cosine, llm_judge.
+#
+# Corpus BLEU/chrf/ter are NOT computed here (they need the harness passthrough path).
+#
+# Optional API (otherwise embedding_cosine / llm_judge are reported as 0.0):
+#   LM_EVAL_CHEGEKA_EMBEDDING_API_BASE, LM_EVAL_CHEGEKA_EMBEDDING_MODEL
+#   LM_EVAL_CHEGEKA_JUDGE_API_BASE, LM_EVAL_CHEGEKA_JUDGE_MODEL
+#   LM_EVAL_CHEGEKA_JUDGE_PROMPT (optional; must contain {reference} and {prediction})
+#
+# Install extras: pip install "lm_eval[generative_metrics,api,hf]"
+include: chegeka.yaml
+task: chegeka_generative_metrics
+tag:
+  - mera
+  - mera_gen
+  - mera_all
+  - tape
+  - chegeka_generative
+  - mera_gen_metrics
+process_results: !function utils.process_results_generative_metrics
+metric_list:
+  - metric: em
+    aggregation: mean
+    higher_is_better: true
+  - metric: f1
+    aggregation: mean
+    higher_is_better: true
+  - metric: f1_gen
+    aggregation: mean
+    higher_is_better: true
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+  - metric: rouge1
+    aggregation: mean
+    higher_is_better: true
+  - metric: rouge2
+    aggregation: mean
+    higher_is_better: true
+  - metric: rougeL
+    aggregation: mean
+    higher_is_better: true
+  - metric: sentence_bleu
+    aggregation: mean
+    higher_is_better: true
+  - metric: levenshtein
+    aggregation: mean
+    higher_is_better: true
+  - metric: token_overlap_f1
+    aggregation: mean
+    higher_is_better: true
+  - metric: meteor
+    aggregation: mean
+    higher_is_better: true
+  - metric: bertscore
+    aggregation: mean
+    higher_is_better: true
+  - metric: comet
+    aggregation: mean
+    higher_is_better: true
+  - metric: bleurt
+    aggregation: mean
+    higher_is_better: true
+  - metric: embedding_cosine
+    aggregation: mean
+    higher_is_better: true
+  - metric: llm_judge
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 2.0
+  description: "CheGeKa + extended generative metrics (see file header comments)."
