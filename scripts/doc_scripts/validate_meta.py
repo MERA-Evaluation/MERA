@@ -6,24 +6,24 @@ import os
 REQUIRED_FIELDS = [
     "dataset_name",
     "modalities",
-    "universal_domains",
+    # "universal_domains",
     "data_example",
     "data_field_descriptions",
     "prompts",
     "metrics",
-    "human_benchmark",
+    # "human_benchmark",
     "skills",
     "license",
 ]
 FIRST_ORDER_TYPES = {
     "dataset_name": str,
     "modalities": list,
-    "universal_domains": list,
+    # "universal_domains": list,
     "data_example": dict,
     "data_field_descriptions": dict,
     "prompts": list,
     "metrics": dict,
-    "human_benchmark": dict,
+    # "human_benchmark": dict,
     "skills": list,
     "license": str,
 }
@@ -41,7 +41,7 @@ FILLED_FIELDS = {
     "data_field_descriptions": ["", {}],
     "prompts": ["", []],
     "metrics": ["", [], {}],
-    "human_benchmark": ["", [], {}],
+    # "human_benchmark": ["", [], {}],
     "skills": ["", []],
     "license": [""],
 }
@@ -294,7 +294,7 @@ def validate_meta(path_to_data):
     validate_meta_data_example_id(meta_template)
     validate_number_of_prompts(meta_template)
     validate_modalities_meta_dicts(meta_template)
-    validate_metrics_with_hb(meta_template)
+    # validate_metrics_with_hb(meta_template)
 
     check_coincide_fields(
         meta_template["data_example"], meta_template["data_field_descriptions"], level=1
@@ -315,13 +315,13 @@ def validate_meta(path_to_data):
         "modalities": meta_template["modalities"],
         "skills": meta_template["skills"],
         "domains": domains,
-        "universal_domains": meta_template["universal_domains"],
+        # "universal_domains": meta_template["universal_domains"],
         "synt_source_models": synt_sources,
         "data_example": meta_template["data_example"],
         "data_field_descriptions": meta_template["data_field_descriptions"],
         "prompts": meta_template["prompts"],
         "metrics": meta_template["metrics"],
-        "human_benchmark": meta_template["human_benchmark"],
+        # "human_benchmark": meta_template["human_benchmark"],
     }
 
     return meta

@@ -205,7 +205,7 @@ def complete_template(dataset_dir, language, meta, custom, term_dict):
         data_ex=meta["data_example"])
     computed["data_example"] = json.dumps(meta["data_example"], indent=4, ensure_ascii=False)
     computed["metrics"] = format_metrics(meta["metrics"], lang=language, term_dict=term_dict)
-    computed["human_benchmark"] = format_hb(meta["human_benchmark"], custom["Human baseline"], lang=language)
+    # computed["human_benchmark"] = format_hb(meta["human_benchmark"], custom["Human baseline"], lang=language)
     computed["skills"] = format_skills(meta["skills"])
     computed["contributors"] = format_contributors(custom, lang=language)
 
