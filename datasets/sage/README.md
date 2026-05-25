@@ -3,7 +3,7 @@
 
 ## Task description
 
-The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text. The task is formulated as a text-to-text transformation problem: converting erroneous text into its corrected version. Models are expected to correct spelling and punctuation errors without adding comments or explanations. This dataset is an improved version of the publicly available SAGE dataset (v1.1.0), published on Hugging Face: https://huggingface.co/ai-forever/sage-v1.1.0. The dataset is intended for text-to-text models and enables quantitative evaluation of automatic text correction quality.
+The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text. The task is formulated as a text-to-text transformation problem: converting erroneous text into its corrected version. Models are expected to correct spelling and punctuation errors without adding comments or explanations. This dataset is an improved version of the publicly available SAGE dataset (v1.1.0), published on [Hugging Face](https://huggingface.co/ai-forever/sage-v1.1.0). The dataset is intended for text-to-text models and enables quantitative evaluation of automatic text correction quality.
 
 Evaluated skills: Spelling correction, Punctuation correction, Error detection, Text editing
 
@@ -14,6 +14,14 @@ Contributors: Danil Astafurov, Ulyana Isaeva, Alena Fenogenova, Anastasia Mordas
 
 ### Target models
 The dataset is intended for generative language models capable of text editing and automatic error correction.
+
+### Limitations
+The benchmark is not intended to evaluate:
+- open-ended text generation quality
+- reasoning capabilities or factual knowledge
+- stylistic rewriting or paraphrasing
+- semantic text improvement
+- multilingual text correction
 
 ### Evaluated capabilities
 The task evaluates a model’s ability to:
@@ -28,6 +36,11 @@ The results are intended for NLP researchers and practitioners evaluating text g
 
 ### Interpretation of metrics
 The metrics reflect the quality of correcting spelling and punctuation errors, allowing evaluation of model strengths and weaknesses.
+
+### Validity
+The text-to-text task formulation combined with edit-level metrics enables separate evaluation of a model’s ability to detect errors (recall) and correct them accurately (precision), which would be difficult in classification-based or span-based settings. This design also reflects real-world usage scenarios in which LLMs act as text editors.
+The benchmark design controls key evaluation factors: stratified sampling based on input text length is applied, and spelling and punctuation errors are evaluated separately.
+At the same time, the benchmark has validity limitations. Some cases of Russian punctuation may allow multiple acceptable interpretations in the gold annotations. Mandatory restoration of the letter \"ё\" is an intentional design choice and may affect evaluation results for models trained on alternative writing conventions. In addition, the aggregated metric `ERRANT_F1` does not capture relationships between different error types and should be interpreted together with task-specific metrics.",
 
 
 ## Data description
@@ -58,7 +71,7 @@ Each dataset question includes data in the following fields:
     }
 }
 ```
-
+Some examples in the dataset may already be correct and require no modifications. This is an expected and intentional property of the benchmark: models should be able not only to correct errors, but also to leave correct text unchanged.
 
 ### Prompts
 
@@ -125,6 +138,7 @@ The dataset includes two types of errors: spelling and punctuation errors. Multi
 
 ### Data Splitting
 After preprocessing, the data was shuffled and split into final evaluation sets.
+The initial pool consisted of 2,500 sample, of which 1,000 examples were selected for the final evaluation set (40% of the data). To preserve diversity in text length, stratified sampling based on input text length was applied.
 
 
 ## Evaluation
@@ -136,4 +150,4 @@ Metrics for aggregated evaluation of responses:
 
 - `SPELL_F1`: F1 score measuring the quality of spelling error correction.  
 - `PUNCT_F1`: F1 score measuring the quality of punctuation error correction.  
-- `ERRANT_F1:` an aggregated metric defined as the average of spell_f1 and punct_f1, reflecting the overall quality of text correction.
+- `ERRANT_F1`: an aggregated metric defined as the average of SPELL_F1 and PUNCT_F1, reflecting the overall quality of text correction.

@@ -8,7 +8,6 @@ output_type: generate_until
 doc_to_text: !function utils.doc_to_text
 doc_to_target: "{{ outputs.strip() }}"
 
-
 generation_kwargs:
   do_sample: false
 
@@ -17,7 +16,6 @@ filter_list:
     filter:
         - function: remove_whitespace_and_nones
         - function: "take_first"
-
 
 process_results: !function utils.process_results
 metric_list:
