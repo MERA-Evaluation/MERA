@@ -125,13 +125,18 @@ Prompt example:
 ### Dataset creation
 
 ### Data Sources
-The data is collected from various Russian-language text sources, including open corpora, web texts and user queries.
 
-### Annotation
-The dataset was manually re-annotated to ensure the correctness of reference corrections.
+The SAGE dataset was constructed using a variety of Russian-language textual sources, including open corpora, web texts, and user-generated queries. To ensure diversity in linguistic structures, data from multiple domains were incorporated, including news articles, literary texts, social media content, medical texts, and technical documents.
+
+The dataset was built using existing Russian-language corpora and benchmark datasets, including RUSpellRU, MultidomainGold, MedSpellChecker, and GitHubTypoCorpusRu. In addition, texts from publicly available online sources and user-generated content were included to expand coverage of spelling and punctuation phenomena.
+
+### Annotation and Validation
+
+For each example, both the original text and the corresponding reference correction were recorded. The dataset underwent manual verification to ensure correction accuracy and compliance with modern Russian language standards. Ambiguous cases allowing multiple valid corrections were excluded from the final dataset.
 
 ### Data Cleaning
-Empty, duplicate, and invalid samples were removed from the dataset.
+
+Empty, duplicate, and invalid records were removed from the dataset, along with examples containing ambiguous corrections. Additional checks were performed to ensure diversity in text length, domain coverage, and error categories.
 
 ### Error Types
 The dataset includes two types of errors: spelling and punctuation errors. Multiple error types may appear within a single text.
