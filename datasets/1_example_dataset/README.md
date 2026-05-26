@@ -4,9 +4,6 @@
 ├── README.md  # документация (англ)
 ├── README_ru.md  # документация (рус)
 ├── dataset_meta.json  # метаинформация
-├── raw_readme_en.json  # документация вручную (англ)
-├── raw_readme_ru.json  # документация вручную (рус)
-├── raw_dataset_meta.json  # метаинформация вручную
 ```
 
 
