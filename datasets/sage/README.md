@@ -5,7 +5,9 @@
 
 The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text. The task is formulated as a text-to-text transformation problem: converting erroneous text into its corrected version. Models are expected to correct spelling and punctuation errors without adding comments or explanations. This dataset is an improved version of the publicly available SAGE dataset (v1.1.0), published on [Hugging Face](https://huggingface.co/ai-forever/sage-v1.1.0). The dataset is intended for text-to-text models and enables quantitative evaluation of automatic text correction quality.
 
-Evaluated skills: Spelling correction, Punctuation correction, Error detection, Text editing
+Some examples in the dataset may already be correct and require no modifications. This is an expected and intentional property of the benchmark: models should be able not only to correct errors, but also to leave correct text unchanged.
+
+Evaluated skills: Spelling correction, Punctuation correction, Error detection, Text editing.
 
 Contributors: Danil Astafurov, Ulyana Isaeva, Alena Fenogenova, Anastasia Mordasheva, Natalia Atnagulova, Olga Kun, Olga Tabolina, Kristina Eremeeva, Nikita Martynov, Alexander Astafurov
 
@@ -71,7 +73,6 @@ Each dataset question includes data in the following fields:
     }
 }
 ```
-Some examples in the dataset may already be correct and require no modifications. This is an expected and intentional property of the benchmark: models should be able not only to correct errors, but also to leave correct text unchanged.
 
 ### Prompts
 
@@ -129,6 +130,8 @@ Prompt example:
 The SAGE dataset was constructed using a variety of Russian-language textual sources, including open corpora, web texts, and user-generated queries. To ensure diversity in linguistic structures, data from multiple domains were incorporated, including news articles, literary texts, social media content, medical texts, and technical documents.
 
 The dataset was built using existing Russian-language corpora and benchmark datasets, including RUSpellRU, MultidomainGold, MedSpellChecker, and GitHubTypoCorpusRu. In addition, texts from publicly available online sources and user-generated content were included to expand coverage of spelling and punctuation phenomena.
+
+The dataset is based on the original SAGE dataset [[1](https://aclanthology.org/2024.findings-eacl.10/),[2](https://dialogue-conf.org/media/5914/martynovnplusetal056.pdf)]
 
 ### Annotation and Validation
 
