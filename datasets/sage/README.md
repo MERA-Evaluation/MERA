@@ -52,7 +52,7 @@ At the same time, the benchmark has validity limitations. Some cases of Russian 
 Each dataset question includes data in the following fields:
 
 - `instruction` [str] — Instruction prompt template with question elements placeholders.
-- `inputs` — Input data that forms the task for the model. Can include one or multiple modalities - video, audio, image, text.
+- `inputs` — Input text data that forms the task for the model.
     - `source` [str] — Text containing errors that must be corrected.
 - `outputs` [str] — The correct answer to the question.
 - `meta` — Metadata related to the test example, not used in the question (hidden from the tested model).
@@ -63,7 +63,7 @@ Each dataset question includes data in the following fields:
 
 ```json
 {
-    "instruction": "<role>\nТы — идеальный спеллчекер.\n</role>\n\n<task>\nИсправь ошибки в тексте, сохранив смысл и стиль автора.\n</task>\n\n<input_text>\n{source}\n</input_text>\n\n<rules>\nИсправляй:\n- орфографические\n- пунктуационные\n- синтаксические\n- морфологические\n- лексические ошибки\n\nНе исправляй:\n- стиль и формулировки\n- сленг, разговорную речь, диалектизмы\n- эмоции и намеренные искажения\n- логические или фактические ошибки\n- текст не на русском языке\n</rules>\n\n<constraints>\n- не добавляй и не удаляй слова без необходимости\n- не делай первую букву заглавной без причины\n- не добавляй точку в конце\n- всегда используй \"ё\"\n- сохраняй форматирование\n</constraints>\n\n<output_format>\nВерни только исправленный текст.\n</output_format>",
+    "instruction":"Задача:\nИсправь ошибки в тексте, сохранив смысл и стиль автора.\n\nИсправляй следующие ошибки:\n- орфографические\n- пунктуационные\n- синтаксические\n- морфологические\n- лексические\n\nНе исправляй:\n- стиль и формулировки\n- сленг, разговорную речь, диалектизмы\n- эмоции и намеренные искажения\n- логические или фактические ошибки\n- текст не на русском языке\n\nОграничения:\n- не добавляй и не удаляй слова без необходимости\n- не делай первую букву заглавной без причины\n- не добавляй точку в конце\n- всегда используй \"ё\"\n- сохраняй форматирование\n\nФормат ответа:\nНапиши только исправленный текст.\n\nТекст:\n{source}\n",
     "inputs": {
         "source": "Я заказала размер 35, себя замерив, почитая отзывы. На рос. размер 50-52 заказала, но не посоветовавшись со мной продавец отправил 36 размер. Ну, ооочень большой, одела с застегнутым замком, а пуговицы вообще не застегнула, так как петли не прорезаны. Я выразила претензию. Продавец долго морочил мне голову, что мой заказ мне должен подойти, не спросив даже мой размер. Короче, предложил взамен 3 доллара, я возмутилась и открыла спор. Спасибо AliExpress, вернули деньги полностью. Джинсы валяются, запах ужасный, хорошо, хоть деньги вернули"
     },
@@ -81,25 +81,15 @@ For the task, 5 prompts were prepared and evenly distributed among the questions
 Prompt example:
 
 ```
-<role>
-Ты — идеальный спеллчекер.
-</role>
-
-<task>
+Задача:
 Исправь ошибки в тексте, сохранив смысл и стиль автора.
-</task>
 
-<input_text>
-{source}
-</input_text>
-
-<rules>
-Исправляй:
+Исправляй следующие ошибки:
 - орфографические
 - пунктуационные
 - синтаксические
 - морфологические
-- лексические ошибки
+- лексические
 
 Не исправляй:
 - стиль и формулировки
@@ -107,19 +97,19 @@ Prompt example:
 - эмоции и намеренные искажения
 - логические или фактические ошибки
 - текст не на русском языке
-</rules>
 
-<constraints>
+Ограничения:
 - не добавляй и не удаляй слова без необходимости
 - не делай первую букву заглавной без причины
 - не добавляй точку в конце
-- всегда используй "ё"
+- всегда используй \"ё\"
 - сохраняй форматирование
-</constraints>
 
-<output_format>
-Верни только исправленный текст.
-</output_format>
+Формат ответа:
+Напиши только исправленный текст.
+
+Текст:
+{source}
 ```
 
 
@@ -127,11 +117,9 @@ Prompt example:
 
 ### Data Sources
 
-The SAGE dataset was constructed using a variety of Russian-language textual sources, including open corpora, web texts, and user-generated queries. To ensure diversity in linguistic structures, data from multiple domains were incorporated, including news articles, literary texts, social media content, medical texts, and technical documents.
+The SAGE dataset is based on the original SAGE dataset [[1](https://aclanthology.org/2024.findings-eacl.10/),[2](https://dialogue-conf.org/media/5914/martynovnplusetal056.pdf)] and was constructed using a variety of Russian-language textual sources, including open corpora, web texts, and user-generated queries. To ensure diversity in linguistic structures, data from multiple domains were incorporated, including news articles, literary texts, social media content, medical texts, and technical documents.
 
 The dataset was built using existing Russian-language corpora and benchmark datasets, including RUSpellRU, MultidomainGold, MedSpellChecker, and GitHubTypoCorpusRu. In addition, texts from publicly available online sources and user-generated content were included to expand coverage of spelling and punctuation phenomena.
-
-The dataset is based on the original SAGE dataset [[1](https://aclanthology.org/2024.findings-eacl.10/),[2](https://dialogue-conf.org/media/5914/martynovnplusetal056.pdf)]
 
 ### Annotation and Validation
 
