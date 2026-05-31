@@ -1,7 +1,7 @@
 {
     "dataset_name": "Luzitania",
-    "license": "MERA_private",
-    "dataset_size": 0,
+    "license": "MIT AND CC-BY-NC-SA-4.0",
+    "dataset_size": 258,
     "description": "A dataset for evaluating multi-step mathematical reasoning in Russian, focusing on olympiad-level and advanced problems with integer answers.",
     "modalities": [
         "text"
@@ -28,23 +28,23 @@
     },
     "data_field_descriptions": {
         "instruction": {
-            "en": "a string containing the prompt formulation for the language model;",
-            "ru": "строка, содержащая формулировку запроса к языковой модели;"
+            "en": "Instruction prompt template with question elements placeholders.",
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса."
         },
         "inputs": {
             "question": {
-                "en": "a string containing the actual problem statement;",
-                "ru": "строка, содержащая непосредственно формулировку задачи;"
+                "en": "Text of the question.",
+                "ru": "Текст вопроса."
             }
         },
         "outputs": {
-            "en": "a string containing the correct answer (in most cases, an integer);",
-            "ru": " строка, содержащая правильный ответ (в большинстве случаев — целое число);"
+            "en": "The correct answer to the question.",
+            "ru": "Правильный ответ на вопрос."
         },
         "meta": {
             "id": {
-                "en": "ID (integer).",
-                "ru": "номер примера (целое число)."
+                "en": "Identification number of the question in the dataset.",
+                "ru": "Номер-идентификатор вопроса в датасете."
             },
             "source": {
                 "en": "a string indicating the problem source (see the Dataset Creation section).",
@@ -69,12 +69,12 @@
         "Прочти задачу и найди решение. {question}. \n Результат запиши целым числом, если в условии не требуется иной формат ответа."
     ],
     "metrics": {
-        "Accuracy": {
-            "en": "Accuracy is the proportion of correct model predictions among the total number of cases processed.",
-            "ru": "Метрика Accuracy вычисляет долю правильных предсказаний модели среди всех обработанных вопросов."
+        "Exact match": {
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise.",
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях."
         }
     },
     "human_benchmark": {
-        "Accuracy": 1.0
+        "Exact match": 0.0
     }
 }

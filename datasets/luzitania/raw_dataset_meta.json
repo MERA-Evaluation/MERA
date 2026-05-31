@@ -1,7 +1,7 @@
 {
     "dataset_name": "Luzitania",
     "description": "A dataset for evaluating multi-step mathematical reasoning in Russian, focusing on olympiad-level and advanced problems with integer answers.",
-    "license": "MERA_private",
+    "license": "MIT AND CC-BY-NC-SA-4.0",
     "dataset_size": "len(DATA)",
     "domains": [],
     "modalities": [
@@ -28,23 +28,23 @@
     },
     "data_field_descriptions": {
         "instruction": {
-            "en": "a string containing the prompt formulation for the language model;",
-            "ru": "строка, содержащая формулировку запроса к языковой модели;"
+            "en": "default",
+            "ru": "default"
         },
         "inputs": {
             "question": {
-                "en": "a string containing the actual problem statement;",
-                "ru": "строка, содержащая непосредственно формулировку задачи;"
+                "en": "default",
+                "ru": "default"
             }
         },
         "outputs": {
-            "en": "a string containing the correct answer (in most cases, an integer);",
-            "ru": " строка, содержащая правильный ответ (в большинстве случаев — целое число);"
+            "en": "default",
+            "ru": "default"
         },
         "meta": {
             "id": {
-                "en": "ID (integer).",
-                "ru": "номер примера (целое число)."
+                "en": "default",
+                "ru": "default"
             },
             "source": {
                 "en": "a string indicating the problem source (see the Dataset Creation section).",
@@ -69,13 +69,13 @@
         "Прочти задачу и найди решение. {question}. \n Результат запиши целым числом, если в условии не требуется иной формат ответа."
     ],
     "metrics": {
-        "Accuracy": {
+        "Exact match": {
             "en": "default",
             "ru": "default"
         }
     },
     "human_benchmark": {
-        "Accuracy": 1.0
+        "Exact match": 0.0
         }
 }
 

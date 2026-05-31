@@ -23,12 +23,12 @@ This dataset tests the ability of models to build sequential reasoning in the ma
 
 Each dataset question includes data in the following fields:
 
-- `instruction` [str] — a string containing the prompt formulation for the language model;;
+- `instruction` [str] — Instruction prompt template with question elements placeholders.
 - `inputs` — Input data that forms the task for the model. Can include one or multiple modalities - video, audio, image, text.
-    - `question` [str] — a string containing the actual problem statement;;
-- `outputs` [str] — a string containing the correct answer (in most cases, an integer);;
+    - `question` [str] — Text of the question.
+- `outputs` [str] — The correct answer to the question.
 - `meta` — Metadata related to the test example, not used in the question (hidden from the tested model).
-    - `id` [int] — ID (integer).
+    - `id` [int] — Identification number of the question in the dataset.
     - `source` [str] — a string indicating the problem source (see the Dataset Creation section).
     - `spec` [str] — a string, possibly empty, providing additional information for locating the problem within its source.
 
@@ -124,4 +124,4 @@ Some problem statements from all sources may be slightly modified so that the an
 
 Metrics for aggregated evaluation of responses:
 
-- `Accuracy`: Accuracy is the proportion of correct model predictions among the total number of cases processed.
+- `Exact match`: Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise.
