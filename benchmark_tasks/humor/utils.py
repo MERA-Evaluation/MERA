@@ -101,7 +101,7 @@ def process_results_generative_metrics(doc: Dict, results: List[str]) -> Dict:
     if not doc.get("outputs"):
         return _zeros_generative_bundle()
 
-    gold_label_set = [x.strip() for x in doc["outputs"].split(";") if x.strip()]
+    gold_label_set = [doc["outputs"]]
     if not gold_label_set:
         return _zeros_generative_bundle()
 
@@ -238,7 +238,6 @@ def process_results_generative_metrics(doc: Dict, results: List[str]) -> Dict:
             )["llm_judge"]
             for r in gold_label_set
         )
-        print('ответ после всего:', out["llm_judge"])
     else:
         out["llm_judge"] = 0.0
     return out
