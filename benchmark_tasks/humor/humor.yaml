@@ -1,4 +1,4 @@
-dataset_path: MERA-evaluation/humor
+dataset_path: MERA-evaluation/Humor
 task: humor
 
 
