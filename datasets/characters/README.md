@@ -47,14 +47,14 @@ All characters speak modern, literate Russian. Speech features are used as a sec
 
 ### Task Types
 
-The dataset contains 500 tasks divided into 4 types (approximately 125 of each type):
+The dataset contains 640 tasks divided into 4 types:
 
 | Type | Content | Count |
 |-----|------------|------------|
 | 1 | With an address to a character: "which answer would this character give" | 128 |
-| 2 | With an address to a character: "which answer would this character never give" | 124 |
-| 3 | Without an address: "which character would give the clearest answer to this question" | 124 |
-| 4 | Without an address: "who is this question definitely pointless to ask" | 124 |
+| 2 | With an address to a character: "which answer would this character never give" | 128 |
+| 3 | Without an address: "which character would give the clearest answer to this question" | 192 |
+| 4 | Without an address: "who is this question definitely pointless to ask" | 192 |
 
 ### Data Fields
 
@@ -178,7 +178,7 @@ For the task, 20 prompts were prepared: 5 prompts for each of the 4 task types. 
 
 ### Dataset Creation
 
-Initially, descriptions of four characters were prepared so that they represented different age and gender groups, had distinctive behavioral traits, and still shared some similarities with one another. Based on these descriptions, expert annotators created questions and answers for them. The total number of tasks is 500, distributed evenly across types and characters. The same question may be repeated no more than 6 times (once for each character for types 1-2 and once each for types 3-4). All tasks are formulated as choosing the correct answer from a set of given options.
+Initially, descriptions of four characters were prepared so that they represented different age and gender groups, had distinctive behavioral traits, and still shared some similarities with one another. Based on these descriptions, expert annotators created questions and answers for them. The total number of tasks is 640: 128 tasks of type 1, 128 tasks of type 2, 192 tasks of type 3, and 192 tasks of type 4. The same question may be repeated no more than 6 times (once for each character for types 1-2 and once each for types 3-4). All tasks are formulated as choosing the correct answer from a set of given options.
 
 ### Metrics
 
