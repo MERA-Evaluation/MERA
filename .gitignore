@@ -47,3 +47,7 @@ lm_eval/caching/.cache
 # don't track files created by wandb
 wandb
 examples/wandb
+
+# Local POLLUX subset files are published separately on Hugging Face.
+datasets/pollux-human-centric/test.json
+datasets/pollux-human-centric/shots.json
