@@ -1,0 +1,109 @@
+{
+    "dataset_name": "POLLUXReasoning",
+    "license": "[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)",
+    "dataset_size": "len(DATA)",
+    "description": "Hard Technical Problems prompts from POLLUX-instructions saved in MERA format and scored by Pollux Judge.",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "Instruction following",
+        "Reasoning",
+        "Technical problem solving",
+        "Open-ended generation"
+    ],
+    "domains": [],
+    "universal_domains": [
+        "Technical Problems"
+    ],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "{question}",
+        "inputs": {
+            "question": "SELECT c.customer_id, \n       AVG(o.total_amount) AS average_order_amount\nFROM customers c\n    JOIN orders o ON c.customer_id = o.customer_id\nWHERE YEAR(o.order_date) = 2023\nGROUP BY c.customer_id;\n\nЗадача: Этот запрос имеет сложность O(n^2) по операциям. Проблема в том, что он выполняет сканирование таблицы orders для каждого клиента, а не один раз.\nИзмени этот запрос, чтобы он имел сложность O(n log n) по операциям."
+        },
+        "outputs": "",
+        "meta": {
+            "id": 6,
+            "categories": {
+                "meta": "Technical Problems",
+                "task_type": "Изменить код",
+                "task_subtype": "SQL",
+                "task_subsubtype": "",
+                "difficulty": "Hard",
+                "domain": "Общее"
+            },
+            "prompt_id": 475,
+            "source_instruction": "SELECT c.customer_id, \n       AVG(o.total_amount) AS average_order_amount\nFROM customers c\n    JOIN orders o ON c.customer_id = o.customer_id\nWHERE YEAR(o.order_date) = 2023\nGROUP BY c.customer_id;\n\nЗадача: Этот запрос имеет сложность O(n^2) по операциям. Проблема в том, что он выполняет сканирование таблицы orders для каждого клиента, а не один раз.\nИзмени этот запрос, чтобы он имел сложность O(n log n) по операциям."
+        },
+        "criteria": [
+            {
+                "criteria_description": "Эффективность решения с точки зрения пространственной и временной сложности, оптимальность использования компонентов решения в разрезе итоговой производительности и потребления ресурсов",
+                "criteria_name": "Оптимальный подход",
+                "rubrics": "0: Решение не оптимально по вычислительной или пространственной сложности (худший или средний случай), либо решение реализовано не эффективно с точки зрения используемых компонентов, что увеличивает потребление ресурсов и / или временные затраты на отработку программы.\n\n1: Решение оптимально только с точки зрения либо пространственной, либо вычислительной сложности. Используемые компоненты существенно не увеличивают потребление ресурсов программой, такое решение может быть использовано, однако может быть улучшено с точки зрения потребления ресурсов.\n\n2: Решение эффективно с точки зрения используемых компонентов, решение соответствует оптимальным пространственной и вычислительной сложностям. ",
+                "rubrics_example": ""
+            },
+            {
+                "criteria_description": "Код решения выдает правильный ответ и / или решает поставленную в условии задачу, то есть этот критерий оценивает исключительно правильность ответа, который выдает написанный код, в отрыве от того, как и с помощью чего этот код реализован.",
+                "criteria_name": "Правильность ответа",
+                "rubrics": "0: В результате работы программы получается неправильный ответ, ответ отсутствует или программа не выполняет ни один из требуемых в условии функционалов, либо ответ программы меняется в зависимости от входных данных. \n\n1: Программа выдает правильный ответ, который не зависит от входных данных, на часть вопросов, заданных в условии задачи, или обеспечивает корректное выполнение только части функционала, заложенного в условии задачи.\n\n2: Ответ программы полностью правильный, весь функционал реализован, правильный ответ не зависит от входных данных",
+                "rubrics_example": ""
+            },
+            {
+                "criteria_description": "Соответствие коду принятым стандарту и культуре.",
+                "criteria_name": "Чистота и культура кода",
+                "rubrics": "0: Код не читаем, стандарт языка не соблюдается, код плохо форматирован.\n\n1: Код читаем, однако содержит огрехи в форматировании, названии переменных, отступах, не везде выполняется стандарт языка.\n\n2: В решении использован общепринятый стандарт, названия переменных и функций отражают их суть, код хорошо форматирован.",
+                "rubrics_example": ""
+            },
+            {
+                "criteria_description": "Решение содержит компоненты, заявленные в условии, или выполнено с учетом требований, указанных в задаче",
+                "criteria_name": "Формальный учет требований из запроса пользователя",
+                "rubrics": "0: Решение игнорирует требования условия задачи к решению. Использованы не те компоненты и / или методы, через которые предполагалось решать задачу. Сюда же входит решение, которое не проходит по вычислительной или пространственной сложности, если такие требования были указаны в условии.\n\n1: Решение содержит часть компонентов или методов, которые требовались в условии. Решение частично реализует требования, предъявляемые в условии задачи. Либо решение, кроме нужно функционала или его части, выполняет также лишний функционал, который не требовался изначально в условии.\n\n2: Решение содержит и выполняет ровно то, что требовалось в условии, код решает поставленную задачу, в коде нет ничего лишнего, никакого функционала, который не был заявлен в условии. В коде использованы ровно те компоненты, методы и парадигмы, которые требовались в условии.",
+                "rubrics_example": ""
+            }
+        ],
+        "reference_answer": "CREATE TEMP TABLE orders_2023 AS\nSELECT customer_id,\n       total_amount\nFROM orders\nWHERE YEAR(order_date) = 2023\nORDER BY customer_id;\n\nCREATE TEMP TABLE unique_customers AS\nSELECT DISTINCT customer_id \nFROM orders_2023;\n\nSELECT uc.customer_id, \n       AVG(o23.total_amount) AS average_order_amount\nFROM unique_customers uc\n    JOIN orders_2023 o23 ON uc.customer_id = o23.customer_id\nGROUP BY uc.customer_id\nORDER BY uc.customer_id;"
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "?????? ?????????? ? ????????????? {question}.",
+            "en": "Instruction template with the {question} placeholder."
+        },
+        "inputs": {
+            "ru": "??????? ?????? ??? ??????? ??????????.",
+            "en": "Inputs used to render the instruction template."
+        },
+        "outputs": {
+            "ru": "?????? ??????, ??? ??? ?????? ??????????? judge-???????.",
+            "en": "Empty string because answers are evaluated by a judge model."
+        },
+        "meta": {
+            "ru": "?????????? ????????? ??????? POLLUX.",
+            "en": "Source POLLUX sample metadata."
+        },
+        "criteria": {
+            "ru": "?????? ????????? ?????? POLLUX ?? ?????? 0/1/2.",
+            "en": "List of POLLUX evaluation criteria with 0/1/2 rubrics."
+        },
+        "reference_answer": {
+            "ru": "????????? ?????, ???????????? Pollux Judge.",
+            "en": "Reference answer passed to Pollux Judge."
+        }
+    },
+    "prompts": [
+        "{question}",
+        "User request:\n{question}",
+        "Follow the user request and provide a helpful answer.\n\n{question}",
+        "Read the instruction and answer directly.\n\n{question}",
+        "Produce the best possible response to this request.\n\n{question}"
+    ],
+    "metrics": {
+        "llm_as_judge": {
+            "ru": "??????? ?????? Pollux Judge: ???????????? ?????? ???????? ?? ?????? 0/1/2, ???? ????????? ??? mean(raw criterion scores) / 2.",
+            "en": "Mean Pollux Judge score: only 0/1/2 criteria are used, and the final value is mean(raw criterion scores) / 2."
+        }
+    },
+    "human_benchmark": {
+        "llm_as_judge": 0.0
+    }
+}

@@ -51,3 +51,5 @@ examples/wandb
 # Local POLLUX subset files are published separately on Hugging Face.
 datasets/pollux-human-centric/test.json
 datasets/pollux-human-centric/shots.json
+datasets/pollux_reasoning/test.json
+datasets/pollux_reasoning/shots.json

@@ -1,0 +1,20 @@
+include: ../custom_generate_task.yaml
+tag:
+  - mera
+  - mera_gen
+  - mera_all
+task: pollux_reasoning
+dataset_path: MERA-evaluation/PolluxReasoning
+training_split: shots
+test_split: test
+num_fewshot: 0
+generation_kwargs:
+  until: []
+  max_gen_toks: 2048
+process_results: !function utils.process_results
+metric_list:
+  - metric: llm_as_judge
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0
