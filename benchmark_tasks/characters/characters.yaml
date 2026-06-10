@@ -1,4 +1,4 @@
-dataset_path: MERA-evaluation/characters
+dataset_path: MERA-evaluation/Persona
 task: characters
 
 test_split: test
