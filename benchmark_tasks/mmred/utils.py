@@ -222,15 +222,44 @@ def process_results(doc: dict, results: list[str]) -> dict[str, float]:
     
     gold = normalize_answer(str(doc.get("outputs", "")), atype)
     pred = normalize_answer(str(results[0]) if results else "", atype)
-    
+
     em = float(gold.lower() == pred.lower())
-    
-    return {
+
+    metrics = {
         "exact_match": em,
         f"em.{task}": em,
         f"em.{task}.len{seq_len}": em,
         "em.dc_aggregate": em,  # For weighted aggregate
     }
+
+    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on
+    # long contexts and stops discriminating near-misses from random answers).
+    # A non-numeric prediction gets the worst-case error so that abstaining
+    # cannot improve MAE; numeric_parse_rate shows how often that happened.
+    if atype == "number" and re.fullmatch(r"-?\d+", gold or ""):
+        g = int(gold)
+        scale = max(int(seq_len), 1)
+        # Parse from the raw filtered response: normalize_answer maps
+        # digit-free predictions to "0", which would mask parse failures
+        raw_pred = str(results[0]) if results else ""
+        if re.search(r"\d", raw_pred) and re.fullmatch(r"-?\d+", pred or ""):
+            p = int(pred)
+            err = abs(p - g)
+            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))
+            parsed = 1.0
+        else:
+            err = scale
+            smape = 1.0
+            parsed = 0.0
+        metrics.update({
+            "mae": float(err),
+            "mae_norm": min(err / scale, 1.0),
+            "smape": smape,
+            "numeric_parse_rate": parsed,
+            f"mae.{task}.len{seq_len}": float(err),
+        })
+
+    return metrics
 
 
 def weighted_length_aggregate(items: list[dict]) -> float:
