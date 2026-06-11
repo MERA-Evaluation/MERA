@@ -18,10 +18,10 @@
     "data_example": {
         "instruction": "Задача:\nПроанализируй перемещения и расположение персонажей по шагам.\n\nКонтекст:\nПоследовательность шагов показывает, какие персонажи находятся в каких комнатах.\n{context}\n\nФормат ответа:\nОтветь одним словом или одним числом в формате: Ответ: X\n\nВопрос:\n{question}\n\nОтвет:",
         "inputs": {
-            "context": "Step 1: Kitchen: [Sandra, Daniel]; Bathroom: [Mary]; Garden: []; Office: [John]; Bedroom: [Michael]; Hallway: []\nStep 2: Kitchen: [Sandra]; Bathroom: []; Garden: [Daniel]; Office: [John, Mary]; Bedroom: [Michael]; Hallway: []",
-            "question": "Who spent the most time alone in the rooms?"
+            "context": "Шаг 1: Кухня: [Сандра, Мария]; Ванная: [Иван, Михаил]; Сад: []; Офис: []; Спальня: [Даниил]; Коридор: []\nШаг 2: Кухня: [Сандра]; Ванная: []; Сад: [Даниил]; Офис: [Иван, Мария]; Спальня: [Михаил]; Коридор: []",
+            "question": "Кто провёл больше всего времени в одиночестве?"
         },
-        "outputs": "Michael",
+        "outputs": "Даниил",
         "meta": {
             "id": 1,
             "categories": {
