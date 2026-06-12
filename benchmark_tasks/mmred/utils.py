@@ -111,10 +111,12 @@ def extract_answer(text: str, atype: str = "person") -> str:
 
     # Strip reasoning blocks: <think>...</think> and Gemma-4 <|channel>thought...<channel|>
     text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)
-    # Gemma-4 format: <|channel>thought...reasoning...<channel|>answer
-    gemma_match = re.search(r"<channel\|>\s*(.+)", text, flags=re.DOTALL)
-    if gemma_match:
-        text = gemma_match.group(1)
+    # Gemma-4 format: <|channel>thought...reasoning...<channel|>answer.
+    # With interleaved thinking there are several thought/answer pairs —
+    # the final answer follows the LAST channel close.
+    gemma_matches = list(re.finditer(r"<channel\|>\s*(.+?)(?=<\|channel>|$)", text, flags=re.DOTALL))
+    if gemma_matches:
+        text = gemma_matches[-1].group(1)
     else:
         text = re.sub(r"<\|channel>thought.*?(?=<\|channel>|$)", "", text, flags=re.DOTALL)
     text = text.strip()
@@ -139,29 +141,32 @@ def extract_answer(text: str, atype: str = "person") -> str:
         except (json.JSONDecodeError, ValueError):
             pass
 
-    # Pattern 1: "The answer is X" / "Answer: X" / "Result: X"
+    # Pattern 1: "The answer is X" / "Answer: X" / "Result: X".
+    # \b — otherwise «ответы» in a reasoning chain matches and captures «ы»;
+    # the separator is required (the task format is "Ответ: X");
+    # the LAST match wins — CoT traces mention intermediate "ответ: ..." hypotheses.
     patterns = [
-        r"(?:the\s+)?(?:answer|result)\s*(?:is|:)\s*['\"]?([A-Za-zА-Яа-я0-9]+)['\"]?",
-        r"(?:ответ|результат)\s*(?::|—|-)?\s*['\"]?([A-Za-zА-Яа-я0-9]+)['\"]?",
+        r"(?:the\s+)?(?:answer|result)\b\s*(?:is|:)\s*['\"]?([A-Za-zА-Яа-я0-9]+)['\"]?",
+        r"(?:ответ|результат)\b\s*(?::|—|–|-)\s*['\"]?([A-Za-zА-Яа-я0-9]+)['\"]?",
     ]
-    
+
     for pattern in patterns:
-        match = re.search(pattern, text, re.IGNORECASE)
-        if match:
-            answer = match.group(1)
+        matches = list(re.finditer(pattern, text, re.IGNORECASE))
+        if matches:
+            answer = matches[-1].group(1)
             break
-    
+
     # Pattern 2: Boxed answer \boxed{X}
     if not answer:
         match = re.search(r"\\boxed\{([^}]+)\}", text)
         if match:
             answer = match.group(1)
-    
-    # Pattern 3: Final answer marker **X** or *X*
+
+    # Pattern 3: Final answer marker **X** or *X* (last one — conclusions go last)
     if not answer:
-        match = re.search(r"\*\*([A-Za-zА-Яа-я0-9]+)\*\*", text)
-        if match:
-            answer = match.group(1)
+        bold = list(re.finditer(r"\*\*([A-Za-zА-Яа-я0-9]+)\*\*", text))
+        if bold:
+            answer = bold[-1].group(1)
     
     # Pattern 4: First word/number for short responses
     if not answer:
