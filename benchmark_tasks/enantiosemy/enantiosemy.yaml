@@ -1,4 +1,4 @@
-dataset_path: MERA-evaluation/enantiosemy
+dataset_path: MERA-evaluation/Enantiosemy
 task: enantiosemy
 
 test_split: test
