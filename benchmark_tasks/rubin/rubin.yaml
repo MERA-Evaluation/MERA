@@ -1,0 +1,35 @@
+dataset_path: MERA-evaluation/RUBIN
+task: rubin
+
+test_split: test
+fewshot_split: test
+
+output_type: generate_until
+
+doc_to_text: !function utils.doc_to_text
+doc_to_target: "{{ outputs.strip() }}"
+
+
+fewshot_config:
+  sampler: default
+
+generation_kwargs:
+  do_sample: false
+
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: remove_whitespace_and_nones
+      - function: "take_first"
+
+process_results: !function utils.process_results
+
+metric_list:
+  - metric: em
+    aggregation: mean
+    higher_is_better: true
+
+num_fewshot: null
+
+metadata:
+  version: 1.0
