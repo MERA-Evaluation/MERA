@@ -13,9 +13,11 @@ def process_results(doc: Dict, results: List[str]) -> Dict:
     
     if len(doc["outputs"]) > 0:
         gold_label = doc["outputs"]
-        pred_label = results[0]
+        pred_label = results[0] if results else ""
         if "Ответ:" in pred_label:
             pred_label = pred_label.split("Ответ:")[-1].strip()
+            
+        pred_label = pred_label.strip()
 
         em = squad_metrics.compute_exact(gold_label, pred_label)
 
