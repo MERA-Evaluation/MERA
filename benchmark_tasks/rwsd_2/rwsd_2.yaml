@@ -1,4 +1,4 @@
-dataset_path: MERA-evaluation/RWSD_2
+dataset_path: MERA-evaluation/RWSDNew
 task: rwsd_2
 
 test_split: test
