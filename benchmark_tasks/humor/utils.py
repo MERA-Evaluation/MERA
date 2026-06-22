@@ -265,7 +265,10 @@ if "remove_whitespace_and_nones" not in FILTER_REGISTRY:
                     if not resp:
                         resp = ""
                     else:
-                        resp = resp.lstrip()
+                        resp = resp.split('\n')
+                        answer = resp[0].lstrip().split('ОТВЕТ ')[-1].strip()
+                        solution = resp[1].lstrip().split('РЕШЕНИЕ ')[-1].strip()
+                        resp = answer + "," + solution
                     filtered_resp.append(resp)
                 return filtered_resp
     
