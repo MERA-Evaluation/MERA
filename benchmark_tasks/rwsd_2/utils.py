@@ -1,5 +1,7 @@
 import os
 from transformers.data.metrics import squad_metrics
+from lm_eval.api.filter import Filter
+from lm_eval.api.registry import register_filter, FILTER_REGISTRY
 
 
 def process_results(doc, results):
