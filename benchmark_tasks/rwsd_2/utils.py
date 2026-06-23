@@ -44,3 +44,23 @@ def compute_judge_score(doc, model_answer):
 
 def doc_to_text(doc):
     return doc["instruction"].format(**doc["inputs"])
+
+
+if "remove_whitespace_and_nones" not in FILTER_REGISTRY:
+    @register_filter("remove_whitespace_and_nones")
+    class RemoveWhitespaceAndNones(Filter):
+
+        def apply(self, resps: list[list[str]], docs: list[dict]) -> list[list[str]]:
+            def filter_set(inst):
+                filtered_resp = []
+                for resp in inst:
+                    if not resp:
+                        resp = ""
+                    else:
+                        resp = resp.lstrip()
+                    filtered_resp.append(resp)
+                return filtered_resp
+
+            filtered_resps = [filter_set(resp) for resp in resps]
+
+            return filtered_resps
