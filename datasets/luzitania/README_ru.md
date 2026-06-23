@@ -29,9 +29,7 @@
 - `outputs` [str] — Правильный ответ на вопрос.
 - `meta` — Метаданные, относящиеся к тестовому примеру, но не используемые в вопросе (скрытые от тестируемой модели).
     - `id` [int] — Номер-идентификатор вопроса в датасете.
-    - `source` [str] — строка, источник задачи (см. раздел Создание Датасета);
-    - `spec` [str] — строка, возможно пустая, дополнительная информация по поиску задачи внутри источника.
-
+    - `source` [str] — строка, источник задачи (см. раздел Создание Датасета).
 
 ### Пример данных
 
@@ -44,8 +42,7 @@
     "outputs": "9",
     "meta": {
         "id": 999,
-        "source": "example",
-        "spec": ""
+        "source": "example"
     }
 }
 ```
@@ -69,11 +66,11 @@
 
 | source | количество |
 |--------|------------|
-| olympiads | 133 |
-| olympic_reason | 50 |
-| MathArena | 36 |
-| turgor | 31 |
-| chinese_olympiads_2002_2006 | 8 |
+| olympiads | 132 |
+| olympic_reason | 49 |
+| MathArena | 34 |
+| turgor | 30 |
+| chinese_olympiads_2002_2006 | 7 |
 
 #### olympiads
 
@@ -81,24 +78,19 @@
 
 Фильтрация задач из этого датасета производилась следующим образом: сперва для всех задач из решений были извлечены ответы, затем были отобраны задачи с целочисленным неотрицательным ответом. Для набора этих задач запускалась рассуждающая модель средних размеров (GPT-oss-120B, reasoning "high", `max_length=65536` токенов) по 8 попыток на задачу (4 без использования `tool_call` и 4 с использованием `tool_call`). В текущий набор вошли задачи с долей успешных попыток `0 < x ≤ 50%` так, чтобы средняя длина ответов GPT-oss-120B была не менее 12k токенов, а самый короткий правильный ответ — не менее 10k токенов.
 
-Поле `spec` в этом случае пустое.
-
 #### olympic_reason
 
-50 олимпиадных задач разных стран, вышедших после апреля 2025 года. Подсэмпл этих задач можно использовать как отдельный валидационный набор для более ранних моделей, чтобы исключить утечку задач в трейнсеты.
-
-Поле `spec` в этом случае содержит сокращение названия олимпиады и номер задачи.
+49 олимпиадных задач разных стран, вышедших после апреля 2025 года. Подсэмпл этих задач можно использовать как отдельный валидационный набор для более ранних моделей, чтобы исключить утечку задач в трейнсеты.
 
 #### MathArena
 
 Отдельные задачи из наборов открытого лидерборда [MathArena](https://matharena.ai/).
+В группу MathArena входят задачи из следующих открытых поднаборов:
 
-Поле `spec` в этом случае содержит название одного из поднаборов ArxivMath[1] и Apex[2]:
-
-- `ArXivMath_Feb_2026`: 12 задач из [ArXivMath_Feb_2026](https://huggingface.co/datasets/MathArena/arxivmath-0226)
-- `ArXivMath_Jan_2026`: 9 задач из [ArXivMath_Jan_2026](https://huggingface.co/datasets/MathArena/arxivmath-0126)
-- `ArXivMath_Dec_2025`: 9 задач из [ArXivMath_Dec_2025](https://huggingface.co/datasets/MathArena/arxivmath-1225)
-- `apex`: 8 задач, [apex](https://huggingface.co/datasets/MathArena/apex_2025)
+- [ArXivMath_Feb_2026](https://huggingface.co/datasets/MathArena/arxivmath-0226)
+- [ArXivMath_Jan_2026](https://huggingface.co/datasets/MathArena/arxivmath-0126)
+- [ArXivMath_Dec_2025](https://huggingface.co/datasets/MathArena/arxivmath-1225)
+- [apex](https://huggingface.co/datasets/MathArena/apex_2025)
 
 #### turgor
 
@@ -106,14 +98,10 @@
 
 [https://turgor.ru/problems/](https://turgor.ru/problems/)
 
-Поле `spec` в этом случае пустое.
-
 #### chinese_olympiads_2002_2006
 
 Книга «Mathematical Olympiad in China: Problems and Solutions», Xiong Bin and Lee Peng Yee
 ([PDF](https://phuylai.wordpress.com/wp-content/uploads/2009/10/mathematical-olympiad-in-china-problems-and-solutions.pdf))
-
-Поле `spec` в этом случае пустое.
 
 Часть условий задач из всех источников может быть незначительно изменена с тем, чтобы в ответе получалось целое число.
 
