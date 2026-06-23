@@ -30,8 +30,6 @@ Each dataset question includes data in the following fields:
 - `meta` — Metadata related to the test example, not used in the question (hidden from the tested model).
     - `id` [int] — Identification number of the question in the dataset.
     - `source` [str] — a string indicating the problem source (see the Dataset Creation section).
-    - `spec` [str] — a string, possibly empty, providing additional information for locating the problem within its source.
-
 
 ### Data formatting example
 
