@@ -42,8 +42,7 @@ Each dataset question includes data in the following fields:
     "outputs": "9",
     "meta": {
         "id": 999,
-        "source": "example",
-        "spec": ""
+        "source": "example"
     }
 }
 ```
@@ -66,11 +65,11 @@ The test set was collected from open sources, with problem statements translated
 
 | source | count |
 |--------|-------|
-| olympiads | 133 |
-| olympic_reason | 50 |
-| MathArena | 36 |
-| turgor | 31 |
-| chinese_olympiads_2002_2006 | 8 |
+| olympiads | 132 |
+| olympic_reason | 49 |
+| MathArena | 34 |
+| turgor | 30 |
+| chinese_olympiads_2002_2006 | 7 |
 
 #### olympiads
 
@@ -78,24 +77,19 @@ Problems taken from the open dataset [olympiads](https://huggingface.co/datasets
 
 Filtering was performed as follows: first, answers were extracted from the solutions for all problems, then problems with non-negative integer answers were selected. A medium-sized reasoning model (GPT-oss-120B, reasoning "high", `max_length=65536` tokens) was run on this set of problems for 8 attempts per problem (4 without `tool_call` and 4 with `tool_call`). The current set includes problems with a success rate of `0 < x ≤ 50%` such that the average response length of GPT-oss-120B was at least 12k tokens, and the shortest correct answer was at least 10k tokens.
 
-The `spec` field is empty in this case.
-
 #### olympic_reason
 
-50 olympiad problems from various countries released after April 2025. A subsample of these problems can be used as a separate validation set for earlier models to avoid data leakage into training sets.
-
-The `spec` field contains the abbreviation of the olympiad name and the problem number.
+49 olympiad problems from various countries released after April 2025. A subsample of these problems can be used as a separate validation set for earlier models to avoid data leakage into training sets.
 
 #### MathArena
 
 Selected problems from the open leaderboard [MathArena](https://matharena.ai/).
+The MathArena group includes problems originating from the following open subsets:
 
-The `spec` field contains the name of one of the ArxivMath[1] and Apex[2] subsets:
-
-- `ArXivMath_Feb_2026`: 12 problems from [ArXivMath_Feb_2026](https://huggingface.co/datasets/MathArena/arxivmath-0226)
-- `ArXivMath_Jan_2026`: 9 problems from [ArXivMath_Jan_2026](https://huggingface.co/datasets/MathArena/arxivmath-0126)
-- `ArXivMath_Dec_2025`: 9 problems from [ArXivMath_Dec_2025](https://huggingface.co/datasets/MathArena/arxivmath-1225)
-- `apex`: 8 problems, [apex](https://huggingface.co/datasets/MathArena/apex_2025)
+- [ArXivMath_Feb_2026](https://huggingface.co/datasets/MathArena/arxivmath-0226)
+- [ArXivMath_Jan_2026](https://huggingface.co/datasets/MathArena/arxivmath-0126)
+- [ArXivMath_Dec_2025](https://huggingface.co/datasets/MathArena/arxivmath-1225)
+- [apex](https://huggingface.co/datasets/MathArena/apex_2025)
 
 #### turgor
 
@@ -103,14 +97,10 @@ Problems from the "Tournament of Towns".
 
 [https://turgor.ru/problems/](https://turgor.ru/problems/)
 
-The `spec` field is empty in this case.
-
 #### chinese_olympiads_2002_2006
 
 Book "Mathematical Olympiad in China: Problems and Solutions", Xiong Bin and Lee Peng Yee
 ([PDF](https://phuylai.wordpress.com/wp-content/uploads/2009/10/mathematical-olympiad-in-china-problems-and-solutions.pdf))
-
-The `spec` field is empty in this case.
 
 Some problem statements from all sources may be slightly modified so that the answer is an integer.
 
