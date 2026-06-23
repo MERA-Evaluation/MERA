@@ -1,7 +1,7 @@
 {
     "dataset_name": "Luzitania",
     "license": "MIT AND CC-BY-NC-SA-4.0",
-    "dataset_size": 258,
+    "dataset_size": 252,
     "description": "A dataset for evaluating multi-step mathematical reasoning in Russian, focusing on olympiad-level and advanced problems with integer answers.",
     "modalities": [
         "text"
@@ -22,8 +22,7 @@
         "outputs": "9",
         "meta": {
             "id": 999,
-            "source": "example",
-            "spec": ""
+            "source": "example"
         }
     },
     "data_field_descriptions": {
@@ -50,10 +49,6 @@
                 "en": "a string indicating the problem source (see the Dataset Creation section).",
                 "ru": "строка, источник задачи (см. раздел Создание Датасета)"
             },
-            "spec": {
-                "en": "a string, possibly empty, providing additional information for locating the problem within its source.",
-                "ru": "строка, возможно пустая, дополнительная информация по поиску задачи внутри источника."
-            }
         }
     },
     "prompts": [
