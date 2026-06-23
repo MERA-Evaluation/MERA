@@ -1,4 +1,6 @@
 import os
+from lm_eval.api.filter import Filter
+from lm_eval.api.registry import register_filter, FILTER_REGISTRY
 from transformers.data.metrics import squad_metrics
 
 
@@ -63,3 +65,23 @@ def aggregate_group_score(items):
 
 def doc_to_text(doc):
     return doc["instruction"].format(**doc["inputs"])
+
+
+if "remove_whitespace_and_nones" not in FILTER_REGISTRY:
+    @register_filter("remove_whitespace_and_nones")
+    class RemoveWhitespaceAndNones(Filter):
+    
+        def apply(self, resps: list[list[str]], docs: list[dict]) -> list[list[str]]:
+            def filter_set(inst):
+                filtered_resp = []
+                for resp in inst:
+                    if not resp:
+                        resp = ""
+                    else:
+                        resp = resp.lstrip().split('Ответ: ')[-1].strip()
+                    filtered_resp.append(resp)
+                return filtered_resp
+    
+            filtered_resps = [filter_set(resp) for resp in resps]
+    
+            return filtered_resps

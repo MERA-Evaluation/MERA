@@ -8,6 +8,13 @@ doc_to_text: !function utils.doc_to_text
 doc_to_target: "outputs"
 process_results: !function utils.process_results
 
+
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: remove_whitespace_and_nones
+      - function: take_first
+
 metric_list:
   - metric: exact_match
     aggregation: mean
