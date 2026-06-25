@@ -53,24 +53,24 @@ Each dataset question includes data in the following fields:
 
 ```json
 {
-    "instruction": "ТОЛЬКО РЕЗУЛЬТАТ! Разберись с задачей: {question}. Выведи только числовой результат, комментариев и пояснений давать не нужно!",
+    "instruction": "Помогите мне, пожалуйста.\n\nРешите математическую задачу.\n\nПоследняя строка ответа должна содержать одно число в формате:\n\nОтвет: <число>\n\n{question}",
     "inputs": {
-        "question": "В окружности проведены две пересекающиеся хорды. Радиус окружности равен 5, BC=6, и AD делится пополам хордой BC. Найдите произведение mn, где m/n - несократимая дробь, представляющая синус центрального угла малой дуги AB."
+        "question": "Пусть $f(x)=|x-p|+|x-15|+|x-p-15|$, где $0 < p < 15$. Определите минимальное значение $f(x)$, принимаемое при $x$ из интервала $p \\leq x\\leq15$."
     },
-    "outputs": "175",
+    "outputs": "15",
     "meta": {
-        "id": 999,
-        "url": "https://artofproblemsolving.com/wiki/index.php/2024_AIME_Problems/Problem_0",
+        "id": 1,
+        "url": "https://artofproblemsolving.com/wiki/index.php/1983_AIME_Problems/Problem_2",
         "categories": {
             "contest_type": "AIME",
-            "year": 2024,
-            "problem_id": 0,
-            "math_domain": "Геометрия"
+            "year": 1983,
+            "problem_id": 2,
+            "math_domain": "Алгебра"
         },
         "solutions": {
-            "solution_i": {
+            "solution_1": {
                 "id": 1,
-                "text": "Пусть O - центр окружности. Поскольку BC=6, расстояние от O до BC равно 4. Рассмотрим геометрическое место середин хорд из A - это окружность с диаметром AO. Условие единственности означает, что эта окружность касается BC. Проведя необходимые вычисления, получаем sin(∠AOB) = 7/25. Таким образом, m=7, n=25, и их произведение равно 175."
+                "text": "Сначала лучше всего избавиться от модулей.\nПри заданных условиях замечаем, что $|x-p|=x-p$, $|x-15|=15-x$ и $|x-p-15|=15+p-x$.\nСложив их, находим, что сумма равна $30-x$, которая достигает своего минимального значения (на заданном интервале $p \\leq x \\leq 15$) при $x=15$, давая минимум $\\boxed{015}$."
             }
         }
     }
@@ -80,13 +80,26 @@ Each dataset question includes data in the following fields:
 
 ### Prompts
 
-For the task, 10 prompts were prepared and evenly distributed among the questions on the principle of "one prompt per question". The templates in curly braces in each prompt are filled in from the fields inside the `inputs` field in each question.
+For the task, 5 prompts were prepared and evenly distributed among the questions on the principle of "one prompt per question". The prompts vary in formality (informal *ты* / formal *вы*) and require the model to output a single number in the format `Ответ: <число>`. Templates in curly braces in each prompt are filled in from the fields inside the `inputs` field in each question.
 
 Prompt example:
 
 ```
-ТОЛЬКО ЧИСЛО! Реши задачу: {question}. В ответе напиши только число, без объяснений!
+Помогите мне, пожалуйста.
+
+Решите математическую задачу.
+
+Последняя строка ответа должна содержать одно число в формате:
+
+Ответ: <число>
+
+{question}
 ```
+
+
+### Few-shot examples
+
+During evaluation, 2 demonstration examples from `shots.json` are used (`num_fewshot=2`). They follow the same data format as the test set and illustrate the expected answer format.
 
 
 ### Dataset creation
