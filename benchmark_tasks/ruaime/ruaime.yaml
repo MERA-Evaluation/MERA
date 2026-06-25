@@ -1,7 +1,7 @@
 tag:
   - mera
   - mera_all
-dataset_path: gabovanton/ruAIME
+dataset_path: MERA-evaluation/ruAIME
 dataset_name: null
 task: ruaime
 training_split: shots
