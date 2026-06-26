@@ -115,6 +115,11 @@ MERA is a collaborative project created in a union of industry and academia with
 
 *Powered by [Aliance AI](https://a-ai.ru)*
 
+## Requirements
+
+- **Python 3.9+** is required to run MERA evaluation scripts (`scripts/run_benchmark.sh`, `lm_eval`, etc.).
+- `scripts/log_to_submission.py` is compatible with **Python 3.8+** (see [#5](https://github.com/MERA-Evaluation/MERA/issues/5)).
+
 ## Contents
 
 The repository has the following structure:

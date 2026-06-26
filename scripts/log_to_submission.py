@@ -450,10 +450,9 @@ def get_args():
     )
     parser.add_argument(
         "--gen",
-        type=bool,
+        action="store_true",
         default=False,
         help="generation or loglike setup.",
-        action=argparse.BooleanOptionalAction,  # type: ignore[attr-defined]
     )
     parser.add_argument(
         "--model_args",

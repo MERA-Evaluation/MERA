@@ -10,6 +10,8 @@ This project provides a unified framework to test generative language models on 
 
 ## Install
 
+**Python 3.9+** is required. See [README.md](README.md#requirements) for details.
+
 To install `lm-eval` from the repository main branch, run:
 
 ```bash
