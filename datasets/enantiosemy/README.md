@@ -2,7 +2,7 @@
 
 ## Task Description
 
-The **Enantiosemy** dataset is a dataset for evaluating the ability of language models to understand words that can have opposite meanings in the same form depending on context. The benchmark tests the model's ability to correctly interpret enantiosemic units in one of four multiple-choice settings: selecting a suitable continuation, selecting an unsuitable continuation, identifying the meaning used in context, or identifying the meaning not used in context. The expected answer is one or several option letters.
+The **Enantiosemy** dataset evaluates whether language models can understand words that, in the same surface form, can have opposite meanings depending on context. The benchmark tests the model's ability to correctly interpret enantiosemic units in one of four multiple-choice settings: selecting a suitable continuation, selecting an unsuitable continuation, identifying the meaning used in context, or identifying the meaning not used in context. The expected answer is one or several option letters.
 
 Tested model skills: Russian language proficiency, Contextual disambiguation, Linguistic-aware reasoning
 
@@ -31,11 +31,12 @@ Each example is assigned one of four types in the `type` field:
 | `type` | Task type | Count | Share |
 |--------|-----------|------:|------:|
 | 1 | Select the **correct** continuation of the final utterance | 290 | 57.3% |
-| 2 | Select the **incorrect** / unsuitable continuation | 188 | 37.2% |
+| 2 | Select the **incorrect** (unsuitable) continuation | 188 | 37.2% |
 | 3 | Identify the meaning **in which the word is used** | 18 | 3.6% |
 | 4 | Identify the meaning **in which the word is not used** | 10 | 2.0% |
 
-The answer format is multiple choice among 6 options labeled А, Б, В, Г, Д, Е. One or several answer options may be correct. When several options are correct, the answer letters are written in alphabetical order and separated by a semicolon and a space.
+The answer format is multiple choice among 6 options labeled А, Б, В, Г, Д, Е. One or several options may be correct. When multiple options are correct, the answer letters are listed in alphabetical order and separated by a semicolon followed by a space.
+
 
 ### Data Fields
 
@@ -45,7 +46,7 @@ Each example in the dataset contains the following fields:
 
 - `inputs` — input data that forms the task:
     - `text` [str] — a dialogue or utterance containing an enantiosemic element
-    - `enantiosemic_word` [str] — the enantiosemic word in its initial form
+    - `enantiosemic_word` [str] — the enantiosemic word in the infinitive
     - `option_a` [str] — the first continuation option for the final utterance
     - `option_b` [str] — the second continuation option
     - `option_c` [str] — the third continuation option
@@ -53,7 +54,7 @@ Each example in the dataset contains the following fields:
     - `option_e` [str] — the fifth continuation option
     - `option_f` [str] — the sixth continuation option
 
-- `outputs` [str] — a string containing the letter or letters of the correct answer, written in alphabetical order and separated by a semicolon and a space, for example: А; Б; В; Г; Д; Е
+- `outputs` [str] — a string containing the letter or letters of the correct answer, written in alphabetical order separated by a semicolon and space, for example: А; Б; В; Г; Д; Е
 
 - `meta` — metadata:
     - `id` [int] — example number
@@ -84,7 +85,7 @@ Each example in the dataset contains the following fields:
 
 ### Prompt Creation
 
-20 prompts were prepared for the task: 5 prompts for each of the 4 task types. They were distributed evenly across questions according to the “one question — one prompt” principle. Templates in curly braces in the prompt are filled from the fields inside the `inputs` field in each question.
+20 prompts were prepared for the task: 5 prompts for each of the 4 task types. They were distributed evenly across questions using a one-question–one-prompt scheme. Template placeholders in curly braces in a prompt are filled from the fields inside `inputs` for each question.
 
 ### Dataset Creation
 
