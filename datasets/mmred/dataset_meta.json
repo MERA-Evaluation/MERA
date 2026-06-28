@@ -84,12 +84,20 @@
         "Задача:\nСопоставь вопрос со всеми состояниями комнат и выведи краткий результат.\n\nКонтекст:\nИспользуй полную последовательность JSON-шагов, чтобы учесть все посещения и совпадения.\n{context}\n\nФормат ответа:\nОтвет должен иметь вид: Ответ: X. X — одно слово или одно число.\n\nВопрос:\n{question}\n\nОтвет:"
     ],
     "metrics": {
-        "Exact Match": {
-            "en": "default",
-            "ru": "default"
+        "Subtask Exact Match": {
+            "en": "Exact match within a single subtask: the proportion of answers that exactly match the reference (a character name, room name, or number). Mean over 50 questions. Value from 0 to 1. Reported as exact_match in evaluation logs.",
+            "ru": "Exact Match на подзадаче: доля ответов, точно совпадающих с эталоном (имя персонажа, название комнаты или число). Среднее по 50 вопросам. Значение от 0 до 1. В логах — exact_match."
+        },
+        "Question-type Length-weighted EM": {
+            "en": "Length-weighted exact match for one question type. Combines subtask scores for lengths 32, 64, and 128 with weights 2, 4, and 16: question_type_score = (2*EM_32 + 4*EM_64 + 16*EM_128) / (2+4+16). Reported as em.dc_aggregate for groups mmred_dc_sa_c, mmred_dc_sr_i, mmred_dc_cc_i, mmred_dc_ws_r, mmred_dc_whs_c.",
+            "ru": "Взвешенный EM по типу вопроса. Объединяет оценки подзадач для длин 32, 64 и 128 с весами 2, 4 и 16: оценка_типа = (2*EM_32 + 4*EM_64 + 16*EM_128) / (2+4+16). В логах — em.dc_aggregate для групп mmred_dc_sa_c, mmred_dc_sr_i, mmred_dc_cc_i, mmred_dc_ws_r, mmred_dc_whs_c."
+        },
+        "Overall MMReD Score": {
+            "en": "Overall benchmark score: harmonic mean of the five question-type length-weighted EM scores. Penalizes weakness on any single type: overall_score = 5 / (1/(s_1+eps) + ... + 1/(s_5+eps)), eps=1e-6. Reported as em.dc_aggregate for group mmred.",
+            "ru": "Итоговая оценка MMReD: гармоническое среднее пяти взвешенных EM по типам вопросов. Штрафует слабые результаты на любом типе: итоговая_оценка = 5 / (1/(s_1+eps) + ... + 1/(s_5+eps)), eps=1e-6. В логах — em.dc_aggregate для группы mmred."
         }
     },
     "human_benchmark": {
-        "Exact Match": 0.0
+        "Overall MMReD Score": 0.0
     }
 }

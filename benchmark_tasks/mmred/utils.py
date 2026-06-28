@@ -267,6 +267,31 @@ def process_results(doc: dict, results: list[str]) -> dict[str, float]:
     return metrics
 
 
+# Length weights for 32 / 64 / 128 step subtasks within each question-type group.
+MMRED_LENGTH_WEIGHTS = [2, 4, 16]
+
+
+def group_length_weighted_aggregate(
+    metrics: list[float], sizes: list[int], weight_by_size: bool = True
+) -> float:
+    """Length-weighted aggregate for a single question-type group (3 seq lengths)."""
+    weights = MMRED_LENGTH_WEIGHTS[: len(metrics)]
+    if not weights or not metrics:
+        return 0.0
+    return sum(m * w for m, w in zip(metrics, weights)) / sum(weights)
+
+
+def group_harmonic_mean_aggregate(
+    metrics: list[float], sizes: list[int], weight_by_size: bool = True
+) -> float:
+    """Harmonic mean across question-type groups (penalizes weakness on any type)."""
+    if not metrics:
+        return 0.0
+    eps = 1e-6
+    n = len(metrics)
+    return n / sum(1.0 / (v + eps) for v in metrics)
+
+
 def weighted_length_aggregate(items: list[dict]) -> float:
     """Aggregate metric with exponential weight on length in facts. 32 facts is base, 64 is 2x, 128 is 4x, etc.
     
