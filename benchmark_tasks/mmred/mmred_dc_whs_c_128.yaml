@@ -1,0 +1,11 @@
+# MMReD DC_WHS_C (Length 128)
+include: mmred_base.yaml
+tag:
+  - mmred_dc
+  - mera_all
+task: mmred_dc_whs_c_128
+dataset_name: mmred_dc_whs_c_128
+metadata:
+  version: 1.0
+  qtype: who_spend
+  seq_len: 128
