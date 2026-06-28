@@ -1,0 +1,1478 @@
+{
+  "results": {
+    "mmred": {
+      "em.dc_aggregate,scoring": 2.9999792502302888e-06,
+      "em.dc_aggregate_stderr,scoring": 0.046188021535170064,
+      "alias": "MMReD Dense Context Reasoning"
+    },
+    "mmred_dc_cc_i": {
+      "em.dc_aggregate,scoring": 0.0,
+      "em.dc_aggregate_stderr,scoring": 0.0,
+      "alias": " - DC-CC-I (crowd_count)"
+    },
+    "mmred_dc_cc_i_128": {
+      "alias": "  - mmred_dc_cc_i_128",
+      "exact_match,scoring": 0.0,
+      "exact_match_stderr,scoring": 0.0,
+      "em.DC-CC-I,scoring": 0.0,
+      "em.DC-CC-I_stderr,scoring": 0.0,
+      "em.DC-CC-I.len128,scoring": 0.0,
+      "em.DC-CC-I.len128_stderr,scoring": 0.0,
+      "em.dc_aggregate,scoring": 0.0,
+      "em.dc_aggregate_stderr,scoring": 0.0,
+      "mae,scoring": 22.0,
+      "mae_stderr,scoring": 2.23606797749979,
+      "mae_norm,scoring": 0.171875,
+      "mae_norm_stderr,scoring": 0.017469281074217108,
+      "smape,scoring": 0.820410783055199,
+      "smape_stderr,scoring": 0.07262306584449775,
+      "numeric_parse_rate,scoring": 1.0,
+      "numeric_parse_rate_stderr,scoring": 0.0,
+      "mae.DC-CC-I.len128,scoring": 22.0,
+      "mae.DC-CC-I.len128_stderr,scoring": 2.23606797749979
+    },
+    "mmred_dc_cc_i_32": {
+      "alias": "  - mmred_dc_cc_i_32",
+      "exact_match,scoring": 0.0,
+      "exact_match_stderr,scoring": 0.0,
+      "em.DC-CC-I,scoring": 0.0,
+      "em.DC-CC-I_stderr,scoring": 0.0,
+      "em.DC-CC-I.len32,scoring": 0.0,
+      "em.DC-CC-I.len32_stderr,scoring": 0.0,
+      "em.dc_aggregate,scoring": 0.0,
+      "em.dc_aggregate_stderr,scoring": 0.0,
+      "mae,scoring": 6.2,
+      "mae_stderr,scoring": 1.2806248474865698,
+      "mae_norm,scoring": 0.19375,
+      "mae_norm_stderr,scoring": 0.040019526483955306,
+      "smape,scoring": 0.45136645962732913,
+      "smape_stderr,scoring": 0.08838793027401591,
+      "numeric_parse_rate,scoring": 1.0,
+      "numeric_parse_rate_stderr,scoring": 0.0,
+      "mae.DC-CC-I.len32,scoring": 6.2,
+      "mae.DC-CC-I.len32_stderr,scoring": 1.2806248474865698
+    },
+    "mmred_dc_cc_i_64": {
+      "alias": "  - mmred_dc_cc_i_64",
+      "exact_match,scoring": 0.0,
+      "exact_match_stderr,scoring": 0.0,
+      "em.DC-CC-I,scoring": 0.0,
+      "em.DC-CC-I_stderr,scoring": 0.0,
+      "em.DC-CC-I.len64,scoring": 0.0,
+      "em.DC-CC-I.len64_stderr,scoring": 0.0,
+      "em.dc_aggregate,scoring": 0.0,
+      "em.dc_aggregate_stderr,scoring": 0.0,
+      "mae,scoring": 9.4,
+      "mae_stderr,scoring": 0.39999999999999997,
+      "mae_norm,scoring": 0.146875,
+      "mae_norm_stderr,scoring": 0.0062499999999999995,
+      "smape,scoring": 0.8051282051282052,
+      "smape_stderr,scoring": 0.059777144753203934,
+      "numeric_parse_rate,scoring": 1.0,
+      "numeric_parse_rate_stderr,scoring": 0.0,
+      "mae.DC-CC-I.len64,scoring": 9.4,
+      "mae.DC-CC-I.len64_stderr,scoring": 0.39999999999999997
+    },
+    "mmred_dc_sa_c": {
+      "em.dc_aggregate,scoring": 0.21818181818181823,
+      "em.dc_aggregate_stderr,scoring": 0.12472191289246473,
+      "alias": " - DC-SA-C (spend_alone)"
+    },
+    "mmred_dc_sa_c_128": {
+      "alias": "  - mmred_dc_sa_c_128",
+      "exact_match,scoring": 0.2,
+      "exact_match_stderr,scoring": 0.20000000000000004,
+      "em.DC-SA-C,scoring": 0.2,
+      "em.DC-SA-C_stderr,scoring": 0.20000000000000004,
+      "em.DC-SA-C.len128,scoring": 0.2,
+      "em.DC-SA-C.len128_stderr,scoring": 0.20000000000000004,
+      "em.dc_aggregate,scoring": 0.2,
+      "em.dc_aggregate_stderr,scoring": 0.20000000000000004
+    },
+    "mmred_dc_sa_c_32": {
+      "alias": "  - mmred_dc_sa_c_32",
+      "exact_match,scoring": 0.4,
+      "exact_match_stderr,scoring": 0.24494897427831783,
+      "em.DC-SA-C,scoring": 0.4,
+      "em.DC-SA-C_stderr,scoring": 0.24494897427831783,
+      "em.DC-SA-C.len32,scoring": 0.4,
+      "em.DC-SA-C.len32_stderr,scoring": 0.24494897427831783,
+      "em.dc_aggregate,scoring": 0.4,
+      "em.dc_aggregate_stderr,scoring": 0.24494897427831783
+    },
+    "mmred_dc_sa_c_64": {
+      "alias": "  - mmred_dc_sa_c_64",
+      "exact_match,scoring": 0.2,
+      "exact_match_stderr,scoring": 0.20000000000000004,
+      "em.DC-SA-C,scoring": 0.2,
+      "em.DC-SA-C_stderr,scoring": 0.20000000000000004,
+      "em.DC-SA-C.len64,scoring": 0.2,
+      "em.DC-SA-C.len64_stderr,scoring": 0.20000000000000004,
+      "em.dc_aggregate,scoring": 0.2,
+      "em.dc_aggregate_stderr,scoring": 0.20000000000000004
+    },
+    "mmred_dc_sr_i": {
+      "em.dc_aggregate,scoring": 0.09090909090909091,
+      "em.dc_aggregate_stderr,scoring": 0.10540925533894599,
+      "alias": " - DC-SR-I (steps_in_room)"
+    },
+    "mmred_dc_sr_i_128": {
+      "alias": "  - mmred_dc_sr_i_128",
+      "exact_match,scoring": 0.0,
+      "exact_match_stderr,scoring": 0.0,
+      "em.DC-SR-I,scoring": 0.0,
+      "em.DC-SR-I_stderr,scoring": 0.0,
+      "em.DC-SR-I.len128,scoring": 0.0,
+      "em.DC-SR-I.len128_stderr,scoring": 0.0,
+      "em.dc_aggregate,scoring": 0.0,
+      "em.dc_aggregate_stderr,scoring": 0.0,
+      "mae,scoring": 15.8,
+      "mae_stderr,scoring": 2.8705400188814645,
+      "mae_norm,scoring": 0.1234375,
+      "mae_norm_stderr,scoring": 0.02242609389751144,
+      "smape,scoring": 0.7849976110845677,
+      "smape_stderr,scoring": 0.11389611240258658,
+      "numeric_parse_rate,scoring": 1.0,
+      "numeric_parse_rate_stderr,scoring": 0.0,
+      "mae.DC-SR-I.len128,scoring": 15.8,
+      "mae.DC-SR-I.len128_stderr,scoring": 2.8705400188814645
+    },
+    "mmred_dc_sr_i_32": {
+      "alias": "  - mmred_dc_sr_i_32",
+      "exact_match,scoring": 0.6,
+      "exact_match_stderr,scoring": 0.24494897427831783,
+      "em.DC-SR-I,scoring": 0.6,
+      "em.DC-SR-I_stderr,scoring": 0.24494897427831783,
+      "em.DC-SR-I.len32,scoring": 0.6,
+      "em.DC-SR-I.len32_stderr,scoring": 0.24494897427831783,
+      "em.dc_aggregate,scoring": 0.6,
+      "em.dc_aggregate_stderr,scoring": 0.24494897427831783,
+      "mae,scoring": 2.0,
+      "mae_stderr,scoring": 1.224744871391589,
+      "mae_norm,scoring": 0.0625,
+      "mae_norm_stderr,scoring": 0.038273277230987154,
+      "smape,scoring": 0.4,
+      "smape_stderr,scoring": 0.24494897427831783,
+      "numeric_parse_rate,scoring": 1.0,
+      "numeric_parse_rate_stderr,scoring": 0.0,
+      "mae.DC-SR-I.len32,scoring": 2.0,
+      "mae.DC-SR-I.len32_stderr,scoring": 1.224744871391589
+    },
+    "mmred_dc_sr_i_64": {
+      "alias": "  - mmred_dc_sr_i_64",
+      "exact_match,scoring": 0.2,
+      "exact_match_stderr,scoring": 0.20000000000000004,
+      "em.DC-SR-I,scoring": 0.2,
+      "em.DC-SR-I_stderr,scoring": 0.20000000000000004,
+      "em.DC-SR-I.len64,scoring": 0.2,
+      "em.DC-SR-I.len64_stderr,scoring": 0.20000000000000004,
+      "em.dc_aggregate,scoring": 0.2,
+      "em.dc_aggregate_stderr,scoring": 0.20000000000000004,
+      "mae,scoring": 10.8,
+      "mae_stderr,scoring": 3.6249137920783716,
+      "mae_norm,scoring": 0.16875,
+      "mae_norm_stderr,scoring": 0.056639278001224556,
+      "smape,scoring": 0.5958074866310161,
+      "smape_stderr,scoring": 0.17736163441077799,
+      "numeric_parse_rate,scoring": 1.0,
+      "numeric_parse_rate_stderr,scoring": 0.0,
+      "mae.DC-SR-I.len64,scoring": 10.8,
+      "mae.DC-SR-I.len64_stderr,scoring": 3.6249137920783716
+    },
+    "mmred_dc_whs_c": {
+      "em.dc_aggregate,scoring": 0.5454545454545454,
+      "em.dc_aggregate_stderr,scoring": 0.12472191289246473,
+      "alias": " - DC-WHS-C (who_spend)"
+    },
+    "mmred_dc_whs_c_128": {
+      "alias": "  - mmred_dc_whs_c_128",
+      "exact_match,scoring": 0.6,
+      "exact_match_stderr,scoring": 0.24494897427831783,
+      "em.DC-WHS-C,scoring": 0.6,
+      "em.DC-WHS-C_stderr,scoring": 0.24494897427831783,
+      "em.DC-WHS-C.len128,scoring": 0.6,
+      "em.DC-WHS-C.len128_stderr,scoring": 0.24494897427831783,
+      "em.dc_aggregate,scoring": 0.6,
+      "em.dc_aggregate_stderr,scoring": 0.24494897427831783
+    },
+    "mmred_dc_whs_c_32": {
+      "alias": "  - mmred_dc_whs_c_32",
+      "exact_match,scoring": 0.8,
+      "exact_match_stderr,scoring": 0.20000000000000004,
+      "em.DC-WHS-C,scoring": 0.8,
+      "em.DC-WHS-C_stderr,scoring": 0.20000000000000004,
+      "em.DC-WHS-C.len32,scoring": 0.8,
+      "em.DC-WHS-C.len32_stderr,scoring": 0.20000000000000004,
+      "em.dc_aggregate,scoring": 0.8,
+      "em.dc_aggregate_stderr,scoring": 0.20000000000000004
+    },
+    "mmred_dc_whs_c_64": {
+      "alias": "  - mmred_dc_whs_c_64",
+      "exact_match,scoring": 0.2,
+      "exact_match_stderr,scoring": 0.20000000000000004,
+      "em.DC-WHS-C,scoring": 0.2,
+      "em.DC-WHS-C_stderr,scoring": 0.20000000000000004,
+      "em.DC-WHS-C.len64,scoring": 0.2,
+      "em.DC-WHS-C.len64_stderr,scoring": 0.20000000000000004,
+      "em.dc_aggregate,scoring": 0.2,
+      "em.dc_aggregate_stderr,scoring": 0.20000000000000004
+    },
+    "mmred_dc_ws_r": {
+      "em.dc_aggregate,scoring": 0.32727272727272727,
+      "em.dc_aggregate_stderr,scoring": 0.10540925533894599,
+      "alias": " - DC-WS-R (where_spend)"
+    },
+    "mmred_dc_ws_r_128": {
+      "alias": "  - mmred_dc_ws_r_128",
+      "exact_match,scoring": 0.4,
+      "exact_match_stderr,scoring": 0.24494897427831783,
+      "em.DC-WS-R,scoring": 0.4,
+      "em.DC-WS-R_stderr,scoring": 0.24494897427831783,
+      "em.DC-WS-R.len128,scoring": 0.4,
+      "em.DC-WS-R.len128_stderr,scoring": 0.24494897427831783,
+      "em.dc_aggregate,scoring": 0.4,
+      "em.dc_aggregate_stderr,scoring": 0.24494897427831783
+    },
+    "mmred_dc_ws_r_32": {
+      "alias": "  - mmred_dc_ws_r_32",
+      "exact_match,scoring": 0.0,
+      "exact_match_stderr,scoring": 0.0,
+      "em.DC-WS-R,scoring": 0.0,
+      "em.DC-WS-R_stderr,scoring": 0.0,
+      "em.DC-WS-R.len32,scoring": 0.0,
+      "em.DC-WS-R.len32_stderr,scoring": 0.0,
+      "em.dc_aggregate,scoring": 0.0,
+      "em.dc_aggregate_stderr,scoring": 0.0
+    },
+    "mmred_dc_ws_r_64": {
+      "alias": "  - mmred_dc_ws_r_64",
+      "exact_match,scoring": 0.2,
+      "exact_match_stderr,scoring": 0.2,
+      "em.DC-WS-R,scoring": 0.2,
+      "em.DC-WS-R_stderr,scoring": 0.2,
+      "em.DC-WS-R.len64,scoring": 0.2,
+      "em.DC-WS-R.len64_stderr,scoring": 0.2,
+      "em.dc_aggregate,scoring": 0.2,
+      "em.dc_aggregate_stderr,scoring": 0.2
+    }
+  },
+  "groups": {
+    "mmred": {
+      "em.dc_aggregate,scoring": 2.9999792502302888e-06,
+      "em.dc_aggregate_stderr,scoring": 0.046188021535170064,
+      "alias": "MMReD Dense Context Reasoning"
+    },
+    "mmred_dc_cc_i": {
+      "em.dc_aggregate,scoring": 0.0,
+      "em.dc_aggregate_stderr,scoring": 0.0,
+      "alias": " - DC-CC-I (crowd_count)"
+    },
+    "mmred_dc_sa_c": {
+      "em.dc_aggregate,scoring": 0.21818181818181823,
+      "em.dc_aggregate_stderr,scoring": 0.12472191289246473,
+      "alias": " - DC-SA-C (spend_alone)"
+    },
+    "mmred_dc_sr_i": {
+      "em.dc_aggregate,scoring": 0.09090909090909091,
+      "em.dc_aggregate_stderr,scoring": 0.10540925533894599,
+      "alias": " - DC-SR-I (steps_in_room)"
+    },
+    "mmred_dc_whs_c": {
+      "em.dc_aggregate,scoring": 0.5454545454545454,
+      "em.dc_aggregate_stderr,scoring": 0.12472191289246473,
+      "alias": " - DC-WHS-C (who_spend)"
+    },
+    "mmred_dc_ws_r": {
+      "em.dc_aggregate,scoring": 0.32727272727272727,
+      "em.dc_aggregate_stderr,scoring": 0.10540925533894599,
+      "alias": " - DC-WS-R (where_spend)"
+    }
+  },
+  "group_subtasks": {
+    "mmred_dc_whs_c": [
+      "mmred_dc_whs_c_32",
+      "mmred_dc_whs_c_64",
+      "mmred_dc_whs_c_128"
+    ],
+    "mmred_dc_ws_r": [
+      "mmred_dc_ws_r_32",
+      "mmred_dc_ws_r_64",
+      "mmred_dc_ws_r_128"
+    ],
+    "mmred_dc_cc_i": [
+      "mmred_dc_cc_i_32",
+      "mmred_dc_cc_i_64",
+      "mmred_dc_cc_i_128"
+    ],
+    "mmred_dc_sr_i": [
+      "mmred_dc_sr_i_32",
+      "mmred_dc_sr_i_64",
+      "mmred_dc_sr_i_128"
+    ],
+    "mmred_dc_sa_c": [
+      "mmred_dc_sa_c_32",
+      "mmred_dc_sa_c_64",
+      "mmred_dc_sa_c_128"
+    ],
+    "mmred": [
+      "mmred_dc_sa_c",
+      "mmred_dc_sr_i",
+      "mmred_dc_cc_i",
+      "mmred_dc_ws_r",
+      "mmred_dc_whs_c"
+    ]
+  },
+  "configs": {
+    "mmred_dc_cc_i_128": {
+      "task": "mmred_dc_cc_i_128",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_cc_i_128",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "crowd_count",
+        "seq_len": 128,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_cc_i_32": {
+      "task": "mmred_dc_cc_i_32",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_cc_i_32",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "crowd_count",
+        "seq_len": 32,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_cc_i_64": {
+      "task": "mmred_dc_cc_i_64",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_cc_i_64",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "crowd_count",
+        "seq_len": 64,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_sa_c_128": {
+      "task": "mmred_dc_sa_c_128",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_sa_c_128",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "spend_alone",
+        "seq_len": 128,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_sa_c_32": {
+      "task": "mmred_dc_sa_c_32",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_sa_c_32",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "spend_alone",
+        "seq_len": 32,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_sa_c_64": {
+      "task": "mmred_dc_sa_c_64",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_sa_c_64",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "spend_alone",
+        "seq_len": 64,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_sr_i_128": {
+      "task": "mmred_dc_sr_i_128",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_sr_i_128",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "steps_in_room",
+        "seq_len": 128,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_sr_i_32": {
+      "task": "mmred_dc_sr_i_32",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_sr_i_32",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "steps_in_room",
+        "seq_len": 32,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_sr_i_64": {
+      "task": "mmred_dc_sr_i_64",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_sr_i_64",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "steps_in_room",
+        "seq_len": 64,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_whs_c_128": {
+      "task": "mmred_dc_whs_c_128",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_whs_c_128",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "who_spend",
+        "seq_len": 128,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_whs_c_32": {
+      "task": "mmred_dc_whs_c_32",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_whs_c_32",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "who_spend",
+        "seq_len": 32,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_whs_c_64": {
+      "task": "mmred_dc_whs_c_64",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_whs_c_64",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "who_spend",
+        "seq_len": 64,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_ws_r_128": {
+      "task": "mmred_dc_ws_r_128",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_ws_r_128",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "where_spend",
+        "seq_len": 128,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_ws_r_32": {
+      "task": "mmred_dc_ws_r_32",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_ws_r_32",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "where_spend",
+        "seq_len": 32,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    },
+    "mmred_dc_ws_r_64": {
+      "task": "mmred_dc_ws_r_64",
+      "tag": [
+        "mmred_dc",
+        "mera_all"
+      ],
+      "dataset_path": "dondosss/mmred_mera",
+      "dataset_name": "mmred_dc_ws_r_64",
+      "test_split": "test",
+      "doc_to_text": "{{instruction.format(**inputs).strip()}}",
+      "doc_to_target": "outputs",
+      "unsafe_code": false,
+      "process_results": "def process_results(doc: dict, results: list[str]) -> dict[str, float]:\n    \"\"\"Process results and compute metrics per task/length.\n    \n    Args:\n        doc: Document dictionary with meta information\n        results: List of model predictions\n        \n    Returns:\n        Dictionary of metric name to value\n    \"\"\"\n    meta = doc.get(\"meta\", {})\n    categories = meta.get(\"categories\", {})\n    task = categories.get(\"task_type\", meta.get(\"task\", \"unknown\"))\n    seq_len = categories.get(\"seq_len\", meta.get(\"seq_len\", 0))\n    atype = categories.get(\"atype\", meta.get(\"atype\", \"person\"))\n    \n    gold = normalize_answer(str(doc.get(\"outputs\", \"\")), atype)\n    pred = normalize_answer(str(results[0]) if results else \"\", atype)\n\n    em = float(gold.lower() == pred.lower())\n\n    metrics = {\n        \"exact_match\": em,\n        f\"em.{task}\": em,\n        f\"em.{task}.len{seq_len}\": em,\n        \"em.dc_aggregate\": em,  # For weighted aggregate\n    }\n\n    # Diagnostic regression metrics for numeric tasks (EM saturates to 0 on\n    # long contexts and stops discriminating near-misses from random answers).\n    # A non-numeric prediction gets the worst-case error so that abstaining\n    # cannot improve MAE; numeric_parse_rate shows how often that happened.\n    if atype == \"number\" and re.fullmatch(r\"-?\\d+\", gold or \"\"):\n        g = int(gold)\n        scale = max(int(seq_len), 1)\n        # Parse from the raw filtered response: normalize_answer maps\n        # digit-free predictions to \"0\", which would mask parse failures\n        raw_pred = str(results[0]) if results else \"\"\n        if re.search(r\"\\d\", raw_pred) and re.fullmatch(r\"-?\\d+\", pred or \"\"):\n            p = int(pred)\n            err = abs(p - g)\n            smape = 0.0 if (p == 0 and g == 0) else abs(p - g) / (abs(p) + abs(g))\n            parsed = 1.0\n        else:\n            err = scale\n            smape = 1.0\n            parsed = 0.0\n        metrics.update({\n            \"mae\": float(err),\n            \"mae_norm\": min(err / scale, 1.0),\n            \"smape\": smape,\n            \"numeric_parse_rate\": parsed,\n            f\"mae.{task}.len{seq_len}\": float(err),\n        })\n\n    return metrics\n",
+      "description": "",
+      "target_delimiter": "\nОтвет: ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": false,
+        "max_gen_toks": 1024,
+        "until": "[\"<|im_end|>\"",
+        "\"<|eot_id|>\"": "",
+        "\"</s>\"]": ""
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "scoring",
+          "filter": [
+            {
+              "function": "<class 'utils.extract_answer_filter'>"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "qtype": "where_spend",
+        "seq_len": 64,
+        "model": "google/gemma-4-31B-it-qat-w4a16-ct",
+        "base_url": "http://0.0.0.0:8088/v1/completions",
+        "max_length": 2048,
+        "num_concurrent": 8,
+        "timeout": 1000,
+        "max_retries": 5
+      }
+    }
+  },
+  "versions": {
+    "mmred": null,
+    "mmred_dc_cc_i": null,
+    "mmred_dc_cc_i_128": 1.0,
+    "mmred_dc_cc_i_32": 1.0,
+    "mmred_dc_cc_i_64": 1.0,
+    "mmred_dc_sa_c": null,
+    "mmred_dc_sa_c_128": 1.0,
+    "mmred_dc_sa_c_32": 1.0,
+    "mmred_dc_sa_c_64": 1.0,
+    "mmred_dc_sr_i": null,
+    "mmred_dc_sr_i_128": 1.0,
+    "mmred_dc_sr_i_32": 1.0,
+    "mmred_dc_sr_i_64": 1.0,
+    "mmred_dc_whs_c": null,
+    "mmred_dc_whs_c_128": 1.0,
+    "mmred_dc_whs_c_32": 1.0,
+    "mmred_dc_whs_c_64": 1.0,
+    "mmred_dc_ws_r": null,
+    "mmred_dc_ws_r_128": 1.0,
+    "mmred_dc_ws_r_32": 1.0,
+    "mmred_dc_ws_r_64": 1.0
+  },
+  "n-shot": {
+    "mmred_dc_cc_i_128": 0,
+    "mmred_dc_cc_i_32": 0,
+    "mmred_dc_cc_i_64": 0,
+    "mmred_dc_sa_c_128": 0,
+    "mmred_dc_sa_c_32": 0,
+    "mmred_dc_sa_c_64": 0,
+    "mmred_dc_sr_i_128": 0,
+    "mmred_dc_sr_i_32": 0,
+    "mmred_dc_sr_i_64": 0,
+    "mmred_dc_whs_c_128": 0,
+    "mmred_dc_whs_c_32": 0,
+    "mmred_dc_whs_c_64": 0,
+    "mmred_dc_ws_r_128": 0,
+    "mmred_dc_ws_r_32": 0,
+    "mmred_dc_ws_r_64": 0
+  },
+  "higher_is_better": {
+    "mmred": {
+      "exact_match": true
+    },
+    "mmred_dc_cc_i": {
+      "exact_match": true
+    },
+    "mmred_dc_cc_i_128": {
+      "exact_match": true
+    },
+    "mmred_dc_cc_i_32": {
+      "exact_match": true
+    },
+    "mmred_dc_cc_i_64": {
+      "exact_match": true
+    },
+    "mmred_dc_sa_c": {
+      "exact_match": true
+    },
+    "mmred_dc_sa_c_128": {
+      "exact_match": true
+    },
+    "mmred_dc_sa_c_32": {
+      "exact_match": true
+    },
+    "mmred_dc_sa_c_64": {
+      "exact_match": true
+    },
+    "mmred_dc_sr_i": {
+      "exact_match": true
+    },
+    "mmred_dc_sr_i_128": {
+      "exact_match": true
+    },
+    "mmred_dc_sr_i_32": {
+      "exact_match": true
+    },
+    "mmred_dc_sr_i_64": {
+      "exact_match": true
+    },
+    "mmred_dc_whs_c": {
+      "exact_match": true
+    },
+    "mmred_dc_whs_c_128": {
+      "exact_match": true
+    },
+    "mmred_dc_whs_c_32": {
+      "exact_match": true
+    },
+    "mmred_dc_whs_c_64": {
+      "exact_match": true
+    },
+    "mmred_dc_ws_r": {
+      "exact_match": true
+    },
+    "mmred_dc_ws_r_128": {
+      "exact_match": true
+    },
+    "mmred_dc_ws_r_32": {
+      "exact_match": true
+    },
+    "mmred_dc_ws_r_64": {
+      "exact_match": true
+    }
+  },
+  "n-samples": {
+    "mmred_dc_sa_c_32": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_sa_c_64": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_sa_c_128": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_sr_i_32": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_sr_i_64": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_sr_i_128": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_cc_i_32": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_cc_i_64": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_cc_i_128": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_ws_r_32": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_ws_r_64": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_ws_r_128": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_whs_c_32": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_whs_c_64": {
+      "original": 50,
+      "effective": 5
+    },
+    "mmred_dc_whs_c_128": {
+      "original": 50,
+      "effective": 5
+    }
+  },
+  "config": {
+    "model": "local-completions",
+    "model_args": "model=google/gemma-4-31B-it-qat-w4a16-ct,base_url=http://0.0.0.0:8088/v1/completions,max_length=2048,num_concurrent=8,timeout=1000,max_retries=5",
+    "batch_size": "1",
+    "batch_sizes": [],
+    "device": null,
+    "use_cache": null,
+    "limit": 5.0,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": {
+      "do_sample": false,
+      "until": "[\"<|im_end|>\"",
+      "\"<|eot_id|>\"": "",
+      "\"</s>\"]": "",
+      "max_gen_toks": 1024
+    },
+    "random_seed": 1234,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": "9003269",
+  "date": 1782679966.3822393,
+  "pretty_env_info": "PyTorch version: 2.12.1+cu130\nIs debug build: False\nCUDA used to build PyTorch: 13.0\nROCM used to build PyTorch: N/A\n\nOS: Ubuntu 22.04.5 LTS (x86_64)\nGCC version: (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0\nClang version: Could not collect\nCMake version: version 3.22.1\nLibc version: glibc-2.35\n\nPython version: 3.11.15 | packaged by conda-forge | (main, Jun 11 2026, 03:34:02) [GCC 14.3.0] (64-bit runtime)\nPython platform: Linux-6.8.0-1015-nvidia-x86_64-with-glibc2.35\nIs CUDA available: False\nCUDA runtime version: Could not collect\nCUDA_MODULE_LOADING set to: N/A\nGPU models and configuration: GPU 0: NVIDIA A100-SXM4-80GB\nNvidia driver version: 560.35.03\ncuDNN version: Could not collect\nIs XPU available: False\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: True\nCaching allocator config: N/A\n\nCPU:\nArchitecture:                         x86_64\nCPU op-mode(s):                       32-bit, 64-bit\nAddress sizes:                        48 bits physical, 48 bits virtual\nByte Order:                           Little Endian\nCPU(s):                               128\nOn-line CPU(s) list:                  0-15\nOff-line CPU(s) list:                 16-127\nVendor ID:                            AuthenticAMD\nModel name:                           AMD EPYC 7763 64-Core Processor\nCPU family:                           25\nModel:                                1\nThread(s) per core:                   1\nCore(s) per socket:                   64\nSocket(s):                            2\nStepping:                             1\nFrequency boost:                      enabled\nCPU max MHz:                          3529.0520\nCPU min MHz:                          1500.0000\nBogoMIPS:                             4900.10\nFlags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 invpcid cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin brs arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload vgif v_spec_ctrl umip pku ospke vaes vpclmulqdq rdpid overflow_recov succor smca debug_swap\nVirtualization:                       AMD-V\nL1d cache:                            4 MiB (128 instances)\nL1i cache:                            4 MiB (128 instances)\nL2 cache:                             64 MiB (128 instances)\nL3 cache:                             512 MiB (16 instances)\nNUMA node(s):                         2\nNUMA node0 CPU(s):                    0-63\nNUMA node1 CPU(s):                    64-127\nVulnerability Gather data sampling:   Not affected\nVulnerability Itlb multihit:          Not affected\nVulnerability L1tf:                   Not affected\nVulnerability Mds:                    Not affected\nVulnerability Meltdown:               Not affected\nVulnerability Mmio stale data:        Not affected\nVulnerability Reg file data sampling: Not affected\nVulnerability Retbleed:               Not affected\nVulnerability Spec rstack overflow:   Mitigation; Safe RET\nVulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:             Mitigation; Retpolines; IBPB conditional; IBRS_FW; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                  Not affected\nVulnerability Tsx async abort:        Not affected\n\nVersions of relevant libraries:\n[pip3] numpy==1.26.4\n[pip3] nvidia-cublas==13.1.1.3\n[pip3] nvidia-cuda-cupti==13.0.85\n[pip3] nvidia-cuda-nvrtc==13.0.88\n[pip3] nvidia-cuda-runtime==13.0.96\n[pip3] nvidia-cudnn-cu13==9.20.0.48\n[pip3] nvidia-cufft==12.0.0.61\n[pip3] nvidia-curand==10.4.0.35\n[pip3] nvidia-cusolver==12.0.4.66\n[pip3] nvidia-cusparse==12.6.3.3\n[pip3] nvidia-cusparselt-cu13==0.8.1\n[pip3] nvidia-nccl-cu13==2.29.7\n[pip3] nvidia-nvjitlink==13.0.88\n[pip3] nvidia-nvtx==13.0.85\n[pip3] torch==2.12.1\n[pip3] triton==3.7.1\n[conda] numpy                      1.26.4           pypi_0                pypi\n[conda] nvidia-cublas              13.1.1.3         pypi_0                pypi\n[conda] nvidia-cuda-cupti          13.0.85          pypi_0                pypi\n[conda] nvidia-cuda-nvrtc          13.0.88          pypi_0                pypi\n[conda] nvidia-cuda-runtime        13.0.96          pypi_0                pypi\n[conda] nvidia-cudnn-cu13          9.20.0.48        pypi_0                pypi\n[conda] nvidia-cufft               12.0.0.61        pypi_0                pypi\n[conda] nvidia-curand              10.4.0.35        pypi_0                pypi\n[conda] nvidia-cusolver            12.0.4.66        pypi_0                pypi\n[conda] nvidia-cusparse            12.6.3.3         pypi_0                pypi\n[conda] nvidia-cusparselt-cu13     0.8.1            pypi_0                pypi\n[conda] nvidia-nccl-cu13           2.29.7           pypi_0                pypi\n[conda] nvidia-nvjitlink           13.0.88          pypi_0                pypi\n[conda] nvidia-nvtx                13.0.85          pypi_0                pypi\n[conda] torch                      2.12.1           pypi_0                pypi\n[conda] triton                     3.7.1            pypi_0                pypi",
+  "transformers_version": "5.12.1",
+  "lm_eval_version": "0.4.9.2",
+  "upper_git_hash": null,
+  "tokenizer_pad_token": [
+    "<pad>",
+    "0"
+  ],
+  "tokenizer_eos_token": [
+    "<eos>",
+    "1"
+  ],
+  "tokenizer_bos_token": [
+    "<bos>",
+    "2"
+  ],
+  "eot_token_id": 1,
+  "max_length": 2047,
+  "task_hashes": {
+    "mmred_dc_sa_c_32": "2f5d7193b3a78a72f0d5f5210a8e4bf0ecb3c50162b5dd3f2cf380cf044884af",
+    "mmred_dc_sa_c_64": "f9206c4753eddaa16c70ce85c40930d7e9fa18e5e19880f2457c376bbcbc5497",
+    "mmred_dc_sa_c_128": "9480614f4c80b1f4bd458080bf81111c3d10ffd3ab61d9ab28cfaedc8d37cb0e",
+    "mmred_dc_sr_i_32": "c99ee09710909bcee8842bc37baf6c7d9c4ddeed3d43649c46a795c9fbbb87f3",
+    "mmred_dc_sr_i_64": "315449984c4071d8c59002da7e053edd332673800decdb23acb6de79d33ff6ec",
+    "mmred_dc_sr_i_128": "1c6383dcb4e297b606c22cfa693bac37f5ba5a2fc511f56fa64fd244ff27102b",
+    "mmred_dc_cc_i_32": "45b382384e881b4557c408ce1ed68ec1862a11d2ad4e35620b5e746cc5ce8770",
+    "mmred_dc_cc_i_64": "65efb5370c814f9ffba0b7cb685d785f4e8f934fbcaebe87e4271fc9854e0d9c",
+    "mmred_dc_cc_i_128": "38f26c7dccc35684f2210d25ef6a6256605756ee801cb83b0605887b27522c8d",
+    "mmred_dc_ws_r_32": "fe8aa53ed4eae9c3d412d1e25ae25ac721db564e25958933db0fc58bc3cb41c1",
+    "mmred_dc_ws_r_64": "1e73c700298668ee8f0c4e583890d1ec01a570c4c9fffdcef6e3c25c7b4107f8",
+    "mmred_dc_ws_r_128": "b42d25ee42570fa6114c11aafc8d5041c7f900ef261f0b7001a5c44c45691299",
+    "mmred_dc_whs_c_32": "1a1aeb09e5a559b6d320daa2cce4ee73279a58f1ab67752dc951d44d94b97e1f",
+    "mmred_dc_whs_c_64": "6efeac6886fabfb5011210b84ca76eb3d519bba9773db05617662f5dda601b06",
+    "mmred_dc_whs_c_128": "afbb69a6b97123890fed68c7ae07f8129af1151428f596480ce4ce5430bbf6bf"
+  },
+  "model_source": "local-completions",
+  "model_name": "google/gemma-4-31B-it-qat-w4a16-ct",
+  "model_name_sanitized": "google__gemma-4-31B-it-qat-w4a16-ct",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": true,
+  "chat_template": "{%- macro format_parameters(properties, required, filter_keys=false) -%}\n    {%- set standard_keys = ['description', 'type', 'properties', 'required', 'nullable'] -%}\n    {%- set ns = namespace(found_first=false) -%}\n    {%- for key, value in properties | dictsort -%}\n        {%- set add_comma = false -%}\n        {%- if not filter_keys or key not in standard_keys -%}\n            {%- if ns.found_first %},{% endif -%}\n            {%- set ns.found_first = true -%}\n            {{ key }}:{\n            {%- if value['description'] -%}\n                description:<|\"|>{{ value['description'] }}<|\"|>\n                {%- set add_comma = true -%}\n            {%- endif -%}\n            {%- if value['type'] | upper == 'STRING' -%}\n                {%- if value['enum'] -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    enum:{{ format_argument(value['enum']) }}\n                {%- endif -%}\n            {%- elif value['type'] | upper == 'ARRAY' -%}\n                {%- if value['items'] is mapping and value['items'] -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    items:{\n                    {%- set ns_items = namespace(found_first=false) -%}\n                    {%- for item_key, item_value in value['items'] | dictsort -%}\n                        {%- if item_value is not none -%}\n                            {%- if ns_items.found_first %},{% endif -%}\n                            {%- set ns_items.found_first = true -%}\n                            {%- if item_key == 'properties' -%}\n                                properties:{\n                                {%- if item_value is mapping -%}\n                                    {{- format_parameters(item_value, value['items']['required'] | default([])) -}}\n                                {%- endif -%}\n                                }\n                            {%- elif item_key == 'required' -%}\n                                required:[\n                                {%- for req_item in item_value -%}\n                                    <|\"|>{{- req_item -}}<|\"|>\n                                    {%- if not loop.last %},{% endif -%}\n                                {%- endfor -%}\n                                ]\n                            {%- elif item_key == 'type' -%}\n                                {%- if item_value is string -%}\n                                    type:{{ format_argument(item_value | upper) }}\n                                {%- else -%}\n                                    type:{{ format_argument(item_value | map('upper') | list) }}\n                                {%- endif -%}\n                            {%- else -%}\n                                {{ item_key }}:{{ format_argument(item_value) }}\n                            {%- endif -%}\n                        {%- endif -%}\n                    {%- endfor -%}\n                    }\n                {%- endif -%}\n            {%- endif -%}\n            {%- if value['nullable'] %}\n                {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                nullable:true\n            {%- endif -%}\n            {%- if value['type'] | upper == 'OBJECT' -%}\n                {%- if value['properties'] is defined and value['properties'] is mapping -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    properties:{\n                    {{- format_parameters(value['properties'], value['required'] | default([])) -}}\n                    }\n                {%- elif value is mapping -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    properties:{\n                    {{- format_parameters(value, value['required'] | default([]), filter_keys=true) -}}\n                    }\n                {%- endif -%}\n                {%- if value['required'] -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    required:[\n                    {%- for item in value['required'] | default([]) -%}\n                        <|\"|>{{- item -}}<|\"|>\n                        {%- if not loop.last %},{% endif -%}\n                    {%- endfor -%}\n                    ]\n                {%- endif -%}\n            {%- endif -%}\n            {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n            type:<|\"|>{{ value['type'] | upper }}<|\"|>}\n        {%- endif -%}\n    {%- endfor -%}\n{%- endmacro -%}\n{%- macro format_function_declaration(tool_data) -%}\n    declaration:{{- tool_data['function']['name'] -}}{description:<|\"|>{{- tool_data['function']['description'] -}}<|\"|>\n    {%- set params = tool_data['function']['parameters'] -%}\n    {%- if params -%}\n        ,parameters:{\n        {%- if params['properties'] -%}\n            properties:{ {{- format_parameters(params['properties'], params['required']) -}} },\n        {%- endif -%}\n        {%- if params['required'] -%}\n            required:[\n            {%- for item in params['required'] -%}\n                <|\"|>{{- item -}}<|\"|>\n                {{- ',' if not loop.last -}}\n            {%- endfor -%}\n            ],\n        {%- endif -%}\n        {%- if params['type'] -%}\n            type:<|\"|>{{- params['type'] | upper -}}<|\"|>}\n        {%- endif -%}\n    {%- endif -%}\n    {%- if 'response' in tool_data['function'] -%}\n        {%- set response_declaration = tool_data['function']['response'] -%}\n        ,response:{\n        {%- if response_declaration['description'] -%}\n            description:<|\"|>{{- response_declaration['description'] -}}<|\"|>,\n        {%- endif -%}\n        {%- if response_declaration['type'] | upper == 'OBJECT' -%}\n            type:<|\"|>{{- response_declaration['type'] | upper -}}<|\"|>}\n        {%- endif -%}\n    {%- endif -%}\n    }\n{%- endmacro -%}\n{%- macro format_argument(argument, escape_keys=True) -%}\n    {%- if argument is string -%}\n        {{- '<|\"|>' + argument + '<|\"|>' -}}\n    {%- elif argument is boolean -%}\n        {{- 'true' if argument else 'false' -}}\n    {%- elif argument is mapping -%}\n        {{- '{' -}}\n        {%- set ns = namespace(found_first=false) -%}\n        {%- for key, value in argument | dictsort -%}\n            {%- if ns.found_first %},{% endif -%}\n            {%- set ns.found_first = true -%}\n            {%- if escape_keys -%}\n                {{- '<|\"|>' + key + '<|\"|>' -}}\n            {%- else -%}\n                {{- key -}}\n            {%- endif -%}\n            :{{- format_argument(value, escape_keys=escape_keys) -}}\n        {%- endfor -%}\n        {{- '}' -}}\n    {%- elif argument is sequence -%}\n        {{- '[' -}}\n        {%- for item in argument -%}\n            {{- format_argument(item, escape_keys=escape_keys) -}}\n            {%- if not loop.last %},{% endif -%}\n        {%- endfor -%}\n        {{- ']' -}}\n    {%- else -%}\n        {{- argument -}}\n    {%- endif -%}\n{%- endmacro -%}\n{%- macro strip_thinking(text) -%}\n    {%- set ns = namespace(result='') -%}\n    {%- for part in text.split('<channel|>') -%}\n        {%- if '<|channel>' in part -%}\n            {%- set ns.result = ns.result + part.split('<|channel>')[0] -%}\n        {%- else -%}\n            {%- set ns.result = ns.result + part -%}\n        {%- endif -%}\n    {%- endfor -%}\n    {{- ns.result | trim -}}\n{%- endmacro -%}\n\n{%- macro format_tool_response_block(tool_name, response) -%}\n    {{- '<|tool_response>' -}}\n    {%- if response is mapping -%}\n        {{- 'response:' + tool_name + '{' -}}\n        {%- for key, value in response | dictsort -%}\n            {{- key -}}:{{- format_argument(value, escape_keys=False) -}}\n            {%- if not loop.last %},{% endif -%}\n        {%- endfor -%}\n        {{- '}' -}}\n    {%- else -%}\n        {{- 'response:' + tool_name + '{value:' + format_argument(response, escape_keys=False) + '}' -}}\n    {%- endif -%}\n    {{- '<tool_response|>' -}}\n{%- endmacro -%}\n\n{%- set ns = namespace(prev_message_type=None) -%}\n{%- set loop_messages = messages -%}\n{{- bos_token -}}\n{#- Handle System/Tool Definitions Block -#}\n{%- if (enable_thinking is defined and enable_thinking) or tools or messages[0]['role'] in ['system', 'developer'] -%}\n    {{- '<|turn>system\\n' -}}\n    {#- Inject Thinking token at the very top of the FIRST system turn -#}\n    {%- if enable_thinking is defined and enable_thinking -%}\n        {{- '<|think|>\\n' -}}\n        {%- set ns.prev_message_type = 'think' -%}\n    {%- endif -%}\n    {%- if messages[0]['role'] in ['system', 'developer'] -%}\n        {%- if messages[0]['content'] is string -%}\n            {{- messages[0]['content'] | trim -}}\n        {%- elif messages[0]['content'] is sequence -%}\n            {%- for item in messages[0]['content'] -%}\n                {{- item['text'] | trim + ' '-}}\n            {%- endfor -%}\n        {%- endif -%}\n        {%- set loop_messages = messages[1:] -%}\n    {%- endif -%}\n    {%- if tools -%}\n        {%- for tool in tools %}\n            {{- '<|tool>' -}}\n            {{- format_function_declaration(tool) | trim -}}\n            {{- '<tool|>' -}}\n        {%- endfor %}\n        {%- set ns.prev_message_type = 'tool' -%}\n    {%- endif -%}\n    {{- '<turn|>\\n' -}}\n{%- endif %}\n\n{#- Pre-scan: find last user message index for reasoning guard -#}\n{%- set ns_turn = namespace(last_user_idx=-1) -%}\n{%- for i in range(loop_messages | length) -%}\n    {%- if loop_messages[i]['role'] == 'user' -%}\n        {%- set ns_turn.last_user_idx = i -%}\n    {%- endif -%}\n{%- endfor -%}\n\n{#- Loop through messages -#}\n{%- for message in loop_messages -%}\n    {%- if message['role'] != 'tool' -%}\n    {%- set ns.prev_message_type = None -%}\n    {%- set role = 'model' if message['role'] == 'assistant' else message['role'] -%}\n    {#- Detect continuation: suppress duplicate <|turn>model when previous non-tool message was also assistant -#}\n    {%- set prev_nt = namespace(role=None, found=false) -%}\n    {%- if loop.index0 > 0 -%}\n        {%- for j in range(loop.index0 - 1, -1, -1) -%}\n            {%- if not prev_nt.found -%}\n                {%- if loop_messages[j]['role'] != 'tool' -%}\n                    {%- set prev_nt.role = loop_messages[j]['role'] -%}\n                    {%- set prev_nt.found = true -%}\n                {%- endif -%}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- endif -%}\n    {%- set continue_same_model_turn = (role == 'model' and prev_nt.role == 'assistant') -%}\n    {%- if not continue_same_model_turn -%}\n        {{- '<|turn>' + role + '\\n' }}\n    {%- endif -%}\n\n    {#- Render reasoning/reasoning_content as thinking channel -#}\n    {%- set thinking_text = message.get('reasoning') or message.get('reasoning_content') -%}\n    {%- if thinking_text and loop.index0 > ns_turn.last_user_idx and message.get('tool_calls') -%}\n        {{- '<|channel>thought\\n' + thinking_text + '\\n<channel|>' -}}\n    {%- endif -%}\n\n            {%- if message['tool_calls'] -%}\n                {%- for tool_call in message['tool_calls'] -%}\n                    {%- set function = tool_call['function'] -%}\n                    {{- '<|tool_call>call:' + function['name'] + '{' -}}\n                    {%- if function['arguments'] is mapping -%}\n                        {%- set ns_args = namespace(found_first=false) -%}\n                        {%- for key, value in function['arguments'] | dictsort -%}\n                            {%- if ns_args.found_first %},{% endif -%}\n                            {%- set ns_args.found_first = true -%}\n                            {{- key -}}:{{- format_argument(value, escape_keys=False) -}}\n                        {%- endfor -%}\n                    {%- elif function['arguments'] is string -%}\n                        {{- function['arguments'] -}}\n                    {%- endif -%}\n                    {{- '}<tool_call|>' -}}\n                {%- endfor -%}\n                {%- set ns.prev_message_type = 'tool_call' -%}\n            {%- endif -%}\n\n            {%- set ns_tr_out = namespace(flag=false) -%}\n            {%- if message.get('tool_responses') -%}\n                {#- Legacy: tool_responses embedded on the assistant message (Google/Gemma native) -#}\n                {%- for tool_response in message['tool_responses'] -%}\n                    {{- format_tool_response_block(tool_response['name'] | default('unknown'), tool_response['response']) -}}\n                    {%- set ns_tr_out.flag = true -%}\n                    {%- set ns.prev_message_type = 'tool_response' -%}\n                {%- endfor -%}\n            {%- elif message.get('tool_calls') -%}\n                {#- OpenAI Chat Completions: forward-scan consecutive role:tool messages -#}\n                {%- set ns_tool_scan = namespace(stopped=false) -%}\n                {%- for k in range(loop.index0 + 1, loop_messages | length) -%}\n                    {%- if ns_tool_scan.stopped -%}\n                    {%- elif loop_messages[k]['role'] != 'tool' -%}\n                        {%- set ns_tool_scan.stopped = true -%}\n                    {%- else -%}\n                        {%- set follow = loop_messages[k] -%}\n                        {#- Resolve tool_call_id to function name -#}\n                        {%- set ns_tname = namespace(name=follow.get('name') | default('unknown')) -%}\n                        {%- for tc in message['tool_calls'] -%}\n                            {%- if tc.get('id') == follow.get('tool_call_id') -%}\n                                {%- set ns_tname.name = tc['function']['name'] -%}\n                            {%- endif -%}\n                        {%- endfor -%}\n                        {#- Handle content as string or content-parts array -#}\n                        {%- set tool_body = follow.get('content') -%}\n                        {%- if tool_body is string -%}\n                            {{- format_tool_response_block(ns_tname.name, tool_body) -}}\n                        {%- elif tool_body is sequence and tool_body is not string -%}\n                            {%- set ns_txt = namespace(s='') -%}\n                            {%- for part in tool_body -%}\n                                {%- if part.get('type') == 'text' -%}\n                                    {%- set ns_txt.s = ns_txt.s + (part.get('text') | default('')) -%}\n                                {%- endif -%}\n                            {%- endfor -%}\n                            {{- format_tool_response_block(ns_tname.name, ns_txt.s) -}}\n                        {%- else -%}\n                            {{- format_tool_response_block(ns_tname.name, tool_body) -}}\n                        {%- endif -%}\n                        {%- set ns_tr_out.flag = true -%}\n                        {%- set ns.prev_message_type = 'tool_response' -%}\n                    {%- endif -%}\n                {%- endfor -%}\n            {%- endif -%}\n\n            {%- set captured_content -%}\n            {%- if message['content'] is string -%}\n                {%- if role == 'model' -%}\n                    {{- strip_thinking(message['content']) -}}\n                {%- else -%}\n                    {{- message['content'] | trim -}}\n                {%- endif -%}\n            {%- elif message['content'] is sequence -%}\n                {%- for item in message['content'] -%}\n                    {%- if item['type'] == 'text' -%}\n                        {%- if role == 'model' -%}\n                            {{- strip_thinking(item['text']) -}}\n                        {%- else -%}\n                            {{- item['text'] | trim -}}\n                        {%- endif -%}\n                    {%- elif item['type'] == 'image' -%}\n                        {{- '<|image|>' -}}\n                        {%- set ns.prev_message_type = 'image' -%}\n                    {%- elif item['type'] == 'audio' -%}\n                        {{- '<|audio|>' -}}\n                        {%- set ns.prev_message_type = 'audio' -%}\n                    {%- elif item['type'] == 'video' -%}\n                        {{- '<|video|>' -}}\n                        {%- set ns.prev_message_type = 'video' -%}\n                    {%- endif -%}\n                {%- endfor -%}\n            {%- endif -%}\n            {%- endset -%}\n\n            {{- captured_content -}}\n            {%- set has_content = captured_content | trim | length > 0 -%}\n\n        {%- if ns.prev_message_type == 'tool_call' and not ns_tr_out.flag -%}\n            {{- '<|tool_response>' -}}\n        {%- elif not (ns_tr_out.flag and not has_content) -%}\n            {{- '<turn|>\\n' -}}\n        {%- endif -%}\n    {%- endif -%}\n{%- endfor -%}\n\n{%- if add_generation_prompt -%}\n    {%- if ns.prev_message_type != 'tool_response' and ns.prev_message_type != 'tool_call' -%}\n        {{- '<|turn>model\\n' -}}\n        {%- if not enable_thinking | default(false) -%}\n            {{- '<|channel>thought\\n<channel|>' -}}\n        {%- endif -%}\n    {%- endif -%}\n{%- endif -%}",
+  "chat_template_sha": "94899c0f917d93f6fe81c95744d1e8ddab2d21d39228d2e4aec1fb2a25bff413",
+  "start_time": 23374255.32015992,
+  "end_time": 23374429.098178104,
+  "total_evaluation_time_seconds": "173.7780181840062"
+}

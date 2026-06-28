@@ -1,7 +1,7 @@
 tag:
   - mera
   - mera_all
-dataset_path: a141592/Luzitania
+dataset_path: MERA-evaluation/Luzitania
 dataset_name: null
 task: luzitania
 training_split: shots
@@ -22,7 +22,7 @@ filter_list:
   - name: "strict-match"
     filter:
       - function: regex
-        regex_pattern: "(?:(?:ответ|Ответ|ОТВЕТ)(?:ом)?[\s:—-]+(?:является|равен|будет|это|составляет)?[\s]*(?:число[м]?)?[\s:—-]*|^)(-?\d+(?:\.\d+)?)"
+        regex_pattern: "(?:(?:ответ|Ответ|ОТВЕТ)(?:ом)?[\\s:—-]+(?:является|равен|будет|это|составляет)?[\\s]*(?:число[м]?)?[\\s:—-]*|^)(-?\\d+(?:\\.\\d+)?)"
         group_select: -1
         fallback: "[INVALID]"
       - function: take_first

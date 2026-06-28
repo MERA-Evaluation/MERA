@@ -4,6 +4,8 @@ from typing import Any, Dict, List
 
 eval_logger = logging.getLogger(__name__)
 
+_MATH_VERIFY_ERROR: str | None = None
+
 try:
     from math_verify import (
         ExprExtractionConfig,
@@ -12,17 +14,29 @@ try:
         verify,
     )
     from latex2sympy2_extended import NormalizationConfig
-except ImportError:
+except ImportError as exc:
     parse = None
     verify = None
-    eval_logger.warning(
-        "math_verify is not installed. It is required to compute metrics "
-        "for the T-math task.\n\n"
-        "If you are running with --predict_only or are not evaluating this "
-        "task, you can safely ignore this warning.\n\n"
-        "To install math_verify, run:\n"
-        "  pip install math_verify"
+    _MATH_VERIFY_ERROR = (
+        "math_verify is required to score T-math.\n"
+        "Install with:\n"
+        "  pip install math_verify latex2sympy2_extended 'antlr4-python3-runtime==4.11'"
     )
+    eval_logger.warning("%s\nOriginal error: %s", _MATH_VERIFY_ERROR, exc)
+
+
+def _require_math_verify() -> None:
+    if parse is None or verify is None:
+        raise RuntimeError(_MATH_VERIFY_ERROR or "math_verify is not available")
+
+
+def _extract_prediction(results: List[Any]) -> str:
+    if not results:
+        return ""
+    value = results[0]
+    if isinstance(value, (list, tuple)):
+        value = value[0] if value else ""
+    return value if isinstance(value, str) else str(value)
 
 
 # ---------------------------------------------------------------------------
@@ -114,15 +128,14 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     of mathematical equivalence. With greedy decoding, the averaged
     exact_match is equivalent to pass@1 from the dataset card.
     """
-    if parse is None:
-        return {}
+    _require_math_verify()
 
     gold = doc["outputs"]
     if not gold:
         # closed test set without answers (--inference): honest zero
         return {"exact_match": 0.0}
 
-    prediction = results[0] if results and results[0] else ""
+    prediction = _extract_prediction(results)
     if not prediction.strip():
         return {"exact_match": 0.0}
 
