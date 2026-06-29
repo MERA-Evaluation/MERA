@@ -2,7 +2,7 @@
 # Inheritable configuration for all MMReD Dense Context tasks
 
 output_type: generate_until
-dataset_path: dondosss/mmred_mera
+dataset_path: MERA-evaluation/MMReD
 test_split: test
 
 # Prompt formatting
