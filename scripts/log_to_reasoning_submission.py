@@ -41,11 +41,8 @@ REASONING_TASKS = {
 }
 
 LOGS_PUBLIC_GLOBS = [
-    "results_mmred*.json*",
-    "results_tmath*.json*",
-    "results_t_math*.json*",
-    "results_luzitania*.json*",
-    "results_ruaime*.json*",
+    "results_*.json",
+    "results_*.jsonl",
     "samples_mmred*.json*",
     "samples_tmath*.json*",
     "samples_t_math*.json*",
