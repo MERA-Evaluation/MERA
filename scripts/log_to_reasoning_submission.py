@@ -144,8 +144,23 @@ def pack_logs_public(outputs_dir: str, dst_dir: str) -> str:
     return zip_path
 
 
-def create_submission(outputs_dir: str, dst_dir: str, tasks: list[str]) -> str:
-    os.makedirs(dst_dir, exist_ok=True)
+def create_submission(
+    outputs_dir: str,
+    tasks: list[str],
+    dst_dir: str | None = None,
+) -> str:
+    outputs_dir = os.path.abspath(outputs_dir)
+    model_folder_name = os.path.basename(outputs_dir)
+    parent_dir = os.path.dirname(outputs_dir)
+
+    if dst_dir:
+        staging_dir = dst_dir
+        zip_base = os.path.splitext(dst_dir)[0] if dst_dir.endswith(".zip") else dst_dir
+    else:
+        staging_dir = os.path.join(parent_dir, f"{model_folder_name}_submission")
+        zip_base = os.path.join(parent_dir, model_folder_name)
+
+    os.makedirs(staging_dir, exist_ok=True)
     missing = []
     for task in tasks:
         spec = REASONING_TASKS[task]
@@ -155,7 +170,7 @@ def create_submission(outputs_dir: str, dst_dir: str, tasks: list[str]) -> str:
             print(f"[skip] no samples for {task}")
             continue
         submission = samples_to_submission(sample_paths)
-        out_path = os.path.join(dst_dir, f"{spec['submission_name']}.json")
+        out_path = os.path.join(staging_dir, f"{spec['submission_name']}.json")
         save_json(submission, out_path)
         print(f"[ok] {task}: {len(submission['data']['test'])} predictions -> {out_path}")
 
@@ -165,10 +180,10 @@ def create_submission(outputs_dir: str, dst_dir: str, tasks: list[str]) -> str:
         )
 
     print("Packing logs for public submission...")
-    logs_zip = pack_logs_public(outputs_dir, dst_dir)
+    logs_zip = pack_logs_public(outputs_dir, staging_dir)
     print("logs_public stored at", logs_zip)
 
-    zip_path = shutil.make_archive(dst_dir, "zip", dst_dir)
+    zip_path = shutil.make_archive(zip_base, "zip", staging_dir)
     print("Submission stored at", zip_path)
     return zip_path
 
@@ -178,8 +193,8 @@ def get_args() -> argparse.Namespace:
     parser.add_argument("--outputs_dir", required=True, help="lm-eval output directory")
     parser.add_argument(
         "--dst_dir",
-        default="submission/",
-        help="Directory for submission JSON files and zip archive",
+        default=None,
+        help="Staging directory for submission files (default: {model_folder}_submission next to logs)",
     )
     parser.add_argument(
         "--model_args",
@@ -205,7 +220,7 @@ def main() -> None:
     if not os.path.isdir(outputs_dir):
         raise FileNotFoundError(f"Outputs directory not found: {outputs_dir}")
 
-    create_submission(outputs_dir, args.dst_dir, tasks)
+    create_submission(outputs_dir, tasks, args.dst_dir)
 
 
 if __name__ == "__main__":
