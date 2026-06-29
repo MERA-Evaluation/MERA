@@ -1,0 +1,11 @@
+# MMReD DC_CC_I (Length 32)
+include: mmred_base.yaml
+tag:
+  - mmred_dc
+  - mera_all
+task: mmred_dc_cc_i_32
+dataset_name: mmred_dc_cc_i_32
+metadata:
+  version: 1.0
+  qtype: crowd_count
+  seq_len: 32
