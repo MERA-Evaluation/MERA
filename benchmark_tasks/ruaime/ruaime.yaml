@@ -1,0 +1,55 @@
+tag:
+  - mera
+  - mera_all
+dataset_path: MERA-evaluation/ruAIME
+dataset_name: null
+task: ruaime
+training_split: shots
+test_split: test
+fewshot_split: shots
+output_type: generate_until
+doc_to_text: "{{instruction.format(**inputs)}}"
+doc_to_target: "{{outputs}}"
+fewshot_config:
+  sampler: !function ../custom_samplers.FewshotSampler
+  doc_to_text_without_instruction: "{{inputs.question}}"
+  query: "{{instruction.format(**inputs)}}"
+filter_list:
+  - name: "strict-match"
+    filter:
+      - function: regex
+        regex_pattern: "(?:ответ|Ответ|ОТВЕТ)(?:ом)?[\\s:—-]+(?:является|равен|будет|это|составляет)?[\\s]*(?:число[мй]?)?[\\s:—-]*(-?\\d+(?:\\.\\d+)?)"
+        group_select: -1
+        fallback: "[INVALID]"
+      - function: take_first
+  - name: "flexible-extract"
+    filter:
+      - function: regex
+        regex_pattern: "(-?\\d+(?:\\.\\d+)?)"
+        group_select: -1
+        fallback: "[NO_NUMBER]"
+      - function: take_first
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+    regexes_to_ignore:
+      - "\\$"
+      - "\\boxed"
+      - "\\["
+      - "\\]"
+generation_kwargs:
+  do_sample: false
+  temperature: 0.0
+num_fewshot: 2
+metadata:
+  version: 1.0
+  description: "Russian Translated AIME Dataset - Mathematical Problem Solving"
+  license: "cc-by-4.0"
+  keywords:
+    - mathematics
+    - reasoning
+    - generative
+    - problem_solving
