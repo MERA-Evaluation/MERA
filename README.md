@@ -44,10 +44,10 @@ etc.
 
 **🚀 How to Contribute?**
 
-0. Develop your dataset according to the text LLM evaluation criteria ([see requirements](docs/dataset_review.md)).
-1. Format your dataset to our specifications ([format instruction](docs/dataset_formatting.md)) and upload it to the 🤗 Hugging Face Hub ([instruction](docs/dataset_hf.md](docs/dataset_formatting.md))). 
-2.  Integrate your dataset into our codebase using the instructions above. Check that it works by running the baselines! ([instruction](docs/task_codebase.md)).
-3. Submit a **Pull Request** with your dataset to this repository.
+0. Submit a **Pull Request** with the dataset description to this repository ([instruction](docs/how_to_add_dataset.md)).
+1. Develop your dataset according to the text LLM evaluation criteria ([see requirements](docs/dataset_review.md)).
+2. Format your dataset to our specifications ([format instruction](docs/dataset_formatting.md)) and upload it to the 🤗 Hugging Face Hub ([instruction](docs/dataset_hf.md](docs/dataset_formatting.md))). 
+3.  Integrate your dataset into our codebase using the instructions above. Check that it works by running the baselines! ([instruction](docs/task_codebase.md)).
 
 We will review your submission and, upon approval, add it to New MERA TEXT.
 

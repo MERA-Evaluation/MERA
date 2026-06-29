@@ -4,7 +4,7 @@ import logging
 import warnings
 from typing import Optional
 
-eval_logger = logging.getLogger("lm-eval")
+eval_logger = logging.getLogger(__name__)
 
 
 class FewshotSampler(ContextSampler):

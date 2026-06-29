@@ -44,10 +44,10 @@ def _update_request(storage, request):
 
     # when string passed (everywhere except for API calls)
     if isinstance(request.arguments[0], str):
-        new_req = replace_targets(request.arguments[0], max_num, storage)
+        new_req = replace_targets(request.arguments[0], max_num, storage).replace("{context}", "")
         request.arguments = (new_req, request.arguments[1])
     else:
-        new_req = replace_targets(request.arguments[0].prompt, max_num, storage)
+        new_req = replace_targets(request.arguments[0].prompt, max_num, storage).replace("{context}", "")
         new_req = JsonChatStr(new_req)
         request.arguments = (new_req, request.arguments[1])
 

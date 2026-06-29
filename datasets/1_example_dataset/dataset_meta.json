@@ -1,0 +1,142 @@
+{
+    "dataset_name": "XXX",
+    "license": "MERA_private",
+    "dataset_size": 1,
+    "description": "Example dataset description (up to 200 characters).",
+    "modalities": [
+        "text",
+        "image"
+    ],
+    "skills": [
+        "Counterfactual robustness",
+        "Static counting"
+    ],
+    "domains": [],
+    "synt_source_models": [
+        "model-name"
+    ],
+    "data_example": {
+        "instruction": "Посмотри на картинку <image> и ответь на вопрос, выбрав вариант ответа из предложенных. Напиши только букву правильного ответа.\nВопрос: {question}.\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d)\nОтвет:",
+        "inputs": {
+            "question": "Сколько автомобилей изображено на фото?",
+            "image": "image0001.jpg",
+            "option_a": "три",
+            "option_b": "два",
+            "option_c": "ни одного",
+            "option_d": "пять"
+        },
+        "outputs": "C",
+        "meta": {
+            "id": 1,
+            "categories": {
+                "task_type": "counterfactual"
+            },
+            "image": {
+                "synt_source": [
+                    "model-name"
+                ],
+                "source": [
+                    "photo"
+                ],
+                "type": [
+                    "visual"
+                ],
+                "content": [
+                    "view",
+                    "objects"
+                ],
+                "context": [
+                    "no_context"
+                ]
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "question": {
+                "ru": "Текст вопроса.",
+                "en": "Text of the question."
+            },
+            "image": {
+                "ru": "Путь к файлу с изображением, к которому относится вопрос.",
+                "en": "Path to the image file related to the question."
+            },
+            "option_a": {
+                "ru": "Вариант ответа A.",
+                "en": "Answer option A."
+            },
+            "option_b": {
+                "ru": "Вариант ответа B.",
+                "en": "Answer option B."
+            },
+            "option_c": {
+                "ru": "Вариант ответа C.",
+                "en": "Answer option C."
+            },
+            "option_d": {
+                "ru": "Вариант ответа D.",
+                "en": "Answer option D."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "categories": {
+                "task_type": {
+                    "ru": "Тип задач в соответствии с классификацией задач в датасете XXX",
+                    "en": "Task type according to the task classification in the XXX dataset"
+                }
+            },
+            "image": {
+                "synt_source": {
+                    "ru": "Источники, с помощью которых сгенерированы или воссозданы данные для формирования вопроса, в том числе названия генеративных моделей.",
+                    "en": "Sources used to generate or recreate data for the question, including names of generative models."
+                },
+                "source": {
+                    "ru": "Информация о происхождении изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Information about the origin of the image — according to the image classification for MERA datasets."
+                },
+                "type": {
+                    "ru": "Тип изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image type — according to the image classification for MERA datasets."
+                },
+                "content": {
+                    "ru": "Содержание изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image content — according to the image classification for MERA datasets."
+                },
+                "context": {
+                    "ru": "Сопроводительный контекст, присутствующий на изображении, — согласно классификации изображений для датасетов MERA.",
+                    "en": "Accompanying context present in the image — according to the image classification for MERA datasets."
+                }
+            }
+        }
+    },
+    "prompts": [
+        "prompt_0",
+        "prompt_1",
+        "prompt_2",
+        "prompt_3",
+        "prompt_4",
+        "prompt_5",
+        "prompt_6",
+        "prompt_7",
+        "prompt_8",
+        "prompt_9"
+    ],
+    "metrics": {
+        "Accuracy": {
+            "ru": "Метрика Accuracy вычисляет долю правильных предсказаний модели среди всех обработанных вопросов.",
+            "en": "Accuracy is the proportion of correct model predictions among the total number of cases processed."
+        }
+    }
+}
