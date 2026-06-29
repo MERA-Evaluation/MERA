@@ -16,8 +16,10 @@ task:
   - mmred_dc_whs_c_32
   - mmred_dc_whs_c_64
   - mmred_dc_whs_c_128
+# lm-eval aggregates ONLY a metric the leaf tasks actually emit, always via a
+# (size-)weighted mean; a custom `aggregation: !function` is ignored at group level.
+# Leaf tasks emit `exact_match` (see mmred_base.yaml), so aggregate that.
 aggregate_metric_list:
-  - metric: em_dc_weighted
-    aggregation: !function utils.weighted_length_aggregate
-    weight: 1.0
-    higher_is_better: true
+  - metric: exact_match
+    aggregation: mean
+    weight_by_size: true
