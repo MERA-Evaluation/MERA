@@ -30,7 +30,7 @@ class RemoveWhitespaceAndNones(Filter):
                 if not resp:
                     resp = ""
                 else:
-                    resp = resp.lstrip()
+                    resp = resp.lstrip().split('Ответ: ')[-1].strip()
                 filtered_resp.append(resp)
             return filtered_resp
 
