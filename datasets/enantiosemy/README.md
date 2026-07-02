@@ -30,10 +30,10 @@ Each example is assigned one of four types in the `type` field:
 
 | `type` | Task type | Count | Share |
 |--------|-----------|------:|------:|
-| 1 | Select the **correct** continuation of the final utterance | 290 | 57.3% |
-| 2 | Select the **incorrect** (unsuitable) continuation | 188 | 37.2% |
-| 3 | Identify the meaning **in which the word is used** | 18 | 3.6% |
-| 4 | Identify the meaning **in which the word is not used** | 10 | 2.0% |
+| `choose_correct` | Select the **correct** continuation of the final utterance | 290 | 57.3% |
+| `choose_incorrect` | Select the **incorrect** / unsuitable continuation | 188 | 37.2% |
+| `meaning_used` | Identify the meaning **in which the word is used** | 18 | 3.6% |
+| `meaning_unused` | Identify the meaning **in which the word is not used** | 10 | 2.0% |
 
 The answer format is multiple choice among 6 options labeled А, Б, В, Г, Д, Е. One or several options may be correct. When multiple options are correct, the answer letters are listed in alphabetical order and separated by a semicolon followed by a space.
 
@@ -46,19 +46,19 @@ Each example in the dataset contains the following fields:
 
 - `inputs` — input data that forms the task:
     - `text` [str] — a dialogue or utterance containing an enantiosemic element
-    - `enantiosemic_word` [str] — the enantiosemic word in the infinitive
-    - `option_a` [str] — the first continuation option for the final utterance
-    - `option_b` [str] — the second continuation option
-    - `option_c` [str] — the third continuation option
-    - `option_d` [str] — the fourth continuation option
-    - `option_e` [str] — the fifth continuation option
-    - `option_f` [str] — the sixth continuation option
+    - `enantiosemic_word` [str] — the enantiosemic word in its initial form
+    - `option_a` [str] — the first answer option
+    - `option_b` [str] — the second answer option
+    - `option_c` [str] — the third answer option
+    - `option_d` [str] — the fourth answer option
+    - `option_e` [str] — the fifth answer option
+    - `option_f` [str] — the sixth answer option
 
-- `outputs` [str] — a string containing the letter or letters of the correct answer, written in alphabetical order separated by a semicolon and space, for example: А; Б; В; Г; Д; Е
+- `outputs` [str] — a string containing the letter or letters of the correct answer, written in alphabetical order and separated by a semicolon and a space, for example: А; Б; В; Г; Д; Е
 
 - `meta` — metadata:
     - `id` [int] — example number
-    - `type` [int] — task type (1–4, see the table above)
+    - `type` [str] — task type, see the task type table above
 
 ### Data Example
 
@@ -78,7 +78,7 @@ Each example in the dataset contains the following fields:
       "outputs": "А; Е",
       "meta": {
         "id": 510,
-        "type": 1
+        "type": "choose_correct"
       }
     }
 ```
