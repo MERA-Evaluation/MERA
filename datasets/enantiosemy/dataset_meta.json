@@ -28,7 +28,7 @@
       "outputs": "А; Е",
       "meta": {
         "id": 510,
-        "type": 1
+        "type": "choose_correct"
         }
     },
     "data_field_descriptions": {
@@ -80,9 +80,9 @@
                 "ru": "номер примера (целое число)"
             },
             "type": {
-                "en": "an integer ID of the task type: 1 — correct continuation, 2 — incorrect continuation, 3 — meaning used in context, 4 — meaning not used in context",
-                "ru": "номер типа задания: 1 — верное продолжение, 2 — неверное продолжение, 3 — значение употреблено, 4 — значение не употреблено"
-            }
+                "en": "task type: choose_correct — select the correct continuation, choose_incorrect — select the incorrect continuation, meaning_used — identify the meaning used in context, meaning_unused — identify the meaning not used in context",
+                "ru": "тип задания: choose_correct — выбрать верное продолжение, choose_incorrect — выбрать неверное продолжение, meaning_used — определить значение, в котором слово употреблено, meaning_unused — определить значение, в котором слово не употреблено"
+}
         }
     },
     "prompts": [
