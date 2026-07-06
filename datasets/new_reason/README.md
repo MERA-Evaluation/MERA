@@ -1,0 +1,109 @@
+# NewReason
+
+## Task Description
+
+NewReason is a Russian-language dataset for evaluating a model's ability to solve short reasoning tasks with multiple-choice answers. Each example contains a textual task with a blank marked as `_ _ _` and a set of answer options labeled with Russian letters. The model must select one or more suitable options and return the answer letters in the required format.
+
+The dataset tests whether a model can handle logical traps, condition substitutions, changes in quantities and qualitative properties, and disrupted reasoning chains.
+
+Evaluated skills: Reasoning, Critical Thinking, Deductive Reasoning, Inductive Reasoning, Abductive Reasoning, Analogical Reasoning, Cause-and-Effect Reasoning, Decompositional Reasoning, Case-based Reasoning, Value Reasoning.
+
+Contributors: Denis Shevelev, Alexander Kharitonov, Alexander Astafurov
+
+## Motivation
+
+The task is designed for evaluating Russian-language generative models in cases where solving requires checking the task conditions rather than only recognizing a familiar pattern.
+
+NewReason helps analyze robustness to shallow templates: tasks that look similar on the surface may require different reasoning strategies, so the score reflects how well a model preserves the structure of the condition and follows the required answer format.
+
+### Limitations
+
+The dataset is not intended for evaluating models that do not support Russian or cannot generate answers in the required textual format. The task also does not measure broad mathematical, encyclopedic, or domain-specific knowledge: the examples focus on local reasoning over the provided condition and answer options.
+
+### Validity
+
+Task validity is supported by the controlled format: each example contains an explicit condition, answer options, and a task type in the metadata. Different example types test whether the model preserves the original conditions, detects substitutions, and selects an answer after analyzing the specific formulation rather than relying on a familiar template.
+
+## Dataset Description
+
+The dataset contains **372** examples. Each example contains a shared `instruction` template, a task-specific instruction in `inputs.task_instruction`, a question, answer options, and metadata describing the task type. The number of answer options varies from 3 to 9.
+
+### Distribution by Task Type
+
+Each example is assigned one of four types in the `task_type` field:
+
+| `task_type` | Task type | Count | Share |
+|-------------|-----------|------:|------:|
+| `А` | Type А "Task or trick" | 184 | 49.5% |
+| `Б` | Type Б "Sequence of steps" | 110 | 29.6% |
+| `В` | Type В "Smart answer" | 63 | 16.9% |
+| `Г` | Type Г "Matching" | 15 | 4.0% |
+
+### Data Fields
+
+Each example contains the following fields:
+
+- `instruction` [str] — a string with the task formulation for the language model.
+- `inputs` — input data that forms the task:
+    - `task_instruction` [str] — task formulation for the specific example type;
+    - `question` [str] — task text with the `_ _ _` blank;
+    - `option_a` [str] — answer option А;
+    - `option_b` [str] — answer option Б;
+    - `option_c` [str] — answer option В;
+    - `option_d` [str] — answer option Г;
+    - `option_e` [str] — answer option Д;
+    - `option_f` [str] — answer option Е;
+    - `option_g` [str] — answer option Ё;
+    - `option_h` [str] — answer option Ж;
+    - `option_i` [str] — answer option З.
+- `outputs` [str] — a string containing the letter or letters of the correct answer, written in alphabetical order and separated by a semicolon and a space.
+- `meta` — metadata:
+    - `id` [int] — example number;
+    - `task_type` [str] — task type: А, Б, В, or Г;
+    - `task_description` [str] — textual task type description.
+
+### Data Instance
+
+```json
+{
+    "instruction": "{task_instruction}\n\nВопрос: {question}\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}\nЖ. {option_h}\nЗ. {option_i}\n\nОтвет:",
+    "inputs": {
+        "task_instruction": "Прочитайте текст с пропуском, обозначенным как ’_ _ _’. Прочитайте обозначенные русскими буквами (А, Б, В и так далее) варианты заполнения пропусков - и выберите все подходящие (и логично отвечающие на вопрос в скобках, если он есть). В качестве ответа выведите в алфавитном порядке (через точку с запятой с пробелом, если их несколько) все русские буквы, обозначающие подходящие варианты заполнения пропуска (и только эти буквы). Задание будет касаться необходимости оценить ситуацию и дать решение предложенной задачи на основании той или иной разновидности ризонинга - нужно будет оценить ситуацию в рамках привычной логики и, возможно, совершить элементарный подсчёт в пределах элементарной арифметики либо не попасться в ловушку необходимости делать расчёты и прикидки - и дать ответ, используя элементарную сообразительность",
+        "question": "Матери 55 лет. У неё три дочери. Первой 15 лет, второй — 7, а третьей — 21 год. Через сколько лет возраст матери будет равен сумме лет её дочерей? Верный ответ: ’_ _ _’.",
+        "option_a": "Никогда",
+        "option_b": "3,5 года",
+        "option_c": "3 года",
+        "option_d": "8 лет",
+        "option_e": "4 года",
+        "option_f": "5 лет",
+        "option_g": "6 лет",
+        "option_h": "12 лет",
+        "option_i": "15 лет"
+    },
+    "outputs": "Ё",
+    "meta": {
+        "id": -101,
+        "task_type": "А",
+        "task_description": "Тип А «Задачка или уловка»"
+    }
+}
+```
+
+### Prompts
+
+TODO
+
+## Dataset Creation
+
+The dataset is built as a collection of short Russian-language reasoning tasks with controlled transformations. It uses original tasks and variants where surface features or the logical structure are changed: conditions are inverted, numbers are modified, units and parameters are replaced, objects are substituted, the required solution type changes, or the order of reasoning steps is disrupted.
+
+Examples are annotated with four task types: А — "Task or trick", Б — "Sequence of steps", В — "Smart answer", and Г — "Matching". These fields allow examples to be filtered by task type and results to be analyzed by group.
+
+## Evaluation
+
+### Metrics
+
+The following metrics are used for aggregated evaluation:
+
+- **Exact match (EM)**: the proportion of model answers that exactly match the reference letter after extracting the string following the `Answer` marker.
+- **LLM judge score**: a metric where an LLM judge compares the model answer with the reference answer for each example. If the answer is judged correct, the example receives 1; if it is judged incorrect, it receives 0. The final metric value is the proportion of examples that received 1.

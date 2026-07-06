@@ -1,0 +1,128 @@
+{
+    "dataset_name": "NewReason",
+    "license": "MERA_private",
+    "dataset_size": 372,
+    "description": "Russian multiple-choice reasoning tasks with controlled logical and surface transformations.",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "Reasoning",
+        "Critical Thinking",
+        "Deductive Reasoning",
+        "Inductive Reasoning",
+        "Abductive Reasoning",
+        "Analogical Reasoning",
+        "Cause-and-Effect Reasoning",
+        "Decompositional Reasoning",
+        "Case-based Reasoning",
+        "Value Reasoning"
+    ],
+    "domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "{task_instruction}\n\nВопрос: {question}\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}\nЖ. {option_h}\nЗ. {option_i}\n\nОтвет:",
+        "inputs": {
+            "task_instruction": "Прочитайте текст с пропуском, обозначенным как ’_ _ _’. Прочитайте обозначенные русскими буквами (А, Б, В и так далее) варианты заполнения пропусков - и выберите все подходящие (и логично отвечающие на вопрос в скобках, если он есть). В качестве ответа выведите в алфавитном порядке (через точку с запятой с пробелом, если их несколько) все русские буквы, обозначающие подходящие варианты заполнения пропуска (и только эти буквы). Задание будет касаться необходимости оценить ситуацию и дать решение предложенной задачи на основании той или иной разновидности ризонинга - нужно будет оценить ситуацию в рамках привычной логики и, возможно, совершить элементарный подсчёт в пределах элементарной арифметики либо не попасться в ловушку необходимости делать расчёты и прикидки - и дать ответ, используя элементарную сообразительность",
+            "question": "Матери 55 лет. У неё три дочери. Первой 15 лет, второй — 7, а третьей — 21 год. Через сколько лет возраст матери будет равен сумме лет её дочерей? Верный ответ: ’_ _ _’.",
+            "option_a": "Никогда",
+            "option_b": "3,5 года",
+            "option_c": "3 года",
+            "option_d": "8 лет",
+            "option_e": "4 года",
+            "option_f": "5 лет",
+            "option_g": "6 лет",
+            "option_h": "12 лет",
+            "option_i": "15 лет"
+        },
+        "outputs": "Ё",
+        "meta": {
+            "id": -101,
+            "task_type": "А",
+            "task_description": "Тип А «Задачка или уловка»"
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "строка с формулировкой задания для языковой модели",
+            "en": "a string with the task formulation for the language model"
+        },
+        "inputs": {
+            "task_instruction": {
+                "ru": "формулировка задачи для конкретного типа примера",
+                "en": "task formulation for the specific example type"
+            },
+            "question": {
+                "ru": "текст задачи с пропуском '_ _ _'",
+                "en": "task text with the '_ _ _' blank"
+            },
+            "option_a": {
+                "ru": "вариант ответа А",
+                "en": "answer option А"
+            },
+            "option_b": {
+                "ru": "вариант ответа Б",
+                "en": "answer option Б"
+            },
+            "option_c": {
+                "ru": "вариант ответа В",
+                "en": "answer option В"
+            },
+            "option_d": {
+                "ru": "вариант ответа Г",
+                "en": "answer option Г"
+            },
+            "option_e": {
+                "ru": "вариант ответа Д",
+                "en": "answer option Д"
+            },
+            "option_f": {
+                "ru": "вариант ответа Е",
+                "en": "answer option Е"
+            },
+            "option_g": {
+                "ru": "вариант ответа Ё",
+                "en": "answer option Ё"
+            },
+            "option_h": {
+                "ru": "вариант ответа Ж",
+                "en": "answer option Ж"
+            },
+            "option_i": {
+                "ru": "вариант ответа З",
+                "en": "answer option З"
+            }
+        },
+        "outputs": {
+            "ru": "строка, содержащая букву или буквы верного ответа, записанные в алфавитном порядке через точку с запятой и пробел",
+            "en": "a string containing the letter or letters of the correct answer, written in alphabetical order and separated by a semicolon and a space"
+        },
+        "meta": {
+            "id": {
+                "ru": "номер примера",
+                "en": "example number"
+            },
+            "task_type": {
+                "ru": "тип задания: А, Б, В или Г",
+                "en": "task type: А, Б, В, or Г"
+            },
+            "task_description": {
+                "ru": "текстовое описание типа задания",
+                "en": "textual task type description"
+            }
+        }
+    },
+    "prompts": [
+        "TODO"
+    ],
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет долю ответов модели, которые точно совпадают с правильной буквой после извлечения строки после маркера Ответ:.",
+            "en": "Exact match is the proportion of model answers that exactly match the reference letter after extracting the string following the Answer marker."
+        },
+        "LLM judge score": {
+            "ru": "Метрика, в которой LLM-судья сравнивает ответ модели с эталонным ответом для каждого примера. Если ответ признан корректным, пример получает 1; если некорректным — 0. Итоговое значение метрики равно доле примеров, получивших 1.",
+            "en": "A metric where an LLM judge compares the model answer with the reference answer for each example. If the answer is judged correct, the example receives 1; if it is judged incorrect, it receives 0. The final metric value is the proportion of examples that received 1."
+        }
+    }
+}
