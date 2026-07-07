@@ -26,7 +26,14 @@ Task validity is supported by the controlled format: each example contains an ex
 
 ## Dataset Description
 
-The dataset contains **372** examples. Each example contains a shared `instruction` template, a task-specific instruction in `inputs.task_instruction`, a question, answer options, and metadata describing the task type. The number of answer options varies from 3 to 9.
+The dataset consists of two files with the same structure:
+
+- `test.json` — **372** test examples with ids **1–372**
+- `shots.json` — **16** few-shot examples with ids **373–388**
+
+Both files have the form `{"access": "private", "data": [...]}`. Each item contains an `instruction` template, `inputs`, `outputs`, and `meta`.
+
+Each example uses nine answer-option fields (`option_a`–`option_i`). Unused options are stored as empty strings. The `instruction` field contains placeholders for all nine options. One or several options may be correct; multiple correct answers are written in alphabetical order and separated by a semicolon followed by a space.
 
 ### Distribution by Task Type
 
@@ -39,13 +46,14 @@ Each example is assigned one of four types in the `task_type` field:
 | `В` | Type В "Smart answer" | 63 | 16.9% |
 | `Г` | Type Г "Matching" | 15 | 4.0% |
 
+The few-shot split contains 4 examples per task type.
+
 ### Data Fields
 
 Each example contains the following fields:
 
 - `instruction` [str] — a string with the task formulation for the language model.
 - `inputs` — input data that forms the task:
-    - `task_instruction` [str] — task formulation for the specific example type;
     - `question` [str] — task text with the `_ _ _` blank;
     - `option_a` [str] — answer option А;
     - `option_b` [str] — answer option Б;
@@ -59,16 +67,14 @@ Each example contains the following fields:
 - `outputs` [str] — a string containing the letter or letters of the correct answer, written in alphabetical order and separated by a semicolon and a space.
 - `meta` — metadata:
     - `id` [int] — example number;
-    - `task_type` [str] — task type: А, Б, В, or Г;
-    - `task_description` [str] — textual task type description.
+    - `task_type` [str] — task type: А, Б, В, or Г.
 
 ### Data Instance
 
 ```json
 {
-    "instruction": "{task_instruction}\n\nВопрос: {question}\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}\nЖ. {option_h}\nЗ. {option_i}\n\nОтвет:",
+    "instruction": "Помогите мне, пожалуйста.\n\nЗадача:\nПрочитайте текст с пропуском, обозначенным как ’_ _ _’. Ознакомьтесь с вариантами заполнения пропуска, обозначенными русскими буквами (А, Б, В и так далее), и выберите все подходящие — те, что логично отвечают на вопрос в тексте (в том числе в скобках, если он есть).\n\nДля решения нужно оценить ситуацию, применить логическое рассуждение и, при необходимости, элементарную арифметику или сообразительность.\n\nФормат ответа:\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <буква или буквы>\n\nЕсли подходящих вариантов несколько, перечислите буквы в алфавитном порядке через точку с запятой и пробел. Укажите только буквы подходящих вариантов.\n\nТекст:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}\nЖ. {option_h}\nЗ. {option_i}\n\nОтвет:",
     "inputs": {
-        "task_instruction": "Прочитайте текст с пропуском, обозначенным как ’_ _ _’. Прочитайте обозначенные русскими буквами (А, Б, В и так далее) варианты заполнения пропусков - и выберите все подходящие (и логично отвечающие на вопрос в скобках, если он есть). В качестве ответа выведите в алфавитном порядке (через точку с запятой с пробелом, если их несколько) все русские буквы, обозначающие подходящие варианты заполнения пропуска (и только эти буквы). Задание будет касаться необходимости оценить ситуацию и дать решение предложенной задачи на основании той или иной разновидности ризонинга - нужно будет оценить ситуацию в рамках привычной логики и, возможно, совершить элементарный подсчёт в пределах элементарной арифметики либо не попасться в ловушку необходимости делать расчёты и прикидки - и дать ответ, используя элементарную сообразительность",
         "question": "Матери 55 лет. У неё три дочери. Первой 15 лет, второй — 7, а третьей — 21 год. Через сколько лет возраст матери будет равен сумме лет её дочерей? Верный ответ: ’_ _ _’.",
         "option_a": "Никогда",
         "option_b": "3,5 года",
@@ -82,16 +88,15 @@ Each example contains the following fields:
     },
     "outputs": "Ё",
     "meta": {
-        "id": -101,
-        "task_type": "А",
-        "task_description": "Тип А «Задачка или уловка»"
+        "id": 373,
+        "task_type": "А"
     }
 }
 ```
 
 ### Prompts
 
-TODO
+Five prompt variants were prepared and distributed evenly across examples on a one-example–one-prompt basis. Template placeholders in curly braces are filled from the fields inside `inputs` for each question.
 
 ## Dataset Creation
 
@@ -105,5 +110,5 @@ Examples are annotated with four task types: А — "Task or trick", Б — "Seq
 
 The following metrics are used for aggregated evaluation:
 
-- **Exact match (EM)**: the proportion of model answers that exactly match the reference letter after extracting the string following the `Answer` marker.
+- **Exact match (EM)**: the proportion of model answers that exactly match the reference answer after extracting the string following the `Answer` marker.
 - **LLM judge score**: a metric where an LLM judge compares the model answer with the reference answer for each example. If the answer is judged correct, the example receives 1; if it is judged incorrect, it receives 0. The final metric value is the proportion of examples that received 1.
