@@ -1,7 +1,7 @@
 {
     "dataset_name": "RWSDNew",
     "license": "MERA_private",
-    "dataset_size": 425,
+    "dataset_size": 423,
     "description": "Russian reference-resolution and nonce-word reasoning dataset based on RWSD and Glokaya-kuzdra-style contexts.",
     "modalities": [
         "text"
@@ -34,7 +34,7 @@
             },
             "outputs": "Г",
             "meta": {
-                "id": 1,
+                "id": 426,
                 "context_type": "текст",
                 "task_type": "rwsd"
             }
@@ -57,7 +57,7 @@
             },
             "outputs": "В",
             "meta": {
-                "id": 4,
+                "id": 429,
                 "context_type": "текст",
                 "task_type": "kusdra"
             }
@@ -65,75 +65,75 @@
     },
     "data_field_descriptions": {
         "instruction": {
-            "ru": "Строка с формулировкой задания для языковой модели.",
-            "en": "A string containing the task formulation for the language model."
+            "ru": "строка с формулировкой задания для языковой модели",
+            "en": "a string containing the task formulation for the language model"
         },
         "inputs": {
             "question": {
-                "ru": "Вопрос к контексту.",
-                "en": "Question about the context."
+                "ru": "вопрос к контексту",
+                "en": "question about the context"
             },
             "context": {
-                "ru": "Текст, диалог или фрагмент с исходной ситуацией.",
-                "en": "Source text, dialogue, or fragment."
+                "ru": "текст, диалог или фрагмент с исходной ситуацией",
+                "en": "source text, dialogue, or fragment"
             },
             "reference": {
-                "ru": "Референс, который нужно соотнести с вариантом ответа; в части kusdra может быть служебным значением.",
-                "en": "Reference to be matched with an answer option; in the kusdra subset it may be a service value."
+                "ru": "референс, который нужно соотнести с вариантом ответа; в части kusdra может быть служебным значением",
+                "en": "reference to be matched with an answer option; in the kusdra subset it may be a service value"
             },
             "option_a": {
-                "ru": "Вариант ответа А.",
-                "en": "Answer option А."
+                "ru": "вариант ответа А",
+                "en": "answer option А"
             },
             "option_b": {
-                "ru": "Вариант ответа Б.",
-                "en": "Answer option Б."
+                "ru": "вариант ответа Б",
+                "en": "answer option Б"
             },
             "option_c": {
-                "ru": "Вариант ответа В.",
-                "en": "Answer option В."
+                "ru": "вариант ответа В",
+                "en": "answer option В"
             },
             "option_d": {
-                "ru": "Вариант ответа Г.",
-                "en": "Answer option Г."
+                "ru": "вариант ответа Г",
+                "en": "answer option Г"
             },
             "option_e": {
-                "ru": "Вариант ответа Д.",
-                "en": "Answer option Д."
+                "ru": "вариант ответа Д",
+                "en": "answer option Д"
             },
             "option_f": {
-                "ru": "Вариант ответа Е.",
-                "en": "Answer option Е."
+                "ru": "вариант ответа Е",
+                "en": "answer option Е"
             },
             "option_g": {
-                "ru": "Вариант ответа Ё.",
-                "en": "Answer option Ё."
+                "ru": "вариант ответа Ё",
+                "en": "answer option Ё"
             },
             "option_h": {
-                "ru": "Вариант ответа Ж.",
-                "en": "Answer option Ж."
+                "ru": "вариант ответа Ж",
+                "en": "answer option Ж"
             },
             "option_i": {
-                "ru": "Вариант ответа З.",
-                "en": "Answer option З."
+                "ru": "вариант ответа З",
+                "en": "answer option З"
             }
         },
         "outputs": {
-            "ru": "Правильный ответ: одна буква из множества А, Б, В, Г, Д, Е, Ё, Ж, З.",
-            "en": "Correct answer: one letter from А, Б, В, Г, Д, Е, Ё, Ж, З."
+            "ru": "правильный ответ: одна буква из множества А, Б, В, Г, Д, Е, Ё, Ж, З",
+            "en": "correct answer: one letter from А, Б, В, Г, Д, Е, Ё, Ж, З"
         },
         "meta": {
             "id": {
-                "ru": "Номер примера.",
-                "en": "Example number."
+                "ru": "номер примера",
+                "en": "example number"
             },
             "context_type": {
-                "ru": "Тип контекста: текст или диалог.",
-                "en": "Context type: text or dialogue."
+                "ru": "тип контекста: текст или диалог",
+                "en": "context type: text or dialogue"
             },
             "task_type": {
-                "ru": "Тип задания: rwsd для разрешения референции или kusdra для вопросов по нестандартным текстам.",
-                "en": "Task type: rwsd for reference resolution or kusdra for questions over non-standard texts."
+                "ru": "тип задания: rwsd для разрешения референции или kusdra для вопросов по нестандартным текстам",
+                "en": "task type: rwsd for reference resolution or kusdra for questions over non-standard texts"
             }
         }
     },

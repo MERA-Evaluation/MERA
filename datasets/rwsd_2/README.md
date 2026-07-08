@@ -29,18 +29,18 @@ The examples are designed so that the correct answer can be recovered from the c
 
 ## Dataset Description
 
-The dataset contains **425** examples:
+The dataset contains **423** examples:
 
 | `task_type` | Task type | Count | Share |
 |-------------|-----------|------:|------:|
-| `rwsd` | Reference resolution in regular Russian contexts | 212 | 49.9% |
-| `kusdra` | Questions over texts with non-standard vocabulary and language play | 213 | 50.1% |
+| `rwsd` | Reference resolution in regular Russian contexts | 211 | 49.9% |
+| `kusdra` | Questions over texts with non-standard vocabulary and language play | 212 | 50.1% |
 
 Distribution by context type:
 
 | `context_type` | Count |
 |----------------|------:|
-| `текст` | 317 |
+| `текст` | 315 |
 | `диалог` | 108 |
 
 The number of answer options ranges from 4 to 9.
@@ -92,7 +92,7 @@ Each example contains the following fields:
     },
     "outputs": "Г",
     "meta": {
-        "id": 1,
+        "id": 426,
         "context_type": "текст",
         "task_type": "rwsd"
     }
@@ -120,7 +120,7 @@ Each example contains the following fields:
     },
     "outputs": "В",
     "meta": {
-        "id": 4,
+        "id": 429,
         "context_type": "текст",
         "task_type": "kusdra"
     }
