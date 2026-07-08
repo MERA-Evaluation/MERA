@@ -11,7 +11,7 @@ cd "$(dirname "$0")/.."
 OUTPUT_FOLDER="${OUTPUT_FOLDER:-$PWD/mera_results/}"
 MERA_MODEL_STRING="${MERA_MODEL_STRING:?Set MERA_MODEL_STRING}"
 MERA_COMMON_SETUP="${MERA_COMMON_SETUP:---model local-completions --batch_size=1 --log_samples --seed 1234 --verbosity ERROR --apply_chat_template --fewshot_as_multiturn}"
-GENERATION_KWARGS="${GENERATION_KWARGS:-do_sample=False,until=[\"<|im_end|>\",\"<|eot_id|>\",\"</s>\"],max_gen_toks=1024}"
+GENERATION_KWARGS="${GENERATION_KWARGS:-do_sample=False,until=[\"<|im_end|>\",\"<|eot_id|>\",\"</s>\"],max_gen_toks=32768}"
 TASKS="${TASKS:-mmred tmath luzitania ruaime}"
 PACK_SUBMISSION="${PACK_SUBMISSION:-1}"
 
@@ -31,12 +31,5 @@ for task in $TASKS; do
     --output_path="${OUTPUT_FOLDER}" ${MERA_COMMON_SETUP} \
     --include_path=./benchmark_tasks ${LIMIT:+--limit "$LIMIT"}
 done
-
-if [[ "$PACK_SUBMISSION" == "1" ]]; then
-  python scripts/log_to_reasoning_submission.py \
-    --outputs_dir "${OUTPUT_FOLDER}" \
-    --model_args "${MERA_MODEL_STRING}" \
-    --tasks "$(echo "$TASKS" | tr ' ' ',')"
-fi
 
 printf '\nDone. Logs: %s\n' "$OUTPUT_FOLDER"
