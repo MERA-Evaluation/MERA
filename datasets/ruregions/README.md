@@ -42,7 +42,7 @@ Each dataset question contains the following fields:
     - `option_b` [str] — the second answer option;
     - `option_c` [str] — the third answer option;
     - `option_d` [str] — the fourth answer option;
-    - `format_description` [str] — the answer format description.
+    - `format_description` [str] — the answer format description; for task type 1 it specifies that the model must output a single capital Russian letter from (А, Б, В, Г) corresponding to the chosen text; for task types 2 and 3 it also requires the language unit from the chosen text after a semicolon.
 - `outputs` [str] — a string containing the correct answer.
 - `meta` — metadata related to the test example, not used in the question (hidden from the tested model):
     - `id` [int] — an integer ID of the example;
@@ -59,14 +59,14 @@ Each dataset question contains the following fields:
         "introduction": "Пожалуйста, прочитайте тексты внимательно.",
         "task_formulation": "Выберите текст, в котором нет смысловых ошибок.",
         "option_a": "Не везет мне с мужчинами почему-то. Все подруги давно замужем, многие не по одному разу. Даже такая толчёнка, как ты, нашла себе любящего мужа.",
-        "option_b": "Скубались они всегда громко, наслаждаясь процессом и полностью ему отдаваясь.Сначала меня это удивляло, но скоро я уже не обращал внимания.",
-        "option_c": "Виктор сильно окреп, в свои 12 лет он был ростом со старшего брата, весил так же. Он буквально вырос на жидриках да на свежем воздухе. ",
+        "option_b": "Скубались они всегда громко, наслаждаясь процессом и полностью ему отдаваясь. Сначала меня это удивляло, но скоро я уже не обращал внимания.",
+        "option_c": "Виктор сильно окреп, в свои 12 лет он был ростом со старшего брата, весил так же. Он буквально вырос на жидриках да на свежем воздухе.",
         "option_d": "Для тебя одна радость — мжить в свой дебилизатор и только, пока дым из ушей не пойдёт. Лучше бы с ребятами мяч погонял.",
-        "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите только букву выбранного текста."
+        "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите заглавную букву из множества (А, Б, В, Г), обозначающую выбранный вариант ответа."
     },
     "outputs": "Б",
     "meta": {
-        "id": 0,
+        "id": 1,
         "group_id": 0,
         "task_type": 1
     }
@@ -86,7 +86,7 @@ Prompt example:
     "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
     "introduction": "Интересно, сможете ли вы найти корректный текст?",
     "task_formulation": "Определите, какой текст не содержит смысловых искажений.",
-    "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите только букву выбранного текста."
+    "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите только одну заглавную букву русского алфавита — А, Б, В или Г — которая соответствует выбранному тексту."
 }
 ```
 
