@@ -1,0 +1,58 @@
+{
+    "dataset_name": "Riddles",
+    "license": "MERA_private",
+    "dataset_size": 500,
+    "description": "Riddles is a Russian-language dataset of riddles where the model must find the answer as a word or short phrase.",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "General reasoning",
+        "Problem solving",
+        "Metaphorical Thinking",
+        "Folklore",
+        "Language Games",
+        "Attention to Detail",
+        "Pattern recognition"
+    ],
+    "domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Помоги мне, пожалуйста.\n\nПрочитай загадку и найди правильный ответ в виде слова или фразы.\n\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <слово или фраза>\n\n{question}"
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "строка с формулировкой задания для языковой модели",
+            "en": "a string with the task formulation for the language model"
+        },
+        "inputs": {
+            "question": {
+                "ru": "текст загадки",
+                "en": "riddle text"
+            }
+        },
+        "outputs": {
+            "ru": "строка с ответом — словом или фразой",
+            "en": "a string containing the answer word or phrase"
+        },
+        "meta": {
+            "id": {
+                "ru": "номер примера",
+                "en": "example number"
+            }
+        }
+    },
+    "prompts": [
+        "Помоги мне, пожалуйста.\n\nПрочитай загадку и найди правильный ответ в виде слова или фразы.\n\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <слово или фраза>\n\n{question}",
+        "Привет! Поможешь разобраться?\n\nРеши загадку и дай ответ в виде слова или фразы.\n\nНапиши только одну строку вида:\n\nОтвет: СЛОВО ИЛИ ФРАЗА\n\n{question}",
+        "Внимательно прочитай задачку и определи ответ.\n\nРазгадай загадку и укажи ответ — одно слово или короткую фразу.\n\nВыведи только\n\nОтвет: <слово или фраза>\n\n{question}",
+        "По тексту загадки нужно найти ответ в виде слова или фразы.\n\nВ качестве ответа укажите строку\n\nОтвет: СЛОВО ИЛИ ФРАЗА\n\n{question}",
+        "Требуется решить загадку и назвать ответ — слово или фразу.\n\nВерните результат в формате\n\nОтвет: <слово или фраза>\n\n{question}"
+    ],
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет долю ответов модели, которые точно совпадают с одним из эталонных вариантов.",
+            "en": "Exact match is the proportion of model answers that exactly match one of the reference variants."
+        }
+    }
+}
