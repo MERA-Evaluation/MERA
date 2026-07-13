@@ -43,7 +43,7 @@ Distribution by context type:
 | `текст` | 315 |
 | `диалог` | 108 |
 
-The number of answer options ranges from 4 to 9.
+The number of answer options ranges from 4 to 9. The `instruction` field contains placeholders only for non-empty options: the "Варианты ответа" block includes exactly as many lines as there are non-empty `option_*` fields in that example. The "Формат ответа" block states that answer letters may only be uppercase Russian letters from the list (А, Б, В, Г, Д, Е, Ё, Ж, З); in each example this list is shortened to match the non-empty options.
 
 ### Data Fields
 
@@ -75,7 +75,7 @@ Each example contains the following fields:
 
 ```json
 {
-    "instruction": "Помогите мне, пожалуйста.\n\nЗадача:\nЕсть контекст, референс и несколько вариантов ответа. Нужно определить, к каким из вариантов относится референс.\n\nВ некоторых примерах референс может быть связан не с отдельным словом, а с тем, кто выполняет действие. Если рядом с глаголом встречается несколько существительных, нужно понять, какое из них имеется в виду.\n\nКонтекст:\n{context}\n\nРеференс:\n{reference}\n\nФормат ответа:\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <буква>\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}",
+    "instruction": "Задача:\nПо контексту и референсу нужно определить, к каким вариантам относится референс.\n\nРеференс может указывать как на отдельное слово, так и на того, кто выполняет действие. В последнем случае нужно определить, какое из существительных имеется в виду.\n\nКонтекст:\n{context}\n\nРеференс:\n{reference}\n\nФормат ответа:\nВерните результат в формате\n\nОтвет: <буква>\n\nБуквами ответа могут являться только заглавные буквы русского алфавита из списка (А, Б, В, Г, Д, Е, Ё).\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}\n",
     "inputs": {
         "question": "Относится ли референс к данному слову среди всех вариантов в указанном контексте?",
         "context": "Дни летели за днями, птицы за птицами, депеши за депешами, а самолёты Аркадия Петровича Авастюрова никак не желали подниматься с полей в небеса, и всёшеньки! Они понуро жались к стерне и что-то надрывно бурчали про себя время от времени, но и только.",
@@ -103,10 +103,10 @@ Each example contains the following fields:
 
 ```json
 {
-    "instruction": "Помогите мне, пожалуйста.\n\nЗадача:\nЕсть текст и несколько вариантов ответа. Нужно внимательно прочитать текст, ответить на вопрос и выбрать подходящий вариант ответа.\n\nТекст:\n{context}\n\nФормат ответа:\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <буква>\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+    "instruction": "Внимательно прочитай текст и определи ответ.\n\nЗадача:\nОтветь на вопрос по тексту и выбери правильный вариант.\n\nТекст:\n{context}\n\nФормат ответа:\nВыведи только\n\nОтвет: <буква>\n\nБуквами ответа могут являться только заглавные буквы русского алфавита из списка (А, Б, В, Г).\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\n",
     "inputs": {
         "question": "Сколько пасиков в пусике?",
-        "context": "241. Мряка крючит на пасики и лениво друсит пусики на тасики, которые являются конечной и единственной величиной любой друськи пусиков. На друську одного пусика Мряка тратит полдолгика. Сколько долгиков истратит Мряка на друську шести пусиков?",
+        "context": "241. Мряка крючит на пасики и лениво друсит пусики на тасики, которые являются конечной и единственной величиной любой друськи пусиков. На друську одного пусика Мряка тратит полдолгика. Сколько долгиков истратит Мряка на друську восьми пусиков?",
         "reference": "‘-‘",
         "option_a": "Три",
         "option_b": "Два",
@@ -129,7 +129,7 @@ Each example contains the following fields:
 
 ### Prompts
 
-The task uses 10 prompts: 5 prompts for the `rwsd` type and 5 prompts for the `kusdra` type. The prompts are distributed across examples and follow the SAP structure: they explicitly separate the task formulation, context, reference or question, answer format, and answer options. All prompts require a line in the form `Ответ: <letter>`, where the letter is selected from the available options.
+The task uses 10 prompts: 5 prompts for the `rwsd` type and 5 prompts for the `kusdra` type. The prompts are distributed evenly across examples within each task type and follow the SAP structure: they explicitly separate the task formulation, context, reference or question, answer format, and answer options. For each example the prompt is adapted to the number of non-empty answer options. All prompts require a line in the form `Ответ: <letter>`, where the letter is selected from the available options. Each prompt template uses a consistent form of address (informal ты or formal вы).
 
 ### Dataset Creation
 
