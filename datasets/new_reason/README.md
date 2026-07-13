@@ -33,7 +33,7 @@ The dataset consists of two files with the same structure:
 
 Both files have the form `{"access": "private", "data": [...]}`. Each item contains an `instruction` template, `inputs`, `outputs`, and `meta`.
 
-Each example uses nine answer-option fields (`option_a`–`option_i`). Unused options are stored as empty strings. The `instruction` field contains placeholders for all nine options. One or several options may be correct; multiple correct answers are written in alphabetical order and separated by a semicolon followed by a space.
+Each example uses nine answer-option fields (`option_a`–`option_i`). Unused options are stored as empty strings. The `instruction` field contains placeholders only for non-empty options: the "Answer options" block includes exactly as many lines as there are non-empty `option_*` fields in that example. The "Answer format" block explicitly states that answer letters must be uppercase Russian letters from the list (А, Б, В, Г, Д, Е, Ё, Ж, З); in each example, this list contains only the letters that correspond to the non-empty options. One or several options may be correct; multiple correct answers are written in alphabetical order and separated by a semicolon followed by a space.
 
 ### Distribution by Task Type
 
@@ -73,7 +73,7 @@ Each example contains the following fields:
 
 ```json
 {
-    "instruction": "Помогите мне, пожалуйста.\n\nЗадача:\nПрочитайте текст с пропуском, обозначенным как ’_ _ _’. Ознакомьтесь с вариантами заполнения пропуска, обозначенными русскими буквами (А, Б, В и так далее), и выберите все подходящие — те, что логично отвечают на вопрос в тексте (в том числе в скобках, если он есть).\n\nДля решения нужно оценить ситуацию, применить логическое рассуждение и, при необходимости, элементарную арифметику или сообразительность.\n\nФормат ответа:\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <буква или буквы>\n\nЕсли подходящих вариантов несколько, перечислите буквы в алфавитном порядке через точку с запятой и пробел. Укажите только буквы подходящих вариантов.\n\nТекст:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}\nЖ. {option_h}\nЗ. {option_i}\n\nОтвет:",
+    "instruction": "Помогите мне, пожалуйста.\n\nЗадача:\nПрочитайте текст с пропуском, обозначенным как ’_ _ _’. Ознакомьтесь с вариантами заполнения пропуска, и выберите все подходящие — те, что логично отвечают на вопрос в тексте (в том числе в скобках, если он есть).\n\nДля решения нужно оценить ситуацию, применить логическое рассуждение и, при необходимости, элементарную арифметику или сообразительность.\n\nФормат ответа:\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <буква или буквы>\n\nЕсли подходящих вариантов несколько, перечислите буквы в алфавитном порядке через точку с запятой и пробел. \n\nБуквами ответа могут являться только заглавные буквы русского алфавита из списка (А, Б, В, Г, Д, Е, Ё, Ж, З).\n\nТекст:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}\nЖ. {option_h}\nЗ. {option_i}\n\nОтвет:",
     "inputs": {
         "question": "Матери 55 лет. У неё три дочери. Первой 15 лет, второй — 7, а третьей — 21 год. Через сколько лет возраст матери будет равен сумме лет её дочерей? Верный ответ: ’_ _ _’.",
         "option_a": "Никогда",
@@ -96,7 +96,7 @@ Each example contains the following fields:
 
 ### Prompts
 
-Five prompt variants were prepared and distributed evenly across examples on a one-example–one-prompt basis. Template placeholders in curly braces are filled from the fields inside `inputs` for each question.
+Five prompt variants were prepared and distributed evenly across examples on a one-example–one-prompt basis. For each example, the prompt is adapted to the number of non-empty answer options: the "Answer options" block retains only the corresponding lines, and the "Answer format" block lists the shortened set of allowed letters (for example, six options yield "А, Б, В, Г, Д, Е"). Template placeholders in curly braces are filled from the fields inside `inputs` for each question.
 
 ## Dataset Creation
 
