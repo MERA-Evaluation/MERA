@@ -37,6 +37,8 @@ Each example is assigned one of four types in the `type` field:
 
 The answer format is multiple choice among 6 options labeled А, Б, В, Г, Д, Е. One or several options may be correct. When multiple options are correct, the answer letters are listed in alphabetical order and separated by a semicolon followed by a space.
 
+Each example uses six answer-option fields (`option_a`–`option_f`). Unused options are stored as empty strings. The `instruction` field contains placeholders only for non-empty options: the "Варианты ответа" block includes exactly as many lines as there are non-empty `option_*` fields in that example. The "Формат ответа" block states that answer letters may only be uppercase Russian letters from the list (А, Б, В, Г, Д, Е); in each example this list is shortened to match the non-empty options.
+
 
 ### Data Fields
 
@@ -64,28 +66,28 @@ Each example in the dataset contains the following fields:
 
 ```json
 {
-      "instruction": "Задача:\\nВыберите тезис, который наиболее логично продолжает заключительную реплику текста и отражает мысль персонажа — исходя из того значения, в котором употреблено энантиосемическое слово.\\n\\nТекст:\\n{text}\\n\\nВарианты ответа:\\nА. {option_a}\\nБ. {option_b}\\nВ. {option_c}\\nГ. {option_d}\\nД. {option_e}\\nЕ. {option_f}\\n\\nЭнантиосемическое слово:\\n{enantiosemic_word}",
-      "inputs": {
-        "text": "— «Миль Попс, жу-жу-жу, жу-жу-жу…»\n— Таня, прекрати, ты мне на нервы действуешь.\n— «Миль Попс, ах как вкусно, ням-ням-ням…»\n— Таня! Я сейчас ремень достану!\n— Ну что я могу поделать! Весь день эта реклама вертится в голове.",
-        "enantiosemic_word": "вертится в голове",
-        "option_a": "Я, наверное, и умирать буду, всё равно «Миль Попс» спою.",
-        "option_b": "Я, наверное, и умирать буду, но не вспомню.",
-        "option_c": "Как её найти? Господи.",
-        "option_d": "Как её там? Господи.",
-        "option_e": "Уже который день не могу от неё избавиться, словно проклятие наложили.",
-        "option_f": "Уже который день вспоминаю, а все равно весело."
-      },
-      "outputs": "А; Е",
-      "meta": {
-        "id": 510,
-        "type": "choose_correct"
-      }
+    "instruction": "Помогите, пожалуйста, решить следующую задачу.\n\nЗадача:\nОпределите вариант(ы), который(ые) не мог(ли) бы стать завершающей фразой последней реплики в тексте из-за противоречия заложенному в тексте смыслу энантиосемического слова.\n\nКонтекст:\nВ тексте есть энантиосемическое слово — лексическая единица, способная в одной форме выражать противоположные смыслы.\n\nФормат ответа:\nЗапишите ответ в формате:\n\nОтвет: <выбранная буква или буквы>\n\nУкажите одну букву или несколько букв через точку с запятой и пробел в алфавитном порядке, если неверных вариантов больше одного.\n\nБуквами ответа могут являться только заглавные буквы русского алфавита из списка (А, Б, В, Г, Д, Е).\n\nТекст:\n{text}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\n\nЭнантиосемическое слово:\n{enantiosemic_word}",
+    "inputs": {
+        "enantiosemic_word": "стишки",
+        "option_a": "Простенькие, но такие душевные, такие искренние!",
+        "option_b": "Простенькие, неказистые. Одним словом – ужас. Не выйдет из него поэта.",
+        "option_c": "Вот чувствуется в них любовь, что ни скажи.",
+        "option_d": "Вот чувствуется, что старался.",
+        "option_e": "Пусть простые, зато от сердца — такие и запоминаются.",
+        "option_f": "Слабенькие, конечно, но мальчишка старался.",
+        "text": "— Девочки, ну как малыши вас с днём матери поздравили? Мне вот Саша цветы из бумаги подарила.\n— Ой, мне Ванюша портрет нарисовал. Красота!\n— А мой Лёшка написал замечательные стишки. Такие, знаете…"
+    },
+    "outputs": "Б",
+    "meta": {
+        "id": 507,
+        "type": 2
     }
+}
 ```
 
 ### Prompt Creation
 
-20 prompts were prepared for the task: 5 prompts for each of the 4 task types. They were distributed evenly across questions using a one-question–one-prompt scheme. Template placeholders in curly braces in a prompt are filled from the fields inside `inputs` for each question.
+20 prompts were prepared for the task: 5 prompts for each of the 4 task types. They are distributed evenly across examples using a one-example–one-prompt scheme within each type. For each example the prompt is adapted to the number of non-empty answer options: the "Варианты ответа" block keeps only the corresponding lines, and the "Формат ответа" block lists the shortened set of allowed letters. Template placeholders in curly braces are filled from the fields inside `inputs` for each question. Each prompt template uses a consistent form of address (informal ты or formal вы).
 
 ### Dataset Creation
 
