@@ -1,4 +1,4 @@
-dataset_path: MERA-Evaluation/riddles
+dataset_path: MERA-Evaluation/Riddles
 
 task: riddles
 
