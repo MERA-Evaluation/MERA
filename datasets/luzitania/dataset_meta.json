@@ -48,7 +48,7 @@
             "source": {
                 "en": "a string indicating the problem source (see the Dataset Creation section).",
                 "ru": "строка, источник задачи (см. раздел Создание Датасета)"
-            },
+            }
         }
     },
     "prompts": [
