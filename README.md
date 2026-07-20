@@ -164,7 +164,7 @@ The reasoning track includes four benchmarks:
 | --- | --- | --- | --- | --- | --- |
 | ruAIME | `ruaime` | Mathematics (AIME) | 724 | 2 | Exact match |
 | T-math | `tmath` | Olympiad mathematics | 331 | 0 | Exact match |
-| Luzitania | `luzitania` | Logic, multi-step reasoning | 252 | 0 | Exact match |
+| Luzitania | `luzitania` | Logic, multi-step reasoning | 251 | 0 | Exact match |
 | MMReD | `mmred` | Long-context dense reasoning | 750 | 0 | `em.dc_aggregate` |
 
 Dataset cards: [ruAIME](https://huggingface.co/datasets/MERA-evaluation/ruAIME), [T-math](https://huggingface.co/datasets/MERA-evaluation/T-math), [Luzitania](https://huggingface.co/datasets/MERA-evaluation/Luzitania), [MMReD](https://huggingface.co/datasets/MERA-evaluation/MMReD).

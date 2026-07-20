@@ -65,7 +65,7 @@ The test set was collected from open sources, with problem statements translated
 
 | source | count |
 |--------|-------|
-| olympiads | 132 |
+| olympiads | 131 |
 | olympic_reason | 49 |
 | MathArena | 34 |
 | turgor | 30 |
