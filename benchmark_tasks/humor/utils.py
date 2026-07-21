@@ -4,7 +4,7 @@ from lm_eval.api.registry import register_filter, FILTER_REGISTRY
 from transformers.data.metrics import squad_metrics
 import logging
 import os
-
+import re
 import sacrebleu
 from transformers.data.metrics import squad_metrics
 
@@ -262,16 +262,29 @@ if "remove_whitespace_and_nones" not in FILTER_REGISTRY:
             def filter_set(inst):
                 filtered_resp = []
                 for resp in inst:
-                    if not resp:
-                        resp = ""
+                    if not resp or not str(resp).strip():
+                        filtered_resp.append("")
+                        continue
+
+                    lines = [ln.strip() for ln in str(resp).split("\n") if ln.strip()]
+                    if not lines:
+                        filtered_resp.append("")
+                        continue
+
+                    if len(lines) >= 2:
+                        answer = lines[0].split("ОТВЕТ", 1)[-1].strip(" :-")
+                        solution = lines[1].split("РЕШЕНИЕ", 1)[-1].strip(" :-")
                     else:
-                        resp = resp.split('\n')
-                        answer = resp[0].lstrip().split('ОТВЕТ ')[-1].strip()
-                        solution = resp[1].lstrip().split('РЕШЕНИЕ ')[-1].strip()
-                        resp = answer + "," + solution
-                    filtered_resp.append(resp)
+                        line = lines[0]
+                        if "РЕШЕНИЕ" in line:
+                            left, right = line.split("РЕШЕНИЕ", 1)
+                            answer = left.split("ОТВЕТ", 1)[-1].strip(" :-")
+                            solution = right.strip(" :-")
+                        else:
+                            answer = line.split("ОТВЕТ", 1)[-1].strip(" :-")
+                            solution = ""
+
+                    filtered_resp.append(f"{answer},{solution}")
                 return filtered_resp
-    
-            filtered_resps = [filter_set(resp) for resp in resps]
-    
-            return filtered_resps
+
+            return [filter_set(inst) for inst in resps]
