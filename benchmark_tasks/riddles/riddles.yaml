@@ -3,7 +3,7 @@ dataset_path: MERA-Evaluation/Riddles
 task: riddles
 
 test_split: test
-fewshot_split: test
+fewshot_split: shots
 
 output_type: generate_until
 
@@ -26,6 +26,9 @@ process_results: !function utils.process_results
 
 metric_list:
   - metric: em
+    aggregation: mean
+    higher_is_better: true
+  - metric: judge_score
     aggregation: mean
     higher_is_better: true
 

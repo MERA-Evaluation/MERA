@@ -18,7 +18,14 @@
     "domains": [],
     "synt_source_models": [],
     "data_example": {
-        "instruction": "Помоги мне, пожалуйста.\n\nПрочитай загадку и найди правильный ответ в виде слова или фразы.\n\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <слово или фраза>\n\n{question}"
+        "instruction": "По тексту загадки нужно найти ответ в виде слова или фразы.\n\nВ качестве ответа укажите строку\n\nОтвет: СЛОВО ИЛИ ФРАЗА\n\n{question}",
+        "inputs": {
+            "question": "Серёжки для простаков."
+        },
+        "outputs": "Лапша",
+        "meta": {
+            "id": 504
+        }
     },
     "data_field_descriptions": {
         "instruction": {
@@ -53,6 +60,10 @@
         "Exact match": {
             "ru": "Метрика Exact match вычисляет долю ответов модели, которые точно совпадают с одним из эталонных вариантов.",
             "en": "Exact match is the proportion of model answers that exactly match one of the reference variants."
+        },
+        "LLM judge score": {
+            "ru": "LLM-судья сравнивает ответ модели с эталонными вариантами и оценивает его правильность и полноту: 1 — ответ полностью правильный и полный; 0.5 — ответ частично правильный или неполный, но содержит существенную часть разгадки; 0 — ответ неправильный, противоречивый или не содержит правильной разгадки. Итоговое значение метрики равно среднему баллу по всем примерам.",
+            "en": "An LLM judge compares the model answer with the reference variants and evaluates its correctness and completeness: 1 indicates a fully correct and complete answer; 0.5 indicates a partially correct or incomplete answer that contains an essential part of the solution; 0 indicates an incorrect or contradictory answer, or one that does not contain the correct solution. The final metric value is the mean score across all examples."
         }
     }
 }
