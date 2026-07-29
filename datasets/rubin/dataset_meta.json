@@ -1,0 +1,106 @@
+{
+    "dataset_name": "RuBIN",
+    "license": "MERA_private",
+    "dataset_size": 783,
+    "description": "**RuBIN** is a Russian-language cultural-code MCQ dataset evaluating whether language models understand culture-specific phrases and phenomena (memes, slang, songs, films, folklore, tongue twisters, sayings, and related material).",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "Culture code",
+        "Question Answering"
+    ],
+    "domains": [],
+    "synt_source_models": [
+        "Qwen2.5-14B"
+    ],
+    "data_example": {
+        "instruction": "Помогите мне, пожалуйста.\n\nОтветьте на вопрос, выбрав один правильный вариант из предложенных.\n\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <буква>\n\nДопустимые значения: А, Б, В, Г.\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+        "inputs": {
+            "question": "Под каким названием прославилась фраза из интервью лидера рок-группы, обозначающая, что оба выбранных варианта одинаково плохи?",
+            "option_a": "Теорема Эскобара",
+            "option_b": "Золотое уравнение",
+            "option_c": "Мост Эйлшам",
+            "option_d": "Предел Эрдеша"
+        },
+        "outputs": "А",
+        "meta": {
+            "id": 3,
+            "type": "Meme",
+            "year": "2007",
+            "is_phrase_ending": false,
+            "is_easy": false
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "шаблон промпта; плейсхолдеры в фигурных скобках заполняются из inputs",
+            "en": "prompt template; curly-brace placeholders are filled from inputs"
+        },
+        "inputs": {
+            "question": {
+                "ru": "текст вопроса",
+                "en": "question text"
+            },
+            "option_a": {
+                "ru": "вариант ответа А",
+                "en": "answer option A"
+            },
+            "option_b": {
+                "ru": "вариант ответа Б",
+                "en": "answer option B"
+            },
+            "option_c": {
+                "ru": "вариант ответа В",
+                "en": "answer option C"
+            },
+            "option_d": {
+                "ru": "вариант ответа Г",
+                "en": "answer option D"
+            }
+        },
+        "outputs": {
+            "ru": "буква единственного правильного ответа: А, Б, В или Г",
+            "en": "letter of the single correct answer: А, Б, В, or Г"
+        },
+        "meta": {
+            "id": {
+                "ru": "идентификатор примера",
+                "en": "example identifier"
+            },
+            "type": {
+                "ru": "культурная категория: Song, Others, Proverb, Slang, Film, Riddle, Twister, Meme, Poems, Cartoon",
+                "en": "cultural category: Song, Others, Proverb, Slang, Film, Riddle, Twister, Meme, Poems, Cartoon"
+            },
+            "year": {
+                "ru": "год появления или пика культурной релевантности; строка, либо Unknown",
+                "en": "year of appearance or peak cultural relevance; string, or Unknown"
+            },
+            "is_phrase_ending": {
+                "ru": "вопрос в формате продолжения фразы",
+                "en": "whether the item is a phrase-completion question"
+            },
+            "is_easy": {
+                "ru": "входил ли пример в RuBIN-Easy по результатам HumanEval",
+                "en": "whether the item belonged to RuBIN-Easy according to HumanEval"
+            }
+        }
+    },
+    "prompts": [
+        "Помогите мне, пожалуйста.\n\nОтветьте на вопрос, выбрав один правильный вариант из предложенных.\n\nПоследняя строка ответа должна иметь вид:\n\nОтвет: <буква>\n\nДопустимые значения: А, Б, В, Г.\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+        "Привет! Поможешь разобраться?\n\nПрочитай вопрос и выбери правильный вариант ответа.\n\nНапиши только одну строку вида:\n\nОтвет: БУКВА\n\nДопустимые значения БУКВА: А, Б, В, Г.\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+        "Внимательно прочитай вопрос и определи правильный ответ.\n\nВыбери один вариант из предложенных.\n\nВыведи только\n\nОтвет: <буква>\n\nГде буква может принимать значения А, Б, В или Г.\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+        "По тексту вопроса нужно выбрать правильный вариант ответа.\n\nВ качестве ответа укажите строку\n\nОтвет: БУКВА\n\nДопустимые значения: А, Б, В, Г.\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+        "Требуется ответить на вопрос и выбрать один правильный вариант.\n\nВерните результат в формате\n\nОтвет: <буква>\n\nДопустимые значения: А, Б, В, Г.\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}"
+    ],
+    "metrics": {
+        "Exact match": {
+            "ru": "Доля предсказаний, у которых извлечённый ответ (после маркера Ответ:) точно совпадает с эталонной буквой.",
+            "en": "The share of predictions whose extracted answer (after the Ответ: marker) exactly matches the gold letter."
+        },
+        "judge_score": {
+            "ru": "LLM-судья сравнивает ответ модели с эталонными вариантами и оценивает его правильность и полноту. Полностью правильный и полный ответ получает 1; частично правильный или неполный ответ, содержащий существенную часть разгадки, получает 0.5; неправильный, противоречивый или не содержащий правильной разгадки ответ получает 0. Итоговое значение метрики равно среднему баллу по всем примерам.",
+            "en": "An LLM judge compares the model answer with the reference options and scores its correctness and completeness. A fully correct and complete answer gets 1; a partially correct or incomplete answer that still contains a substantial part of the solution gets 0.5; an incorrect, contradictory, or non-matching answer gets 0. The final metric is the mean score over all examples."
+        }
+    }
+}
