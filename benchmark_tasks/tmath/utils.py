@@ -56,6 +56,23 @@ def doc_to_text(doc: Dict[str, Any]) -> str:
 # Preprocessing: extraction and parsing of mathematical expressions
 # ---------------------------------------------------------------------------
 
+_THINK_BLOCK_RE = re.compile(r"<think>[\s\S]*?</think>")
+_THINK_TAG_RE = re.compile(r"</?think>")
+_BOLD_RE = re.compile(r"\*\*([^*]+)\*\*")
+_NUM_OR_FRAC_RE = re.compile(r"-?\d+(?:[.,]\d+)?(?:\s*/\s*-?\d+(?:[.,]\d+)?)?")
+# Patterns assume the input was already lowercased.
+_ANSWER_MARKER_RES = (
+    re.compile(r"(?m)^#{1,3}\s*ответ\s*:?\s*$"),
+    re.compile(r"(?m)(?:^|\n)\s*ответ\s*:?\s*"),
+    re.compile(r"(?m)(?:^|\n)\s*\*\*ответ\s*:?\*\*\s*:?\s*"),
+    re.compile(r"(?m)(?:^|\n)\s*answer\s*:\s*"),
+    re.compile(r"(?m)(?:^|\n)\s*final answer\s*:\s*"),
+)
+# Generations longer than this are treated as CoT: take the last number/fraction.
+_LONG_GENERATION_THRESH = 200
+_SHORT_ANSWER_SECTION_THRESH = 160
+
+
 def _fix_decimal_comma(text: str) -> str:
     """Replaces a decimal comma between digits with a dot ('0,75' -> '0.75').
 
@@ -65,23 +82,90 @@ def _fix_decimal_comma(text: str) -> str:
     return re.sub(r"(?<=\d),(?=\d)", ".", text)
 
 
+def _strip_think_and_bold(text: str) -> str:
+    """Removes think-blocks/tags and markdown bold wrappers."""
+    text = _THINK_BLOCK_RE.sub("", text or "")
+    text = _THINK_TAG_RE.sub("", text)
+    # orphan leading dot from patterns like '.</think>150'
+    text = re.sub(r"(?m)^\.(?=\d)", "", text)
+    text = _BOLD_RE.sub(r"\1", text).replace("**", "")
+    return text.strip()
+
+
+def _after_answer_marker(text: str) -> str | None:
+    """Returns the substring after the last answer-section marker, if any."""
+    best_end = -1
+    for regex in _ANSWER_MARKER_RES:
+        for match in regex.finditer(text or ""):
+            if match.end() >= best_end:
+                best_end = match.end()
+    if best_end < 0:
+        return None
+    return text[best_end:]
+
+
+def _last_num_or_frac(text: str) -> str:
+    """Last plain number or simple fraction in text; normalizes decimal commas."""
+    matches = _NUM_OR_FRAC_RE.findall(_fix_decimal_comma(text or ""))
+    if not matches:
+        return ""
+    return re.sub(r"\s+", "", matches[-1])
+
+
+def normalize_generation(generation: str) -> str:
+    """Normalizes a raw model generation before math_verify extraction.
+
+    Pipeline (length-gated hybrid):
+      0) lowercase the text so all subsequent matchers use lowercase only;
+      1) strip ``<think>...</think>`` / orphan think tags and markdown ``**bold**``;
+      2) if ``\\boxed{...}`` is present -- keep the cleaned text;
+      3) if an answer section marker is found (``ответ:``, ``## ответ``,
+         ``answer:``, ``final answer:``, …) -- use that section (or the last
+         number/fraction from a long section);
+      4) if the cleaned text is short (<=200 chars) -- return it as-is
+         (protects short-answer models);
+      5) otherwise treat as long CoT and take the last number or ``a/b``
+         fraction (``0,75`` -> ``0.75``).
+         
+    """
+    raw = (generation or "").lower()
+    cleaned = _strip_think_and_bold(raw)
+
+    if "\\boxed{" in cleaned:
+        return cleaned
+
+    section = _after_answer_marker(raw)
+    if section is not None:
+        sec = _strip_think_and_bold(section)
+        if sec:
+            if len(sec) <= _SHORT_ANSWER_SECTION_THRESH:
+                return sec
+            return _last_num_or_frac(sec) or sec
+
+    if len(cleaned) <= _LONG_GENERATION_THRESH:
+        return cleaned
+
+    return _last_num_or_frac(cleaned) or cleaned
+
+
 def preprocess_gold(gold: str) -> list:
     """Parses the gold answer ('7', '1/2', '0.75', '183+1839-8')
     into a list of sympy representations."""
-    return parse(_fix_decimal_comma(gold), extraction_mode="first_match")
+    return parse(_fix_decimal_comma((gold or "").lower()), extraction_mode="first_match")
 
 
 def preprocess_prediction(generation: str) -> list:
     """Extracts the final answer from the raw model generation and parses it.
 
-    Extractor order:
+    First lowercases and applies :func:`normalize_generation`, then math_verify:
       1) LatexExtractionConfig (boxed="all") -- prioritizes the contents of
          \\boxed{...}, then other LaTeX expressions;
       2) ExprExtractionConfig -- fallback to plain expressions/numbers in the
          text in case the model did not use LaTeX ('Answer: 33').
     """
+    normalized = normalize_generation(generation)
     return parse(
-        _fix_decimal_comma(generation),
+        _fix_decimal_comma(normalized),
         extraction_config=[
             LatexExtractionConfig(
                 normalization_config=NormalizationConfig(
