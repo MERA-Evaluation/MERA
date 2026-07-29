@@ -68,7 +68,6 @@ The release uses 10 values:
 
 `Song`, `Others`, `Proverb`, `Slang`, `Film`, `Riddle`, `Twister`, `Meme`, `Poems`, `Cartoon`.
 
-- `Proverb` — sayings and proverbs.
 - `Others` aggregates rarer original domains (advertising, slogans and quotes, palindromes, counting rhymes, lullabies, etc.).
 
 
