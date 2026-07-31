@@ -1,54 +1,51 @@
 {
-    "dataset_name": "POLLUXReasoning",
-    "license": "[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)",
-    "dataset_size": "len(DATA)",
-    "description": "Hard Technical Problems prompts from POLLUX-instructions saved in MERA format and scored by Pollux Judge.",
+    "dataset_name": "POLLUX Reasoning",
+    "license": "MERA_private",
+    "dataset_size": 117,
+    "description": "**POLLUX Reasoning** is a generative dataset for MERA Text 2.0: 117 test items and 5 few-shot examples (122 total). Examples are selected from POLLUX with the filter `Technical Problems` / `Hard` / `Общее`. The dataset evaluates technical generation and reasoning: writing, editing, and analyzing code (SQL, Python, C#, C++, JavaScript). The model answer is scored by LLM-as-a-Judge (Pollux-4B-Judge) separately for each `criteria` item.",
     "modalities": [
         "text"
     ],
     "skills": [
-        "Instruction following",
-        "Reasoning",
-        "Technical problem solving",
-        "Open-ended generation"
+        "General Reasoning",
+        "Chain-of-Thought",
+        "Decomposition",
+        "Code Generation"
     ],
-    "domains": [],
-    "universal_domains": [
-        "Technical Problems"
+    "domains": [
+        "technical_problems",
+        "code",
+        "general"
     ],
-    "synt_source_models": [],
+    "synt_source_models": [
+        "OpenAI o1",
+        "GPT-4o",
+        "Claude 3.5 Sonnet",
+        "Llama 3.1 405B",
+        "YandexGPT 4 Pro",
+        "GigaChat MAX",
+        "T-pro-it-1.0"
+    ],
     "data_example": {
-        "instruction": "{question}",
+        "instruction": "Пожалуйста, помоги мне с решением вопроса, требующего логического размышления.\nОтвет выдай в формате:\nОтвет: <сгенерированный текст>\nСам вопрос, требующий логического подхода, таков: {question}",
         "inputs": {
-            "question": "SELECT c.customer_id, \n       AVG(o.total_amount) AS average_order_amount\nFROM customers c\n    JOIN orders o ON c.customer_id = o.customer_id\nWHERE YEAR(o.order_date) = 2023\nGROUP BY c.customer_id;\n\nЗадача: Этот запрос имеет сложность O(n^2) по операциям. Проблема в том, что он выполняет сканирование таблицы orders для каждого клиента, а не один раз.\nИзмени этот запрос, чтобы он имел сложность O(n log n) по операциям."
+            "question": "Предположим, у нас есть таблица shop_visits с полями:\n\nИдентификатор посещения — id\nДата посещения — visit_date\nЧисло покупателей — customer_cnt\n\nДата посещения является первичным ключом данной таблицы.\nПо мере увеличения id увеличивается date.\n\nЗадача: Напиши запрос на SQL, который будет выводить записи, у которых три или более последовательных идентификаторов (id), а количество покупателей для каждой строки этих последовательностей равно или превышает 100."
         },
         "outputs": "",
         "meta": {
-            "id": 6,
             "categories": {
-                "meta": "Technical Problems",
-                "task_type": "Изменить код",
-                "task_subtype": "SQL",
-                "task_subsubtype": "",
                 "difficulty": "Hard",
-                "domain": "Общее"
+                "domain": "Общее",
+                "meta": "Technical Problems",
+                "task_subsubtype": "",
+                "task_subtype": "SQL",
+                "task_type": "Написать код"
             },
-            "prompt_id": 475,
-            "source_instruction": "SELECT c.customer_id, \n       AVG(o.total_amount) AS average_order_amount\nFROM customers c\n    JOIN orders o ON c.customer_id = o.customer_id\nWHERE YEAR(o.order_date) = 2023\nGROUP BY c.customer_id;\n\nЗадача: Этот запрос имеет сложность O(n^2) по операциям. Проблема в том, что он выполняет сканирование таблицы orders для каждого клиента, а не один раз.\nИзмени этот запрос, чтобы он имел сложность O(n log n) по операциям."
+            "id": 1,
+            "prompt_id": 70,
+            "source_instruction": "Предположим, у нас есть таблица shop_visits с полями:\n\nИдентификатор посещения — id\nДата посещения — visit_date\nЧисло покупателей — customer_cnt\n\nДата посещения является первичным ключом данной таблицы.\nПо мере увеличения id увеличивается date.\n\nЗадача: Напиши запрос на SQL, который будет выводить записи, у которых три или более последовательных идентификаторов (id), а количество покупателей для каждой строки этих последовательностей равно или превышает 100."
         },
         "criteria": [
-            {
-                "criteria_description": "Эффективность решения с точки зрения пространственной и временной сложности, оптимальность использования компонентов решения в разрезе итоговой производительности и потребления ресурсов",
-                "criteria_name": "Оптимальный подход",
-                "rubrics": "0: Решение не оптимально по вычислительной или пространственной сложности (худший или средний случай), либо решение реализовано не эффективно с точки зрения используемых компонентов, что увеличивает потребление ресурсов и / или временные затраты на отработку программы.\n\n1: Решение оптимально только с точки зрения либо пространственной, либо вычислительной сложности. Используемые компоненты существенно не увеличивают потребление ресурсов программой, такое решение может быть использовано, однако может быть улучшено с точки зрения потребления ресурсов.\n\n2: Решение эффективно с точки зрения используемых компонентов, решение соответствует оптимальным пространственной и вычислительной сложностям. ",
-                "rubrics_example": ""
-            },
-            {
-                "criteria_description": "Код решения выдает правильный ответ и / или решает поставленную в условии задачу, то есть этот критерий оценивает исключительно правильность ответа, который выдает написанный код, в отрыве от того, как и с помощью чего этот код реализован.",
-                "criteria_name": "Правильность ответа",
-                "rubrics": "0: В результате работы программы получается неправильный ответ, ответ отсутствует или программа не выполняет ни один из требуемых в условии функционалов, либо ответ программы меняется в зависимости от входных данных. \n\n1: Программа выдает правильный ответ, который не зависит от входных данных, на часть вопросов, заданных в условии задачи, или обеспечивает корректное выполнение только части функционала, заложенного в условии задачи.\n\n2: Ответ программы полностью правильный, весь функционал реализован, правильный ответ не зависит от входных данных",
-                "rubrics_example": ""
-            },
             {
                 "criteria_description": "Соответствие коду принятым стандарту и культуре.",
                 "criteria_name": "Чистота и культура кода",
@@ -56,54 +53,82 @@
                 "rubrics_example": ""
             },
             {
+                "criteria_description": "Эффективность решения с точки зрения пространственной и временной сложности, оптимальность использования компонентов решения в разрезе итоговой производительности и потребления ресурсов",
+                "criteria_name": "Оптимальный подход",
+                "rubrics": "0: Решение не оптимально по вычислительной или пространственной сложности (худший или средний случай), либо решение реализовано не эффективно с точки зрения используемых компонентов, что увеличивает потребление ресурсов и / или временные затраты на отработку программы.\n\n1: Решение оптимально только с точки зрения либо пространственной, либо вычислительной сложности. Используемые компоненты существенно не увеличивают потребление ресурсов программой, такое решение может быть использовано, однако может быть улучшено с точки зрения потребления ресурсов.\n\n2: Решение эффективно с точки зрения используемых компонентов, решение соответствует оптимальным пространственной и вычислительной сложностям.",
+                "rubrics_example": ""
+            },
+            {
                 "criteria_description": "Решение содержит компоненты, заявленные в условии, или выполнено с учетом требований, указанных в задаче",
                 "criteria_name": "Формальный учет требований из запроса пользователя",
                 "rubrics": "0: Решение игнорирует требования условия задачи к решению. Использованы не те компоненты и / или методы, через которые предполагалось решать задачу. Сюда же входит решение, которое не проходит по вычислительной или пространственной сложности, если такие требования были указаны в условии.\n\n1: Решение содержит часть компонентов или методов, которые требовались в условии. Решение частично реализует требования, предъявляемые в условии задачи. Либо решение, кроме нужно функционала или его части, выполняет также лишний функционал, который не требовался изначально в условии.\n\n2: Решение содержит и выполняет ровно то, что требовалось в условии, код решает поставленную задачу, в коде нет ничего лишнего, никакого функционала, который не был заявлен в условии. В коде использованы ровно те компоненты, методы и парадигмы, которые требовались в условии.",
                 "rubrics_example": ""
+            },
+            {
+                "criteria_description": "Код решения выдает правильный ответ и / или решает поставленную в условии задачу, то есть этот критерий оценивает исключительно правильность ответа, который выдает написанный код, в отрыве от того, как и с помощью чего этот код реализован.",
+                "criteria_name": "Правильность ответа",
+                "rubrics": "0: В результате работы программы получается неправильный ответ, ответ отсутствует или программа не выполняет ни один из требуемых в условии функционалов, либо ответ программы меняется в зависимости от входных данных. \n\n1: Программа выдает правильный ответ, который не зависит от входных данных, на часть вопросов, заданных в условии задачи, или обеспечивает корректное выполнение только части функционала, заложенного в условии задачи.\n\n2: Ответ программы полностью правильный, весь функционал реализован, правильный ответ не зависит от входных данных",
+                "rubrics_example": ""
             }
         ],
-        "reference_answer": "CREATE TEMP TABLE orders_2023 AS\nSELECT customer_id,\n       total_amount\nFROM orders\nWHERE YEAR(order_date) = 2023\nORDER BY customer_id;\n\nCREATE TEMP TABLE unique_customers AS\nSELECT DISTINCT customer_id \nFROM orders_2023;\n\nSELECT uc.customer_id, \n       AVG(o23.total_amount) AS average_order_amount\nFROM unique_customers uc\n    JOIN orders_2023 o23 ON uc.customer_id = o23.customer_id\nGROUP BY uc.customer_id\nORDER BY uc.customer_id;"
+        "reference_answer": "WITH q1 AS (\nSELECT *, \n     COUNT(*) OVER( ORDER BY id RANGE BETWEEN CURRENT ROW AND 2 FOLLOWING ) following_cnt,\n     COUNT(*) OVER( ORDER BY id RANGE BETWEEN 2 PRECEDING AND CURRENT ROW ) preceding_cnt,\n     COUNT(*) OVER( ORDER BY id RANGE BETWEEN 1 PRECEDING AND 1 FOLLOWING ) current_cnt\nFROM shop_visits\nWHERE customer_cnt >= 100\n)\nSELECT id, visit_date, customer_cnt\nFROM q1\nWHERE following_cnt = 3 OR preceding_cnt = 3 OR current_cnt = 3\nORDER BY visit_date"
     },
     "data_field_descriptions": {
         "instruction": {
-            "ru": "?????? ?????????? ? ????????????? {question}.",
-            "en": "Instruction template with the {question} placeholder."
+            "en": "one of five wrapper prompts from dataset_meta.json with the {question} placeholder",
+            "ru": "один из пяти wrapper-промптов из dataset_meta.json с плейсхолдером {question}"
         },
         "inputs": {
-            "ru": "??????? ?????? ??? ??????? ??????????.",
-            "en": "Inputs used to render the instruction template."
+            "question": {
+                "en": "problem statement (text and/or code)",
+                "ru": "условие задачи (текст и/или код)"
+            }
         },
         "outputs": {
-            "ru": "?????? ??????, ??? ??? ?????? ??????????? judge-???????.",
-            "en": "Empty string because answers are evaluated by a judge model."
+            "en": "intentionally empty string; not a gold answer; the model answer appears at evaluation time",
+            "ru": "намеренно пустая строка; не эталон; ответ модели появляется на этапе оценки"
         },
         "meta": {
-            "ru": "?????????? ????????? ??????? POLLUX.",
-            "en": "Source POLLUX sample metadata."
+            "id": {
+                "en": "example id",
+                "ru": "идентификатор примера"
+            },
+            "prompt_id": {
+                "en": "source POLLUX prompt id",
+                "ru": "идентификатор исходного промпта POLLUX"
+            },
+            "source_instruction": {
+                "en": "original instruction text",
+                "ru": "исходная формулировка задания"
+            },
+            "categories": {
+                "en": "difficulty, domain, meta, task_type, task_subtype, task_subsubtype",
+                "ru": "difficulty, domain, meta, task_type, task_subtype, task_subsubtype"
+            }
         },
         "criteria": {
-            "ru": "?????? ????????? ?????? POLLUX ?? ?????? 0/1/2.",
-            "en": "List of POLLUX evaluation criteria with 0/1/2 rubrics."
+            "en": "judge criteria: criteria_name, criteria_description, rubrics, rubrics_example",
+            "ru": "критерии судьи: criteria_name, criteria_description, rubrics, rubrics_example"
         },
         "reference_answer": {
-            "ru": "????????? ?????, ???????????? Pollux Judge.",
-            "en": "Reference answer passed to Pollux Judge."
+            "en": "reference solution or fixed code; passed to the judge at evaluation time",
+            "ru": "эталон решения или исправленного кода; передаётся судье при оценке"
         }
     },
     "prompts": [
-        "{question}",
-        "User request:\n{question}",
-        "Follow the user request and provide a helpful answer.\n\n{question}",
-        "Read the instruction and answer directly.\n\n{question}",
-        "Produce the best possible response to this request.\n\n{question}"
+        "Пожалуйста, помоги мне с текстом.\nОт тебя потребуется помощь в формате свободной генерации, но по возможности сохраняй краткость и добавляй только те элементы, которые необходимы для генерации ответа. Ответ должен представлять собой сгенерированный тобою текст в формате:\nОтвет: <сгенерированный текст>\nСама задача, требующая текстовой генерации, такова: {question}",
+        "Пожалуйста, помоги мне с решением вопроса, требующего логического размышления.\nОтвет выдай в формате:\nОтвет: <сгенерированный текст>\nСам вопрос, требующий логического подхода, таков: {question}",
+        "Нужна ваша помощь с задачей на рассуждение.\nПредложите ответ, при возможности сохраняя краткость и избегая лишних дополнений, в формате:\nОтвет: <сгенерированный текст>\nСам вопрос таков: {question}",
+        "Помогите, пожалуйста, возник вопрос.\nОтвет предложите в формате:\nОтвет: <сгенерированный текст>\nСобственно, вопрос: {question}",
+        "Сгенерировать текст ответа на вопрос, требующий логики и навыков рассуждения.\nДать ответ лаконично в формате:\nОтвет: <сгенерированный текст>\nСам вопрос: {question}"
     ],
-    "metrics": {
-        "llm_as_judge": {
-            "ru": "??????? ?????? Pollux Judge: ???????????? ?????? ???????? ?? ?????? 0/1/2, ???? ????????? ??? mean(raw criterion scores) / 2.",
-            "en": "Mean Pollux Judge score: only 0/1/2 criteria are used, and the final value is mean(raw criterion scores) / 2."
+    "metrics": [
+        {
+            "name": "llm_as_judge",
+            "aggregation": "mean",
+            "higher_is_better": true,
+            "description_en": "For each criteria item, a separate Pollux-4B-Judge call is made via an OpenAI-compatible endpoint. Criterion scores are 0/1/2; the example score is the mean of the scores divided by 2.",
+            "description_ru": "На каждый элемент criteria выполняется отдельный вызов Pollux-4B-Judge через OpenAI-compatible endpoint. Баллы критерия — 0/1/2; итог примера — среднее баллов, делённое на 2."
         }
-    },
-    "human_benchmark": {
-        "llm_as_judge": 0.0
-    }
+    ]
 }

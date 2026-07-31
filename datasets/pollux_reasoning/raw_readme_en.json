@@ -1,8 +1,0 @@
-{
-    "Task description": "POLLUXReasoning evaluates open-ended reasoning and technical problem solving on the hard Technical Problems subset of ai-forever/POLLUX-instructions, saved in MERA dataset format.",
-    "Motivation": "The dataset targets instruction-tuned generative models and measures technical reasoning quality where exact-match metrics are not meaningful.",
-    "Dataset creation": "The dataset is created by filtering the train split of ai-forever/POLLUX-instructions to retain only rows with meta equal to Technical Problems and difficulty equal to hard after lowercase normalization. Five examples are placed into shots.json, and the remaining examples are stored in test.json. Only criteria with 0/1/2 rubrics are used.",
-    "Evaluation": "Model outputs are evaluated with Pollux-4B-Judge through an OpenAI-compatible vLLM endpoint. The final metric is mean(raw criterion scores) / 2.",
-    "Human baseline": "No human baseline is included yet. The placeholder value is 0.0.",
-    "Contributors": "MERA contributors"
-}
