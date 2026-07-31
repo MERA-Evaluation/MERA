@@ -2,7 +2,7 @@ import os
 import re
 from functools import lru_cache
 from string import Formatter
-from typing import Any, Dict, Iterable, List
+from typing import Any, Dict, Iterable, List, Optional
 
 
 METRIC_NAME = "llm_as_judge"
@@ -73,7 +73,7 @@ def _judge_answer_with_prompt(
     instruction: str,
     answer: str,
     reference_answer: str,
-    criterion: Dict[str, Any] | None,
+    criterion: Optional[Dict[str, Any]],
     prompt_template: str,
     score_max: float,
 ) -> float:

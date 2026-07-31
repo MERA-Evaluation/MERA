@@ -1,37 +1,46 @@
 {
-    "dataset_name": "POLLUXHumanCentric",
-    "license": "[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)",
-    "dataset_size": "len(DATA)",
-    "description": "Hard Human Interaction prompts from POLLUX-instructions saved in MERA format and scored by an LLM judge.",
+    "dataset_name": "POLLUX Human Centric",
+    "license": "MERA_private",
+    "dataset_size": 70,
+    "description": "**POLLUX Human Centric** is a MERA Text v.2.0 generative subset of hard Human Interaction tasks (recommendations, advice, action plans) from POLLUX, scored by Pollux-4B-Judge (`llm_as_judge`).",
     "modalities": [
         "text"
     ],
     "skills": [
-        "Instruction following",
-        "Human interaction",
-        "Open-ended generation"
+        "Alignment",
+        "Chain-of-Acts and Psychological & Agent Skills",
+        "Art & Cultural Analysis",
+        "Creativity"
     ],
-    "domains": [],
-    "universal_domains": [
-        "General"
+    "domains": [
+        "human_interaction",
+        "general"
     ],
-    "synt_source_models": [],
+    "synt_source_models": [
+        "OpenAI o1",
+        "GPT-4o",
+        "Claude 3.5 Sonnet",
+        "Llama 3.1 405B",
+        "YandexGPT 4 Pro",
+        "GigaChat MAX",
+        "T-pro-it-1.0"
+    ],
     "data_example": {
-        "instruction": "User request:\n{question}",
+        "instruction": "Пожалуйста, помоги мне с текстом.\nОт тебя потребуется помощь в формате свободной генерации, но по возможности сохраняй краткость и добавляй только те элементы, которые необходимы для генерации ответа. Ответ должен представлять собой сгенерированный тобою текст в формате:\nОтвет: <сгенерированный текст>\nСама задача, требующая текстовой генерации, такова: {question}",
         "inputs": {
             "question": "Какие соборы, монастыри и церкви можешь порекомендовать во Владимире? Хочу посмотреть их архитектуру, но мне нужны только самые древние памятники. Если среди них будут какие-то платные достопримечательности, то сразу пиши об этом"
         },
         "outputs": "",
         "meta": {
-            "id": 1,
             "categories": {
-                "meta": "Human Interaction",
-                "task_type": "Дать рекомендации",
-                "task_subtype": "",
-                "task_subsubtype": "",
                 "difficulty": "Hard",
-                "domain": "Общее"
+                "domain": "Общее",
+                "meta": "Human Interaction",
+                "task_subsubtype": "",
+                "task_subtype": "",
+                "task_type": "Дать рекомендации"
             },
+            "id": 1,
             "prompt_id": 36,
             "source_instruction": "Какие соборы, монастыри и церкви можешь порекомендовать во Владимире? Хочу посмотреть их архитектуру, но мне нужны только самые древние памятники. Если среди них будут какие-то платные достопримечательности, то сразу пиши об этом"
         },
@@ -43,7 +52,7 @@
                 "rubrics_example": "Запрос пользователя: Как лучше организовать свое утро, чтобы день прошел продуктивно\n\nОтвет модели: Просыпайся каждый час ночью, чтобы потренироваться вставать быстро. Так ты точно будешь готов к утреннему подъему!\n\nОценка разметчика: 0 баллов. (Этот совет не является целесообразным, так как он не соответствует задаче организации продуктивного утра и, скорее, приведет к обратному результату — усталости и снижению продуктивности в течение дня.)"
             },
             {
-                "criteria_description": "Данный критерий оценивает, если ли в ответе модели зацикливания, которые не критично влияют на качество ответа.",
+                "criteria_description": "Данный критерий оценивает, есть ли в ответе модели зацикливания, которые не критично влияют на качество ответа.",
                 "criteria_name": "Отсутствие зацикливаний",
                 "rubrics": "0: Ответ модели все еще можно прочитать и оценить по другим критериям, однако довольно много зацикливаний, зацикливаются целые предложения или куски текста, что ощутимо мешает восприятию.\n\n1: Ответ модели почти не содержит зацикливаний — одно-два небольших зацикливания.\n\n2: Ответ модели не содержит зацикливаний.",
                 "rubrics_example": "Пример некритичного зацикливания:\n\nПомещица была очень горда. Она была помещицей, а значит, она была выше всех. Она была очень богата, но она не любила своих крестьян. Она не любила их, потому что они были бедны. Она не любила их, потому что они были глупы. Она не любила их, потому что они были ленивы. Она не любила их, потому что они были невежественны. Она не любила их, потому что они были некрасивы. (И дальше продолжение основной истории без зацикливаний.)"
@@ -109,7 +118,7 @@
                 "rubrics_example": "Например, модель может выполнить запрос пользователя и в конце написать: «Я еще могу рассказать про {...}, хотите послушать?»\n\nЕще один пример — когда пользователь пишет в запросе «Привет, я житель лучшего города на земле)) Напиши мне реферат про Древний Рим» — и модель пишет реферат, но в начале или в конце диалога уточняет: «Я вижу, вы очень гордитесь своим городом, это здорово! Расскажите о нем поподробнее»."
             },
             {
-                "criteria_description": "Данный критерий оценивает, что модель:\n— Дает подробный, развернутый, исчерпывающий (но не избыточный) ответ.\n— Обосновывает советы и рекомендации. ",
+                "criteria_description": "Данный критерий оценивает, что модель:\n— Дает подробный, развернутый, исчерпывающий (но не избыточный) ответ.\n— Обосновывает советы и рекомендации.",
                 "criteria_name": "Глубина проработки ответа",
                 "rubrics": "0: Ответ модели размытый и общий, не содержит конкретики и/или не завершен.\n \n1: Ответ выглядит развернутым и завершенным, но есть пробелы в деталях и/или избыточная информация.\n\n2: Исчерпывающий детальный ответ, не содержит ни пробелов в деталях, ни лишней информации.",
                 "rubrics_example": ""
@@ -125,82 +134,60 @@
     },
     "data_field_descriptions": {
         "instruction": {
-            "ru": "?????? ?????????? ? ????????????? {question}.",
-            "en": "Instruction template with the {question} placeholder."
+            "en": "wrapper prompt string with {question} placeholder (from dataset_meta.json prompts)",
+            "ru": "строка wrapper-промпта с плейсхолдером {question} (из prompts в dataset_meta.json)"
         },
         "inputs": {
             "question": {
-                "ru": "????? ????????????????? ??????? ?? ????????? POLLUX.",
-                "en": "User instruction text from the source POLLUX dataset."
+                "en": "user question / task statement for free-form generation",
+                "ru": "пользовательский вопрос / условие задачи для свободной генерации"
             }
         },
         "outputs": {
-            "ru": "?????? ??????: ????????? ????? ?? ????????????.",
-            "en": "Empty string: no reference answer is used."
+            "en": "intentionally empty string; not a gold answer; model output is produced at evaluation time",
+            "ru": "намеренно пустая строка; не эталон; ответ модели появляется на этапе оценки"
         },
         "meta": {
             "id": {
-                "ru": "???????? ????????????? ???????.",
-                "en": "Global example identifier."
-            },
-            "categories": {
-                "meta": {
-                    "ru": "??????????????? ????????? ????????? ????????.",
-                    "en": "Top-level category from the source dataset."
-                },
-                "task_type": {
-                    "ru": "??? ?????? ? ???????? ????????.",
-                    "en": "Task type in the source dataset."
-                },
-                "task_subtype": {
-                    "ru": "?????? ?????? ? ???????? ????????.",
-                    "en": "Task subtype in the source dataset."
-                },
-                "task_subsubtype": {
-                    "ru": "????????? ?????? ? ???????? ????????.",
-                    "en": "Task subsubtype in the source dataset."
-                },
-                "difficulty": {
-                    "ru": "????????? ???????.",
-                    "en": "Example difficulty."
-                },
-                "domain": {
-                    "ru": "????? ???????.",
-                    "en": "Example domain."
-                }
-            },
-            "criteria": {
-                "ru": "Список критериев оценки POLLUX, передаваемый Pollux Judge.",
-                "en": "Source POLLUX criteria passed to Pollux Judge."
+                "en": "example id",
+                "ru": "идентификатор примера"
             },
             "prompt_id": {
-                "ru": "????????????? ????????? ??????? ? POLLUX.",
-                "en": "Source POLLUX prompt identifier."
-            },
-            "reference_answer": {
-                "ru": "????????? ????? ?? ????????? ????????.",
-                "en": "Reference answer from the source dataset."
+                "en": "source POLLUX prompt id",
+                "ru": "id исходного промпта POLLUX"
             },
             "source_instruction": {
-                "ru": "???????? ????? ?????????? ?? ???????????? ? ?????? MERA.",
-                "en": "Original instruction text before wrapping into the MERA template."
+                "en": "original instruction text",
+                "ru": "исходная формулировка задания"
+            },
+            "categories": {
+                "en": "difficulty, domain, meta, task_type, task_subtype, task_subsubtype",
+                "ru": "difficulty, domain, meta, task_type, task_subtype, task_subsubtype"
             }
+        },
+        "criteria": {
+            "en": "list of judge criteria objects with criteria_name, criteria_description, rubrics, rubrics_example",
+            "ru": "список критериев судьи: criteria_name, criteria_description, rubrics, rubrics_example"
+        },
+        "reference_answer": {
+            "en": "reference solution for the judge (empty in Human-Centric; usually filled in Reasoning)",
+            "ru": "эталон для судьи (пустой в Human-Centric; обычно заполнен в Reasoning)"
         }
     },
     "prompts": [
-        "{question}",
-        "User request:\n{question}",
-        "Follow the user request and provide a helpful answer.\n\n{question}",
-        "Read the instruction and answer directly.\n\n{question}",
-        "Produce the best possible response to this request.\n\n{question}"
+        "Пожалуйста, помоги мне с текстом.\nОт тебя потребуется помощь в формате свободной генерации, но по возможности сохраняй краткость и добавляй только те элементы, которые необходимы для генерации ответа. Ответ должен представлять собой сгенерированный тобою текст в формате:\nОтвет: <сгенерированный текст>\nСама задача, требующая текстовой генерации, такова: {question}",
+        "Пожалуйста, помоги мне с решением вопроса, требующего понимания человеческой культуры и знания человеческой природы.\nОтвет выдай в формате:\nОтвет: <сгенерированный текст>\nСам вопрос, требующий понимания природы человека и культуры, таков: {question}",
+        "Нужна ваша помощь с задачей на человеческий фактор.\nПредложите ответ, при возможности сохраняя краткость и избегая лишних дополнений, в формате:\nОтвет: <сгенерированный текст>\nСам вопрос таков: {question}",
+        "Помогите, пожалуйста, возник вопрос.\nОтвет предложите в формате:\nОтвет: <сгенерированный текст>\nСобственно, вопрос: {question}",
+        "Сгенерировать текст ответа на вопрос, требующий знания, как мыслит человек и как устроена культура людского сообщества.\nДать ответ лаконично в формате:\nОтвет: <сгенерированный текст>\nСам вопрос: {question}"
     ],
-    "metrics": {
-        "llm_as_judge": {
-            "ru": "Средняя оценка Pollux Judge: используются только критерии со шкалой 0/1/2, итог считается как mean(raw criterion scores) / 2.",
-            "en": "Mean Pollux Judge score: only 0/1/2 criteria are used, and the final value is mean(raw criterion scores) / 2."
+    "metrics": [
+        {
+            "name": "llm_as_judge",
+            "aggregation": "mean",
+            "higher_is_better": true,
+            "description_en": "Mean of per-criterion Pollux-4B-Judge scores (0/1/2), divided by 2. One judge call per criteria item via OpenAI-compatible endpoint.",
+            "description_ru": "Среднее сырых баллов Pollux-4B-Judge по критериям (0/1/2), делённое на 2. Один вызов судьи на элемент criteria через OpenAI-compatible endpoint."
         }
-    },
-    "human_benchmark": {
-        "llm_as_judge": 0.0
-    }
+    ]
 }
