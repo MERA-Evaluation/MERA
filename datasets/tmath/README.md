@@ -5,7 +5,7 @@
 
 **T-Math** is a Russian-language dataset of math olympiad problems for evaluating the mathematical reasoning capabilities of large language models. The task is to solve a problem written in Russian and return only the final verifiable answer.
 
-The dataset contains 331 problems from the [All-Russian School Olympiad](https://vos.olimpiada.ru/) and the [Moscow Olympiad](https://mos.olimpiada.ru) for school students, covering the period from 1998 to 2025. The tasks and their ground-truth answers were extracted automatically and then verified by human assessors.
+The dataset contains 310 problems from the [All-Russian School Olympiad](https://vos.olimpiada.ru/) and the [Moscow Olympiad](https://mos.olimpiada.ru) for school students, covering the period from 2005 to 2025. The tasks and their ground-truth answers were extracted automatically and then verified by human assessors.
 
 Details are presented in the academic paper [T-pro 2.0: An Efficient Russian Hybrid-Reasoning Model and Playground](https://aclanthology.org/2026.eacl-demo.22/)
 
@@ -73,14 +73,28 @@ Each dataset question contains the following fields:
 
 ### Prompts
 
-For the task, several prompt variants were prepared. Each prompt asks the model to solve a mathematical problem and output only the final answer. The problem statement is substituted into the `{question}` placeholder.
+For the task, five prompt variants were prepared. Each prompt asks the model to solve a mathematical problem and output only the final answer. The problem statement is substituted into the `{question}` placeholder.
 
-Prompt example:
+Prompt variants used in the dataset:
 
 ```json
-{
-    "instruction": "Привет! Поможешь с задачей?\n\nЗадача:\nНайдите ответ к следующей математической задаче.\n\nУсловие:\n{question}\n\nФормат ответа:\nУкажите только итоговый ответ."
-}
+[
+    {
+        "instruction": "Решите математическую задачу.\n\nУсловие:\n{question}\n\nФормат ответа:\nВыведите только окончательный ответ."
+    },
+    {
+        "instruction": "Привет! Поможешь с задачей?\n\nЗадача:\nНайдите ответ к следующей математической задаче.\n\nУсловие:\n{question}\n\nФормат ответа:\nУкажите только итоговый ответ."
+    },
+    {
+        "instruction": "Помогите мне, пожалуйста.\n\nЗадача:\nРешите математическую задачу и найдите правильный ответ.\n\nУсловие:\n{question}\n\nФормат ответа:\nВ качестве ответа укажите только окончательный ответ."
+    },
+    {
+        "instruction": "Задача:\nВыполните решение математической задачи и определите итоговый результат.\n\nУсловие:\n{question}\n\nФормат ответа:\nВерните только окончательный ответ."
+    },
+    {
+        "instruction": "Задача:\nПо данному условию нужно найти правильный математический ответ.\n\nУсловие:\n{question}\n\nФормат ответа:\nВ ответе укажите только окончательный результат."
+    }
+]
 ```
 
 

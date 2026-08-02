@@ -1,7 +1,7 @@
 {
     "dataset_name": "T-Math",
     "license": "apache-2.0",
-    "dataset_size": 331,
+    "dataset_size": 310,
     "description": "**T-Math** is a Russian-language dataset of math olympiad problems for evaluating the mathematical reasoning capabilities of large language models.",
     "modalities": [
         "text"
@@ -88,7 +88,7 @@
             "instruction": "Задача:\nВыполните решение математической задачи и определите итоговый результат.\n\nУсловие:\n{question}\n\nФормат ответа:\nВерните только окончательный ответ."
         },
         {
-            "instruction": "Решите следующую математическую задачу эффективно и ясно. Последняя строка вашего ответа должна иметь следующий формат:\n'Таким образом, окончательный ответ: $\\boxed{ОТВЕТ}$.' (без кавычек), где ОТВЕТ - это просто окончательное число или выражение, решающее задачу.\nДумайте шаг за шагом перед ответом.\n\nУсловие:\n{question}"
+            "instruction": "Задача:\nПо данному условию нужно найти правильный математический ответ.\n\nУсловие:\n{question}\n\nФормат ответа:\nВ ответе укажите только окончательный результат."
         }
     ],
     "metrics": {

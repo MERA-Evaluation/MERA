@@ -66,7 +66,7 @@
 
 | source | количество |
 |--------|------------|
-| olympiads | 132 |
+| olympiads | 131 |
 | olympic_reason | 49 |
 | MathArena | 34 |
 | turgor | 30 |

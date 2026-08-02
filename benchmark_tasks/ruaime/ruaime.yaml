@@ -33,8 +33,8 @@ metric_list:
   - metric: exact_match
     aggregation: mean
     higher_is_better: true
-    ignore_case: true
-    ignore_punctuation: true
+    ignore_case: false
+    ignore_punctuation: false
     regexes_to_ignore:
       - "\\$"
       - "\\boxed"
