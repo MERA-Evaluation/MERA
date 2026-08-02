@@ -18,14 +18,14 @@ filter_list:
 process_results: !function utils.process_results
 
 metric_list:
-  - metric: em
+  - metric: exact_match
     aggregation: mean
     higher_is_better: true
   - metric: judge_score
     aggregation: mean
     higher_is_better: true
 
-num_fewshot: null
+num_fewshot: 0
 
 metadata:
   version: 1.0
