@@ -10,7 +10,7 @@ def process_results(doc, results):
     judge_score = compute_judge_score(doc, model_answer)
 
     return {
-        "em": exact_score,
+        "exact_match": exact_score,
         "judge_score": judge_score,
     }
 
