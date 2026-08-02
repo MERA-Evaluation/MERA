@@ -2,7 +2,7 @@
     "dataset_name": "RWSDNew",
     "license": "MERA_private",
     "dataset_size": 423,
-    "description": "Russian reference-resolution and nonce-word reasoning dataset based on RWSD and Glokaya-kuzdra-style contexts.",
+    "description": "Russian reference-resolution and nonce-word reasoning dataset based on RWSD and Glokaya-kusdra-style contexts.",
     "modalities": [
         "text"
     ],
@@ -10,6 +10,7 @@
         "Russian language proficiency",
         "Coreference resolution",
         "Syntactic ambiguity resolution",
+        "Lexical ambiguity resolution",
         "Morphological reasoning",
         "Contextual reasoning"
     ],
@@ -19,7 +20,7 @@
         "rwsd": {
             "instruction": "Задача:\nПо контексту и референсу нужно определить, к каким вариантам относится референс.\n\nРеференс может указывать как на отдельное слово, так и на того, кто выполняет действие. В последнем случае нужно определить, какое из существительных имеется в виду.\n\nКонтекст:\n{context}\n\nРеференс:\n{reference}\n\nФормат ответа:\nВерните результат в формате\n\nОтвет: <буква>\n\nБуквами ответа могут являться только заглавные буквы русского алфавита из списка (А, Б, В, Г, Д, Е, Ё).\n\nВопрос:\n{question}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}\nД. {option_e}\nЕ. {option_f}\nЁ. {option_g}\n",
             "inputs": {
-                "question": "Относится ли референс к данному слову среди всех вариантов в указанном контексте?",
+                "question": "К какому из предложенных вариантов ответа относится слово референс в данном контексте?",
                 "context": "Дни летели за днями, птицы за птицами, депеши за депешами, а самолёты Аркадия Петровича Авастюрова никак не желали подниматься с полей в небеса, и всёшеньки! Они понуро жались к стерне и что-то надрывно бурчали про себя время от времени, но и только.",
                 "reference": "они",
                 "option_a": "дни",
@@ -78,8 +79,8 @@
                 "en": "source text, dialogue, or fragment"
             },
             "reference": {
-                "ru": "референс, который нужно соотнести с вариантом ответа; в части kusdra может быть служебным значением",
-                "en": "reference to be matched with an answer option; in the kusdra subset it may be a service value"
+                "ru": "референс, который нужно соотнести с вариантом ответа в заданиях rwsd; в заданиях kusdra поле не используется и содержит плейсхолдер ‘-‘",
+                "en": "reference to be matched with an answer option in rwsd; the field is unused in kusdra and contains the ‘-‘ placeholder"
             },
             "option_a": {
                 "ru": "вариант ответа А",
@@ -151,12 +152,12 @@
     ],
     "metrics": {
         "Exact match": {
-            "ru": "Метрика Exact match вычисляет долю ответов модели, которые точно совпадают с правильной буквой после извлечения строки после маркера Ответ:.",
-            "en": "Exact match is the proportion of model answers that exactly match the reference letter after extracting the string following the Answer marker."
+            "ru": "Метрика Exact match вычисляет долю ответов модели, которые точно совпадают с правильной буквой после извлечения строки после маркера Ответ:. Значение находится в диапазоне от 0 до 1.",
+            "en": "Exact match is the proportion of model answers that exactly match the reference letter after extracting the string following the Answer marker. The score ranges from 0 to 1."
         },
         "LLM judge score": {
-            "ru": "Метрика, в которой LLM-судья сравнивает ответ модели с эталонным ответом для каждого примера. Если ответ признан правильным, пример получает 1; если неправильным, 0. Итоговое значение метрики равно доле примеров, получивших оценку 1.",
-            "en": "A metric where an LLM judge compares the model answer with the reference answer for each example. If the answer is judged correct, the example receives 1; if it is judged incorrect, it receives 0. The final metric value is the proportion of examples that received 1."
+            "ru": "LLM-судья сравнивает ответ модели с эталонным ответом и оценивает его правильность и полноту: 1 — ответ полностью правильный и полный; 0.5 — ответ частично правильный или неполный, но содержит существенную часть правильного ответа; 0 — ответ неправильный, противоречивый или не содержит правильного ответа. Итоговое значение метрики равно среднему баллу по всем примерам.",
+            "en": "An LLM judge compares the model answer with the reference answer and evaluates its correctness and completeness: 1 indicates a fully correct and complete answer; 0.5 indicates a partially correct or incomplete answer that contains an essential part of the correct answer; 0 indicates an incorrect or contradictory answer, or one that does not contain the correct answer. The final metric value is the mean score across all examples."
         }
     }
 }
