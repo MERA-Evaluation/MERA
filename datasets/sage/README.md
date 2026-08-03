@@ -42,7 +42,7 @@ The metrics reflect the quality of correcting spelling and punctuation errors, a
 ### Validity
 The text-to-text task formulation combined with edit-level metrics enables separate evaluation of a model’s ability to detect errors (recall) and correct them accurately (precision), which would be difficult in classification-based or span-based settings. This design also reflects real-world usage scenarios in which LLMs act as text editors.
 The benchmark design controls key evaluation factors: stratified sampling based on input text length is applied, and spelling and punctuation errors are evaluated separately.
-At the same time, the benchmark has validity limitations. Some cases of Russian punctuation may allow multiple acceptable interpretations in the gold annotations. Mandatory restoration of the letter \"ё\" is an intentional design choice and may affect evaluation results for models trained on alternative writing conventions. In addition, the aggregated metric `ERRANT_F1` does not capture relationships between different error types and should be interpreted together with task-specific metrics.",
+At the same time, the benchmark has validity limitations. Some cases of Russian punctuation may allow multiple acceptable interpretations in the gold annotations. Mandatory restoration of the letter \"ё\" is an intentional design choice and may affect evaluation results for models trained on alternative writing conventions. In addition, the aggregated metric `ERRANT_F1` does not capture relationships between different error types and should be interpreted together with task-specific metrics.
 
 
 ## Data description
