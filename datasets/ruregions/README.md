@@ -3,7 +3,7 @@
 
 ## Task Description
 
-**RussianRegions** is a dataset for evaluating the capabilities of language models in solving tasks in the Russian language that are specific to certain regions of Russia. The benchmark tests knowledge of Russian regionalisms, as well as the ability to use them in context.
+**RussianRegions** is a dataset for evaluating the capabilities of language models in solving tasks in variations of the Russian language specific to certain regions of Russia. The benchmark tests knowledge of Russian regionalisms, as well as the ability to use them in context.
 
 Evaluated skills: Russian language proficiency, Regional culture awareness
 
@@ -93,7 +93,7 @@ Prompt example:
 
 ### Dataset Creation
 
-Open materials were used as sources for regional expressions: [1](https://ru.wikipedia.org/wiki/Регионализмы_русского_языка), [2](https://yandex.ru/company/researches/2021/local-words), as well as expressions collected by expert linguists. The tasks for the dataset were also compiled by expert linguists. The tasks in the dataset are divided into 3 types: Type 1. General understanding of a text containing regional expressions; Type 2. Understanding the synonymy between regionalisms and the codified language; Type 3. Understanding the regions of origin of regional words. Each task type contains 201 examples, for a total of 603 examples in the dataset.
+Open materials were used as sources for regional expressions: [1]([https://ru.wikipedia.org/wiki/Регионализмы_русского_языка](https://ru.wiktionary.org/wiki/%D0%9F%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5:%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D0%B5_%D1%80%D0%B5%D0%B3%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7%D0%BC%D1%8B)), [2](https://yandex.ru/company/researches/2021/local-words), as well as expressions collected by expert linguists. The tasks for the dataset were also compiled by expert linguists. The tasks in the dataset are divided into 3 types: Type 1. General understanding of a text containing regional expressions; Type 2. Understanding the synonymy between regionalisms and the codified language; Type 3. Understanding the regions of origin of regional words. Each task type contains 201 examples, for a total of 603 examples in the dataset.
 
 
 ## Evaluation
