@@ -1,0 +1,96 @@
+tag:
+  - mera
+  - mera_all
+dataset_path: MERA-evaluation/SOBHard
+dataset_name: null
+task: sobhard
+
+test_split: test
+fewshot_split: shots
+
+output_type: generate_until
+
+# The prompt is the SAP four-block layout; every template carries exactly
+# {task} / {input_data} / {format} / {question} and the question always comes last.
+doc_to_text: "{{instruction.format(**inputs)}}"
+# The reference document, packaged in the fence the prompt demands. Scoring does
+# not read this field — it reads meta.reference, which survives the MERA
+# convention of blanking answers before a Hub upload (see utils.Ctx._load_reference).
+doc_to_target: "{{outputs}}"
+
+# MERA-style few-shot construction: only the first shot carries the full
+# instruction. Dormant under num_fewshot: 0, activates with --num_fewshot N.
+# The instructionless form keeps the block order of the full prompt so a shot
+# never demonstrates a different layout.
+fewshot_config:
+  sampler: !function ../custom_samplers.FewshotSampler
+  doc_to_text_without_instruction: "{{'Задача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}'.format(**inputs)}}"
+  query: "{{instruction.format(**inputs)}}"
+
+# The prompt ends with the instruction and no answer trigger, so a few-shot
+# answer needs a visible break from the prompt it follows. Unused at
+# num_fewshot: 0, where the context is doc_to_text alone.
+target_delimiter: "\n\n"
+
+# The answer is a whole document inside a fenced block: it contains blank lines
+# by construction, so the lm-eval default (until = fewshot_delimiter = "\n\n")
+# would cut it off after the first paragraph and fail the sample for the
+# harness's reason rather than the model's. Only end-of-turn markers stop it.
+# `max_gen_toks` (not `max_new_tokens`) is the key lm-eval actually reads: the HF
+# backend pops it in generate_until, and the API backends map it to `max_tokens`.
+# The budget is sized for a reasoning model, not for the document. The first real
+# run used 6144 — enough for the largest reference (4329 tokens) plus the fence —
+# and 253 of 500 answers came back empty at the ceiling: the model had spent the
+# whole budget thinking, with ~99% of the median completion being reasoning
+# tokens. The ceiling has to clear reasoning AND the answer, or the benchmark
+# measures the budget rather than the model.
+generation_kwargs:
+  do_sample: false
+  temperature: 0.0
+  max_gen_toks: 65536
+  until:
+    - "<|eot_id|>"
+    - "<|im_end|>"
+    - "</s>"
+
+# No answer extraction: the response is scored verbatim (minus reasoning traces,
+# stripped inside process_results). Unwrapping a stray fence or peeling off a
+# preamble here would hide exactly the packaging errors the task measures.
+# take_first only unpacks [[gen]] -> [gen].
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: "take_first"
+
+process_results: !function utils.process_results
+metric_list:
+  # Headline: every applicable constraint of the question holds at once.
+  - metric: sample_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  # Partial credit — separates "one rule missed" from "ignored the format".
+  - metric: constraint_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  # The three layers scored apart, so a model that solves the task but cannot
+  # package the answer is distinguishable from one that cannot solve it.
+  - metric: format_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: content_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: task_pass_rate
+    aggregation: mean
+    higher_is_better: true
+
+num_fewshot: 0
+metadata:
+  version: 2.0
+  description: "SOBHard — structured output between machine formats with per-constraint verification (Russian). 500 questions from real documents in eight source notations; five families, four difficulty levels, twenty-one deterministic constraints."
+  license: "MERA_private"
+  keywords:
+    - structured_output
+    - format_conversion
+    - format_control
+    - generative

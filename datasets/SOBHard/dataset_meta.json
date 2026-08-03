@@ -1,0 +1,60 @@
+{
+  "dataset_name": "SOBHard",
+  "description": "SOBHard — структурированный вывод между машинными форматами. Каждый вопрос даёт документ в одной нотации и требует документ в другой, упакованный ровно так, как сказано в промпте. Ни одна проверка не выполняется моделью-судьёй: каждое требование промпта проверяется отдельным детерминированным верификатором.",
+  "license": "MERA_private",
+  "dataset_size": 500,
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "prompts": [
+    "Нужна твоя помощь. Разберись с задачей ниже и постарайся точно попасть в требуемый формат ответа.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Смотри, тут такая штука. Разберись по условиям ниже, только с форматом ответа не промахнись.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Ниже приведены условия задачи, входные данные и требования к формату ответа.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Задача подлежит решению в полном соответствии с приведёнными ниже условиями и требованиями к формату ответа.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Задание к исполнению. Условия и требования к формату ответа соблюдать строго, отклонения не допускаются.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Помоги, пожалуйста, с одной задачей — она ниже. Главное, не отступай от формата ответа.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Короче, есть задачка. Ниже всё написано — сделай и оформи как просят.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Далее следуют постановка задачи, исходный документ и требования к оформлению ответа.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Требуется выполнить приведённое ниже задание, соблюдая указанные условия и формат ответа.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Выполнить задание ниже. Формат ответа — ровно как указано, без отклонений.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Прошу решить задачу, описанную ниже. Обрати особое внимание на требования к оформлению ответа.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Тут вот что нужно сделать. Условия ниже, требования к ответу тоже — с ними аккуратнее.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Ниже — описание задачи, входные данные, требования к ответу и сама инструкция.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Ниже сформулировано задание. Решение принимается только при полном соблюдении требований к формату.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "К исполнению. Условия ниже, формат ответа не менять.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Будь добр, разберись с задачей ниже и оформи ответ ровно так, как там сказано.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Слушай, надо кое-что переделать. Всё по условиям ниже, и формат ответа не потеряй.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Постановка, входные данные и требования к формату ответа приведены ниже.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Настоящее задание выполняется строго по приведённым ниже условиям; формат ответа обязателен к соблюдению.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "Задание. Выполнить по условиям ниже; формат ответа обязателен.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}"
+  ],
+  "metrics": {
+    "sample_pass_rate": "Доля вопросов, где выполнены сразу все применимые ограничения. Главная метрика: документ, нарушающий хотя бы одно правило, дальше по конвейеру не годится.",
+    "constraint_pass_rate": "Доля выполненных ограничений — частичный зачёт; отделяет ошибку в упаковке от ошибки в содержании.",
+    "format_pass_rate": "Упаковка: один блок кода, верный тег, ничего снаружи, тело разбирается как целевой формат.",
+    "content_pass_rate": "Содержание: структура совпадает с эталоном, числа в пределах 1e-6, строки побайтово.",
+    "task_pass_rate": "Семантика семейства: то, чего сравнение с эталоном структурно не видит."
+  },
+  "inputs": {
+    "task": "Постановка задачи: что за работа и в каких нотациях.",
+    "input_data": "Исходный документ.",
+    "format": "Требования к упаковке и сверке ответа.",
+    "question": "Конкретная инструкция; всегда идёт последней."
+  },
+  "outputs": "Эталонный документ, упакованный в блок кода с нужным тегом.",
+  "example": {
+    "instruction": "Тут вот что нужно сделать. Условия ниже, требования к ответу тоже — с ними аккуратнее.\n\nЗадача:\n{task}\n\nВходные данные:\n{input_data}\n\nФормат ответа:\n{format}\n\nИнструкция:\n{question}",
+    "inputs": {
+      "task": "Перекладка документа из одной нотации в другую: на входе YAML, на выходе тот же документ в JSON.",
+      "input_data": "'@id': https://w3id.org/security#EcdsaSecp256r1Signature2019\n'@context':\n  '@version': 1.1\n  '@protected': true\n  id: '@id'\n  type: '@type'\n  sec: https://w3id.org/security#\n  xsd: http://www.w3.org/2001/XMLSchema#\n  challenge: sec:challenge\n  created:\n    '@id': http://purl.org/dc/terms/created\n    '@type': xsd:dateTime\n  domain: sec:domain\n  expires:\n    '@id': sec:expiration\n    '@type': xsd:dateTime\n  jws: sec:jws\n  nonce: sec:nonce\n  proofPurpose:\n    '@id': sec:proofPurpose\n    '@type': '@vocab'\n    '@context':\n      '@version': 1.1\n      '@protected': true\n      id: '@id'\n      type: '@type'\n      sec: https://w3id.org/security#\n      assertionMethod:\n        '@id': sec:assertionMethod\n        '@type': '@id'\n        '@container': '@set'\n      authentication:\n        '@id': sec:authenticationMethod\n        '@type': '@id'\n        '@container': '@set'\n  proofValue: sec:proofValue\n  verificationMethod:\n    '@id': sec:verificationMethod\n    '@type': '@id'",
+      "format": "Ответ оформляется одним блоком кода с языковым тегом `json`; содержимое блока — документ JSON и ничего кроме него. Порядок, в котором идут ключи объектов, не важен. Числа сверяются с относительной точностью 1e-6, строки — символ в символ, вместе с юникодом.",
+      "question": "Выдай тот же документ в JSON: структура и значения без изменений."
+    },
+    "outputs": "```json\n{\n  \"@id\": \"https://w3id.org/security#EcdsaSecp256r1Signature2019\",\n  \"@context\": {\n    \"@version\": 1.1,\n    \"@protected\": true,\n    \"id\": \"@id\",\n    \"type\": \"@type\",\n    \"sec\": \"https://w3id.org/security#\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n    \"challenge\": \"sec:challenge\",\n    \"created\": {\n      \"@id\": \"http://purl.org/dc/terms/created\",\n      \"@type\": \"xsd:dateTime\"\n    },\n    \"domain\": \"sec:domain\",\n    \"expires\": {\n      \"@id\": \"sec:expiration\",\n      \"@type\": \"xsd:dateTime\"\n    },\n    \"jws\": \"sec:jws\",\n    \"nonce\": \"sec:nonce\",\n    \"proofPurpose\": {\n      \"@id\": \"sec:proofPurpose\",\n      \"@type\": \"@vocab\",\n      \"@context\": {\n        \"@version\": 1.1,\n        \"@protected\": true,\n        \"id\": \"@id\",\n        \"type\": \"@type\",\n        \"sec\": \"https://w3id.org/security#\",\n        \"assertionMethod\": {\n          \"@id\": \"sec:assertionMethod\",\n          \"@type\": \"@id\",\n          \"@container\": \"@set\"\n        },\n        \"authentication\": {\n          \"@id\": \"sec:authenticationMethod\",\n          \"@type\": \"@id\",\n          \"@container\": \"@set\"\n        }\n      }\n    },\n    \"proofValue\": \"sec:proofValue\",\n    \"verificationMethod\": {\n      \"@id\": \"sec:verificationMethod\",\n      \"@type\": \"@id\"\n    }\n  }\n}\n```"
+  }
+}
