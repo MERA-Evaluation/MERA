@@ -1,0 +1,120 @@
+tag:
+  - mera
+  - mera_all
+dataset_path: MERA-evaluation/GorillaHard
+dataset_name: null
+task: gorillahard
+
+test_split: test
+fewshot_split: shots
+
+output_type: generate_until
+
+# The prompt is assembled by literal replacement, not str.format: `context` is a
+# raw source file and `tools` is a JSON catalog, both full of curly braces, which
+# str.format would read as fields and raise on. utils.doc_to_text does the same
+# splicing the dataset generator did, so the rendered prompt is byte-identical to
+# the one the questions were validated against.
+doc_to_text: !function utils.doc_to_text
+# The gold is the answer envelope itself: {"tool": ..., "args": {...}} or
+# {"abstain": true, "reason": ...}. utils.process_results compares against it.
+doc_to_target: "{{outputs}}"
+
+# MERA-style few-shot construction: only the first shot carries the full
+# instruction. Dormant under num_fewshot: 0, activates with --num_fewshot N.
+# Both templates use Jinja's `replace` filter rather than str.format for the same
+# brace-safety reason, and the instructionless form keeps the SAP block order of
+# the full prompt (context -> tools -> format -> question) so a shot never
+# demonstrates a different layout.
+fewshot_config:
+  sampler: !function ../custom_samplers.FewshotSampler
+  doc_to_text_without_instruction: "Контекст:\n{{inputs.context}}\n\nИнструменты:\n{{inputs.tools}}\n\nФормат ответа:\n{{inputs.format}}\n\nВопрос:\n{{inputs.question}}"
+  query: "{{ instruction | replace('{context}', inputs.context) | replace('{tools}', inputs.tools) | replace('{format}', inputs.format) | replace('{question}', inputs.question) }}"
+
+# The prompt has no trailing answer trigger, so a few-shot answer needs a visible
+# break from the prompt it follows. Unused at num_fewshot: 0.
+target_delimiter: "\n\n"
+
+# The answer is one short line of JSON, but generation must not be stopped on a
+# newline: a multi-line answer is a format violation the benchmark is meant to
+# catch, and stopping early would hide it behind a truncated-but-valid-looking
+# object. Only end-of-turn markers stop generation.
+# `max_gen_toks` (not `max_new_tokens`) is the key lm-eval actually reads: the HF
+# backend pops it in generate_until, and the API backends map it to `max_tokens`.
+#
+# The budget is 32768 rather than the one-line answer's worth of tokens, and that
+# is not slack: on a reasoning model the whole allowance can go into hidden
+# reasoning before `content` starts. At 2048 a fifth of a live run came back
+# empty with finish_reason=length and reasoning_tokens above 3000 — a measurement
+# of the cap, not of the model. At 16384 it was still ~3 %, concentrated in the
+# questions whose argument has to be counted out of the file, which is exactly
+# where the answer matters most. A wrong number is a result; an empty response is
+# not, so the cap is set where truncation stops competing with the measurement.
+generation_kwargs:
+  do_sample: false
+  temperature: 0.0
+  max_gen_toks: 32768
+  until:
+    - "<|eot_id|>"
+    - "<|im_end|>"
+    - "</s>"
+
+# No answer extraction: the response is scored verbatim (minus reasoning traces,
+# stripped inside process_results). take_first only unpacks [[gen]] -> [gen].
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: "take_first"
+
+process_results: !function utils.process_results
+# Each metric is averaged over the documents that reported it, and
+# process_results omits the ones that do not apply to a question. That is what
+# keeps the denominators honest: tool_match_rate is a share of the questions that
+# require a call, abstention_recall a share of the questions that require a
+# refusal.
+metric_list:
+  - metric: sample_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  # Every base question ships under all five instruction wordings; this one
+  # credits a base only when all five passed. It needs the per-document
+  # (base_id, pass) pairs, hence the custom aggregation.
+  - metric: robust_pass_rate
+    aggregation: !function utils.robust_aggregation
+    higher_is_better: true
+  - metric: constraint_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: format_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: tool_match_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: args_match_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: abstention_recall
+    aggregation: mean
+    higher_is_better: true
+  - metric: false_abstention_rate
+    aggregation: mean
+    higher_is_better: false
+  # Diagnostic: separates picking the wrong tool from the catalog (a judgement
+  # error) from naming a tool that was never offered (a grounding failure).
+  - metric: tool_in_catalog_rate
+    aggregation: mean
+    higher_is_better: true
+
+num_fewshot: 0
+metadata:
+  version: 1.0
+  description: "GorillaHard — tool selection from a catalog of twins under a strict answer format, with deterministic verification (Russian)"
+  license: "MERA_private"
+  keywords:
+    - tool_use
+    - function_calling
+    - instruction_following
+    - format_control
+    - abstention
+    - generative
