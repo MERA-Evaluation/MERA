@@ -2,7 +2,7 @@
     "dataset_name": "Enantiosemy",
     "license": "MERA_private",
     "dataset_size": 506,
-    "description": "**Enantiosemy** is a Russian-language dataset for evaluating whether language models can disambiguate enantiosemic words — lexical units that can express opposite meanings in the same form depending on context — and select semantically consistent dialogue continuations or meaning interpretations.",
+    "description": "**Enantiosemy** is a Russian-language dataset for evaluating whether language models can disambiguate enantiosemic words and expressions — lexical units that can express opposite meanings in the same form depending on context — and select semantically consistent dialogue continuations or meaning interpretations. The task was developed by the AGI NLP team together with linguists invited as expert annotators.",
     "modalities": [
         "text"
     ],
@@ -38,8 +38,8 @@
         },
         "inputs": {
             "enantiosemic_word": {
-                "en": "a string containing the enantiosemic word as used in the text",
-                "ru": "строка, содержащая энантиосемическое слово в начальной форме"
+                "en": "a string containing the enantiosemic word or expression in its normalized form",
+                "ru": "строка, содержащая энантиосемическое слово или выражение в нормализованной форме"
             },
             "option_a": {
                 "en": "a string containing the first answer option",
@@ -169,8 +169,12 @@
     ],
     "metrics": {
         "Exact match": {
-            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise.",
-            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях."
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the parsed model answer exactly matches the reference letter or letters and is 0 otherwise.",
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов: оценка равна 1, если извлечённый ответ модели точно совпадает с эталонной буквой или буквами, и 0 в остальных случаях."
+        },
+        "LLM judge score": {
+            "ru": "LLM-судья сравнивает ответ модели с эталонным ответом и оценивает его правильность и полноту: 1 — ответ полностью правильный и полный; 0.5 — ответ частично правильный или неполный, но содержит существенную часть правильного ответа; 0 — ответ неправильный, противоречивый или не содержит правильного ответа. Итоговое значение метрики равно среднему баллу по всем примерам.",
+            "en": "An LLM judge compares the model answer with the reference answer and evaluates its correctness and completeness: 1 indicates a fully correct and complete answer; 0.5 indicates a partially correct or incomplete answer that contains an essential part of the correct answer; 0 indicates an incorrect or contradictory answer, or one that does not contain the correct answer. The final metric value is the mean score across all examples."
         }
     }
 }

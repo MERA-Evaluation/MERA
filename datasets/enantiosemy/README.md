@@ -2,7 +2,7 @@
 
 ## Task Description
 
-The **Enantiosemy** dataset evaluates whether language models can understand words that, in the same surface form, can have opposite meanings depending on context. The benchmark tests the model's ability to correctly interpret enantiosemic units in one of four multiple-choice settings: selecting a suitable continuation, selecting an unsuitable continuation, identifying the meaning used in context, or identifying the meaning not used in context. The expected answer is one or several option letters.
+The **Enantiosemy** dataset evaluates whether language models can understand words that, in the same form, can have opposite meanings depending on context. The benchmark tests the model's ability to correctly interpret enantiosemic units in one of four multiple-choice settings: selecting a suitable continuation, selecting an unsuitable continuation, identifying the meaning used in context, or identifying the meaning not used in context. The expected answer is one or several option letters.
 
 Tested model skills: Russian language proficiency, Contextual disambiguation, Linguistic-aware reasoning
 
@@ -14,7 +14,7 @@ Russian has a phenomenon known as **enantiosemy** (also called contronymy or int
 
 ### Limitations
 
-The dataset is intended for Russian-language text models and does not evaluate multimodal abilities, dialogue safety, or factual knowledge outside the provided context. The task focuses on controlled multiple-choice selection, so the results should not be interpreted as a complete evaluation of a model's ability to handle all cases of enantiosemy in open-ended generation.
+The dataset is intended for Russian-language text models and does not evaluate general literacy, dialogue safety, or factual knowledge outside the provided context. The task focuses on controlled multiple-choice selection, so the results should not be interpreted as a complete evaluation of a model's ability to handle all cases of enantiosemy in open-ended generation.
 
 ### Validity
 
@@ -22,7 +22,7 @@ The examples are designed so that the intended meaning of the enantiosemic unit 
 
 ## Dataset Description
 
-The dataset contains **506** examples and **159** unique enantiosemic words.
+The dataset contains **506** examples and **157** unique normalized enantiosemic words and expressions.
 
 ### Distribution by Task Type
 
@@ -30,14 +30,14 @@ Each example is assigned one of four types in the `type` field:
 
 | `type` | Task type | Count | Share |
 |--------|-----------|------:|------:|
-| `choose_correct` | Select the **correct** continuation of the final utterance | 290 | 57.3% |
-| `choose_incorrect` | Select the **incorrect** / unsuitable continuation | 188 | 37.2% |
-| `meaning_used` | Identify the meaning **in which the word is used** | 18 | 3.6% |
-| `meaning_unused` | Identify the meaning **in which the word is not used** | 10 | 2.0% |
+| `1` | Select the **correct** continuation of the final utterance | 290 | 57.3% |
+| `2` | Select the **incorrect** / unsuitable continuation | 188 | 37.2% |
+| `3` | Identify the meaning **in which the word is used** | 18 | 3.6% |
+| `4` | Identify the meaning **in which the word is not used** | 10 | 2.0% |
 
-The answer format is multiple choice among 6 options labeled А, Б, В, Г, Д, Е. One or several options may be correct. When multiple options are correct, the answer letters are listed in alphabetical order and separated by a semicolon followed by a space.
+The answer format is multiple choice. Options are labeled А, Б, В, Г, Д, Е; one or several options may be correct. When multiple options are correct, the answer letters are listed in alphabetical order and separated by a semicolon followed by a space.
 
-Each example uses six answer-option fields (`option_a`–`option_f`). Unused options are stored as empty strings. The `instruction` field contains placeholders only for non-empty options: the "Варианты ответа" block includes exactly as many lines as there are non-empty `option_*` fields in that example. The "Формат ответа" block states that answer letters may only be uppercase Russian letters from the list (А, Б, В, Г, Д, Е); in each example this list is shortened to match the non-empty options.
+Each example stores answer options in the six fields `option_a`–`option_f`. The `instruction` field uses placeholders for these fields in the "Варианты ответа" block and lists the allowed uppercase Russian answer letters (А, Б, В, Г, Д, Е) in the "Формат ответа" block.
 
 
 ### Data Fields
@@ -60,7 +60,7 @@ Each example in the dataset contains the following fields:
 
 - `meta` — metadata:
     - `id` [int] — example number
-    - `type` [str] — task type, see the task type table above
+    - `type` [int] — numeric task type, see the task type table above
 
 ### Data Example
 
@@ -87,11 +87,13 @@ Each example in the dataset contains the following fields:
 
 ### Prompt Creation
 
-20 prompts were prepared for the task: 5 prompts for each of the 4 task types. They are distributed evenly across examples using a one-example–one-prompt scheme within each type. For each example the prompt is adapted to the number of non-empty answer options: the "Варианты ответа" block keeps only the corresponding lines, and the "Формат ответа" block lists the shortened set of allowed letters. Template placeholders in curly braces are filled from the fields inside `inputs` for each question. Each prompt template uses a consistent form of address (informal ты or formal вы).
+20 prompts were prepared for the task: 5 prompts for each of the 4 task types. They are distributed evenly across examples using a one-example–one-prompt scheme within each type. Template placeholders in curly braces are filled from the fields inside `inputs` for each question. Each prompt template uses a consistent form of address (informal ты or formal вы).
 
 ### Dataset Creation
 
-The dataset was created by expert annotators with linguistic training in two stages. First, a list of Russian enantiosemic units was collected, and it was checked that each unit can express opposite meanings in the same form depending on context. Then, multiple-choice tasks were created based on this list: dialogue or utterance contexts and answer options for the four task types.
+The dataset was created in two stages by linguists invited as expert annotators in collaboration with the AGI NLP team. First, the team developed the task methodology and compiled a list of Russian enantiosemic units. The list includes both individual words and multiword expressions whose identical form can express opposite meanings depending on context. The four task types were selected to test two complementary operations—choosing a continuation and identifying a contextual meaning—in both positive and negative formulations.
+
+The invited linguists then created dialogue or utterance contexts and multiple-choice answer options from this list. The AGI NLP team coordinated the methodology and data-production process, reviewed the resulting structure, and prepared the dataset for inclusion in MERA.
 
 Quality control was also performed by annotators with linguistic training. Each task was checked for the absence of ambiguity: the context had to support the target meaning and rule out the opposite interpretation of the enantiosemic element. Examples with unclear context, overlapping interpretations, or answer options that could be justified under different meanings were edited or excluded.
 
@@ -100,3 +102,5 @@ Quality control was also performed by annotators with linguistic training. Each 
 The following metrics are used for aggregated evaluation of model answers:
 
 - **Exact match (EM)**: This metric computes the proportion of model answers that exactly match the correct answer. The reference answer is one or several letters from А, Б, В, Г, Д, Е; if several letters are correct, they are written in alphabetical order and separated by a semicolon and a space. The value ranges from 0 to 1.
+
+- **LLM judge score**: an LLM judge compares the model answer with the reference answer and evaluates its correctness and completeness. A fully correct and complete answer receives `1`; a partially correct or incomplete answer containing an essential part of the correct answer receives `0.5`; an incorrect or contradictory answer, or one that does not contain the correct answer, receives `0`. The final metric value is the mean score across all examples.
