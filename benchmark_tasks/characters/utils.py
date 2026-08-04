@@ -59,7 +59,7 @@ if "remove_whitespace_and_nones" not in FILTER_REGISTRY:
                     if not resp:
                         resp = ""
                     else:
-                        resp = resp.lstrip().split('Ответ: ')[-1].strip()
+                        resp = resp.lstrip()
                     filtered_resp.append(resp)
                 return filtered_resp
 
