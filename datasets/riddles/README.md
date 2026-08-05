@@ -53,7 +53,7 @@ Each example contains the following fields:
 - `instruction` [str] - a string containing the task formulation for the language model.
 - `inputs` - input data forming the task:
     - `question` [str] - the riddle text.
-- `outputs` [str] - a string containing one or more acceptable answer words or phrases separated by `; `; a model answer is correct if it matches at least one variant.
+- `outputs` [str] - a string containing one or more acceptable answer words or phrases separated by the sequence `; `. A model answer is correct if it matches at least one variant.
 - `meta` - metadata:
     - `id` [int] - example number.
 
@@ -91,5 +91,5 @@ The collection and validation process included internal expert reviews and data 
 
 The following metrics are used for aggregated evaluation:
 
-- **Exact match (EM)**: the proportion of model answers that exactly match one of the reference answers after extracting the string following the `Ответ:` marker. The score ranges from 0 to 1: 0 means no exact matches, while 1 means every example matched.
+- **Exact match (EM)**: the proportion of model answers that exactly match one of the reference answers after extracting the text following the `Ответ:` marker. The score ranges from 0 to 1: 0 means no exact matches, while 1 means every example matched.
 - **LLM judge score**: an LLM judge compares the model answer with the reference variants and evaluates its correctness and completeness. A fully correct and complete answer receives `1`; a partially correct or incomplete answer containing an essential part of the solution receives `0.5`; an incorrect or contradictory answer, or one that does not contain the correct solution, receives `0`. The final metric value is the mean score across all examples.
