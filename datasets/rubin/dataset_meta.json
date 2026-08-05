@@ -98,7 +98,7 @@
             "ru": "Доля предсказаний, у которых извлечённый ответ (после маркера Ответ:) точно совпадает с эталонной буквой.",
             "en": "The share of predictions whose extracted answer (after the Ответ: marker) exactly matches the gold letter."
         },
-        "judge_score": {
+        "LLM judge score": {
             "ru": "LLM-судья сравнивает ответ модели с эталонными вариантами и оценивает его правильность и полноту. Полностью правильный и полный ответ получает 1; частично правильный или неполный ответ, содержащий существенную часть разгадки, получает 0.5; неправильный, противоречивый или не содержащий правильной разгадки ответ получает 0. Итоговое значение метрики равно среднему баллу по всем примерам.",
             "en": "An LLM judge compares the model answer with the reference options and scores its correctness and completeness. A fully correct and complete answer gets 1; a partially correct or incomplete answer that still contains a substantial part of the solution gets 0.5; an incorrect, contradictory, or non-matching answer gets 0. The final metric is the mean score over all examples."
         }
