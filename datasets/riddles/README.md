@@ -39,13 +39,6 @@ Each example has a set of acceptable reference answers, including synonyms and, 
 
 ## Dataset Description
 
-The dataset contains two sets of 500 Russian-language riddles each:
-
-- the closed set is used in the MERA diagnostic benchmark;
-- the open set is maintained separately and may be used for supplementary diagnostic evaluation.
-
-Each example uses one of five prompt templates and requires a short answer in the form `Ответ: <word or phrase>`.
-
 ### Data Fields
 
 Each example contains the following fields:
