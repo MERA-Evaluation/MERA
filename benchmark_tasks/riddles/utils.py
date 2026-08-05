@@ -18,7 +18,7 @@ def process_results(
     doc: dict[str, Any], results: list[str]
 ) -> dict[str, int | float]:
     if len(doc["outputs"]) == 0:
-        return {"em": 0, "judge_score": 0.0}
+        return {"exact_match": 0, "judge_score": 0.0}
 
     gold = doc["outputs"]
     pred = results[0]
@@ -29,11 +29,11 @@ def process_results(
 
     pred = normalize(pred)
 
-    em = int(pred in gold_variants)
+    exact_match = int(pred in gold_variants)
     judge_score = compute_judge_score(doc, pred)
 
     return {
-        "em": em,
+        "exact_match": exact_match,
         "judge_score": judge_score,
     }
 

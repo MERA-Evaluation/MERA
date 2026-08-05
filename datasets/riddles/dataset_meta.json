@@ -39,8 +39,8 @@
             }
         },
         "outputs": {
-            "ru": "строка с ответом — словом или фразой",
-            "en": "a string containing the answer word or phrase"
+            "ru": "строка с одним или несколькими допустимыми ответами, разделёнными `; `; ответ модели считается правильным, если совпадает хотя бы с одним из вариантов",
+            "en": "a string containing one or more acceptable answer words or phrases separated by `; `; a model answer is correct if it matches at least one variant"
         },
         "meta": {
             "id": {
@@ -58,8 +58,8 @@
     ],
     "metrics": {
         "Exact match": {
-            "ru": "Метрика Exact match вычисляет долю ответов модели, которые точно совпадают с одним из эталонных вариантов.",
-            "en": "Exact match is the proportion of model answers that exactly match one of the reference variants."
+            "ru": "Доля ответов модели, которые точно совпадают с одним из эталонных ответов после извлечения текста, следующего за маркером `Ответ:`. Значение находится в диапазоне от 0 до 1: 0 означает отсутствие точных совпадений, 1 — совпадение во всех примерах.",
+            "en": "The proportion of model answers that exactly match one of the reference answers after extracting the string following the `Ответ:` marker. The score ranges from 0 to 1: 0 means no exact matches, while 1 means every example matched."
         },
         "LLM judge score": {
             "ru": "LLM-судья сравнивает ответ модели с эталонными вариантами и оценивает его правильность и полноту: 1 — ответ полностью правильный и полный; 0.5 — ответ частично правильный или неполный, но содержит существенную часть разгадки; 0 — ответ неправильный, противоречивый или не содержит правильной разгадки. Итоговое значение метрики равно среднему баллу по всем примерам.",
