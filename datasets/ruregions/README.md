@@ -103,7 +103,7 @@ Open materials were used as sources for regional expressions: [1](https://ru.wik
 
 Metrics for aggregated evaluation of responses:
 
-- `Exact match`: Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise.
-- `Group Exact match`: Group Exact match is the average over groups of examples with the same `group_id`. The `group_id` value groups tasks that test knowledge of the same regionalism. A group receives a score of 1 only if the model answers all tasks related to that regionalism correctly, and 0 otherwise.
-- `Judge Score`: Judge Score uses an LLM-as-a-Judge approach to compare the model prediction with the reference answer for each example. The judge model, API endpoint, and prompt path are configured through environment variables.
-- `Group Judge Score`: Group Judge Score aggregates Judge Score over groups of examples with the same `group_id`. A group receives a score of 1 only if the judge marks all tasks related to the same regionalism as correct, and 0 otherwise.
+- **Exact match (EM)**: the proportion of model answers that exactly match the reference letter after extracting the string following the `Ответ:` marker. The value ranges from 0 to 1: 0 means no exact matches, 1 means a match on every example.
+- **Group Exact match**: Group Exact match is the average over groups of examples with the same `group_id`. The `group_id` value groups tasks that test knowledge of the same regionalism. A group receives a score of 1 only if the model answers all tasks related to that regionalism correctly, and 0 otherwise.
+- **LLM judge score**: an LLM judge compares the model answer with the reference answer and scores its correctness and completeness. A fully correct and complete answer gets `1`; a partially correct or incomplete answer that still contains a substantial part of the correct answer gets `0.5`; an incorrect, contradictory, or non-matching answer gets `0`. The final metric value is the mean score over all examples.
+- **Group Judge Score**: Group Judge Score aggregates LLM judge score over groups of examples with the same `group_id`. A group receives a score of 1 only if the judge marks all tasks related to the same regionalism as correct, and 0 otherwise.

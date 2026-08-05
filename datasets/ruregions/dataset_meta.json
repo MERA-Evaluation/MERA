@@ -209,20 +209,20 @@
     ],
     "metrics": {
         "Exact match": {
-            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise.",
-            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях."
+            "en": "Exact match is the proportion of model answers that exactly match the reference letter after extracting the string following the Ответ: marker. The value ranges from 0 to 1: 0 means no exact matches, 1 means a match on every example.",
+            "ru": "Метрика Exact match вычисляет долю ответов модели, которые точно совпадают с эталонной буквой после извлечения строки после маркера Ответ:. Значение находится в диапазоне от 0 до 1: 0 означает отсутствие точных совпадений, 1 — совпадение во всех примерах."
         },
         "Group Exact match": {
             "ru": "Метрика Group Exact match вычисляет среднее по группам примеров с одинаковым group_id. Значение group_id объединяет задания, посвящённые знанию одного и того же регионализма. Для такой группы метрика принимает значение 1, если модель дала правильный ответ на все задания, связанные с этим регионализмом, и 0 в остальных случаях.",
             "en": "Group Exact match is the average over groups of examples with the same group_id. The group_id value groups tasks that test knowledge of the same regionalism. A group receives a score of 1 only if the model answers all tasks related to that regionalism correctly, and 0 otherwise."
         },
-        "Judge Score": {
-            "en": "Judge Score uses an LLM-as-a-Judge approach to compare the model prediction with the reference answer for each example. The judge model, API endpoint, and prompt path are configured through environment variables.",
-            "ru": "Метрика Judge Score использует подход LLM-as-a-Judge для сравнения предсказания модели с эталонным ответом для каждого примера. Модель-судья, API endpoint и путь к промпту задаются через переменные окружения."
+        "LLM judge score": {
+            "en": "An LLM judge compares the model answer with the reference answer and scores its correctness and completeness. A fully correct and complete answer gets 1; a partially correct or incomplete answer that still contains a substantial part of the correct answer gets 0.5; an incorrect, contradictory, or non-matching answer gets 0. The final metric value is the mean score over all examples.",
+            "ru": "LLM-судья сравнивает ответ модели с эталонным ответом и оценивает его правильность и полноту. Полностью правильный и полный ответ получает 1; частично правильный или неполный ответ, содержащий существенную часть правильного ответа, получает 0.5; неправильный, противоречивый или не содержащий правильного ответа получает 0. Итоговое значение метрики равно среднему баллу по всем примерам."
         },
         "Group Judge Score": {
-            "en": "Group Judge Score aggregates Judge Score over groups of examples with the same group_id. A group receives a score of 1 only if the judge marks all tasks related to the same regionalism as correct, and 0 otherwise.",
-            "ru": "Метрика Group Judge Score агрегирует Judge Score по группам примеров с одинаковым group_id. Группа получает 1 только если judge считает правильными ответы на все задания, связанные с одним и тем же регионализмом, и 0 в остальных случаях."
+            "en": "Group Judge Score aggregates LLM judge score over groups of examples with the same group_id. A group receives a score of 1 only if the judge marks all tasks related to the same regionalism as correct, and 0 otherwise.",
+            "ru": "Метрика Group Judge Score агрегирует LLM judge score по группам примеров с одинаковым group_id. Группа получает 1 только если judge считает правильными ответы на все задания, связанные с одним и тем же регионализмом, и 0 в остальных случаях."
         }
     }
 }

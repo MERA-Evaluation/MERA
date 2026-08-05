@@ -1,13 +1,11 @@
 task: ruregions
 dataset_path: MERA-evaluation/RuRegions
 output_type: generate_until
-training_split: shots
 fewshot_split: shots
 test_split: test
 doc_to_text: !function utils.doc_to_text
 doc_to_target: "outputs"
 process_results: !function utils.process_results
-
 
 filter_list:
   - name: "scoring"
@@ -28,6 +26,6 @@ metric_list:
   - metric: group_judge_score
     aggregation: !function utils.aggregate_group_score
     higher_is_better: true
-num_fewshot: null
+num_fewshot: 0
 metadata:
   version: 1.0
