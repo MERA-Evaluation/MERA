@@ -122,13 +122,10 @@
         "Помогите, пожалуйста, возник вопрос.\nОтвет предложите в формате:\nОтвет: <сгенерированный текст>\nСобственно, вопрос: {question}",
         "Сгенерировать текст ответа на вопрос, требующий логики и навыков рассуждения.\nДать ответ лаконично в формате:\nОтвет: <сгенерированный текст>\nСам вопрос: {question}"
     ],
-    "metrics": [
-        {
-            "name": "llm_as_judge",
-            "aggregation": "mean",
-            "higher_is_better": true,
-            "description_en": "For each criteria item, a separate Pollux-4B-Judge call is made via an OpenAI-compatible endpoint. Criterion scores are 0/1/2; the example score is the mean of the scores divided by 2.",
-            "description_ru": "На каждый элемент criteria выполняется отдельный вызов Pollux-4B-Judge через OpenAI-compatible endpoint. Баллы критерия — 0/1/2; итог примера — среднее баллов, делённое на 2."
+    "metrics": {
+        "llm_as_judge": {
+            "ru": "На каждый элемент criteria выполняется отдельный вызов Pollux-4B-Judge через OpenAI-compatible endpoint. Баллы критерия — 0/1/2; итог примера — среднее баллов, делённое на 2.",
+            "en": "For each criteria item, a separate Pollux-4B-Judge call is made via an OpenAI-compatible endpoint. Criterion scores are 0/1/2; the example score is the mean of the scores divided by 2."
         }
-    ]
+    }
 }

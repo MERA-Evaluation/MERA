@@ -9,6 +9,20 @@ def test_parse_judge_score_valid_plain_number():
     assert utils.parse_judge_score("score: 1") == 1.0
 
 
+def test_parse_rubric_scores_extracts_integer_scale_line_by_line():
+    assert utils.parse_rubric_scores(
+        "0: Incorrect.\n\n  1: Partial.\n\t2 : Correct."
+    ) == {0, 1, 2}
+    assert utils.parse_rubric_scores(
+        "0: Incorrect.\n1: Weak.\n2: Partial.\n3: Good.\n4: Excellent."
+    ) == {0, 1, 2, 3, 4}
+
+
+def test_parse_rubric_scores_rejects_missing_scale():
+    with pytest.raises(ValueError, match="numeric score scale"):
+        utils.parse_rubric_scores("Incorrect / Partial / Correct")
+
+
 @pytest.mark.parametrize(
     "content",
     [
@@ -76,6 +90,47 @@ def test_judge_answer_by_criterion_uses_pollux_prompt(monkeypatch):
     assert "response_format" not in calls
 
 
+@pytest.mark.parametrize("content", ["-1", "2.5", "7", "score: 7"])
+def test_judge_answer_by_criterion_rejects_score_outside_rubric(
+    monkeypatch, content
+):
+    class Message:
+        pass
+
+    Message.content = content
+
+    class Choice:
+        message = Message()
+
+    class Response:
+        choices = [Choice()]
+
+    class Completions:
+        @staticmethod
+        def create(**kwargs):
+            return Response()
+
+    class Chat:
+        completions = Completions()
+
+    class Client:
+        chat = Chat()
+
+    monkeypatch.setenv("POLLUX_JUDGE_MODEL", "ai-forever/Pollux-4B-Judge")
+    monkeypatch.setattr(utils, "_get_openai_client", lambda: Client())
+
+    with pytest.raises(ValueError, match=r"expected one of \[0, 1, 2\]"):
+        utils.judge_answer_by_criterion(
+            instruction="Make a plan",
+            reference_answer="Reference plan.",
+            answer="Plan is ready.",
+            criterion={
+                "criteria_name": "Correctness",
+                "rubrics": "0: Bad.\n\n1: Partial.\n\n2: Good.",
+            },
+        )
+
+
 def test_process_results_renders_dataset_prompt(monkeypatch):
     calls = {}
 
@@ -94,8 +149,14 @@ def test_process_results_renders_dataset_prompt(monkeypatch):
             "inputs": {"question": "Make a plan"},
             "reference_answer": "Reference plan.",
             "criteria": [
-                {"criteria_name": "Correctness", "rubrics": "0: Bad.\n\n2: Good."},
-                {"criteria_name": "Safety", "rubrics": "0: Bad.\n\n2: Good."},
+                {"criteria_name": "Correctness", "rubrics": "0: Bad.\n\n1: Good."},
+                {
+                    "criteria_name": "Safety",
+                    "rubrics": (
+                        "0: Bad.\n\n1: Weak.\n\n2: Partial.\n\n"
+                        "3: Good.\n\n4: Excellent."
+                    ),
+                },
             ],
         },
         ["Done"],

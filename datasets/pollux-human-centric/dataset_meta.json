@@ -181,13 +181,10 @@
         "Помогите, пожалуйста, возник вопрос.\nОтвет предложите в формате:\nОтвет: <сгенерированный текст>\nСобственно, вопрос: {question}",
         "Сгенерировать текст ответа на вопрос, требующий знания, как мыслит человек и как устроена культура людского сообщества.\nДать ответ лаконично в формате:\nОтвет: <сгенерированный текст>\nСам вопрос: {question}"
     ],
-    "metrics": [
-        {
-            "name": "llm_as_judge",
-            "aggregation": "mean",
-            "higher_is_better": true,
-            "description_en": "Mean of per-criterion Pollux-4B-Judge scores (0/1/2), divided by 2. One judge call per criteria item via OpenAI-compatible endpoint.",
-            "description_ru": "Среднее сырых баллов Pollux-4B-Judge по критериям (0/1/2), делённое на 2. Один вызов судьи на элемент criteria через OpenAI-compatible endpoint."
+    "metrics": {
+        "llm_as_judge": {
+            "ru": "Среднее сырых баллов Pollux-4B-Judge по критериям (0/1/2), делённое на 2. Один вызов судьи на элемент criteria через OpenAI-compatible endpoint.",
+            "en": "Mean of per-criterion Pollux-4B-Judge scores (0/1/2), divided by 2. One judge call per criteria item via OpenAI-compatible endpoint."
         }
-    ]
+    }
 }

@@ -2,7 +2,7 @@ import os
 import re
 from functools import lru_cache
 from string import Formatter
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Set
 
 
 METRIC_NAME = "llm_as_judge"
@@ -26,13 +26,18 @@ POLLUX_JUDGE_PROMPT = """### Задание для оценки:
 
 def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     answer = results[0] if results else ""
+    criteria = _get_criteria(doc)
     scores = judge_answer_by_criteria(
         instruction=_render_instruction(doc),
         answer=answer,
         reference_answer=str(doc.get("reference_answer", "")),
-        criteria=_get_criteria(doc),
+        criteria=criteria,
     )
-    return {METRIC_NAME: sum(scores) / len(scores) / 2}
+    normalized_scores = [
+        score / get_criterion_score_max(criterion)
+        for score, criterion in zip(scores, criteria)
+    ]
+    return {METRIC_NAME: sum(normalized_scores) / len(normalized_scores)}
 
 
 def _render_instruction(doc: Dict[str, Any]) -> str:
@@ -75,7 +80,7 @@ def _judge_answer_with_prompt(
     reference_answer: str,
     criterion: Optional[Dict[str, Any]],
     prompt_template: str,
-    score_max: float,
+    allowed_scores: Set[int],
 ) -> float:
     client = _get_openai_client()
     model = _get_required_env("POLLUX_JUDGE_MODEL")
@@ -101,7 +106,12 @@ def _judge_answer_with_prompt(
     )
     content = response.choices[0].message.content
     score = parse_judge_score(content)
-    return max(0.0, min(score_max, score))
+    if score not in allowed_scores:
+        raise ValueError(
+            f"POLLUX judge returned score {score}, expected one of "
+            f"{sorted(allowed_scores)}."
+        )
+    return score
 
 
 def judge_answer_by_criterion(
@@ -110,14 +120,37 @@ def judge_answer_by_criterion(
     reference_answer: str,
     criterion: Dict[str, Any],
 ) -> float:
+    allowed_scores = parse_rubric_scores(str(criterion.get("rubrics", "")))
     return _judge_answer_with_prompt(
         instruction=instruction,
         answer=answer,
         reference_answer=reference_answer,
         criterion=criterion,
         prompt_template=os.getenv("POLLUX_JUDGE_PROMPT", POLLUX_JUDGE_PROMPT),
-        score_max=2.0,
+        allowed_scores=allowed_scores,
     )
+
+
+def parse_rubric_scores(rubrics: str) -> Set[int]:
+    scores = set()
+    for line in str(rubrics or "").splitlines():
+        match = re.match(r"^[ \t]*([+-]?\d+)[ \t]*:", line)
+        if match:
+            scores.add(int(match.group(1)))
+    if not scores:
+        raise ValueError("POLLUX criterion rubrics do not contain a numeric score scale.")
+    return scores
+
+
+def get_criterion_score_max(criterion: Dict[str, Any]) -> int:
+    scores = parse_rubric_scores(str(criterion.get("rubrics", "")))
+    score_max = max(scores)
+    if score_max <= 0:
+        raise ValueError(
+            "POLLUX criterion score scale must have a positive maximum for "
+            "normalization."
+        )
+    return score_max
 
 
 @lru_cache(maxsize=1)
