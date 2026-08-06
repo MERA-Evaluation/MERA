@@ -1,4 +1,4 @@
-"""SOBHard2 — deterministic structured-output scoring for lm-evaluation-harness.
+"""SOBHard — deterministic structured-output scoring for lm-evaluation-harness.
 
 The benchmark scores *structured output under explicit constraints*: the model is
 given a document in one machine format and must emit a document in another,
@@ -34,12 +34,13 @@ Metrics
 
 Self-containment
 ----------------
-This module imports nothing from the SOBHard2 generator. Checks that need the
-*source* document in the pipeline's canonical shape (which requires parsers for
-twenty exotic input formats) are precomputed at build time and shipped inside
-``meta.checks``; here they are plain JSON comparisons. Only the seven *target*
-formats are parsed at scoring time, and those parsers are byte-compatible ports
-of the generator's own.
+This module imports nothing from the build pipeline. Checks that need the
+*source* document in the pipeline's canonical shape (which would mean parsers
+for all fifteen source notations) are precomputed at build time and shipped
+inside ``meta.checks``; here they are plain JSON comparisons. Only *target*
+notations are parsed at scoring time — parsers for nine ship here, of which this
+dataset uses six — and those parsers are byte-compatible ports of the ones the
+references were written with.
 """
 
 from __future__ import annotations
@@ -179,7 +180,7 @@ def _parse_toml(text: str) -> Any:
             import tomli as tomllib          # type: ignore[no-redef]
         except ImportError as e:             # pragma: no cover
             raise MissingParser(
-                "SOBHard2 needs a TOML parser for the 50 questions whose target "
+                "SOBHard needs a TOML parser for the 114 questions whose target "
                 "format is TOML. Python 3.11+ ships tomllib; on 3.10 and older "
                 "install the backport:\n\n    pip install tomli\n"
             ) from e
@@ -2031,9 +2032,9 @@ def _combo_pass(checks: List[dict], names: List[str]) -> float | None:
 #: geometric mean below is zero the moment a model fails one cell outright,
 #: and the benchmark stops separating everything beneath the frontier — a
 #: model at 0.30 overall with one dead cell would tie with a model that
-#: answers nothing. With the floor, one dead cell of forty-four multiplies the
-#: score by 0.01**(1/44) ≈ 0.90: a tenth off, not an annihilation. Two cost
-#: 0.81, five cost 0.59. The number is a declared convention, not a tuning
+#: answers nothing. With the floor, one dead cell of thirty-three multiplies the
+#: score by 0.01**(1/33) ≈ 0.87: an eighth off, not an annihilation. Two cost
+#: 0.76, five cost 0.50. The number is a declared convention, not a tuning
 #: knob — it is written here, in the task description, and in the README.
 BALANCE_FLOOR = 0.01
 
@@ -2146,8 +2147,8 @@ def scalar_metrics(metrics: Dict[str, Any]) -> Dict[str, float]:
 
 _PROMPTS_CACHE: List[str] | None = None
 _META_CANDIDATES = (
-    "../../datasets/SOBHard2/dataset_meta.json",
-    "../../../datasets/SOBHard2/dataset_meta.json",
+    "../../datasets/SOBHard/dataset_meta.json",
+    "../../../datasets/SOBHard/dataset_meta.json",
 )
 
 
@@ -2180,6 +2181,31 @@ def doc_to_text(doc: Dict[str, Any]) -> str:
     if isinstance(instruction, int):
         instruction = _load_prompts()[instruction]
     return instruction.format(**doc["inputs"])
+
+
+def doc_to_target(doc: Dict[str, Any]) -> str:
+    """The reference answer, packaged in the code block the prompt demands.
+
+    Reads ``outputs`` when it is there and falls back to ``meta.reference``,
+    which is not a cosmetic fallback here. MERA blanks ``outputs`` before a Hub
+    upload, and this task replays the earlier turns of a conversation as
+    assistant messages: with an empty target the model is handed its own past
+    answers as empty strings, and every turn after the first asks it to go on
+    working with a document it was then never shown — 54 of the 75 dialogue
+    turns become unanswerable, silently, while the run still produces numbers.
+    The reference survives the blanking in ``meta.reference``, and wrapping it
+    reproduces ``outputs`` byte for byte on every question that still has one.
+    """
+    out = doc.get("outputs")
+    if out:
+        return out
+    meta = doc.get("meta") or {}
+    ref = meta.get("reference") or ""
+    if not ref:
+        return ""
+    tag = meta.get("fence_tag") or FORMAT_TAGS.get(
+        (meta.get("categories") or {}).get("target_format", ""), "")
+    return f"```{tag}\n{ref}\n```"
 
 
 def _resolve_instruction(doc: Dict[str, Any]) -> Dict[str, Any]:

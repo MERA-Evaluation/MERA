@@ -5,11 +5,13 @@ dataset_path: MERA-evaluation/SOBHard
 task: sobhard
 
 test_split: test
-fewshot_split: test
+fewshot_split: shots
 
 output_type: generate_until
 doc_to_text: "{{instruction.format(**inputs)}}"
-doc_to_target: "{{outputs}}"
+# Not "{{outputs}}": on the Hub copy answers are blanked, and this task replays
+# earlier turns of a conversation as assistant messages. See utils.doc_to_target.
+doc_to_target: !function utils.doc_to_target
 
 fewshot_config:
   sampler: !function ../dual_samplers.DualDialogueSampler
@@ -57,4 +59,3 @@ num_fewshot: 8
 
 metadata:
   version: 1.0
-  license: "MERA_private"
