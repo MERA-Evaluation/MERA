@@ -1,5 +1,5 @@
 {
-  "dataset_name": "SOBHard2",
+  "dataset_name": "SOBHard",
   "license": "MERA License",
   "dataset_size": 825,
   "description": "Structured output between machine formats: the model is given one or two real documents and has to produce a document in another notation, packaged exactly as the prompt specifies. Eleven families of work by three difficulty levels, fifteen source notations and six target ones. Nothing is judged by a language model: every rule the prompt states is checked by a separate deterministic verifier.",
@@ -164,7 +164,7 @@
     }
   },
   "human_benchmark": {
-    "sample_pass_rate": "TODO",
-    "balance_score": "TODO"
+    "sample_pass_rate": "N/A",
+    "balance_score": "N/A"
   }
 }
