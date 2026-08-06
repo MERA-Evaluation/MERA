@@ -1,8 +1,8 @@
 {
-    "dataset_name": "IFHardBench21",
+    "dataset_name": "IFHardBench",
     "license": "MERA_private",
     "dataset_size": 1260,
-    "description": "Hard instruction following in Russian: every question pairs a trivial, knowledge-free writing task with a stack of three to six machine-verifiable requirements on the answer, built around one or two deliberately hard ones (exact counts of words, sentences and characters, lipograms, comma and letter-initial counters, positional and cross-referencing words, acrostics, list and JSON shapes, trailing checksums, and conditional rules whose branch depends on the supplied context). Every requirement is checked by a deterministic verifier — no LLM judge and no reference matching — and every question ships a natural reference answer proving the stack is satisfiable. Metric note, declared by design: sample_pass_rate counts an empty response as a plain failure, while constraint_pass_rate is computed over non-empty responses only; the share of empty responses is reported separately by the run audit.",
+    "description": "Hard instruction following in Russian: each of the 1260 questions pairs a trivial, knowledge-free writing task with a stack of three to six machine-verifiable requirements on the answer, built around one or two deliberately hard ones (exact counts of words, sentences and characters, lipograms, comma and letter-initial counters, positional and cross-referencing words, acrostics, list and JSON shapes, trailing checksums, and conditional rules whose branch depends on the supplied context). Every requirement is checked by a deterministic verifier — no LLM judge and no reference matching — and every question was built together with a natural reference answer proving the stack is satisfiable. Metric note, declared by design: sample_pass_rate counts an empty response as a plain failure, while constraint_pass_rate is computed over non-empty responses only, so the share of empty responses belongs next to the metrics wherever they are quoted.",
     "modalities": [
         "text"
     ],
@@ -17,32 +17,28 @@
     "universal_domains": [],
     "synt_source_models": [],
     "data_example": {
-        "instruction": "Можешь написать для меня одну вещь?\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПеречитай, пожалуйста, список перед тем, как отправлять.",
+        "instruction": "Контекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверка выполняется по каждому требованию отдельно.",
         "inputs": {
-            "question": "Напиши про место, в котором ты по-настоящему отдыхаешь.",
-            "constraints": "- Мне нужен ответ ровно на 38 слов.\n- Слов, начинающихся на «с», должно быть ровно 3 — пересчитай их.\n- Буква «к» под запретом — ни строчная, ни заглавная.\n- Обязательно скажи, о каком числе речь в контексте, — но ни одной цифры в ответе быть не должно: пиши число словом («шесть»).\n- Первое и последнее слово ответа — одно и то же слово, форма одинаковая.",
-            "context": "У пруда 6 скамеек, и одна из них всегда свободна."
+            "question": "Расскажи, как выглядит идеальный вечер после тяжёлого дня.",
+            "constraints": "- Раздели мысль ровно на 8 предложений.\n- Сколько слов в первом предложении, ровно столько же должно быть и в последнем.\n- Мне нужен текст длиной ровно 272 символа; пробелы тоже считаются.\n- Не используй букву «я» — нигде в ответе.",
+            "context": "Сосед по переписке отвечает всегда телеграфно: «вечер удался», «чай, плед». Я перенял у него эту манеру. Длинные описания вечеров кажутся мне теперь излишеством."
         },
-        "outputs": "Тихо здесь в любое время. Тишина тут густая и почти осязаемая. Даже зимой я добираюсь сюда хотя бы раз в месяц. Вышло славно. Шесть часов пролетели незаметно. Я вспоминаю это с теплом. Вот это удача! Там всегда тихо.",
+        "outputs": "Мелким удачам радуюсь всерьёз. Лампа даёт тёплый круг света. Радио шумело вполголоса на кухне. Телевизор мы не включаем почти никогда. В подъезде хлопнула дверь, и снова стало тихо. Настроение было ровное. Всё вышло тихо, и мне это подошло. Никаких сложностей не возникло.",
         "meta": {
-            "id": 6,
-            "base_id": "e54e5cb167f1",
-            "constraints": "[{\"category\": \"structure:word_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 38}, \"is_terminal\": false}, {\"category\": \"style:letter_start_count\", \"family\": \"style\", \"params\": {\"letter\": \"с\", \"op\": \"eq\", \"value\": 3}, \"is_terminal\": false}, {\"category\": \"style:forbid_letter\", \"family\": \"style\", \"params\": {\"letter\": \"к\"}, \"is_terminal\": false}, {\"category\": \"style:no_digits\", \"family\": \"style\", \"params\": {\"sample\": \"шесть\", \"any_words\": [\"шесть\", \"шести\"]}, \"is_terminal\": false}, {\"category\": \"lexical:ring_word\", \"family\": \"lexical\", \"params\": {}, \"is_terminal\": false}]",
+            "id": 18,
+            "base_id": "d5f59cea723c",
+            "constraints": "[{\"category\": \"structure:sentence_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 8}, \"is_terminal\": false}, {\"category\": \"structure:mirror_sentences\", \"family\": \"structure\", \"params\": {}, \"is_terminal\": false}, {\"category\": \"structure:char_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 272}, \"is_terminal\": false}, {\"category\": \"style:forbid_letter\", \"family\": \"style\", \"params\": {\"letter\": \"я\"}, \"is_terminal\": false}]",
             "categories": {
                 "language": "ru",
-                "tier": "medium",
+                "tier": "hard",
                 "length_tier": "long",
-                "n_constraints": 5,
-                "constraint_families": "lexical,structure,style",
-                "prompt_style": "request",
-                "topic": "place",
-                "stratum": "core"
+                "n_constraints": 4,
+                "constraint_families": "structure,style",
+                "prompt_style": "spec"
             },
             "annotation": {
-                "witness": "Да",
-                "solvability_review": "не проверялось",
-                "correctness_review": "не проверялось",
-                "reviewer": ""
+                "is_solvable": null,
+                "language_correctness": null
             }
         }
     },
@@ -61,13 +57,13 @@
                 "en": "List of formatting requirements for the answer, one per line, each starting with '- '."
             },
             "context": {
-                "ru": "Фоновые заметки, не относящиеся к делу и не влияющие на проверку; пустая строка у половины вопросов.",
-                "en": "Background notes, irrelevant to scoring; an empty string for half of the questions."
+                "ru": "Фоновые заметки, не относящиеся к делу и не влияющие на проверку; непустой абзац у 717 из 1260 вопросов, у остальных — пустая строка.",
+                "en": "Background notes, irrelevant to scoring; a non-empty paragraph for 717 of the 1260 questions and an empty string for the rest."
             }
         },
         "outputs": {
-            "ru": "Пример ответа, удовлетворяющего всем требованиям вопроса. Это свидетельство решаемости, а не единственный правильный ответ: любой текст, проходящий все проверки, считается верным.",
-            "en": "A reference answer satisfying every requirement of the question. It is a witness of solvability, not the unique correct answer: any text passing all checks is accepted."
+            "ru": "Эталон: ответ, удовлетворяющий всем требованиям вопроса. Это свидетельство решаемости, а не единственный правильный ответ: любой текст, проходящий все проверки, считается верным. Скоринг эталон не использует, поэтому в сплите test он отгружается пустым, а в shots — заполненным.",
+            "en": "The witness: an answer satisfying every requirement of the question. It is evidence of solvability, not the unique correct answer — any text passing all checks is accepted. Scoring never reads it, so the test split ships it empty and shots ships it filled."
         },
         "meta": {
             "id": {
@@ -75,8 +71,8 @@
                 "en": "Identification number of the question in the dataset."
             },
             "base_id": {
-                "ru": "Идентификатор исходного вопроса в генераторе IF-Hard-Bench.",
-                "en": "Identifier of the source question in the IF-Hard-Bench generator."
+                "ru": "Устойчивый идентификатор вопроса.",
+                "en": "Stable identifier of the question."
             },
             "constraints": {
                 "ru": "JSON-строка со списком требований в машиночитаемом виде: категория, семейство, параметры проверки. Дублирует содержание поля inputs.constraints и используется только для автоматической проверки ответа.",
@@ -87,13 +83,9 @@
                     "ru": "Язык вопроса.",
                     "en": "Language of the question."
                 },
-                "topic": {
-                    "en": "Everyday topic the writing task belongs to (day, evening, food, hobby, place, season, story, walk, weekend).",
-                    "ru": "Бытовая тема задания (день, вечер, еда, хобби, место, время года, история, прогулка, выходные)."
-                },
                 "tier": {
-                    "ru": "Уровень сложности вопроса, определяемый количеством и типом требований: easy, medium, hard, expert.",
-                    "en": "Difficulty tier of the question, defined by the number and type of requirements: easy, medium, hard, expert."
+                    "ru": "Квартиль предсказанной сложности стека: easy, medium, hard, expert — по 315 вопросов.",
+                    "en": "Quartile of predicted stack difficulty: easy, medium, hard, expert — 315 questions each."
                 },
                 "length_tier": {
                     "ru": "Наличие блока фоновых заметок: short — без контекста, long — с контекстом.",
@@ -104,34 +96,22 @@
                     "en": "Number of requirements in the question."
                 },
                 "constraint_families": {
-                    "ru": "Семейства требований вопроса через запятую: structure, lexical, style, format, answer_format.",
-                    "en": "Comma-separated requirement families of the question: structure, lexical, style, format, answer_format."
+                    "ru": "Семейства требований вопроса через запятую: structure, lexical, style, format, logic.",
+                    "en": "Comma-separated requirement families of the question: structure, lexical, style, format, logic."
                 },
                 "prompt_style": {
                     "ru": "Тональность промпта-инструкции: request, order, spec, casual, strict.",
                     "en": "Tone of the instruction prompt: request, order, spec, casual, strict."
-                },
-                "stratum": {
-                    "en": "Which half of the build the question belongs to: `core` — the ordinary generation policy, whose requirement mix is checked exactly; `topup` — questions added afterwards so that every requirement type reaches at least 35 uses and its pass rate is readable on its own.",
-                    "ru": "К какой части сборки относится вопрос: `core` — обычная политика генерации, состав требований в которой проверяется точно; `topup` — вопросы, добавленные потом, чтобы каждый тип требования набрал не менее 35 использований и его пасс-рейт читался отдельно."
                 }
             },
             "annotation": {
-                "witness": {
-                    "en": "Whether the question ships a verified witness — a valid answer satisfying every requirement of the question, re-scored with the shipped scorer at build time. Always `Да`: a question for which no witness can be built is discarded.",
-                    "ru": "Есть ли у вопроса проверенный эталон — корректный ответ, удовлетворяющий всем требованиям вопроса и пересчитанный боевым скорером при сборке. Всегда `Да`: вопрос, для которого эталон собрать не удалось, отбрасывается."
+                "is_solvable": {
+                    "ru": "Отметка человеческой проверки решаемости; пусто, пока разметка не проведена.",
+                    "en": "Human review mark for solvability; empty until annotation is carried out."
                 },
-                "solvability_review": {
-                    "en": "Result of the human review of solvability. `не проверялось` where the question has not been through human annotation.",
-                    "ru": "Результат человеческой проверки решаемости. `не проверялось`, если вопрос не проходил разметку."
-                },
-                "correctness_review": {
-                    "en": "Result of the human review of wording correctness. `не проверялось` where the question has not been through human annotation.",
-                    "ru": "Результат человеческой проверки корректности формулировок. `не проверялось`, если вопрос не проходил разметку."
-                },
-                "reviewer": {
-                    "en": "Identifier of the human annotator; empty where the question has not been through human annotation.",
-                    "ru": "Идентификатор разметчика; пусто, если вопрос не проходил разметку."
+                "language_correctness": {
+                    "ru": "Отметка человеческой проверки корректности формулировок; пусто, пока разметка не проведена.",
+                    "en": "Human review mark for wording correctness; empty until annotation is carried out."
                 }
             }
         }

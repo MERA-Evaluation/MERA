@@ -1,4 +1,4 @@
-"""IFHardBench21 — deterministic instruction-following scoring for lm-evaluation-harness.
+"""IFHardBench — deterministic instruction-following scoring for lm-evaluation-harness.
 
 The benchmark scores *instruction following only* — never domain knowledge and
 never the meaning of the answer. Every question ships a machine-readable list of
@@ -28,14 +28,15 @@ Three metrics are emitted per question:
 ``constraint_pass_rate``
     Share of individually satisfied constraints; a partial-credit diagnostic that
     separates "ignored one requirement out of five" from "ignored all of them".
-    **Declared over non-empty responses only** (a change from IFHardBench v1):
-    an empty response — a reasoning model that spent its whole token budget on
-    the trace — already fails ``sample_pass_rate`` outright, and zeroing five
-    constraint verdicts for it would make this diagnostic measure token
-    budgeting instead of what it exists to measure, the comprehensibility of
-    the requirements. Per-sample the metric is ``None`` for an empty response;
-    the aggregation (:func:`agg_constraint_pass_rate`) averages the rest. The
-    share of empty responses is reported separately by the run audit.
+    **Declared over non-empty responses only**: an empty response — a reasoning
+    model that spent its whole token budget on the trace — already fails
+    ``sample_pass_rate`` outright, and zeroing five constraint verdicts for it
+    would make this diagnostic measure token budgeting instead of what it exists
+    to measure, the comprehensibility of the requirements. Per-sample the metric
+    is ``None`` for an empty response; the aggregation
+    (:func:`agg_constraint_pass_rate`) averages the rest. Because the two
+    metrics treat empty responses differently, the share of empty responses
+    belongs next to them wherever they are quoted.
 
 Because ``params`` in the dataset are already localised to the surface language
 of the question at build time, the verifiers here need no constraint catalogue —
@@ -658,7 +659,7 @@ def v_markdown_table(response: str, params: dict, lang_code: str = DEFAULT_LANG)
 
 
 # --------------------------------------------------------------------------- #
-# IFHardBench21 additions — exact counters, cross-references, chains, mirrors
+# Exact counters, cross-references, chains, mirrors
 # --------------------------------------------------------------------------- #
 
 #: Russian alphabet order for the "items in alphabetical order" check. ``ё`` is
@@ -771,8 +772,8 @@ def v_checksum(response: str, params: dict, lang_code: str = DEFAULT_LANG) -> bo
     ``kind: "words"``         — N is the number of words, the marker excluded.
 
     The first two counts are not disturbed by the ``(N)`` marker itself (it
-    carries no commas and no letters), so they read the whole answer. The two
-    added in v2.1 *are* disturbed by it — ``(N)`` is a word, and an unterminated
+    carries no commas and no letters), so they read the whole answer. The latter
+    two *are* disturbed by it — ``(N)`` is a word, and an unterminated
     tail is a sentence — so they read the answer with the marker cut off, which
     is exactly what their wording promises ("саму пометку не считай").
     """
@@ -868,7 +869,7 @@ def v_anaphora(response: str, params: dict, lang_code: str = DEFAULT_LANG) -> bo
 
 
 # --------------------------------------------------------------------------- #
-# IFHardBench v2.1 additions — the everyday requirements
+# The everyday requirements
 #
 # What this block has in common: none of it is a puzzle. "Plain text, no
 # markdown", "wrap at sixty columns", "no digits", "don't start with
@@ -1151,7 +1152,7 @@ def v_epiphora(response: str, params: dict, lang_code: str = DEFAULT_LANG) -> bo
 
 
 # --------------------------------------------------------------------------- #
-# IFHardBench v2.1 — conditional requirements
+# Conditional requirements
 #
 # A rule that has to be *evaluated* before it can be followed. The generator
 # owns the context, so which branch holds is decided at generation time and
@@ -1240,14 +1241,14 @@ VERIFIERS: Dict[str, Callable[..., bool]] = {
     "format:csv_line": v_csv_line,
     "format:two_parts": v_two_parts,
     "format:markdown_table": v_markdown_table,
-    # IFHardBench21 — exact counters of a new kind
+    # Exact counters
     "style:forbid_letters": v_forbid_letters,
     "style:comma_count": v_comma_count,
     "style:letter_start_count": v_letter_start_count,
     "lexical:word_exact_count": v_word_exact_count,
     "structure:checksum": v_checksum,
     "structure:word_char_count": v_word_char_count,
-    # IFHardBench21 — cross-references, chains and mirrors
+    # Cross-references, chains and mirrors
     "lexical:ring_word": v_ring_word,
     "lexical:paragraph_echo": v_paragraph_echo,
     "lexical:item_chain": v_item_chain,
@@ -1257,7 +1258,7 @@ VERIFIERS: Dict[str, Callable[..., bool]] = {
     "structure:mirror_sentences": v_mirror_sentences,
     "lexical:sentence_acrostic": v_sentence_acrostic,
     "style:anaphora": v_anaphora,
-    # IFHardBench v2.1 — the everyday requirements
+    # The everyday requirements
     "style:no_markdown": v_no_markdown,
     "format:bold_words": v_bold_words,
     "format:line_length": v_line_length,
@@ -1272,7 +1273,7 @@ VERIFIERS: Dict[str, Callable[..., bool]] = {
     "format:hashtags": v_hashtags,
     "lexical:anadiplosis": v_anadiplosis,
     "lexical:epiphora": v_epiphora,
-    # IFHardBench v2.1 — conditional requirements
+    # Conditional requirements
     "logic:conditional_include": v_conditional_include,
     "logic:conditional_format": v_conditional_format,
     "logic:override": v_override,
@@ -1293,8 +1294,8 @@ def verify(category: str, response: str, params: dict, lang_code: str = DEFAULT_
 
 _PROMPTS_CACHE: Optional[List[str]] = None
 _META_CANDIDATES = (
-    "../../datasets/IFHardBench21/dataset_meta.json",
-    "../../../datasets/IFHardBench21/dataset_meta.json",
+    "../../datasets/IFHardBench/dataset_meta.json",
+    "../../../datasets/IFHardBench/dataset_meta.json",
 )
 
 
@@ -1361,6 +1362,7 @@ def process_docs(dataset):
 
 _THINK_BLOCK_RE = re.compile(r"<think>[\s\S]*?</think>", re.IGNORECASE)
 _THINK_TAG_RE = re.compile(r"</?think>", re.IGNORECASE)
+_THINK_CLOSE_RE = re.compile(r"</think>", re.IGNORECASE)
 
 
 def normalize_generation(generation: str) -> str:
@@ -1371,8 +1373,33 @@ def normalize_generation(generation: str) -> str:
     followed the instruction. Beyond that the response is scored verbatim: any
     further "lenient extraction" (peeling off a preamble, unwrapping code fences)
     would score a response the instruction did not ask for.
+
+    The trace is delimited by its **closing** tag, not by a balanced pair:
+    everything up to and including the first ``</think>`` is dropped. Matching
+    ``<think>...</think>`` alone is not enough in practice, because the opening
+    tag frequently never appears in the generation —
+
+    * chat templates for reasoning models routinely pre-fill ``<think>`` at the
+      end of the prompt, so the model emits only ``trace</think>answer`` and a
+      balanced-pair rule would score the whole trace;
+    * a server that re-assembles a separated trace back into the text, or a
+      model that leaks a token before opening the block, yields
+      ``token<think>trace</think>answer``, where a balanced-pair rule leaves the
+      leaked token glued to the answer and corrupts every exact counter.
+
+    Any further balanced blocks are removed afterwards, so a model that
+    interleaves several traces keeps the answer between them.
+
+    An **unterminated** trace has no ``</think>`` and is deliberately left
+    alone: the model was cut off inside its own reasoning, and that text is the
+    answer it actually produced. It fails — the answer is not absent, it is
+    wrong.
     """
-    text = _THINK_BLOCK_RE.sub("", generation or "")
+    text = generation or ""
+    close = _THINK_CLOSE_RE.search(text)
+    if close:
+        text = text[close.end():]
+    text = _THINK_BLOCK_RE.sub("", text)
     text = _THINK_TAG_RE.sub("", text)
     return text.strip()
 
@@ -1510,18 +1537,18 @@ def agg_balance_score(values: List[Optional[List[List[Any]]]]) -> float:
     ``sample_pass_rate``.** Both this metric and ``constraint_pass_rate`` are
     built from per-requirement verdicts and live on that scale;
     ``sample_pass_rate`` is a product over the whole stack and is structurally
-    far lower (at a mean stack of 4.5 and a per-requirement rate of 0.83 it lands
-    near 0.83⁴·⁵ ≈ 0.43). A ``balance_score`` above ``sample_pass_rate`` is the
-    normal case, not a sign that the geometric mean failed to bite.
+    far lower (at the shipped mean stack of 4.43 and a per-requirement rate of
+    0.83 it lands near 0.83⁴·⁴³ ≈ 0.44). A ``balance_score`` above
+    ``sample_pass_rate`` is the normal case, not a sign that the geometric mean
+    failed to bite.
 
     Two things separate it from ``constraint_pass_rate`` and they pull in
     opposite directions: equal weight per type instead of weight by frequency
     (which can move the number either way — up, when the model's frequent types
     are its hard ones), and a geometric mean instead of an arithmetic one (always
-    down). The report prints the equal-weight arithmetic mean alongside, so the
-    second gap — the concentration penalty — is visible as a number: measured at
-    −0.036 for gpt-5.6-terra, −0.010 for deepseek-v4-flash and −0.107 for
-    grok-4.3, whose failures sit in a handful of types.
+    down). Reporting the equal-weight *arithmetic* mean alongside separates the
+    two: the gap between it and this metric is the concentration penalty alone,
+    and it widens for a model whose failures sit in a handful of types.
 
     Empty responses are excluded, exactly as in :func:`agg_constraint_pass_rate`
     and for the same reason; they already fail ``sample_pass_rate``.
