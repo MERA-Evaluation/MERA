@@ -52,6 +52,7 @@ import re
 from configparser import ConfigParser, Error as CFGError, MissingSectionHeaderError
 from typing import Any, Callable, Dict, List, Tuple
 from lm_eval.api.registry import register_filter, FILTER_REGISTRY
+from lm_eval.api.filter import Filter
 
 eval_logger = logging.getLogger(__name__)
 
