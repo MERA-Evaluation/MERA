@@ -50,4 +50,3 @@ metric_list:
 num_fewshot: null
 metadata:
   version: 1.0
-  license: "MERA_private"
