@@ -72,6 +72,7 @@ import re
 from collections import defaultdict
 from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 from lm_eval.api.registry import register_filter, FILTER_REGISTRY
+from lm_eval.api.filter import Filter
 
 eval_logger = logging.getLogger(__name__)
 
