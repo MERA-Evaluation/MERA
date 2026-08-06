@@ -1,8 +1,8 @@
 {
-    "dataset_name": "IFHardBench",
+    "dataset_name": "IFHardBench21",
     "license": "MERA_private",
-    "dataset_size": 440,
-    "description": "Hard instruction following in Russian: every question stacks three to six machine-verifiable formatting requirements, checked deterministically, and ships a natural reference answer proving the stack is satisfiable.",
+    "dataset_size": 1260,
+    "description": "Hard instruction following in Russian: every question pairs a trivial, knowledge-free writing task with a stack of three to six machine-verifiable requirements on the answer, built around one or two deliberately hard ones (exact counts of words, sentences and characters, lipograms, comma and letter-initial counters, positional and cross-referencing words, acrostics, list and JSON shapes, trailing checksums, and conditional rules whose branch depends on the supplied context). Every requirement is checked by a deterministic verifier — no LLM judge and no reference matching — and every question ships a natural reference answer proving the stack is satisfiable. Metric note, declared by design: sample_pass_rate counts an empty response as a plain failure, while constraint_pass_rate is computed over non-empty responses only; the share of empty responses is reported separately by the run audit.",
     "modalities": [
         "text"
     ],
@@ -17,25 +17,26 @@
     "universal_domains": [],
     "synt_source_models": [],
     "data_example": {
-        "instruction": "Выручи, пожалуйста, — мне нужен короткий текст под заказ.\n\nВот что уже известно: {context}\n\nТребования такие:\n{constraints}\n\nЗадание: {question}\n\nБуду благодарен, если всё сойдётся до последнего пункта.",
+        "instruction": "Можешь написать для меня одну вещь?\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПеречитай, пожалуйста, список перед тем, как отправлять.",
         "inputs": {
-            "question": "Опиши свой любимый простой ужин.",
-            "constraints": "- Весь ответ — JSON-объект с тремя ключами: «что», «где», «когда». Значения строковые, каждое до 3 слов.\n- Не используй букву «п» — нигде в ответе.\n- Не забудь про слово «гречка»: оно должно быть в тексте, форма неважна.\n- Заглавных букв быть не должно нигде, даже в начале предложений.",
-            "context": "В холодильнике оставались три случайных продукта и полбуханки хлеба. Идти в магазин было лень. Ужин собрался сам собой."
+            "question": "Напиши про место, в котором ты по-настоящему отдыхаешь.",
+            "constraints": "- Мне нужен ответ ровно на 38 слов.\n- Слов, начинающихся на «с», должно быть ровно 3 — пересчитай их.\n- Буква «к» под запретом — ни строчная, ни заглавная.\n- Обязательно скажи, о каком числе речь в контексте, — но ни одной цифры в ответе быть не должно: пиши число словом («шесть»).\n- Первое и последнее слово ответа — одно и то же слово, форма одинаковая.",
+            "context": "У пруда 6 скамеек, и одна из них всегда свободна."
         },
-        "outputs": "{\"что\": \"каша на завтрак\", \"где\": \"фасоль в томате\", \"когда\": \"гречка с грибами\"}",
+        "outputs": "Тихо здесь в любое время. Тишина тут густая и почти осязаемая. Даже зимой я добираюсь сюда хотя бы раз в месяц. Вышло славно. Шесть часов пролетели незаметно. Я вспоминаю это с теплом. Вот это удача! Там всегда тихо.",
         "meta": {
             "id": 6,
-            "base_id": "b2cd20e17bd3",
-            "constraints": "[{\"category\": \"format:json_object\", \"family\": \"format\", \"params\": {\"keys\": [\"что\", \"где\", \"когда\"], \"max_words\": 3, \"no_commas_in_values\": true}, \"is_terminal\": true}, {\"category\": \"style:forbid_letter\", \"family\": \"style\", \"params\": {\"letter\": \"п\"}, \"is_terminal\": false}, {\"category\": \"lexical:include_keyword\", \"family\": \"lexical\", \"params\": {\"word\": \"гречка\", \"stem\": \"гречк\"}, \"is_terminal\": false}, {\"category\": \"style:no_caps\", \"family\": \"style\", \"params\": {}, \"is_terminal\": false}]",
+            "base_id": "e54e5cb167f1",
+            "constraints": "[{\"category\": \"structure:word_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 38}, \"is_terminal\": false}, {\"category\": \"style:letter_start_count\", \"family\": \"style\", \"params\": {\"letter\": \"с\", \"op\": \"eq\", \"value\": 3}, \"is_terminal\": false}, {\"category\": \"style:forbid_letter\", \"family\": \"style\", \"params\": {\"letter\": \"к\"}, \"is_terminal\": false}, {\"category\": \"style:no_digits\", \"family\": \"style\", \"params\": {\"sample\": \"шесть\", \"any_words\": [\"шесть\", \"шести\"]}, \"is_terminal\": false}, {\"category\": \"lexical:ring_word\", \"family\": \"lexical\", \"params\": {}, \"is_terminal\": false}]",
             "categories": {
                 "language": "ru",
                 "tier": "medium",
                 "length_tier": "long",
-                "n_constraints": 4,
-                "constraint_families": "format,lexical,style",
+                "n_constraints": 5,
+                "constraint_families": "lexical,structure,style",
                 "prompt_style": "request",
-                "topic": "food"
+                "topic": "place",
+                "stratum": "core"
             },
             "annotation": {
                 "witness": "Да",
@@ -86,6 +87,10 @@
                     "ru": "Язык вопроса.",
                     "en": "Language of the question."
                 },
+                "topic": {
+                    "en": "Everyday topic the writing task belongs to (day, evening, food, hobby, place, season, story, walk, weekend).",
+                    "ru": "Бытовая тема задания (день, вечер, еда, хобби, место, время года, история, прогулка, выходные)."
+                },
                 "tier": {
                     "ru": "Уровень сложности вопроса, определяемый количеством и типом требований: easy, medium, hard, expert.",
                     "en": "Difficulty tier of the question, defined by the number and type of requirements: easy, medium, hard, expert."
@@ -105,66 +110,82 @@
                 "prompt_style": {
                     "ru": "Тональность промпта-инструкции: request, order, spec, casual, strict.",
                     "en": "Tone of the instruction prompt: request, order, spec, casual, strict."
+                },
+                "stratum": {
+                    "en": "Which half of the build the question belongs to: `core` — the ordinary generation policy, whose requirement mix is checked exactly; `topup` — questions added afterwards so that every requirement type reaches at least 35 uses and its pass rate is readable on its own.",
+                    "ru": "К какой части сборки относится вопрос: `core` — обычная политика генерации, состав требований в которой проверяется точно; `topup` — вопросы, добавленные потом, чтобы каждый тип требования набрал не менее 35 использований и его пасс-рейт читался отдельно."
                 }
             },
             "annotation": {
-                "is_solvable": {
-                    "ru": "Ответ разметчика на вопрос «Вопрос решаем?».",
-                    "en": "Annotator's answer to the question 'Is the task solvable?'."
+                "witness": {
+                    "en": "Whether the question ships a verified witness — a valid answer satisfying every requirement of the question, re-scored with the shipped scorer at build time. Always `Да`: a question for which no witness can be built is discarded.",
+                    "ru": "Есть ли у вопроса проверенный эталон — корректный ответ, удовлетворяющий всем требованиям вопроса и пересчитанный боевым скорером при сборке. Всегда `Да`: вопрос, для которого эталон собрать не удалось, отбрасывается."
                 },
-                "language_correctness": {
-                    "ru": "Ответ разметчика на вопрос «Вопрос корректен?».",
-                    "en": "Annotator's answer to the question 'Is the task linguistically correct?'."
+                "solvability_review": {
+                    "en": "Result of the human review of solvability. `не проверялось` where the question has not been through human annotation.",
+                    "ru": "Результат человеческой проверки решаемости. `не проверялось`, если вопрос не проходил разметку."
+                },
+                "correctness_review": {
+                    "en": "Result of the human review of wording correctness. `не проверялось` where the question has not been through human annotation.",
+                    "ru": "Результат человеческой проверки корректности формулировок. `не проверялось`, если вопрос не проходил разметку."
+                },
+                "reviewer": {
+                    "en": "Identifier of the human annotator; empty where the question has not been through human annotation.",
+                    "ru": "Идентификатор разметчика; пусто, если вопрос не проходил разметку."
                 }
             }
         }
     },
     "prompts": [
-        "Пожалуйста, помоги мне с одним небольшим текстом.\n\nВот чего я жду от ответа:\n{constraints}\n\nСаму задачу формулирую так: {question}\n\nОчень прошу, не упусти ничего из списка — там важен каждый пункт.",
-        "Пожалуйста, помоги мне с одним небольшим текстом.\n\nНемного вводных: {context}\n\nВот чего я жду от ответа:\n{constraints}\n\nСаму задачу формулирую так: {question}\n\nОчень прошу, не упусти ничего из списка — там важен каждый пункт.",
-        "Выручи, пожалуйста, — мне нужен короткий текст под заказ.\n\nТребования такие:\n{constraints}\n\nЗадание: {question}\n\nБуду благодарен, если всё сойдётся до последнего пункта.",
-        "Выручи, пожалуйста, — мне нужен короткий текст под заказ.\n\nВот что уже известно: {context}\n\nТребования такие:\n{constraints}\n\nЗадание: {question}\n\nБуду благодарен, если всё сойдётся до последнего пункта.",
-        "Можешь написать для меня одну вещь?\n\nУсловия вот такие:\n{constraints}\n\nА написать надо вот что: {question}\n\nПеречитай, пожалуйста, список перед тем, как отправлять.",
-        "Можешь написать для меня одну вещь?\n\nДля понимания: {context}\n\nУсловия вот такие:\n{constraints}\n\nА написать надо вот что: {question}\n\nПеречитай, пожалуйста, список перед тем, как отправлять.",
-        "Прошу помочь с текстом — он маленький, но с оговорками.\n\nОговорки такие:\n{constraints}\n\nТема: {question}\n\nЕсли хоть что-то из списка не сойдётся, ответ мне не подойдёт.",
-        "Прошу помочь с текстом — он маленький, но с оговорками.\n\nФон такой: {context}\n\nОговорки такие:\n{constraints}\n\nТема: {question}\n\nЕсли хоть что-то из списка не сойдётся, ответ мне не подойдёт.",
-        "Выполни задачу строго по требованиям.\n\nТребования к ответу:\n{constraints}\n\nЗадача: {question}\n\nСоблюдай каждое требование неукоснительно, без исключений.",
-        "Выполни задачу строго по требованиям.\n\nИсходные данные: {context}\n\nТребования к ответу:\n{constraints}\n\nЗадача: {question}\n\nСоблюдай каждое требование неукоснительно, без исключений.",
-        "Работай точно по списку.\n\nСписок требований:\n{constraints}\n\nЗадача: {question}\n\nОтступления не допускаются.",
-        "Работай точно по списку.\n\nВводная: {context}\n\nСписок требований:\n{constraints}\n\nЗадача: {question}\n\nОтступления не допускаются.",
-        "Сделай ровно то, что написано ниже.\n\nЧто должно быть в ответе:\n{constraints}\n\nЗадача: {question}\n\nПроверь себя по каждому пункту, прежде чем отвечать.",
-        "Сделай ровно то, что написано ниже.\n\nЧто известно заранее: {context}\n\nЧто должно быть в ответе:\n{constraints}\n\nЗадача: {question}\n\nПроверь себя по каждому пункту, прежде чем отвечать.",
-        "Ниже задача и требования к ней. Выполняй.\n\nТребования:\n{constraints}\n\nЗадача: {question}\n\nЛюбое отклонение считается ошибкой.",
-        "Ниже задача и требования к ней. Выполняй.\n\nОбстановка: {context}\n\nТребования:\n{constraints}\n\nЗадача: {question}\n\nЛюбое отклонение считается ошибкой.",
-        "Условия оформления ответа:\n{constraints}\n\nЗадание: {question}\n\nОтвет засчитывается только при одновременном выполнении всех условий.",
-        "Контекст: {context}\n\nУсловия оформления ответа:\n{constraints}\n\nЗадание: {question}\n\nОтвет засчитывается только при одновременном выполнении всех условий.",
-        "Ответ должен удовлетворять следующим условиям:\n{constraints}\n\nЗадание: {question}\n\nНевыполнение любого из условий делает ответ недействительным.",
-        "Исходные сведения: {context}\n\nОтвет должен удовлетворять следующим условиям:\n{constraints}\n\nЗадание: {question}\n\nНевыполнение любого из условий делает ответ недействительным.",
-        "Параметры ответа:\n{constraints}\n\nЗадание: {question}\n\nПроверка выполняется по каждому параметру отдельно.",
-        "Справочная информация: {context}\n\nПараметры ответа:\n{constraints}\n\nЗадание: {question}\n\nПроверка выполняется по каждому параметру отдельно.",
-        "Ограничения на форму ответа:\n{constraints}\n\nЗадание: {question}\n\nОтвет принимается при полном соответствии всем ограничениям.",
-        "Дано: {context}\n\nОграничения на форму ответа:\n{constraints}\n\nЗадание: {question}\n\nОтвет принимается при полном соответствии всем ограничениям.",
-        "Слушай, помоги.\n\nЕсть моменты, которые надо учесть:\n{constraints}\n\nА написать нужно вот что: {question}\n\nПеред тем как отвечать, проверь, что ничего не потерялось.",
-        "Слушай, помоги.\n\nНебольшой контекст: {context}\n\nЕсть моменты, которые надо учесть:\n{constraints}\n\nА написать нужно вот что: {question}\n\nПеред тем как отвечать, проверь, что ничего не потерялось.",
-        "Привет! Есть маленькая просьба.\n\nТут пара условий:\n{constraints}\n\nНужно вот что: {question}\n\nГлавное — не проскочить мимо какого-нибудь пункта.",
-        "Привет! Есть маленькая просьба.\n\nЧтобы ты был в курсе: {context}\n\nТут пара условий:\n{constraints}\n\nНужно вот что: {question}\n\nГлавное — не проскочить мимо какого-нибудь пункта.",
-        "Короче, нужна твоя помощь с текстом.\n\nВот что важно:\n{constraints}\n\nСам текст про это: {question}\n\nПройдись по списку ещё раз, прежде чем отправлять.",
-        "Короче, нужна твоя помощь с текстом.\n\nВкратце обстановка: {context}\n\nВот что важно:\n{constraints}\n\nСам текст про это: {question}\n\nПройдись по списку ещё раз, прежде чем отправлять.",
-        "Есть минутка? Хочу попросить об одном тексте.\n\nУсловия такие:\n{constraints}\n\nПишем вот о чём: {question}\n\nСмотри, чтобы всё сошлось — я буду сверять.",
-        "Есть минутка? Хочу попросить об одном тексте.\n\nНа всякий случай вот детали: {context}\n\nУсловия такие:\n{constraints}\n\nПишем вот о чём: {question}\n\nСмотри, чтобы всё сошлось — я буду сверять.",
-        "Ниже список требований. Ответ будет проверяться по каждому из них:\n{constraints}\n\nЗадание: {question}\n\nНесоответствие хотя бы одному требованию означает, что ответ не принят.",
-        "Контекст задачи: {context}\n\nНиже список требований. Ответ будет проверяться по каждому из них:\n{constraints}\n\nЗадание: {question}\n\nНесоответствие хотя бы одному требованию означает, что ответ не принят.",
-        "Требования, по которым будет проверяться ответ:\n{constraints}\n\nЗадание: {question}\n\nОдно нарушение — и весь ответ идёт в брак.",
-        "Предыстория: {context}\n\nТребования, по которым будет проверяться ответ:\n{constraints}\n\nЗадание: {question}\n\nОдно нарушение — и весь ответ идёт в брак.",
-        "Читай требования внимательно: проверять буду построчно.\n{constraints}\n\nЗадание: {question}\n\nЧастичное выполнение не засчитывается.",
-        "Что нужно знать заранее: {context}\n\nЧитай требования внимательно: проверять буду построчно.\n{constraints}\n\nЗадание: {question}\n\nЧастичное выполнение не засчитывается.",
-        "Требования к ответу:\n{constraints}\n\nЗадание: {question}\n\nПроверка формальная: любой невыполненный пункт обнуляет результат.",
-        "Вот вводные: {context}\n\nТребования к ответу:\n{constraints}\n\nЗадание: {question}\n\nПроверка формальная: любой невыполненный пункт обнуляет результат."
+        "Пожалуйста, помоги мне с одним небольшим текстом.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОчень прошу, не упусти ничего из списка — там важен каждый пункт.",
+        "Пожалуйста, помоги мне с одним небольшим текстом.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОчень прошу, не упусти ничего из списка — там важен каждый пункт.",
+        "Выручи, пожалуйста, — мне нужен короткий текст под заказ.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nБуду благодарен, если всё сойдётся до последнего пункта.",
+        "Выручи, пожалуйста, — мне нужен короткий текст под заказ.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nБуду благодарен, если всё сойдётся до последнего пункта.",
+        "Можешь написать для меня одну вещь?\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПеречитай, пожалуйста, список перед тем, как отправлять.",
+        "Можешь написать для меня одну вещь?\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПеречитай, пожалуйста, список перед тем, как отправлять.",
+        "Прошу помочь с текстом — он маленький, но с оговорками.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nЕсли хоть что-то из списка не сойдётся, ответ мне не подойдёт.",
+        "Прошу помочь с текстом — он маленький, но с оговорками.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nЕсли хоть что-то из списка не сойдётся, ответ мне не подойдёт.",
+        "Выполни задачу строго по требованиям.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nСоблюдай каждое требование неукоснительно, без исключений.",
+        "Выполни задачу строго по требованиям.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nСоблюдай каждое требование неукоснительно, без исключений.",
+        "Работай точно по списку.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОтступления не допускаются.",
+        "Работай точно по списку.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОтступления не допускаются.",
+        "Сделай ровно то, что написано ниже.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверь себя по каждому пункту, прежде чем отвечать.",
+        "Сделай ровно то, что написано ниже.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверь себя по каждому пункту, прежде чем отвечать.",
+        "Ниже задача и требования к ней. Выполняй.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nЛюбое отклонение считается ошибкой.",
+        "Ниже задача и требования к ней. Выполняй.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nЛюбое отклонение считается ошибкой.",
+        "Требования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОтвет засчитывается только при одновременном выполнении всех требований.",
+        "Контекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОтвет засчитывается только при одновременном выполнении всех требований.",
+        "Требования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nНевыполнение любого из требований делает ответ недействительным.",
+        "Контекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nНевыполнение любого из требований делает ответ недействительным.",
+        "Требования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверка выполняется по каждому требованию отдельно.",
+        "Контекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверка выполняется по каждому требованию отдельно.",
+        "Требования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОтвет принимается при полном соответствии всем требованиям.",
+        "Контекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОтвет принимается при полном соответствии всем требованиям.",
+        "Слушай, помоги.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПеред тем как отвечать, проверь, что ничего не потерялось.",
+        "Слушай, помоги.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПеред тем как отвечать, проверь, что ничего не потерялось.",
+        "Привет! Есть маленькая просьба.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nГлавное — не проскочить мимо какого-нибудь пункта.",
+        "Привет! Есть маленькая просьба.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nГлавное — не проскочить мимо какого-нибудь пункта.",
+        "Короче, нужна твоя помощь с текстом.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПройдись по списку ещё раз, прежде чем отправлять.",
+        "Короче, нужна твоя помощь с текстом.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПройдись по списку ещё раз, прежде чем отправлять.",
+        "Есть минутка? Хочу попросить об одном тексте.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nСмотри, чтобы всё сошлось — я буду сверять.",
+        "Есть минутка? Хочу попросить об одном тексте.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nСмотри, чтобы всё сошлось — я буду сверять.",
+        "Ответ будет проверяться по каждому пункту списка.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nНесоответствие хотя бы одному требованию означает, что ответ не принят.",
+        "Ответ будет проверяться по каждому пункту списка.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nНесоответствие хотя бы одному требованию означает, что ответ не принят.",
+        "Выполнить нужно всё до единого пункта.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОдно нарушение — и весь ответ идёт в брак.",
+        "Выполнить нужно всё до единого пункта.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nОдно нарушение — и весь ответ идёт в брак.",
+        "Читай внимательно: проверять буду построчно.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nЧастичное выполнение не засчитывается.",
+        "Читай внимательно: проверять буду построчно.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nЧастичное выполнение не засчитывается.",
+        "Ниже задание. Отвечать строго по списку.\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверка формальная: любой невыполненный пункт обнуляет результат.",
+        "Ниже задание. Отвечать строго по списку.\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверка формальная: любой невыполненный пункт обнуляет результат."
     ],
     "metrics": {
         "sample_pass_rate": {
             "ru": "Доля вопросов, в которых ответ модели удовлетворяет одновременно всем требованиям вопроса. Основная метрика: частичное следование инструкции не засчитывается.",
             "en": "Share of questions where the model response satisfies every requirement of the question at once. The headline metric: partial instruction following does not count."
+        },
+        "balance_score": {
+            "ru": "Пасс-рейт по каждому типу требований, сведённый в геометрическое среднее с равным весом на тип; ставки ограничены снизу значением 0.01. Вторая основная метрика: остальные усредняют по вхождениям и потому взвешены частотой типа, а эта показывает, есть ли вид инструкции, который модель не умеет вовсе. Провалы, собранные в одном типе, стоят дороже, чем размазанные по многим; тип, который модель не выполняет никогда, даёт штраф, а не обнуляет скор; тип менее чем с 5 вердиктами в прогоне исключается и называется в отчёте.",
+            "en": "Pass rate of each requirement type, combined as a geometric mean with equal weight per type and rates floored at 0.01. The second headline metric: the others average over occurrences and are therefore weighted by how common a requirement is, while this one asks whether there is a kind of instruction the model cannot do at all. Failures concentrated in one type cost more than the same number spread out; a type the model never gets right is a penalty rather than a zero; a type with fewer than 5 verdicts in the run is excluded and named in the report."
         },
         "constraint_pass_rate": {
             "ru": "Доля выполненных требований, усреднённая по вопросам. Диагностическая метрика: показывает, пропущено ли одно требование из пяти или все сразу.",
@@ -173,6 +194,7 @@
     },
     "human_benchmark": {
         "sample_pass_rate": "TODO",
+        "balance_score": "TODO",
         "constraint_pass_rate": "TODO"
     }
 }

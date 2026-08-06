@@ -2,7 +2,6 @@ tag:
   - mera
   - mera_all
 dataset_path: MERA-evaluation/IFHardBench
-dataset_name: null
 task: ifhardbench
 
 test_split: test
@@ -10,46 +9,16 @@ fewshot_split: shots
 
 output_type: generate_until
 
-# The instruction template carries {question} / {constraints} / {context}; the
-# short half of the dataset uses templates without the {context} placeholder,
-# and str.format simply ignores the extra key.
 doc_to_text: "{{instruction.format(**inputs)}}"
-# The gold is a reference witness proving the question is satisfiable — scoring
-# never compares against it (see utils.process_results), it only verifies the
-# generation against the question's own constraints.
 doc_to_target: "{{outputs}}"
 
-# MERA-style few-shot construction: only the first shot carries the full
-# instruction. Dormant under num_fewshot: 0, activates with --num_fewshot N.
-# The instructionless form keeps the SAP block order of the full prompt
-# (requirements -> question) so a shot never demonstrates a different layout.
 fewshot_config:
   sampler: !function ../custom_samplers.FewshotSampler
-  doc_to_text_without_instruction: "{{'Требования к ответу:\n{constraints}\n\nЗадание: {question}'.format(**inputs)}}"
+  doc_to_text_without_instruction: "{{'Требования к ответу:\n{constraints}\n\nЗадание:\n{question}'.format(**inputs)}}"
   query: "{{instruction.format(**inputs)}}"
 
-# The prompt has no trailing answer trigger, so a few-shot answer needs a visible
-# break from the prompt it follows; without this the two would run together on
-# one line. Unused at num_fewshot: 0 (the zero-shot context is doc_to_text alone).
 target_delimiter: "\n\n"
 
-# The answer IS the formatted text, so nothing may truncate it: constraints
-# routinely require several paragraphs, bullet lines or blank lines, and the
-# lm-eval default (until = fewshot_delimiter = "\n\n") would cut those off
-# mid-answer and fail the sample for the harness's reason, not the model's.
-# Only end-of-turn markers stop generation.
-# `max_gen_toks` (not `max_new_tokens`) is the key lm-eval actually reads: the
-# HF backend pops it in generate_until, and the API backends (local-chat-completions
-# / openai-chat-completions) map it to `max_tokens`. With `max_new_tokens` an API
-# run would silently fall back to the 256-token default and truncate long answers.
-#
-# The cap is generous because a reasoning model spends this budget on its trace
-# first: an exact word count or an acrostic can cost thousands of tokens of
-# planning before the first character of the answer is emitted, and a model that
-# runs out mid-trace returns an empty `content` — which would score zero for the
-# harness's reason, not the model's. `audit_ifhardbench_logs.py` fails the run if
-# more than 2% of responses come back empty, so a too-small cap cannot pass
-# unnoticed.
 generation_kwargs:
   do_sample: false
   temperature: 0.0
@@ -59,29 +28,26 @@ generation_kwargs:
     - "<|im_end|>"
     - "</s>"
 
-# No answer extraction: the response is scored verbatim (minus reasoning traces,
-# stripped inside process_results). take_first only unpacks [[gen]] -> [gen].
 filter_list:
   - name: "scoring"
     filter:
+      - function: remove_whitespace_and_nones
       - function: "take_first"
 
 process_results: !function utils.process_results
+
 metric_list:
   - metric: sample_pass_rate
     aggregation: mean
     higher_is_better: true
   - metric: constraint_pass_rate
-    aggregation: mean
+    aggregation: !function utils.agg_constraint_pass_rate
+    higher_is_better: true
+  - metric: balance_score
+    aggregation: !function utils.agg_balance_score
     higher_is_better: true
 
-num_fewshot: 0
+num_fewshot: null
 metadata:
   version: 1.0
-  description: "IFHardBench — hard instruction following with deterministic constraint verification (Russian)"
   license: "MERA_private"
-  keywords:
-    - instruction_following
-    - alignment
-    - format_control
-    - generative
