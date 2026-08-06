@@ -2,7 +2,7 @@
     "dataset_name": "GorillaHard",
     "license": "MERA License",
     "dataset_size": 1169,
-    "description": "Маршрутизация запроса по каталогу инструментов: один вызов, план из зависимых шагов, набор независимых вызовов, уточняющий вопрос или обоснованный отказ. Аргументы заполняются по приложенным файлам. Проверка детерминированная, без модели-судьи.",
+    "description": "Маршрутизация запроса по каталогу инструментов: вызов, план, независимые вызовы, уточнение или отказ. Аргументы берутся из приложенных файлов. Проверка детерминированная, без модели-судьи.",
     "modalities": [
         "text"
     ],
@@ -78,8 +78,8 @@
                 "en": "Catalog of available tools as a JSON string: name, family, description, parameters and operational constraints of each tool. A catalog holds 14–22 tools and always contains a twin of the right one — a tool that does almost the same thing."
             },
             "format": {
-                "ru": "Требования к формату ответа. Блок всегда описывает оба конверта — и вызов инструмента, и отказ, — поэтому по формату нельзя догадаться, какой из них ожидается.",
-                "en": "Answer format requirements. The block always describes both envelopes — a call and a refusal — so the format never reveals which one is expected."
+                "ru": "Требования к формату ответа. Блок всегда описывает все пять конвертов — вызов, план, независимые вызовы, уточнение и отказ, — поэтому по формату нельзя догадаться, какой из них ожидается.",
+                "en": "Answer format requirements. The block always describes all five envelopes — a call, a plan, independent calls, a clarification and a refusal — so the format never reveals which one is expected."
             }
         },
         "outputs": {
@@ -92,8 +92,8 @@
                 "en": "Row number in the dataset."
             },
             "base_id": {
-                "ru": "Идентификатор базового вопроса. У каждого вопроса ровно одна строка, так что base_id взаимно однозначен с id; поле сохранено, чтобы разрез по вопросам считался одинаково в версиях, где строк на вопрос было пять.",
-                "en": "Base question identifier. Each question ships as exactly one row, so base_id is one-to-one with id; the field is kept so that per-question slicing works the same way as in versions with five rows per question."
+                "ru": "Идентификатор базового вопроса. У каждого вопроса ровно одна строка, так что base_id взаимно однозначен с id; поле удобно тем, что по нему считается разрез по вопросам, а у ходов одного диалога значения разные.",
+                "en": "Base question identifier. Each question ships as exactly one row, so base_id is one-to-one with id; the field carries the per-question slice, and turns of one dialogue have different values."
             },
             "dialog_id": {
                 "ru": "Идентификатор диалога. Строки с общим dialog_id — ходы одного разговора; историю хода собирает сэмплер по этому полю и turn_id. У однокадрового вопроса dialog_id совпадает с base_id: он вырожденный диалог из одного хода, и отдельного вида строк в датасете нет.",
@@ -112,8 +112,8 @@
                 "en": "How the turn depends on history: tool — the operation is named only in earlier turns, args — an argument value carries over, trap — the turn cancels the previous one and is self-contained on purpose, history must not change the answer. Empty for first turns and single-turn questions."
             },
             "wording": {
-                "ru": "Индекс формулировки инструкции, 0–4. Вопросу достаётся одна формулировка — детерминированно, по хешу вопроса, — так что по датасету они разложены ровно на пять частей и чувствительность к тону меряется срезом. Ходы одного диалога делят формулировку: историю сэмплер собирает только из строк с тем же wording.",
-                "en": "Instruction wording index, 0–4. Each question gets one wording, assigned deterministically by a hash of the question, so the five wordings split the dataset into equal parts and phrasing sensitivity is read as a slice. Turns of one dialogue share a wording: the sampler draws history only from rows with the same wording."
+                "ru": "Индекс формулировки инструкции, 0–4. Вопросу достаётся одна формулировка — детерминированно, по хешу вопроса, — так что по датасету они разложены почти поровну (249 / 231 / 229 / 249 / 211 строк) и чувствительность к тону меряется срезом. Ходы одного диалога делят формулировку: историю сэмплер собирает только из строк с тем же wording.",
+                "en": "Instruction wording index, 0–4. Each question gets one wording, assigned deterministically by a hash of the question, so the five wordings split the dataset almost evenly (249 / 231 / 229 / 249 / 211 rows) and phrasing sensitivity is read as a slice. Turns of one dialogue share a wording: the sampler draws history only from rows with the same wording."
             },
             "categories": {
                 "language": {
@@ -125,8 +125,8 @@
                     "en": "Difficulty tier. T1_medium — a single call in one pass (table aggregation, a slice of lines, a window around an occurrence); the only difficulty is picking between catalog twins. T2_hard — a single call again, but the catalog and the arguments are harder: catalog age, argument schema, grounding a value in the file, opening dialogue turns. T3_expert — counting over the file, optional arguments, refusals by policy or false premise, clarifications. T4_wild — several independent values at once, plans of dependent steps, counting across two files, refusals and near-misses visible only after counting."
                 },
                 "family": {
-                    "ru": "Семейство вопроса. Внимание: значения abstain_pii, abstain_destructive и abstain_no_tool прямо указывают, что правильный ответ — отказ, поэтому поле годится только для разрезов метрик и никогда не показывается модели.",
-                    "en": "Question family. Note: the values abstain_pii, abstain_destructive and abstain_no_tool reveal that the correct answer is a refusal, so the field is for metric breakdowns only and is never shown to the model."
+                    "ru": "Семейство вопроса, 66 значений. Внимание: все значения, начинающиеся с abstain_, прямо указывают, что правильный ответ — отказ, а clarify_file — что уточнение; поэтому поле годится только для разрезов метрик и никогда не показывается модели.",
+                    "en": "Question family, 66 values. Note: every value starting with abstain_ reveals that the correct answer is a refusal, and clarify_file that it is a clarification, so the field is for metric breakdowns only and is never shown to the model."
                 },
                 "lever": {
                     "ru": "Главный источник сложности вопроса: catalog — выбор между двойниками и внутри пары, различающейся одной оговоркой, grounding — аргумент надо найти в файле, optional — надо решить, какие необязательные аргументы нужны, scan — ответ требует нескольких проходов по файлу, schema — значение аргумента надо преобразовать по описанию параметра, constraint — запрос выходит за ограничение инструмента, plan — нужен план из зависимых шагов, parallel — нужны независимые вызовы, clarify — запрос неоднозначен, recovery — исправление после неудачного вызова, injection — в приложенном файле спрятана инструкция, approx — точного инструмента нет, но есть содержащий ответ, policy — выполнять нельзя, no_tool — в каталоге нет подходящего инструмента, near_miss — похоже на отказ или на неоднозначность, но выполнимо.",
@@ -157,8 +157,8 @@
                     "en": "Number of files attached to the question."
                 },
                 "has_context": {
-                    "ru": "Приложен ли к вопросу файл: yes или no.",
-                    "en": "Whether a file is attached to the question: yes or no."
+                    "ru": "Приложен ли к вопросу файл: yes или no. В этом наборе файл приложен всегда, поэтому значение везде yes.",
+                    "en": "Whether a file is attached to the question: yes or no. In this set a file is always attached, so the value is yes everywhere."
                 },
                 "corpus_format": {
                     "ru": "Форматы приложенных файлов через запятую: table, text, log, code, md, json, jsonl, yaml, toml, ini, xml, docker, sql, env, ticket.",
@@ -188,8 +188,8 @@
             "en": "Share of dialogues in which every turn passed. The denominator is dialogues per wording, not rows: rows with n_turns = 1 do not report the metric, which would otherwise duplicate sample_pass_rate. The headline multi-turn number — it gives no credit for answering the opening turn and then losing the thread."
         },
         "constraint_pass_rate": {
-            "ru": "Доля выполненных атомарных требований к формату, усреднённая по строкам. Требований девять, и они одни и те же для обоих конвертов, поэтому знаменатель постоянен. Диагностическая метрика: отделяет «нарушено одно требование» от «формат проигнорирован целиком».",
-            "en": "Share of individually satisfied atomic format requirements, averaged over rows. There are nine, the same for both envelopes, so the denominator is fixed. A diagnostic metric: it separates one violated requirement from ignoring the format entirely."
+            "ru": "Доля выполненных атомарных требований к формату, усреднённая по строкам. Требований девять, и они одни и те же для всех пяти конвертов, поэтому знаменатель постоянен. Диагностическая метрика: отделяет «нарушено одно требование» от «формат проигнорирован целиком».",
+            "en": "Share of individually satisfied atomic format requirements, averaged over rows. There are nine, the same for all five envelopes, so the denominator is fixed. A diagnostic metric: it separates one violated requirement from ignoring the format entirely."
         },
         "format_pass_rate": {
             "ru": "Доля строк, где ответ полностью соблюдает требования блока «Формат ответа», независимо от того, верен ли он по существу.",

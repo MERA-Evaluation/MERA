@@ -1,4 +1,4 @@
-"""GorillaHard2 — deterministic tool-selection scoring for lm-evaluation-harness.
+"""GorillaHard — deterministic tool-selection scoring for lm-evaluation-harness.
 
 The task gives the model a question, one or two attached files, a catalog of
 tools and a block stating the exact shape of the answer. The model must return
@@ -507,8 +507,8 @@ def check_content(sh: Shape, gold: Optional[dict]) -> Dict[str, Optional[bool]]:
 
 _PROMPTS_CACHE: Optional[List[str]] = None
 _META_CANDIDATES = (
-    "../../datasets/GorillaHard2/dataset_meta.json",
-    "../../../datasets/GorillaHard2/dataset_meta.json",
+    "../../datasets/GorillaHard/dataset_meta.json",
+    "../../../datasets/GorillaHard/dataset_meta.json",
 )
 
 
@@ -784,8 +784,8 @@ def balance_aggregation(items: List[Any]) -> float:
     Why the lever and not the tier or the answer kind: the lever is the axis the
     dataset is designed around — it names the capability under test (several
     independent values at once, several passes over a file, telling twins apart,
-    refusing, clarifying) — and it is the axis whose per-cell floor the build
-    enforces (at least six questions each, checked by ``strata.py``). The tier
+    refusing, clarifying) — and it is the axis with a guaranteed floor per cell
+    (sixteen levers, at least six questions each). The tier
     is a difficulty ladder rather than a set of capabilities, and the answer
     kind is a coarser partition of the same axis. Both are printed as
     breakdowns; neither is a good balance axis on its own.

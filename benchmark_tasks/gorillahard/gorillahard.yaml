@@ -18,14 +18,14 @@ fewshot_config:
 
 target_delimiter: "\n\n"
 
-generation_kwargs:
-  do_sample: false
-  temperature: 0.0
-  max_gen_toks: 32768
-  until:
-    - "<|eot_id|>"
-    - "<|im_end|>"
-    - "</s>"
+# generation_kwargs:
+#   do_sample: false
+#   temperature: 0.0
+#   max_gen_toks: 32768
+#   until:
+#     - "<|eot_id|>"
+#     - "<|im_end|>"
+#     - "</s>"
 
 filter_list:
   - name: "scoring"
@@ -84,4 +84,3 @@ num_fewshot: 8
 
 metadata:
   version: 1.0
-  license: "MERA License"
