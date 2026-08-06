@@ -670,7 +670,13 @@ def process_results(doc: Dict[str, Any], results: List[str]) -> Dict[str, float]
     # различаются они тем, как эти строки взвешиваются.
     lever = ((doc.get("meta") or {}).get("categories") or {}).get("lever") or "?"
     out["balance_score"] = (lever, sample_pass)
-    # Multi-turn. A dialogue counts only when every one of its turns passed.
+    # Multi-turn. Exactly one turn of a dialogue is evaluated — the last one;
+    # the earlier turns are given to the model as history and live in the
+    # ``shots`` split. So this counts dialogues whose final turn was answered
+    # after the model was handed everything that came before: the question is
+    # not "did it answer the standalone opening turn" but "did it keep the
+    # thread".
+    #
     # Reported only for questions that are actually part of a dialogue, so the
     # denominator is dialogues rather than rows: a single-turn question is a
     # degenerate one-turn dialogue and would make the metric a copy of
@@ -749,12 +755,19 @@ def _all_or_nothing(items: List[Any]) -> float:
 
 
 def dialog_aggregation(items: List[Any]) -> float:
-    """Share of dialogues in which every turn passed.
+    """Share of dialogues in which every evaluated turn passed.
 
-    The main multi-turn number. A dialogue is credited only when the model got
-    every turn right, so it does not reward answering the standalone opening
-    turn and then losing the thread: that is precisely the failure multi-turn is
-    here to measure.
+    The main multi-turn number. One turn per dialogue is evaluated — the last —
+    and the model reaches it having been shown every earlier turn together with
+    its reference answer, so the metric asks exactly one thing: did the model
+    keep the thread. Answering a standalone opening turn earns nothing here,
+    because opening turns are no longer scored; they are the history.
+
+    The aggregation stays all-or-nothing over the group rather than a plain mean
+    over rows. With one evaluated turn per dialogue the two coincide today, but
+    the group key is what makes the denominator dialogues instead of rows, and a
+    build that ever evaluated two turns of one chain would be caught by the
+    dataset check rather than silently averaged here.
     """
     return _all_or_nothing(items)
 
