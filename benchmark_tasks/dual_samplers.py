@@ -13,12 +13,12 @@ builds the messages —
 This class implements both surfaces over one `pick()`, so the same file can be
 referenced from the same YAML on either version.
 
-Mixed pools are the normal case here: SOBHard2.1 keeps every family in one
-`test` split, and with `num_fewshot > 0` the harness routes EVERY document
-through the sampler — not only the dialogue ones. A document without
-`meta.dialogue_id` gets an empty history, which reproduces the zero-shot
-context byte for byte. Hence every lookup below is a `.get()`: a KeyError here
-would take down the twelve single-turn families along with the dialogues.
+Mixed pools are the normal case here: SOBHard keeps every family in one `test`
+split, and with `num_fewshot > 0` the harness routes EVERY document through the
+sampler — not only the dialogue ones. A document without `meta.dialogue_id`
+gets an empty history, which reproduces the zero-shot context byte for byte.
+Hence every lookup below is a `.get()`: a KeyError here would take down the
+single-turn families along with the dialogues.
 """
 
 from lm_eval.api.samplers import ContextSampler
