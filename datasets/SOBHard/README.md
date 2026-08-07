@@ -7,9 +7,11 @@ a real document — sometimes two — and must return a document in another nota
 packaged exactly as the prompt demands.
 
 825 questions in Russian: 11 families of work × 3 difficulty levels × 25
-questions per cell. Fifteen source notations (`csv`, `fwf`, `html`, `ini`,
-`json`, `jsonc`, `jsonl`, `logline`, `mdtable`, `properties`, `scsv`, `toml`,
-`tsv`, `xml`, `yaml`) and six target ones (`json`, `jsonl`, `yaml`, `toml`,
+questions per cell. That grid is the one axis that is balanced exactly; the
+notations, the lengths and the corpus are not, on purpose — see "What is
+balanced". Fifteen source notations (`csv`, `fwf`, `html`, `ini`, `json`,
+`jsonc`, `jsonl`, `logline`, `mdtable`, `properties`, `scsv`, `toml`, `tsv`,
+`xml`, `yaml`) and six target ones (`json`, `jsonl`, `yaml`, `toml`,
 `properties`, SQL `INSERT`).
 
 | Family | What is asked |
@@ -74,6 +76,38 @@ questions. `shots` holds the 203 rows that may be shown with their answers: ten
 demonstrations, and the 193 earlier turns of the 75 conversations. Those answers
 are the history a graded turn continues.
 
+### What is balanced
+
+One axis is exact, and the rest are not. Reading a rate off an axis that is not
+balanced is fine where the levels are large and misleading where they are not,
+so here are the counts.
+
+**Exact.** Family × difficulty: 33 cells of exactly 25 questions, 275 per
+difficulty level. This is what `balance_score` averages over, and the only slice
+that supports comparing cells against each other directly.
+
+**Even to within a question.** The prompt register: five registers, and in 30 of
+the 33 cells each appears exactly five times. The three `session` cells are
+uneven — 4 to 6 per register — because a conversation speaks in one voice, so the
+register belongs to the whole chain, and 25 turns come from 25 chains of
+different lengths. Over the whole split the five registers are 164 to 167.
+
+**Deliberately uneven.** Document length, because length is half of what
+difficulty means here: 50 short, 275 medium, 500 long, and the mix moves with the
+tier — easy is 50/145/80, medium 0/100/175, hard 0/30/245. The mean input grows
+9 700 → 14 000 → 17 200 characters.
+
+**Uneven, and not a target.** The notations follow what the corpus can carry:
+
+| | most | least |
+|---|---|---|
+| source | `yaml` 153, `json` 134, `jsonl` 88 | `ini` 8, `properties` 4 |
+| target | `yaml` 273, `json` 242, `jsonl` 157 | SQL `INSERT` 37, `properties` 3 |
+
+A rate over `properties` as a target is three questions wide and means nothing;
+`ini` and `properties` as sources are barely more. The corpus is uneven the same
+way: 114 files, a median of 5 questions each, and one table behind 93 of them.
+
 ### Data fields
 
 - `instruction` [str] — the prompt template with slots for the question's parts
@@ -112,8 +146,8 @@ Four blocks with text labels, always in the same order, the instruction last:
 ```
 
 20 templates: five registers of speech — `casual`, `request`, `spec`, `formal`,
-`command` — in four editions each. In 30 of the 33 cells every register appears
-exactly five times; in the other three the split is uneven.
+`command` — in four editions each. How they are spread is under "What is
+balanced".
 
 ### Multi-turn questions
 
@@ -139,13 +173,15 @@ the other 750 questions stay single-turn under the same command.
 
 ### Dataset creation
 
-**Sources.** 111 real files from open repositories — configurations, data dumps,
-tables, schemas. Selection favoured byte dirt: emoji and surrogate pairs, escaped
-quotes and line breaks inside values, number-strings, near-twin keys. A document
-is admitted only when its data model fits in the two or three sentences that can
-be written into the prompt; anything that reads ambiguously — mixed content in
-XML, scalars whose type YAML decides for itself — is refused rather than
-explained away.
+**Sources.** 114 real files from open repositories — configurations, data dumps,
+tables, schemas — read as 139 distinct documents, since a large file is entered
+through one of its own subtrees. Selection favoured byte dirt: emoji and
+surrogate pairs, escaped quotes and line breaks inside values, number-strings,
+near-twin keys. A document is admitted only when its data model fits in the two
+or three sentences that can be written into the prompt; anything that reads
+ambiguously — mixed content in XML, scalars whose type YAML decides for itself —
+is refused rather than explained away. How much each file supplies was not
+levelled: the median is five questions, the largest table stands behind 93.
 
 **Assembly.** For each question the document is rendered in the source notation,
 the operation applied, and the reference written out and then **read back**: if
