@@ -34,7 +34,9 @@
                 "length_tier": "long",
                 "n_constraints": 4,
                 "constraint_families": "structure,style",
-                "prompt_style": "spec"
+                "prompt_style": "spec",
+                "topic": "evening",
+                "stratum": "core"
             },
             "annotation": {
                 "is_solvable": null,
@@ -75,8 +77,8 @@
                 "en": "Stable identifier of the question."
             },
             "constraints": {
-                "ru": "JSON-строка со списком требований в машиночитаемом виде: категория, семейство, параметры проверки. Дублирует содержание поля inputs.constraints и используется только для автоматической проверки ответа.",
-                "en": "JSON string with the machine-readable list of requirements: category, family, verifier parameters. Duplicates the content of inputs.constraints and is used solely for automatic scoring."
+                "ru": "JSON-строка со списком требований в машиночитаемом виде: категория (category), семейство (family), параметры проверки (params) и признак is_terminal — требование задаёт форму всего ответа целиком (JSON-объект, JSON-массив, CSV-строка, markdown-таблица, ответ из двух частей), рядом с ним допустимы только совместимые с этой формой требования; таких 210 из 5585. Дублирует содержание поля inputs.constraints и используется только для автоматической проверки ответа.",
+                "en": "JSON string with the machine-readable list of requirements: category, family, verifier parameters (params) and the is_terminal flag — the requirement fixes the shape of the whole response (a JSON object, a JSON array, a CSV line, a markdown table, a two-part answer), so only requirements compatible with that shape may stand beside it; 210 of the 5585 are marked. Duplicates the content of inputs.constraints and is used solely for automatic scoring."
             },
             "categories": {
                 "language": {
@@ -102,6 +104,14 @@
                 "prompt_style": {
                     "ru": "Тональность промпта-инструкции: request, order, spec, casual, strict.",
                     "en": "Tone of the instruction prompt: request, order, spec, casual, strict."
+                },
+                "topic": {
+                    "ru": "Тема задания на письмо: одна из девяти бытовых тем банка.",
+                    "en": "Theme of the writing task: one of the bank's nine everyday themes."
+                },
+                "stratum": {
+                    "ru": "core — базовая сборка по политике; topup — вопросы, добавленные сверх неё, чтобы редкий тип требования вообще можно было прочитать по отдельности.",
+                    "en": "core — the base build under the ordinary policy; topup — questions added on top of it so that a rare requirement type can be read on its own."
                 }
             },
             "annotation": {

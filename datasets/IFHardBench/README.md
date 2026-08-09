@@ -94,10 +94,17 @@ the balance says whether the model has a blind spot.
     - `id` [int] — running number over the whole dataset;
     - `base_id` [str] — stable identifier of the question;
     - `constraints` [str] — the machine-readable requirement list the scorer
-      reads, as a JSON string;
+      reads, as a JSON string. Every requirement carries `category`, `family`,
+      `params` and `is_terminal` — a flag marking requirements that fix the shape
+      of the whole response (a JSON object, a JSON array, a CSV line, a markdown
+      table, a two-part answer), so that only requirements compatible with that
+      shape may stand beside them; 210 of the 5585 are marked;
     - `categories` — `language`, `tier` (quartile of predicted stack difficulty:
       `easy` / `medium` / `hard` / `expert`, 315 questions each), `length_tier`,
-      `n_constraints`, `constraint_families`, `prompt_style`;
+      `n_constraints`, `constraint_families`, `prompt_style`, `topic` (one of the
+      bank's nine everyday themes) and `stratum`: `core` is the base build under
+      the ordinary policy, `topup` are the questions added on top of it so that a
+      rare requirement type can be read on its own;
     - `annotation` — `is_solvable` and `language_correctness`, reserved for
       human acceptance marks and currently unfilled.
 
@@ -122,11 +129,41 @@ the balance says whether the model has a blind spot.
             "length_tier": "long",
             "n_constraints": 4,
             "constraint_families": "structure,style",
-            "prompt_style": "spec"
+            "prompt_style": "spec",
+            "topic": "evening",
+            "stratum": "core"
         },
         "annotation": {"is_solvable": null, "language_correctness": null}
     }
 }
+```
+
+#### What the model actually sees
+
+The same question with `inputs` substituted into `instruction`. The JSON above
+writes the line breaks as escape sequences; this is the text that reaches the
+model:
+
+```
+Контекст:
+Сосед по переписке отвечает всегда телеграфно: «вечер удался», «чай, плед». Я перенял у него эту манеру. Длинные описания вечеров кажутся мне теперь излишеством.
+
+Требования к ответу:
+- Раздели мысль ровно на 8 предложений.
+- Сколько слов в первом предложении, ровно столько же должно быть и в последнем.
+- Мне нужен текст длиной ровно 272 символа; пробелы тоже считаются.
+- Не используй букву «я» — нигде в ответе.
+
+Задание:
+Расскажи, как выглядит идеальный вечер после тяжёлого дня.
+
+Проверка выполняется по каждому требованию отдельно.
+```
+
+And the witness from `outputs`, which satisfies all four requirements:
+
+```
+Мелким удачам радуюсь всерьёз. Лампа даёт тёплый круг света. Радио шумело вполголоса на кухне. Телевизор мы не включаем почти никогда. В подъезде хлопнула дверь, и снова стало тихо. Настроение было ровное. Всё вышло тихо, и мне это подошло. Никаких сложностей не возникло.
 ```
 
 ### Prompts
@@ -158,6 +195,12 @@ template without the `Контекст:` block rather than an empty one. The tas
 always the last block, so the requirements are never buried in the middle, and
 there is no `Ответ:` cue: these prompts go to instruct models, where the user
 turn is closed by an end-of-turn token.
+
+The `shots` split holds five few-shot examples built from a separate seed. Their
+questions, requirement stacks and identifiers do not overlap with `test`, but
+their writing tasks do: the bank has 81 tasks for 1260 questions, so each of the
+five also occurs in `test` under different requirements. A shot demonstrates the
+shape of an answer, not the answer itself.
 
 ### Dataset creation
 
@@ -252,7 +295,3 @@ them. Beyond that the response is scored verbatim, with no lenient extraction of
 an "answer part". An **unterminated** trace — the model was cut off inside its
 own reasoning, so there is no closing tag — leaves its text as the answer and
 fails: the answer is not absent, it is wrong.
-
-### Human baseline
-
-TODO
