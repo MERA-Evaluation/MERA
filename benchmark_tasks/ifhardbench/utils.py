@@ -22,9 +22,12 @@ Three metrics are emitted per question:
     The second headline, and the one that asks a different question: "is there a
     kind of instruction this model cannot do at all". Per-requirement-type pass
     rates, combined as a geometric mean with equal weight per type and floored
-    at :data:`BALANCE_FLOOR`. Both other metrics average over occurrences, so a
-    rare requirement the model always fails costs them almost nothing; here it
-    costs about seven per cent of the score. See :func:`agg_balance_score`.
+    at :data:`BALANCE_FLOOR`. The other metrics average over questions;
+    ``constraint_pass_rate`` first computes a share inside each question, so a
+    requirement verdict in a stack of three carries more weight than one in a
+    stack of six. Common requirement types still receive more total weight than
+    rare ones, while here every sufficiently supported type receives exactly
+    one factor. See :func:`agg_balance_score`.
 ``constraint_pass_rate``
     Share of individually satisfied constraints; a partial-credit diagnostic that
     separates "ignored one requirement out of five" from "ignored all of them".
@@ -1501,7 +1504,11 @@ def process_results(doc: Dict[str, Any], results: List[str]) -> Dict[str, Any]:
 
 
 def agg_constraint_pass_rate(values: List[Optional[float]]) -> float:
-    """Mean of the per-sample constraint shares over non-empty responses.
+    """Macro mean of the per-sample constraint shares over non-empty responses.
+
+    Each question contributes one value regardless of stack size: a ``3/3``
+    question and a ``0/6`` question aggregate to ``(1.0 + 0.0) / 2 = 0.5``, not
+    to the micro-average ``3/9``.
 
     Empty responses contribute ``None`` (see :func:`process_results`) and are
     excluded: they already fail ``sample_pass_rate``, and letting them zero
@@ -1545,12 +1552,15 @@ def balance_components(values: Sequence[Optional[Sequence[Sequence[Any]]]]
 def agg_balance_score(values: List[Optional[List[List[Any]]]]) -> float:
     """Geometric mean of the per-requirement-type pass rates.
 
-    ``constraint_pass_rate`` is a mean over *verdicts*, so it is weighted by how
-    often each requirement type occurs: a model can score well on it while being
-    unable to do a whole kind of instruction, as long as that kind is rare.
-    ``balance_score`` averages within each type first and then combines the types
-    with equal weight, so every kind of instruction counts the same however many
-    questions use it.
+    ``constraint_pass_rate`` is a macro mean of per-question shares: each
+    question has equal weight, then divides that weight equally among its own
+    requirements. A common requirement type therefore still receives more total
+    weight than a rare one, although individual verdicts are additionally
+    weighted by the inverse stack size. A model can score well on it while being
+    unable to do a rare kind of instruction. ``balance_score`` instead averages
+    within each type first and then combines the types with equal weight, so
+    every sufficiently supported kind counts the same however many questions
+    use it.
 
     The combination is geometric, which is what makes it a balance measure: the
     same total number of failures costs more when concentrated in one type than

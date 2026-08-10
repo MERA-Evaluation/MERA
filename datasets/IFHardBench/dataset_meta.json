@@ -17,25 +17,25 @@
     "universal_domains": [],
     "synt_source_models": [],
     "data_example": {
-        "instruction": "Контекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверка выполняется по каждому требованию отдельно.",
+        "instruction": "Можешь написать для меня одну вещь?\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПеречитай, пожалуйста, список перед тем, как отправлять.",
         "inputs": {
-            "question": "Расскажи, как выглядит идеальный вечер после тяжёлого дня.",
-            "constraints": "- Раздели мысль ровно на 8 предложений.\n- Сколько слов в первом предложении, ровно столько же должно быть и в последнем.\n- Мне нужен текст длиной ровно 272 символа; пробелы тоже считаются.\n- Не используй букву «я» — нигде в ответе.",
-            "context": "Сосед по переписке отвечает всегда телеграфно: «вечер удался», «чай, плед». Я перенял у него эту манеру. Длинные описания вечеров кажутся мне теперь излишеством."
+            "question": "Чем ты занимаешься в свободное время просто для удовольствия?",
+            "constraints": "- Мне нужно ровно 4 абзаца, отделённых друг от друга пустой строкой.\n- Абзацы делай одинаковыми: ровно 3 предложения в каждом.\n- Слово, которым заканчивается первый абзац, обязано повториться где-нибудь в последнем абзаце, форма та же.\n- Считая пробелы, в ответе должно быть ровно 492 символа.\n- Не используй букву «п» — нигде в ответе.",
+            "context": "Коробку с инструментами я держу под столом, чтобы доставать не глядя. Материал закупаю раз в месяц на рынке. Времени уходит по часу в день."
         },
-        "outputs": "Мелким удачам радуюсь всерьёз. Лампа даёт тёплый круг света. Радио шумело вполголоса на кухне. Телевизор мы не включаем почти никогда. В подъезде хлопнула дверь, и снова стало тихо. Настроение было ровное. Всё вышло тихо, и мне это подошло. Никаких сложностей не возникло.",
+        "outputs": "Старые инструменты я отчищал от ржавчины неделю. Мастерскую заменяет угол кухни и складной стол. Одиннадцать вечера — самое тихое время.\n\nУбираю рабочее место дольше, чем работаю. Занятие требует тишины и ровного света. Результат нравится мне далеко не всегда.\n\nНа готовую вещь смотрю дольше, чем делал её. Времени уходит немало, зато голова отдыхает. Такие мелочи и делают обычный день хорошим.\n\nВечер за делом — лучшее время дня. Дорога заняла ровно двадцать минут. Онлайн я бываю всё реже.",
         "meta": {
-            "id": 18,
-            "base_id": "d5f59cea723c",
-            "constraints": "[{\"category\": \"structure:sentence_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 8}, \"is_terminal\": false}, {\"category\": \"structure:mirror_sentences\", \"family\": \"structure\", \"params\": {}, \"is_terminal\": false}, {\"category\": \"structure:char_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 272}, \"is_terminal\": false}, {\"category\": \"style:forbid_letter\", \"family\": \"style\", \"params\": {\"letter\": \"я\"}, \"is_terminal\": false}]",
+            "id": 1,
+            "base_id": "ae28eb7a5231",
+            "constraints": "[{\"category\": \"structure:paragraph_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 4}, \"is_terminal\": false}, {\"category\": \"structure:paragraph_sentences\", \"family\": \"structure\", \"params\": {\"each\": {\"op\": \"eq\", \"value\": 3}}, \"is_terminal\": false}, {\"category\": \"lexical:paragraph_echo\", \"family\": \"lexical\", \"params\": {}, \"is_terminal\": false}, {\"category\": \"structure:char_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 492}, \"is_terminal\": false}, {\"category\": \"style:forbid_letter\", \"family\": \"style\", \"params\": {\"letter\": \"п\"}, \"is_terminal\": false}]",
             "categories": {
                 "language": "ru",
                 "tier": "hard",
                 "length_tier": "long",
-                "n_constraints": 4,
-                "constraint_families": "structure,style",
-                "prompt_style": "spec",
-                "topic": "evening",
+                "n_constraints": 5,
+                "constraint_families": "lexical,structure,style",
+                "prompt_style": "request",
+                "topic": "hobby",
                 "stratum": "core"
             },
             "annotation": {
@@ -174,12 +174,12 @@
             "en": "Share of questions where the model response satisfies every requirement of the question at once. The headline metric: partial instruction following does not count."
         },
         "balance_score": {
-            "ru": "Пасс-рейт по каждому типу требований, сведённый в геометрическое среднее с равным весом на тип; ставки ограничены снизу значением 0.01. Вторая основная метрика: остальные усредняют по вхождениям и потому взвешены частотой типа, а эта показывает, есть ли вид инструкции, который модель не умеет вовсе. Провалы, собранные в одном типе, стоят дороже, чем размазанные по многим; тип, который модель не выполняет никогда, даёт штраф, а не обнуляет скор; тип менее чем с 5 вердиктами в прогоне исключается и называется в отчёте.",
-            "en": "Pass rate of each requirement type, combined as a geometric mean with equal weight per type and rates floored at 0.01. The second headline metric: the others average over occurrences and are therefore weighted by how common a requirement is, while this one asks whether there is a kind of instruction the model cannot do at all. Failures concentrated in one type cost more than the same number spread out; a type the model never gets right is a penalty rather than a zero; a type with fewer than 5 verdicts in the run is excluded and named in the report."
+            "ru": "Пасс-рейт по каждому типу требований, сведённый в геометрическое среднее с равным весом на тип; ставки ограничены снизу значением 0.01. Вторая основная метрика: остальные усредняются по вопросам; constraint_pass_rate сначала считает долю внутри каждого вопроса, поэтому частые типы всё равно получают больший суммарный вес, а вердикт в коротком стеке весит больше, чем в длинном. Эта метрика показывает, есть ли вид инструкции, который модель не умеет вовсе. Провалы, собранные в одном типе, стоят дороже, чем размазанные по многим; тип, который модель не выполняет никогда, даёт штраф, а не обнуляет скор; тип менее чем с 5 вердиктами в прогоне исключается и называется в отчёте.",
+            "en": "Pass rate of each requirement type, combined as a geometric mean with equal weight per type and rates floored at 0.01. The second headline metric: the others average over questions; constraint_pass_rate first computes a share within each question, so common types still receive more total weight and a verdict in a short stack weighs more than one in a long stack. This metric asks whether there is a kind of instruction the model cannot do at all. Failures concentrated in one type cost more than the same number spread out; a type the model never gets right is a penalty rather than a zero; a type with fewer than 5 verdicts in the run is excluded and named in the report."
         },
         "constraint_pass_rate": {
-            "ru": "Доля выполненных требований, усреднённая по вопросам. Диагностическая метрика: показывает, пропущено ли одно требование из пяти или все сразу.",
-            "en": "Share of individually satisfied requirements, averaged over questions. A diagnostic metric: it separates missing one requirement out of five from missing all of them."
+            "ru": "Макросредняя доля выполненных требований по вопросам: сначала считается доля внутри каждого вопроса, затем эти доли усредняются с равным весом вопросов. Диагностическая метрика: показывает, пропущено ли одно требование из пяти или все сразу.",
+            "en": "Macro-average of per-question satisfied-requirement shares: the share is computed within each question and those shares are then averaged with equal question weight. A diagnostic metric: it separates missing one requirement out of five from missing all of them."
         }
     },
     "human_benchmark": {

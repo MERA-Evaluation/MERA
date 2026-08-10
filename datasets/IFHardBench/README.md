@@ -67,13 +67,16 @@ The metrics follow from how such an answer is consumed. A response that misses
 one requirement of five is unusable in the same way as one that misses all five,
 so the headline `sample_pass_rate` is all-or-nothing. But those two failures call
 for different fixes, so `constraint_pass_rate` reports the share of individually
-satisfied requirements as a diagnostic. Both average over occurrences and are
-therefore weighted by how common a requirement is — which hides the failure mode
-engineers care about most, a *kind* of instruction the model cannot follow at
-all. `balance_score` closes that gap: per-type pass rates combined geometrically
-with equal weight per type, so concentrated failures cost more than spread-out
-ones. Read together, the headline says how often the whole answer is right and
-the balance says whether the model has a blind spot.
+satisfied requirements as a diagnostic. Both average over questions;
+`constraint_pass_rate` first computes a share within each question, so every
+question has equal weight and a verdict in a shorter stack carries more weight
+than one in a longer stack. Common requirement types still receive more total
+weight than rare ones — which can hide the failure mode engineers care about
+most, a *kind* of instruction the model cannot follow at all. `balance_score`
+closes that gap: per-type pass rates combined geometrically with equal weight per
+type, so concentrated failures cost more than spread-out ones. Read together,
+the headline says how often the whole answer is right and the balance says
+whether the model has a blind spot.
 
 ## Data description
 
@@ -112,25 +115,25 @@ the balance says whether the model has a blind spot.
 
 ```json
 {
-    "instruction": "Контекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПроверка выполняется по каждому требованию отдельно.",
+    "instruction": "Можешь написать для меня одну вещь?\n\nКонтекст:\n{context}\n\nТребования к ответу:\n{constraints}\n\nЗадание:\n{question}\n\nПеречитай, пожалуйста, список перед тем, как отправлять.",
     "inputs": {
-        "question": "Расскажи, как выглядит идеальный вечер после тяжёлого дня.",
-        "constraints": "- Раздели мысль ровно на 8 предложений.\n- Сколько слов в первом предложении, ровно столько же должно быть и в последнем.\n- Мне нужен текст длиной ровно 272 символа; пробелы тоже считаются.\n- Не используй букву «я» — нигде в ответе.",
-        "context": "Сосед по переписке отвечает всегда телеграфно: «вечер удался», «чай, плед». Я перенял у него эту манеру. Длинные описания вечеров кажутся мне теперь излишеством."
+        "question": "Чем ты занимаешься в свободное время просто для удовольствия?",
+        "constraints": "- Мне нужно ровно 4 абзаца, отделённых друг от друга пустой строкой.\n- Абзацы делай одинаковыми: ровно 3 предложения в каждом.\n- Слово, которым заканчивается первый абзац, обязано повториться где-нибудь в последнем абзаце, форма та же.\n- Считая пробелы, в ответе должно быть ровно 492 символа.\n- Не используй букву «п» — нигде в ответе.",
+        "context": "Коробку с инструментами я держу под столом, чтобы доставать не глядя. Материал закупаю раз в месяц на рынке. Времени уходит по часу в день."
     },
-    "outputs": "Мелким удачам радуюсь всерьёз. Лампа даёт тёплый круг света. Радио шумело вполголоса на кухне. Телевизор мы не включаем почти никогда. В подъезде хлопнула дверь, и снова стало тихо. Настроение было ровное. Всё вышло тихо, и мне это подошло. Никаких сложностей не возникло.",
+    "outputs": "Старые инструменты я отчищал от ржавчины неделю. Мастерскую заменяет угол кухни и складной стол. Одиннадцать вечера — самое тихое время.\n\nУбираю рабочее место дольше, чем работаю. Занятие требует тишины и ровного света. Результат нравится мне далеко не всегда.\n\nНа готовую вещь смотрю дольше, чем делал её. Времени уходит немало, зато голова отдыхает. Такие мелочи и делают обычный день хорошим.\n\nВечер за делом — лучшее время дня. Дорога заняла ровно двадцать минут. Онлайн я бываю всё реже.",
     "meta": {
-        "id": 18,
-        "base_id": "d5f59cea723c",
-        "constraints": "[{\"category\": \"structure:sentence_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 8}, \"is_terminal\": false}, {\"category\": \"structure:mirror_sentences\", \"family\": \"structure\", \"params\": {}, \"is_terminal\": false}, {\"category\": \"structure:char_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 272}, \"is_terminal\": false}, {\"category\": \"style:forbid_letter\", \"family\": \"style\", \"params\": {\"letter\": \"я\"}, \"is_terminal\": false}]",
+        "id": 1,
+        "base_id": "ae28eb7a5231",
+        "constraints": "[{\"category\": \"structure:paragraph_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 4}, \"is_terminal\": false}, {\"category\": \"structure:paragraph_sentences\", \"family\": \"structure\", \"params\": {\"each\": {\"op\": \"eq\", \"value\": 3}}, \"is_terminal\": false}, {\"category\": \"lexical:paragraph_echo\", \"family\": \"lexical\", \"params\": {}, \"is_terminal\": false}, {\"category\": \"structure:char_count\", \"family\": \"structure\", \"params\": {\"op\": \"eq\", \"value\": 492}, \"is_terminal\": false}, {\"category\": \"style:forbid_letter\", \"family\": \"style\", \"params\": {\"letter\": \"п\"}, \"is_terminal\": false}]",
         "categories": {
             "language": "ru",
             "tier": "hard",
             "length_tier": "long",
-            "n_constraints": 4,
-            "constraint_families": "structure,style",
-            "prompt_style": "spec",
-            "topic": "evening",
+            "n_constraints": 5,
+            "constraint_families": "lexical,structure,style",
+            "prompt_style": "request",
+            "topic": "hobby",
             "stratum": "core"
         },
         "annotation": {"is_solvable": null, "language_correctness": null}
@@ -145,25 +148,34 @@ writes the line breaks as escape sequences; this is the text that reaches the
 model:
 
 ```
+Можешь написать для меня одну вещь?
+
 Контекст:
-Сосед по переписке отвечает всегда телеграфно: «вечер удался», «чай, плед». Я перенял у него эту манеру. Длинные описания вечеров кажутся мне теперь излишеством.
+Коробку с инструментами я держу под столом, чтобы доставать не глядя. Материал закупаю раз в месяц на рынке. Времени уходит по часу в день.
 
 Требования к ответу:
-- Раздели мысль ровно на 8 предложений.
-- Сколько слов в первом предложении, ровно столько же должно быть и в последнем.
-- Мне нужен текст длиной ровно 272 символа; пробелы тоже считаются.
-- Не используй букву «я» — нигде в ответе.
+- Мне нужно ровно 4 абзаца, отделённых друг от друга пустой строкой.
+- Абзацы делай одинаковыми: ровно 3 предложения в каждом.
+- Слово, которым заканчивается первый абзац, обязано повториться где-нибудь в последнем абзаце, форма та же.
+- Считая пробелы, в ответе должно быть ровно 492 символа.
+- Не используй букву «п» — нигде в ответе.
 
 Задание:
-Расскажи, как выглядит идеальный вечер после тяжёлого дня.
+Чем ты занимаешься в свободное время просто для удовольствия?
 
-Проверка выполняется по каждому требованию отдельно.
+Перечитай, пожалуйста, список перед тем, как отправлять.
 ```
 
-And the witness from `outputs`, which satisfies all four requirements:
+And the witness from `outputs`, which satisfies all five requirements:
 
 ```
-Мелким удачам радуюсь всерьёз. Лампа даёт тёплый круг света. Радио шумело вполголоса на кухне. Телевизор мы не включаем почти никогда. В подъезде хлопнула дверь, и снова стало тихо. Настроение было ровное. Всё вышло тихо, и мне это подошло. Никаких сложностей не возникло.
+Старые инструменты я отчищал от ржавчины неделю. Мастерскую заменяет угол кухни и складной стол. Одиннадцать вечера — самое тихое время.
+
+Убираю рабочее место дольше, чем работаю. Занятие требует тишины и ровного света. Результат нравится мне далеко не всегда.
+
+На готовую вещь смотрю дольше, чем делал её. Времени уходит немало, зато голова отдыхает. Такие мелочи и делают обычный день хорошим.
+
+Вечер за делом — лучшее время дня. Дорога заняла ровно двадцать минут. Онлайн я бываю всё реже.
 ```
 
 ### Prompts
@@ -269,8 +281,11 @@ dataset byte for byte.
   headline is a product over the whole stack and is structurally far lower.
 - `constraint_pass_rate` — share of individually satisfied requirements; a
   partial-credit diagnostic separating "missed one requirement of five" from
-  "missed all of them". **Computed over non-empty responses only**: per sample the
-  value is `null` for an empty response and a custom aggregation averages the
+  "missed all of them". It is a **macro-average over questions**: the scorer
+  computes the satisfied share inside each question and then averages those
+  shares, so every non-empty question has equal weight regardless of stack size.
+  **Computed over non-empty responses only**: per sample the value is `null` for
+  an empty response and a custom aggregation averages the
   rest. A reasoning model that spends its whole token budget in the trace returns
   an empty answer, which honestly fails the headline metric — but zeroing five
   constraint verdicts for it would turn the diagnostic into a proxy for token
