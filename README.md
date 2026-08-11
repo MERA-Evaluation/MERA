@@ -44,10 +44,10 @@ etc.
 
 **🚀 How to Contribute?**
 
-0. Develop your dataset according to the text LLM evaluation criteria ([see requirements](docs/dataset_review.md)).
-1. Format your dataset to our specifications ([format instruction](docs/dataset_formatting.md)) and upload it to the 🤗 Hugging Face Hub ([instruction](docs/dataset_hf.md](docs/dataset_formatting.md))). 
-2.  Integrate your dataset into our codebase using the instructions above. Check that it works by running the baselines! ([instruction](docs/task_codebase.md)).
-3. Submit a **Pull Request** with your dataset to this repository ([instruction](docs/how_to_add_dataset.md)).
+0. Submit a **Pull Request** with the dataset description to this repository ([instruction](docs/how_to_add_dataset.md)).
+1. Develop your dataset according to the text LLM evaluation criteria ([see requirements](docs/dataset_review.md)).
+2. Format your dataset to our specifications ([format instruction](docs/dataset_formatting.md)) and upload it to the 🤗 Hugging Face Hub ([instruction](docs/dataset_hf.md](docs/dataset_formatting.md))). 
+3.  Integrate your dataset into our codebase using the instructions above. Check that it works by running the baselines! ([instruction](docs/task_codebase.md)).
 
 We will review your submission and, upon approval, add it to New MERA TEXT.
 
@@ -153,6 +153,87 @@ We provide the [sample submission](modules/scoring/examples) for you to check th
 The process of the whole MERA evaluation is described on the Figure:
 
 ![evaluation setup](docs/mera.png)
+
+## MERA Open Reasoning Leaderboard
+
+[MERA Reason](https://huggingface.co/spaces/MERA-evaluation/MERA_Reason) is an open Hugging Face leaderboard for evaluating **reasoning** capabilities of language models in Russian. Unlike the main MERA website submission flow, results are uploaded directly to the Space and appear on the leaderboard immediately after validation.
+
+The reasoning track includes four benchmarks:
+
+| Benchmark | Task code | Type | Test size | N-shots | Primary metric |
+| --- | --- | --- | --- | --- | --- |
+| ruAIME | `ruaime` | Mathematics (AIME) | 724 | 2 | Exact match |
+| T-math | `tmath` | Olympiad mathematics | 331 | 0 | Exact match |
+| Luzitania | `luzitania` | Logic, multi-step reasoning | 251 | 0 | Exact match |
+| MMReD | `mmred` | Long-context dense reasoning | 750 | 0 | `em.dc_aggregate` |
+
+Dataset cards: [ruAIME](https://huggingface.co/datasets/MERA-evaluation/ruAIME), [T-math](https://huggingface.co/datasets/MERA-evaluation/T-math), [Luzitania](https://huggingface.co/datasets/MERA-evaluation/Luzitania), [MMReD](https://huggingface.co/datasets/MERA-evaluation/MMReD).
+
+### Install
+
+Follow the [installation instructions](MODEL_SCORING.md#install) for `lm-evaluation-harness` from this repository (clone with submodules, then `pip install -e .` inside `lm-evaluation-harness/`).
+
+### Run the reasoning benchmark
+
+Use the helper script [`scripts/run_reasoning_benchmark.sh`](scripts/run_reasoning_benchmark.sh). It runs all four tasks sequentially, logs samples, computes metrics locally, and packs a submission ZIP.
+
+**Hugging Face model (local inference):**
+
+```bash
+CUDA_VISIBLE_DEVICES=0 \
+OUTPUT_FOLDER="$PWD/mera_results/my-model-reasoning/" \
+MERA_MODEL_STRING="pretrained=org/my-model,dtype=auto" \
+MERA_COMMON_SETUP="--model hf --device cuda --batch_size=1 --log_samples --seed 1234 --verbosity ERROR --apply_chat_template --fewshot_as_multiturn" \
+bash scripts/run_reasoning_benchmark.sh
+```
+
+**Model served via OpenAI-compatible API (e.g. vLLM):**
+
+```bash
+OUTPUT_FOLDER="$PWD/mera_results/my-model-reasoning/" \
+MERA_MODEL_STRING="model=org/my-model,num_concurrent=16,timeout=3000,max_retries=5,base_url=http://0.0.0.0:8088/v1/chat/completions" \
+bash scripts/run_reasoning_benchmark.sh
+```
+
+Useful environment variables:
+
+- `OUTPUT_FOLDER` — directory for lm-eval logs and the packed submission (default: `./mera_results/`).
+- `MERA_MODEL_STRING` — same as `--model_args` for `lm_eval` (required).
+- `MERA_COMMON_SETUP` — extra `lm_eval` flags (default: `local-completions` with chat template and multi-turn few-shot).
+- `TASKS` — space-separated subset of tasks (default: `mmred tmath luzitania ruaime`).
+- `LIMIT` — optional sample limit for debugging (e.g. `LIMIT=10`).
+- `PACK_SUBMISSION=0` — skip automatic ZIP packing after evaluation.
+
+For long reasoning generations, override `GENERATION_KWARGS` if needed (task YAMLs define per-benchmark limits, e.g. Luzitania up to 65K tokens). See [`MODEL_SCORING.md`](MODEL_SCORING.md) and task configs in [`benchmark_tasks/`](benchmark_tasks/) for details.
+
+### Pack submission manually
+
+If you ran tasks separately or need to re-pack existing logs:
+
+```bash
+python scripts/log_to_reasoning_submission.py \
+    --outputs_dir "$PWD/mera_results/my-model-reasoning/" \
+    --model_args "pretrained=org/my-model,dtype=auto" \
+    --tasks "mmred,tmath,luzitania,ruaime"
+```
+
+Or use [`scripts/pack_reasoning_submission.sh`](scripts/pack_reasoning_submission.sh) as a template.
+
+The resulting ZIP archive must contain:
+
+- `ruaime.json`, `t_math.json`, `luzitania.json`, `mmred.json` — prediction files in MERA submission format (`data.test[].outputs` + `meta.id`).
+- `logs_public.zip` — archive with `results_*.json` (and optionally `samples_*.json*`) from lm-eval.
+
+**Important:** leaderboard scores are extracted **only** from `results_*.json` inside `logs_public`. Sample logs alone are not sufficient — run evaluation without `--predict_only` so that metrics are computed locally, or ensure `results_*.json` files are present before packing.
+
+### Submit to the leaderboard
+
+1. Open [MERA Reason](https://huggingface.co/spaces/MERA-evaluation/MERA_Reason) and go to the **Submit** tab.
+2. Enter the **model name** (e.g. `org/model`) and **team name**.
+3. Upload the ZIP archive produced by `run_reasoning_benchmark.sh` or `log_to_reasoning_submission.py`.
+4. After validation, scores appear on the **Leaderboard** and **Datasets** tabs.
+
+For reproducible public results, keep generation parameters, prompts, and few-shot settings aligned with the task definitions in `benchmark_tasks/`. Include full `logs_public` in the submission archive.
 
 ------------------------------------
 

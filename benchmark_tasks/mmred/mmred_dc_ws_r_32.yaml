@@ -1,0 +1,11 @@
+# MMReD DC_WS_R (Length 32)
+include: mmred_base.yaml
+tag:
+  - mmred_dc
+  - mera_all
+task: mmred_dc_ws_r_32
+dataset_name: mmred_dc_ws_r_32
+metadata:
+  version: 1.0
+  qtype: where_spend
+  seq_len: 32

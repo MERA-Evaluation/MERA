@@ -1,0 +1,103 @@
+{
+    "dataset_name": "MMReD",
+    "license": "Apache-2.0",
+    "dataset_size": 750,
+    "description": "A synthetic benchmark for evaluating long-context dense reasoning in language models over room occupancy sequences.",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "Long-context reasoning",
+        "Dense aggregation",
+        "Counting",
+        "Temporal tracking"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Задача:\nПроанализируй перемещения и расположение персонажей по шагам.\n\nКонтекст:\nПоследовательность шагов в формате JSON показывает, какие персонажи находятся в каких комнатах.\n{context}\n\nФормат ответа:\nОтветь одним словом или одним числом в формате: Ответ: X\n\nВопрос:\n{question}\n\nОтвет:",
+        "inputs": {
+            "context": "{\"step_id\": 1, \"rooms\": {\"Кухня\": [\"Сандра\", \"Мария\"], \"Ванная\": [\"Иван\", \"Михаил\"], \"Сад\": [], \"Офис\": [], \"Спальня\": [\"Даниил\"], \"Коридор\": []}}\n{\"step_id\": 2, \"rooms\": {\"Кухня\": [\"Сандра\"], \"Ванная\": [], \"Сад\": [\"Даниил\"], \"Офис\": [\"Иван\", \"Мария\"], \"Спальня\": [\"Михаил\"], \"Коридор\": []}}",
+            "question": "Кто провёл больше всего времени в одиночестве?"
+        },
+        "outputs": "Даниил",
+        "meta": {
+            "id": 1,
+            "categories": {
+                "task_type": "DC-SA-C",
+                "seq_len": 2,
+                "atype": "person"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "context": {
+                "ru": "Последовательность шагов в формате JSONL: по одному объекту {\"step_id\", \"rooms\"} на строку",
+                "en": "Step sequence as JSONL: one {\"step_id\", \"rooms\"} object per line"
+            },
+            "question": {
+                "ru": "default",
+                "en": "default"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "categories": {
+                "task_type": {
+                    "ru": "Код типа задачи (DC-SA-C, DC-SR-I, DC-CC-I, DC-WS-R, DC-WHS-C)",
+                    "en": "Task type code (DC-SA-C, DC-SR-I, DC-CC-I, DC-WS-R, DC-WHS-C)"
+                },
+                "seq_len": {
+                    "ru": "Длина последовательности (количество шагов)",
+                    "en": "Sequence length (number of steps)"
+                },
+                "atype": {
+                    "ru": "Тип ответа: person, room или number",
+                    "en": "Answer type: person, room, or number"
+                }
+            }
+        }
+    },
+    "prompts": [
+        "Задача:\nПроанализируй перемещения и расположение персонажей по шагам.\n\nКонтекст:\nПоследовательность шагов в формате JSON показывает, какие персонажи находятся в каких комнатах.\n{context}\n\nФормат ответа:\nОтветь одним словом или одним числом в формате: Ответ: X\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nОпредели ответ на вопрос по последовательности состояний комнат.\n\nКонтекст:\nКаждая строка — JSON-объект шага: комнаты и находящиеся в них персонажи.\n{context}\n\nФормат ответа:\nУкажи один ответ: имя персонажа, название комнаты или число. Последняя строка ответа должна иметь формат: Ответ: X\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nРеши задачу о том, где и сколько времени находились персонажи.\n\nКонтекст:\nДанные заданы как упорядоченная последовательность JSON-записей шагов с комнатами и персонажами.\n{context}\n\nФормат ответа:\nНапиши ровно один ответ после префикса Ответ:. Пример: Ответ: Кухня\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nВычисли нужный факт о присутствии персонажей в комнатах.\n\nКонтекст:\nИспользуй все JSON-шаги последовательности как временной ряд расположений.\n{context}\n\nФормат ответа:\nОтвет должен состоять из префикса Ответ: и одного слова или числа.\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nНайди краткий ответ по истории перемещений персонажей.\n\nКонтекст:\nНиже приведены шаги в формате JSON, где для каждой комнаты указан список присутствующих персонажей.\n{context}\n\nФормат ответа:\nВерни только один результат в формате: Ответ: X\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nОтветь на вопрос о перемещениях персонажей между комнатами.\n\nКонтекст:\nДана последовательность шагов в виде JSON-объектов; на каждом шаге указано, кто находится в каждой комнате.\n{context}\n\nФормат ответа:\nПоследняя строка должна быть в формате: Ответ: X, где X — одно имя, одна комната или одно число.\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nОпредели требуемый факт по временной последовательности расположений.\n\nКонтекст:\nКаждый шаг — JSON-объект, описывающий состояние всех комнат и присутствующих персонажей.\n{context}\n\nФормат ответа:\nДай краткий ответ после префикса Ответ:. Пример: Ответ: Иван\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nПроанализируй все шаги и вычисли ответ на вопрос.\n\nКонтекст:\nНиже приведены состояния комнат во времени в формате JSON; порядок шагов важен.\n{context}\n\nФормат ответа:\nИспользуй ровно один результат в форме: Ответ: X\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nНайди персонажа, комнату или число, которые требуются в вопросе.\n\nКонтекст:\nJSON-последовательность показывает распределение персонажей по комнатам на каждом шаге.\n{context}\n\nФормат ответа:\nЗапиши один ответ с префиксом Ответ:, например: Ответ: 12\n\nВопрос:\n{question}\n\nОтвет:",
+        "Задача:\nСопоставь вопрос со всеми состояниями комнат и выведи краткий результат.\n\nКонтекст:\nИспользуй полную последовательность JSON-шагов, чтобы учесть все посещения и совпадения.\n{context}\n\nФормат ответа:\nОтвет должен иметь вид: Ответ: X. X — одно слово или одно число.\n\nВопрос:\n{question}\n\nОтвет:"
+    ],
+    "metrics": {
+        "Subtask Exact Match": {
+            "en": "Exact match within a single subtask: the proportion of answers that exactly match the reference (a character name, room name, or number). Mean over 50 questions. Value from 0 to 1. Reported as exact_match in evaluation logs.",
+            "ru": "Exact Match на подзадаче: доля ответов, точно совпадающих с эталоном (имя персонажа, название комнаты или число). Среднее по 50 вопросам. Значение от 0 до 1. В логах — exact_match."
+        },
+        "Question-type Length-weighted EM": {
+            "en": "Length-weighted exact match for one question type. Combines subtask scores for lengths 32, 64, and 128 with weights 2, 4, and 16: question_type_score = (2*EM_32 + 4*EM_64 + 16*EM_128) / (2+4+16). Reported as em.dc_aggregate for groups mmred_dc_sa_c, mmred_dc_sr_i, mmred_dc_cc_i, mmred_dc_ws_r, mmred_dc_whs_c.",
+            "ru": "Взвешенный EM по типу вопроса. Объединяет оценки подзадач для длин 32, 64 и 128 с весами 2, 4 и 16: оценка_типа = (2*EM_32 + 4*EM_64 + 16*EM_128) / (2+4+16). В логах — em.dc_aggregate для групп mmred_dc_sa_c, mmred_dc_sr_i, mmred_dc_cc_i, mmred_dc_ws_r, mmred_dc_whs_c."
+        },
+        "Overall MMReD Score": {
+            "en": "Overall benchmark score: harmonic mean of the five question-type length-weighted EM scores. Penalizes weakness on any single type: overall_score = 5 / (1/(s_1+eps) + ... + 1/(s_5+eps)), eps=1e-6. Reported as em.dc_aggregate for group mmred.",
+            "ru": "Итоговая оценка MMReD: гармоническое среднее пяти взвешенных EM по типам вопросов. Штрафует слабые результаты на любом типе: итоговая_оценка = 5 / (1/(s_1+eps) + ... + 1/(s_5+eps)), eps=1e-6. В логах — em.dc_aggregate для группы mmred."
+        }
+    },
+    "human_benchmark": {
+        "Overall MMReD Score": 0.0
+    }
+}

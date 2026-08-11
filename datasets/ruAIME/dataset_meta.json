@@ -1,0 +1,118 @@
+{
+    "dataset_name": "ruAIME",
+    "license": "American Invitational Mathematics Examination (AIME) — Problems 1983-2025.\n© 1983-2025 Mathematical Association of America (AMC). All rights reserved.\nUsed for educational, noncommercial purposes.\nSource: AIME 1983-2025.",
+    "dataset_size": 724,
+    "description": "Russian-translated AIME mathematical problems (1983-2025) covering algebra, geometry, calculus, combinatorics, number theory, and probability.",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "Mathematical reasoning",
+        "Problem solving",
+        "Algebraic manipulation",
+        "Multistep deduction",
+        "Pattern recognition"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Помогите мне, пожалуйста.\n\nРешите математическую задачу.\n\nПоследняя строка ответа должна содержать одно число в формате:\n\nОтвет: <число>\n\n{question}",
+        "inputs": {
+            "question": "Пусть $f(x)=|x-p|+|x-15|+|x-p-15|$, где $0 < p < 15$. Определите минимальное значение $f(x)$, принимаемое при $x$ из интервала $p \\leq x\\leq15$."
+        },
+        "outputs": "15",
+        "meta": {
+            "id": 1,
+            "url": "https://artofproblemsolving.com/wiki/index.php/1983_AIME_Problems/Problem_2",
+            "categories": {
+                "contest_type": "AIME",
+                "year": 1983,
+                "problem_id": 2,
+                "math_domain": "Алгебра"
+            },
+            "solutions": {
+                "solution_1": {
+                    "id": 1,
+                    "text": "Сначала лучше всего избавиться от модулей.\nПри заданных условиях замечаем, что $|x-p|=x-p$, $|x-15|=15-x$ и $|x-p-15|=15+p-x$.\nСложив их, находим, что сумма равна $30-x$, которая достигает своего минимального значения (на заданном интервале $p \\leq x \\leq 15$) при $x=15$, давая минимум $\\boxed{015}$."
+                },
+                "solution_2": {
+                    "id": 2,
+                    "text": "Пусть $p$ равно $15 - \\varepsilon$, где $\\varepsilon$ — почти пренебрежимо малая величина. Из-за малости $\\varepsilon$ область определения $f(x)$ — это, по сути, множество ${15}$. Подстановка $15$ даёт $\\varepsilon + 0 + 15 - \\varepsilon$, то есть $15$, поэтому ответ $\\boxed{015}$."
+                }
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Инструкция для решения задачи",
+            "en": "Instruction for solving the problem"
+        },
+        "inputs": {
+            "question": {
+                "ru": "Текст математической задачи",
+                "en": "Mathematical problem statement"
+            }
+        },
+        "outputs": {
+            "ru": "Числовой ответ на задачу",
+            "en": "Numeric answer to the problem"
+        },
+        "meta": {
+            "id": {
+                "ru": "Уникальный идентификатор задачи в датасете",
+                "en": "Unique problem identifier in dataset"
+            },
+            "url": {
+                "ru": "URL исходной задачи на AoPS Wiki",
+                "en": "URL of original problem on AoPS Wiki"
+            },
+            "categories": {
+                "contest_type": {
+                    "ru": "Тип математического соревнования",
+                    "en": "Type of mathematical competition"
+                },
+                "year": {
+                    "ru": "Год проведения соревнования",
+                    "en": "Contest year"
+                },
+                "problem_id": {
+                    "ru": "Номер задачи в соревновании",
+                    "en": "Problem number in contest"
+                },
+                "math_domain": {
+                    "ru": "Математическая область задачи",
+                    "en": "Mathematical domain of the problem"
+                }
+            },
+            "solutions": {
+                "solution_i": {
+                    "id": {
+                        "ru": "Идентификатор варианта решения",
+                        "en": "Solution variant identifier"
+                    },
+                    "text": {
+                        "ru": "Текст решения задачи",
+                        "en": "Problem solution text"
+                    }
+                }
+            }
+        }
+    },
+    "prompts": [
+        "Помогите мне, пожалуйста.\n\nРешите математическую задачу.\n\nПоследняя строка ответа должна содержать одно число в формате:\n\nОтвет: <число>\n\n{question}",
+        "Привет! Поможешь с задачей?\n\nПрочитай условие и найди числовой ответ.\n\nНапиши только одну строку вида:\n\nОтвет: <число>\n\n{question}",
+        "Внимательно прочитай условие и реши задачу.\n\nВ ответе укажи ровно одно число.\n\nВыведи только\n\nОтвет: <число>\n\n{question}",
+        "Вам предложена математическая задача.\n\nОпределите числовой ответ и укажите его в формате:\n\nОтвет: <число>\n\n{question}",
+        "Требуется решить задачу и назвать ответ — одно число.\n\nВерните результат в формате\n\nОтвет: <число>\n\n{question}"
+    ],
+    "metrics": {
+        "Accuracy": {
+            "ru": "Метрика Accuracy вычисляет долю правильных предсказаний модели среди всех обработанных вопросов.",
+            "en": "Accuracy is the proportion of correct model predictions among the total number of cases processed."
+        }
+    },
+    "human_benchmark": {
+        "Accuracy": "TODO"
+    }
+}
