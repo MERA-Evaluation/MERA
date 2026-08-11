@@ -1,0 +1,100 @@
+{
+    "dataset_name": "T-Math",
+    "license": "apache-2.0",
+    "dataset_size": 310,
+    "description": "**T-Math** is a Russian-language dataset of math olympiad problems for evaluating the mathematical reasoning capabilities of large language models.",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "Mathematical reasoning",
+        "Multi-step problem solving",
+        "Russian language understanding"
+    ],
+    "domains": [
+        "mathematics"
+    ],
+    "synt_source_models": [
+        "Qwen/Qwen2.5-VL-72B-Instruct"
+    ],
+    "data_example": {
+        "instruction": "Привет! Поможешь с задачей?\n\nЗадача:\nНайдите ответ к следующей математической задаче.\n\nУсловие:\n{question}\n\nФормат ответа:\nУкажите только итоговый ответ.",
+        "inputs": {
+            "question": "Дима спускается на лифте с этажа за 1 минуту, а поднимается пешком после нажатия доступной кнопки. Путь наверх занимает 1 минуту 10 секунд. Лифт и Дима имеют постоянные скорости. На каком этаже живет Дима?"
+        },
+        "outputs": "7",
+        "meta": {
+            "id": 329,
+            "grade": "all",
+            "task_complexity": "MEDIUM",
+            "olympiad": "mos",
+            "solutions": "Первое решение: Разница между подъемом и спуском составляет 10 секунд. Путь пешком — 1 промежуток между этажами. Второе решение: Решение системы уравнений дает n=7, m=6.",
+            "year": "2008"
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "en": "a string containing the prompt formulation for the language model",
+            "ru": "строка, содержащая формулировку запроса к языковой модели"
+        },
+        "inputs": {
+            "question": {
+                "en": "a string containing the mathematical olympiad problem statement",
+                "ru": "строка, содержащая условие олимпиадной математической задачи"
+            }
+        },
+        "outputs": {
+            "en": "a string containing the correct final answer",
+            "ru": "строка, содержащая правильный итоговый ответ"
+        },
+        "meta": {
+            "id": {
+                "en": "an integer ID of the example",
+                "ru": "номер примера (целое число)"
+            },
+            "grade": {
+                "en": "a string containing the school grade associated with the problem, or all if the grade is not specified",
+                "ru": "строка, содержащая класс, к которому относится задача, или all, если класс не указан"
+            },
+            "task_complexity": {
+                "en": "a string containing the difficulty label of the problem: EASY, MEDIUM, or HARD",
+                "ru": "строка, содержащая метку сложности задачи: EASY, MEDIUM или HARD"
+            },
+            "olympiad": {
+                "en": "a string containing the source olympiad: mos for the Moscow Olympiad or vos for the All-Russian School Olympiad",
+                "ru": "строка, содержащая олимпиаду-источник: mos для Московской олимпиады или vos для Всероссийской олимпиады школьников"
+            },
+            "solutions": {
+                "en": "a string containing the reference solution or explanation",
+                "ru": "строка, содержащая эталонное решение или объяснение"
+            },
+            "year": {
+                "en": "a string containing the year or academic year of the problem",
+                "ru": "строка, содержащая год или учебный год задачи"
+            }
+        }
+    },
+    "prompts": [
+        {
+            "instruction": "Решите математическую задачу.\n\nУсловие:\n{question}\n\nФормат ответа:\nВыведите только окончательный ответ."
+        },
+        {
+            "instruction": "Привет! Поможешь с задачей?\n\nЗадача:\nНайдите ответ к следующей математической задаче.\n\nУсловие:\n{question}\n\nФормат ответа:\nУкажите только итоговый ответ."
+        },
+        {
+            "instruction": "Помогите мне, пожалуйста.\n\nЗадача:\nРешите математическую задачу и найдите правильный ответ.\n\nУсловие:\n{question}\n\nФормат ответа:\nВ качестве ответа укажите только окончательный ответ."
+        },
+        {
+            "instruction": "Задача:\nВыполните решение математической задачи и определите итоговый результат.\n\nУсловие:\n{question}\n\nФормат ответа:\nВерните только окончательный ответ."
+        },
+        {
+            "instruction": "Задача:\nПо данному условию нужно найти правильный математический ответ.\n\nУсловие:\n{question}\n\nФормат ответа:\nВ ответе укажите только окончательный результат."
+        }
+    ],
+    "metrics": {
+        "Exact match": {
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string exactly matches the reference answer, and 0 otherwise. In this task, exact match means mathematical equivalence between the prediction and the reference answer, checked with the math_verify library.",
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях. В этой задаче под точным совпадением подразумевается математическая эквивалентность предсказания и эталонного ответа, которая проверяется с помощью библиотеки math_verify."
+        }
+    }
+}
