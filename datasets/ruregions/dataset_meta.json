@@ -1,0 +1,228 @@
+{
+    "dataset_name": "RuRegions",
+    "license": "MERA_private",
+    "dataset_size": 603,
+    "human_benchmark": 0,
+    "description": "**RussianRegions** is a dataset for evaluating the capabilities of language models in solving tasks in the Russian language that are specific to certain regions of Russia.",
+    "modalities": [
+        "text"
+    ],
+    "skills": [
+        "Russian language proficiency",
+        "Regional culture awareness"
+    ],
+    "domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+        "inputs": {
+            "introduction": "Пожалуйста, прочитайте тексты внимательно.",
+            "task_formulation": "Выберите текст, в котором нет смысловых ошибок.",
+            "lang_unit": "",
+            "example_text": "",
+            "region": "",
+            "option_a": "Не везет мне с мужчинами почему-то. Все подруги давно замужем, многие не по одному разу. Даже такая толчёнка, как ты, нашла себе любящего мужа.",
+            "option_b": "Скубались они всегда громко, наслаждаясь процессом и полностью ему отдаваясь. Сначала меня это удивляло, но скоро я уже не обращал внимания.",
+            "option_c": "Виктор сильно окреп, в свои 12 лет он был ростом со старшего брата, весил так же. Он буквально вырос на жидриках да на свежем воздухе.",
+            "option_d": "Для тебя одна радость — мжить в свой дебилизатор и только, пока дым из ушей не пойдёт. Лучше бы с ребятами мяч погонял.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите заглавную букву из множества (А, Б, В, Г), обозначающую выбранный вариант ответа."
+        },
+        "outputs": "Б",
+        "meta": {
+            "id": 1,
+            "group_id": 0,
+            "task_type": 1
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "en": "a string containing the prompt formulation for the language model",
+            "ru": "строка, содержащая формулировку запроса к языковой модели"
+        },
+        "inputs": {
+            "introduction": {
+                "en": "a string containing a short introductory phrase for the prompt",
+                "ru": "строка, содержащая короткое вступление к запросу"
+            },
+            "task_formulation": {
+                "en": "a string containing the task formulation",
+                "ru": "строка, содержащая формулировку задачи"
+            },
+            "lang_unit": {
+                "en": "a string containing the language unit to use as a replacement; used in task parts 2 and 3",
+                "ru": "строка, содержащая языковую единицу для замены; используется в частях задачи 2 и 3"
+            },
+            "example_text": {
+                "en": "a string containing the reference text that defines the required meaning of the language unit; used in task part 2",
+                "ru": "строка, содержащая эталонный текст, задающий нужное значение языковой единицы; используется в части задачи 2"
+            },
+            "region": {
+                "en": "a string containing the region for which the language unit is characteristic; used in task part 3",
+                "ru": "строка, содержащая регион, для которого характерна языковая единица; используется в части задачи 3"
+            },
+            "option_a": {
+                "en": "a string containing the first option",
+                "ru": "строка, содержащая первый вариант"
+            },
+            "option_b": {
+                "en": "a string containing the second option",
+                "ru": "строка, содержащая второй вариант"
+            },
+            "option_c": {
+                "en": "a string containing the third option",
+                "ru": "строка, содержащая третий вариант"
+            },
+            "option_d": {
+                "en": "a string containing the fourth option",
+                "ru": "строка, содержащая четвертый вариант"
+            },
+            "format_description": {
+                "en": "a string containing the answer format description; for task type 1 it specifies that the model must output a single capital Russian letter from (А, Б, В, Г) corresponding to the chosen text; for task types 2 and 3 it also requires the language unit from the chosen text after a semicolon",
+                "ru": "строка, содержащая описание формата ответа; для типа 1 указывает, что модель должна вывести одну заглавную букву русского алфавита из множества (А, Б, В, Г), соответствующую выбранному тексту; для типов 2 и 3 также требует указать языковую единицу из выбранного текста после точки с запятой"
+            }
+        },
+        "outputs": {
+            "en": "a string containing the correct answer",
+            "ru": "строка, содержащая правильный ответ"
+        },
+        "meta": {
+            "id": {
+                "en": "an integer ID of the example",
+                "ru": "номер примера (целое число)"
+            },
+            "group_id": {
+                "en": "an integer ID of the group of examples; examples share the same value when the regionalism needed for the correct answer is the same",
+                "ru": "номер группы примеров; одинаковое значение имеют примеры, у которых совпадает регионализм, необходимый для правильного ответа на задание"
+            },
+            "task_type": {
+                "en": "an integer ID of the task type: 1 — general understanding of text with regional expressions; 2 — synonymy between regionalisms and codified language; 3 — regions of origin of regional words",
+                "ru": "номер типа задания: 1 — общее понимание текста с региональными выражениями; 2 — синонимия регионализмов и кодифицированного языка; 3 — регионы происхождения региональных слов"
+            }
+        }
+    },
+    "prompts": [
+        {
+            "task_type": 1,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Интересно, сможете ли вы найти корректный текст?",
+            "task_formulation": "Определите, какой текст не содержит смысловых искажений.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите только одну заглавную букву русского алфавита — А, Б, В или Г — которая соответствует выбранному тексту."
+        },
+        {
+            "task_type": 1,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Пожалуйста, прочитайте тексты внимательно.",
+            "task_formulation": "Выберите текст, в котором нет смысловых ошибок.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите заглавную букву из множества (А, Б, В, Г), обозначающую выбранный вариант ответа."
+        },
+        {
+            "task_type": 1,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Попробуй выполнить небольшое задание по смыслу текстов.",
+            "task_formulation": "Найди вариант, который выглядит семантически корректным.",
+            "format_description": "В ответе напиши только одну строку, начинающуюся с «Ответ:». После двоеточия укажи одну заглавную букву — А, Б, В или Г — той опции, которую ты считаешь правильной."
+        },
+        {
+            "task_type": 1,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Привет! Помоги, пожалуйста, разобраться с текстами.",
+            "task_formulation": "Найди текст, в котором всё логично и понятно, без смысловых ошибок.",
+            "format_description": "В ответе напиши только одну строку, начинающуюся с «Ответ:». После двоеточия напиши заглавную букву русского алфавита (А, Б, В или Г), соответствующую тексту, который ты выбрал."
+        },
+        {
+            "task_type": 1,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Сосредоточьтесь на вариантах ответа.",
+            "task_formulation": "Выберите текст без смысловых ошибок.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите ровно одну заглавную букву — А, Б, В или Г — в соответствии с буквой, стоящей перед выбранным текстом в списке вариантов."
+        },
+        {
+            "task_type": 2,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nЭталонный текст, задающий нужное значение языковой единицы:\n{example_text}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Будьте внимательны: здесь важен оттенок значения.",
+            "task_formulation": "Найдите текст, в котором одна языковая единица взаимозаменима с указанной единицей без искажения смысла и без потери корректности. Ориентируйтесь на значение этой единицы в эталонном тексте.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите заглавную букву из множества (А, Б, В, Г), соответствующую выбранному тексту, затем точку с запятой и языковую единицу из этого текста."
+        },
+        {
+            "task_type": 2,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nЭталонный текст, задающий нужное значение языковой единицы:\n{example_text}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Вам поручено проверить, где возможна замена без потери смысла.",
+            "task_formulation": "Найдите текст, в котором одна из языковых единиц допускает замену на указанную единицу без изменения смысла и без нарушения семантической целостности высказывания.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите одну заглавную букву русского алфавита — А, Б, В или Г — обозначающую выбранный текст, затем точку с запятой и подлежащую замене языковую единицу из этого текста."
+        },
+        {
+            "task_type": 2,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nЭталонный текст, задающий нужное значение языковой единицы:\n{example_text}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Интересно, получится ли у тебя найти нужный текст.",
+            "task_formulation": "Установи, какой из предложенных текстов допускает замену одной из своих языковых единиц на указанную единицу. Проверь, что текст остаётся корректным и не меняет смысл, а значение указанной единицы совпадает со значением в эталонном тексте.",
+            "format_description": "В ответе напиши только одну строку, начинающуюся с «Ответ:». После двоеточия укажи заглавную букву (А, Б, В или Г), соответствующую выбранному варианту, затем точку с запятой и языковую единицу из этого варианта."
+        },
+        {
+            "task_type": 2,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nЭталонный текст, задающий нужное значение языковой единицы:\n{example_text}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Пожалуйста, сопоставь тексты с языковой единицей и эталонным текстом.",
+            "task_formulation": "Выбери текст, в котором одну из языковых единиц можно заменить указанной языковой единицей так, чтобы смысл остался тем же, а текст сохранил корректность. Учитывай значение, показанное в эталонном тексте.",
+            "format_description": "В ответе напиши только одну строку, начинающуюся с «Ответ:». После двоеточия напиши одну заглавную букву из (А, Б, В, Г), соответствующую правильному тексту, затем точку с запятой и слово или выражение из этого текста, которое можно заменить."
+        },
+        {
+            "task_type": 2,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nЭталонный текст, задающий нужное значение языковой единицы:\n{example_text}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Привет! Поможешь с задачкой?",
+            "task_formulation": "Посмотри на тексты и найди тот, где одно слово или выражение можно заменить указанной языковой единицей так, чтобы смысл остался тем же, а само предложение не испортилось. Учитывай значение из эталонного текста.",
+            "format_description": "В ответе напиши только одну строку, начинающуюся с «Ответ:». После двоеточия укажи ровно одну заглавную букву — А, Б, В или Г — в соответствии с буквой выбранного текста, затем точку с запятой и языковую единицу из этого текста."
+        },
+        {
+            "task_type": 3,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nРегион, для которого характерна языковая единица:\n{region}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Выполните поручение: проверьте, где регионализм подходит по смыслу.",
+            "task_formulation": "Найдите текст, в котором одна из языковых единиц допускает замену на указанный регионализм при сохранении смысла и корректности текста.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите заглавную букву из множества (А, Б, В, Г), соответствующую выбранному тексту, затем точку с запятой и языковую единицу из этого текста."
+        },
+        {
+            "task_type": 3,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nРегион, для которого характерна языковая единица:\n{region}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Не спешите: здесь важно не потерять смысл при замене.",
+            "task_formulation": "Определите текст, в котором одна языковая единица может быть заменена указанным региональным словом или выражением без искажения смысла и без нарушения корректности текста.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите одну заглавную букву русского алфавита — А, Б, В или Г — обозначающую выбранный текст, затем точку с запятой и подлежащую замене языковую единицу из этого текста."
+        },
+        {
+            "task_type": 3,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nРегион, для которого характерна языковая единица:\n{region}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Пожалуйста, прочитай тексты, языковую единицу и название региона.",
+            "task_formulation": "Выбери текст, в котором одну из языковых единиц можно заменить указанным регионализмом так, чтобы смысл остался тем же, а текст сохранил корректность.",
+            "format_description": "В ответе напиши только одну строку, начинающуюся с «Ответ:». После двоеточия укажи заглавную букву (А, Б, В или Г), соответствующую выбранному варианту, затем точку с запятой и языковую единицу из этого варианта."
+        },
+        {
+            "task_type": 3,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nРегион, для которого характерна языковая единица:\n{region}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Привет! Поможешь разобраться?",
+            "task_formulation": "Посмотри на тексты и найди тот, где одно слово или выражение можно заменить указанным регионализмом так, чтобы смысл остался прежним, а текст был правильным.",
+            "format_description": "В ответе напиши только одну строку, начинающуюся с «Ответ:». После двоеточия напиши одну заглавную букву из (А, Б, В, Г), соответствующую правильному тексту, затем точку с запятой и слово или выражение из этого текста, которое можно заменить регионализмом."
+        },
+        {
+            "task_type": 3,
+            "instruction": "{introduction}\n\nЗадача:\n{task_formulation}\n\nЯзыковая единица для замены:\n{lang_unit}\n\nРегион, для которого характерна языковая единица:\n{region}\n\nФормат ответа:\n{format_description}\n\nВарианты ответа:\nА. {option_a}\nБ. {option_b}\nВ. {option_c}\nГ. {option_d}",
+            "introduction": "Сможете определить, где региональное выражение употребимо без нарушения смысла?",
+            "task_formulation": "Установите, какой из предложенных текстов допускает замену одной из своих языковых единиц на указанный регионализм при сохранении семантической эквивалентности и грамматической корректности высказывания.",
+            "format_description": "В ответе напишите только одну строку, начинающуюся с «Ответ:». После двоеточия укажите ровно одну заглавную букву — А, Б, В или Г — в соответствии с буквой выбранного текста, затем точку с запятой и языковую единицу из этого текста."
+        }
+    ],
+    "metrics": {
+        "Exact match": {
+            "en": "Exact match is the proportion of model answers that exactly match the reference letter after extracting the string following the Ответ: marker. The value ranges from 0 to 1: 0 means no exact matches, 1 means a match on every example.",
+            "ru": "Метрика Exact match вычисляет долю ответов модели, которые точно совпадают с эталонной буквой после извлечения строки после маркера Ответ:. Значение находится в диапазоне от 0 до 1: 0 означает отсутствие точных совпадений, 1 — совпадение во всех примерах."
+        },
+        "Group Exact match": {
+            "ru": "Метрика Group Exact match вычисляет среднее по группам примеров с одинаковым group_id. Значение group_id объединяет задания, посвящённые знанию одного и того же регионализма. Для такой группы метрика принимает значение 1, если модель дала правильный ответ на все задания, связанные с этим регионализмом, и 0 в остальных случаях.",
+            "en": "Group Exact match is the average over groups of examples with the same group_id. The group_id value groups tasks that test knowledge of the same regionalism. A group receives a score of 1 only if the model answers all tasks related to that regionalism correctly, and 0 otherwise."
+        },
+        "LLM judge score": {
+            "en": "An LLM judge compares the model answer with the reference answer and scores its correctness and completeness. A fully correct and complete answer gets 1; a partially correct or incomplete answer that still contains a substantial part of the correct answer gets 0.5; an incorrect, contradictory, or non-matching answer gets 0. The final metric value is the mean score over all examples.",
+            "ru": "LLM-судья сравнивает ответ модели с эталонным ответом и оценивает его правильность и полноту. Полностью правильный и полный ответ получает 1; частично правильный или неполный ответ, содержащий существенную часть правильного ответа, получает 0.5; неправильный, противоречивый или не содержащий правильного ответа получает 0. Итоговое значение метрики равно среднему баллу по всем примерам."
+        },
+        "Group Judge Score": {
+            "en": "Group Judge Score aggregates LLM judge score over groups of examples with the same group_id. A group receives a score of 1 only if the judge marks all tasks related to the same regionalism as correct, and 0 otherwise.",
+            "ru": "Метрика Group Judge Score агрегирует LLM judge score по группам примеров с одинаковым group_id. Группа получает 1 только если judge считает правильными ответы на все задания, связанные с одним и тем же регионализмом, и 0 в остальных случаях."
+        }
+    }
+}
