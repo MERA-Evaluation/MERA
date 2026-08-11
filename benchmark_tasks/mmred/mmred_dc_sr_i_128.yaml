@@ -1,0 +1,11 @@
+# MMReD DC_SR_I (Length 128)
+include: mmred_base.yaml
+tag:
+  - mmred_dc
+  - mera_all
+task: mmred_dc_sr_i_128
+dataset_name: mmred_dc_sr_i_128
+metadata:
+  version: 1.0
+  qtype: steps_in_room
+  seq_len: 128

@@ -1,0 +1,34 @@
+dataset_path: MERA-evaluation/SAGE
+task: sage
+
+test_split: test
+
+output_type: generate_until
+
+doc_to_text: !function utils.doc_to_text
+doc_to_target: "{{ outputs.strip() }}"
+
+generation_kwargs:
+  do_sample: false
+
+filter_list:
+  - name: "scoring"
+    filter:
+        - function: remove_whitespace_and_nones
+        - function: "take_first"
+
+process_results: !function utils.process_results
+metric_list:
+  - metric: errant_f1
+    aggregation: mean
+    higher_is_better: true
+  - metric: spell_f1
+    aggregation: mean
+    higher_is_better: true
+  - metric: punct_f1
+    aggregation: mean
+    higher_is_better: true
+
+num_fewshot: null
+metadata:
+  version: 1.0

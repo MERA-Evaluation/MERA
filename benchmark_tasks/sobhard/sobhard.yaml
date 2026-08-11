@@ -1,0 +1,61 @@
+tag:
+  - mera
+  - mera_all
+dataset_path: MERA-evaluation/SOBHard
+task: sobhard
+
+test_split: test
+fewshot_split: shots
+
+output_type: generate_until
+doc_to_text: "{{instruction.format(**inputs)}}"
+# Not "{{outputs}}": on the Hub copy answers are blanked, and this task replays
+# earlier turns of a conversation as assistant messages. See utils.doc_to_target.
+doc_to_target: !function utils.doc_to_target
+
+fewshot_config:
+  sampler: !function ../dual_samplers.DualDialogueSampler
+
+target_delimiter: "\n\n"
+
+generation_kwargs:
+  do_sample: false
+  temperature: 0.0
+  max_gen_toks: 65536
+  until:
+    - "<|eot_id|>"
+    - "<|im_end|>"
+    - "</s>"
+
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: remove_whitespace_and_nones
+      - function: "take_first"
+
+process_results: !function utils.process_results
+metric_list:
+  - metric: sample_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: balance_score
+    aggregation: !function utils.balance_score
+    higher_is_better: true
+  - metric: constraint_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: format_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: content_pass_rate
+    aggregation: mean
+    higher_is_better: true
+  - metric: task_pass_rate
+    aggregation: mean
+    higher_is_better: true
+
+# used for multi-turn samples in dialogue mode
+num_fewshot: 8
+
+metadata:
+  version: 1.0
