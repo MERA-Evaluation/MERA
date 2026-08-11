@@ -52,8 +52,6 @@ import math
 import re
 from configparser import ConfigParser, Error as CFGError, MissingSectionHeaderError
 from typing import Any, Callable, Dict, List, Tuple
-from lm_eval.api.registry import register_filter, FILTER_REGISTRY
-from lm_eval.api.filter import Filter
 
 eval_logger = logging.getLogger(__name__)
 
@@ -2083,14 +2081,26 @@ def process_results(doc: Dict[str, Any], results: List[str]) -> Dict[str, Any]:
     empty string (nothing outside the fence, no disallowed keywords), so without
     this guard a model that answered nothing would collect partial credit.
     """
-    response = normalize_generation(_extract_prediction(results))
-    checks = score_response(doc, response)
-    applicable = [c for c in checks if c["applicable"]]
     cats = (doc["meta"].get("categories") or {})
     cell = f"{cats.get('family', '?')}/{cats.get('difficulty', '?')}"
     zero = {"sample_pass_rate": 0.0, "constraint_pass_rate": 0.0,
             "format_pass_rate": 0.0, "content_pass_rate": 0.0,
             "task_pass_rate": 0.0, "balance_score": (cell, 0.0)}
+
+    # No reference: the public copy of the dataset blanks both `outputs` and
+    # `meta.reference` on purpose, and that build is scored by the separate
+    # remote scoring service. Bail out before scoring anything — the syntactic
+    # constraints would still pass here and produce a plausible-looking partial
+    # number that is indistinguishable from a real result.
+    if not doc_to_target(doc).strip():
+        eval_logger.warning(
+            "sample %s has no reference answer; reporting zeros",
+            doc["meta"].get("id"))
+        return zero
+
+    response = normalize_generation(_extract_prediction(results))
+    checks = score_response(doc, response)
+    applicable = [c for c in checks if c["applicable"]]
     if not applicable:                       # cannot happen with a well-formed doc
         eval_logger.warning("sample %s has no applicable constraints",
                             doc["meta"].get("id"))
@@ -2222,23 +2232,3 @@ def process_docs(dataset):
     template, which calls ``instruction.format`` directly.
     """
     return dataset.map(_resolve_instruction)
-
-
-if "remove_whitespace_and_nones" not in FILTER_REGISTRY:
-    @register_filter("remove_whitespace_and_nones")
-    class RemoveWhitespaceAndNones(Filter):
-
-        def apply(self, resps: list[list[str]], docs: list[dict]) -> list[list[str]]:
-            def filter_set(inst):
-                filtered_resp = []
-                for resp in inst:
-                    if not resp:
-                        resp = ""
-                    else:
-                        resp = resp.lstrip()
-                    filtered_resp.append(resp)
-                return filtered_resp
-
-            filtered_resps = [filter_set(resp) for resp in resps]
-
-            return filtered_resps

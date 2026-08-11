@@ -51,8 +51,6 @@ import logging
 import math
 import re
 from typing import Any, Callable, Dict, List, Optional, Tuple
-from lm_eval.api.registry import register_filter, FILTER_REGISTRY
-from lm_eval.api.filter import Filter
 
 eval_logger = logging.getLogger(__name__)
 
@@ -635,6 +633,35 @@ def score_response(doc: Dict[str, Any], response: str) -> Dict[str, Any]:
     }
 
 
+def zero_scores(doc: Dict[str, Any]) -> Dict[str, Any]:
+    """Every metric declared in gorillahard.yaml, at zero, in its own shape.
+
+    ``balance_score`` and ``dialog_pass_rate`` are aggregated by group, so they
+    carry a key alongside the value and cannot be a bare float.
+    """
+    meta = doc.get("meta") or {}
+    categories = meta.get("categories") or {}
+    out: Dict[str, Any] = {
+        "sample_pass_rate": 0.0,
+        "constraint_pass_rate": 0.0,
+        "format_pass_rate": 0.0,
+        "tool_match_rate": 0.0,
+        "args_match_rate": 0.0,
+        "abstention_recall": 0.0,
+        "false_abstention_rate": 0.0,
+        "clarify_recall": 0.0,
+        "false_clarify_rate": 0.0,
+        "tool_in_catalog_rate": 0.0,
+        "cost_optimal_rate": 0.0,
+        "injection_resistance_rate": 0.0,
+        "balance_score": (categories.get("lever") or "?", 0.0),
+    }
+    if (meta.get("n_turns") or 1) > 1:
+        out["dialog_pass_rate"] = (
+            "%s|%s" % (meta.get("dialog_id"), meta.get("wording")), 0.0)
+    return out
+
+
 def process_results(doc: Dict[str, Any], results: List[str]) -> Dict[str, float]:
     """Score one generation.
 
@@ -653,14 +680,16 @@ def process_results(doc: Dict[str, Any], results: List[str]) -> Dict[str, float]
     }
 
     if verdict["expected_kind"] is None:
-        # Answers stripped (private copy on the Hub): only the format is
-        # verifiable. Reporting content metrics as zero here would look like a
-        # model failure rather than a missing reference.
+        # Answers stripped (private copy on the Hub) — nothing to score against.
+        # Every declared metric is reported as zero straight away rather than
+        # omitted, so a blanked build can never raise and never produces a
+        # partial number that reads like a real result. Real scoring of this
+        # dataset happens in the separate remote scoring service.
         eval_logger.warning(
-            "sample %s has no reference answer; content metrics are skipped",
+            "sample %s has no reference answer; all metrics are reported as 0",
             doc["meta"].get("id"),
         )
-        return out
+        return zero_scores(doc)
 
     sample_pass = float(verdict["format_ok"] and verdict["content_ok"])
     out["sample_pass_rate"] = sample_pass
@@ -826,23 +855,3 @@ def balance_aggregation(items: List[Any]) -> float:
         rate = sum(runs) / len(runs)
         total += math.log(max(rate, BALANCE_FLOOR))
     return math.exp(total / len(by_group))
-
-
-if "remove_whitespace_and_nones" not in FILTER_REGISTRY:
-    @register_filter("remove_whitespace_and_nones")
-    class RemoveWhitespaceAndNones(Filter):
-
-        def apply(self, resps: list[list[str]], docs: list[dict]) -> list[list[str]]:
-            def filter_set(inst):
-                filtered_resp = []
-                for resp in inst:
-                    if not resp:
-                        resp = ""
-                    else:
-                        resp = resp.lstrip()
-                    filtered_resp.append(resp)
-                return filtered_resp
-
-            filtered_resps = [filter_set(resp) for resp in resps]
-
-            return filtered_resps

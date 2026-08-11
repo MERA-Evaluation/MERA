@@ -75,19 +75,6 @@ import math
 import re
 from collections import defaultdict
 from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
-try:
-    from lm_eval.api.registry import register_filter, FILTER_REGISTRY
-    from lm_eval.api.filter import Filter
-except ImportError:  # pragma: no cover — see the note below
-    # This module is the single definition of what every requirement means, and
-    # it is imported in two very different places: by lm-eval when the benchmark
-    # runs, and by plain Python when the dataset is built or checked (the
-    # generator scores its own witnesses with it, and the upload notebook
-    # re-scores every one of them before pushing to the Hub). Only the response
-    # filter at the bottom of this file needs lm-eval; the verifiers and the
-    # metrics do not. A hard import would make the build depend on the harness
-    # for a class the build never uses.
-    register_filter = FILTER_REGISTRY = Filter = None
 
 eval_logger = logging.getLogger(__name__)
 
@@ -1431,21 +1418,17 @@ def get_constraints(doc: Dict[str, Any]) -> List[dict]:
     """Machine-readable constraints of a question (JSON string in ``meta``).
 
     This field is the whole scoring key: no other part of the sample says what
-    the answer has to satisfy. A build that ships it blank cannot be scored at
-    all, so an empty value fails loudly here rather than being read as "this
-    question has no requirements" — which would silently score every answer as
-    a pass-by-vacuity or a zero, depending on the metric.
+    the answer has to satisfy. The public copy of the dataset ships it blank on
+    purpose — publishing it would leak the answers — and that build is scored by
+    the separate remote scoring service, not here. An empty value therefore
+    means "not scorable locally" and yields no constraints; the caller turns
+    that into zeros. It must never be read as "this question has no
+    requirements", which would score every answer as a pass by vacuity.
     """
     raw = doc["meta"]["constraints"]
     if isinstance(raw, str):
         if not raw.strip():
-            raise ValueError(
-                "meta.constraints is empty for sample %r: this build carries no "
-                "scoring key and cannot be evaluated. Re-upload the split with "
-                "meta.constraints populated (it is required for scoring; only "
-                "`outputs` may be blanked for a private dataset)."
-                % (doc.get("meta", {}).get("id"),)
-            )
+            return []
         return json.loads(raw)
     return raw
 
@@ -1489,7 +1472,13 @@ def process_results(doc: Dict[str, Any], results: List[str]) -> Dict[str, Any]:
     checks = score_response(doc, response)
     n_total = len(checks)
     if n_total == 0:
-        eval_logger.warning("sample %s has no constraints", doc["meta"].get("id"))
+        # Either the build ships meta.constraints blank (public copy — scored
+        # remotely, see get_constraints) or the question genuinely carries no
+        # requirements. Both are unscorable here, so every declared metric is
+        # reported at zero rather than raising or crediting a vacuous pass.
+        eval_logger.warning(
+            "sample %s has no constraints to score; reporting zeros",
+            doc["meta"].get("id"))
         return {"sample_pass_rate": 0.0, "constraint_pass_rate": 0.0,
                 "balance_score": None}
 
@@ -1596,23 +1585,3 @@ def agg_balance_score(values: List[Optional[List[List[Any]]]]) -> float:
         return 0.0
     logs = [math.log(max(p / n, BALANCE_FLOOR)) for p, n in counted.values()]
     return math.exp(sum(logs) / len(logs))
-
-
-if Filter is not None and "remove_whitespace_and_nones" not in FILTER_REGISTRY:
-    @register_filter("remove_whitespace_and_nones")
-    class RemoveWhitespaceAndNones(Filter):
-
-        def apply(self, resps: list[list[str]], docs: list[dict]) -> list[list[str]]:
-            def filter_set(inst):
-                filtered_resp = []
-                for resp in inst:
-                    if not resp:
-                        resp = ""
-                    else:
-                        resp = resp.lstrip()
-                    filtered_resp.append(resp)
-                return filtered_resp
-
-            filtered_resps = [filter_set(resp) for resp in resps]
-
-            return filtered_resps

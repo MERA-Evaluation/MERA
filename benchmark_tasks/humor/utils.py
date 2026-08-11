@@ -1,43 +1,62 @@
 """Task utils for the Humor dataset.
 
-Two metrics: EM and
-LLM judge. The scoring code follows benchmark_tasks/rwsd_2/utils.py (PR 36,
-approved reference): ``process_results`` returns ``exact_match`` +
-``judge_score``, the judge is configured through the generic
-``LM_EVAL_JUDGE_API_BASE`` / ``LM_EVAL_JUDGE_MODEL`` /
-``LM_EVAL_JUDGE_PROMPT_PATH`` env vars and receives the rendered task text
-as ``instruction``.
+Two metrics, ``exact_match`` and ``judge_score``, scored the same way as the
+other generative tasks: the filter chain only normalises the response, and the
+metric reads it several ways and keeps the best score.
 
-
+Humor is the one task with a genuinely different answer shape. The model is
+asked two questions at once and answers them on one line as
+``<class>,<letter>`` — the kind of humour, then the option — announced with the
+``ОТВЕТ`` and ``РЕШЕНИЕ`` markers rather than the ``Ответ:`` the rest of the
+suite uses. So on top of the two generic readings this task adds a third
+candidate: the pair reassembled by :func:`parse_humor_response`. The generic
+readings still count, because a model that simply wrote ``ирония,Г`` with no
+markers at all has given a perfectly good answer.
 """
 
+import logging
 import os
 import re
 from typing import List
 
+from lm_eval.api.answer_extraction import answer_candidates, best_score
 from transformers.data.metrics import squad_metrics
-from lm_eval.api.filter import Filter
-from lm_eval.api.registry import register_filter, FILTER_REGISTRY
+
+eval_logger = logging.getLogger(__name__)
+
+
+def humor_candidates(response):
+    """The generic readings of the response plus the reassembled pair."""
+    candidates = answer_candidates(response)
+    parsed = parse_humor_response(response)
+    if parsed and parsed not in candidates:
+        candidates.append(parsed)
+    return candidates
 
 
 def process_results(doc, results):
-    # The Humor answer parser runs in the filter, so results[0] is already
-    # the canonical "<class>,<letter>" string (rwsd_2 calls extract_answer
-    # here instead).
-    model_answer = results[0] if results and results[0] else ""
-    exact_score = squad_metrics.compute_exact(doc["outputs"], model_answer) if doc["outputs"] else 0
-    judge_score = compute_judge_score(doc, model_answer)
+    gold = doc.get("outputs") or ""
+    if not gold:
+        return {"exact_match": 0, "judge_score": 0.0}
+
+    candidates = humor_candidates(results[0] if results else "")
 
     return {
-        "exact_match": exact_score,
-        "judge_score": judge_score,
+        "exact_match": best_score(
+            lambda c: squad_metrics.compute_exact(gold, c), candidates),
+        "judge_score": best_score(
+            lambda c: compute_judge_score(doc, c), candidates),
     }
 
 
 def compute_judge_score(doc, model_answer):
     judge_api_base = os.getenv("LM_EVAL_JUDGE_API_BASE")
     judge_model = os.getenv("LM_EVAL_JUDGE_MODEL")
-    judge_prompt_path = os.getenv("LM_EVAL_JUDGE_PROMPT_PATH")
+    judge_prompt = os.getenv(
+        "LM_EVAL_HUMOR_JUDGE_PROMPT",
+        "Оцени, верно ли модель определила тип юмора и вариант ответа, по шкале от 1 до 10.\n"
+        "Эталон: {reference}\nОтвет модели: {prediction}\nОдно число:",
+    )
 
     if not doc.get("outputs") or not judge_api_base or not judge_model:
         return 0.0
@@ -50,10 +69,10 @@ def compute_judge_score(doc, model_answer):
             [doc["outputs"]],
             api_base=judge_api_base,
             model=judge_model,
-            judge_prompt_path=judge_prompt_path,
-            instruction=doc_to_text(doc),
+            judge_prompt=judge_prompt,
         )["llm_judge"]
     except Exception:
+        eval_logger.warning("%s: llm judge failed, scoring 0.0", __name__, exc_info=True)
         return 0.0
 
 
@@ -109,14 +128,3 @@ def parse_humor_response(resp: str) -> str:
         return f"{final.group(1).strip()},{final.group(2).upper()}"
 
     return text.strip()
-
-
-if "remove_whitespace_and_nones" not in FILTER_REGISTRY:
-
-    @register_filter("remove_whitespace_and_nones")
-    class RemoveWhitespaceAndNones(Filter):
-        def apply(self, resps: List[List[str]], docs: List[dict]) -> List[List[str]]:
-            def filter_set(inst):
-                return [parse_humor_response(resp) for resp in inst]
-
-            return [filter_set(resp) for resp in resps]

@@ -1,6 +1,4 @@
 from typing import Dict, List, Any
-from lm_eval.api.filter import Filter
-from lm_eval.api.registry import register_filter
 import logging
 
 eval_logger = logging.getLogger(__name__)
@@ -22,20 +20,26 @@ except ImportError:
 def doc_to_text(doc: Dict[str, Any]) -> str:
     return doc["instruction"].format(**doc["inputs"])
 
+ZERO_SCORES = {"errant_f1": 0.0, "spell_f1": 0.0, "punct_f1": 0.0}
+
+
 def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
-    if Scorer is None:
-        return {}
-
-    scorer = Scorer()
-
-
-    gold = doc["outputs"]
+    gold = doc.get("outputs") or ""
     source = doc["inputs"]["source"]
 
     pred = results[0] if results and results[0] else ""
 
-    if not pred or not pred.strip():
-        return {"errant_f1": 0.0, "spell_f1": 0.0, "punct_f1": 0.0}
+    # The public copy of the dataset ships with `outputs` blanked, so there is
+    # nothing to score against; the same happens when the model answered with
+    # nothing. Return the declared metrics as zeros instead of running (or
+    # loading) the scorer, which would otherwise be handed an empty reference.
+    if not gold.strip() or not pred.strip():
+        return dict(ZERO_SCORES)
+
+    if Scorer is None:
+        return dict(ZERO_SCORES)
+
+    scorer = Scorer()
 
     metric = scorer.score(
     [source],
@@ -53,21 +57,3 @@ def process_results(doc: Dict, results: List[str]) -> Dict[str, float]:
     return {"spell_f1": spell_f1,
             "punct_f1": punct_f1,
             "errant_f1": combined_f1}
-
-@register_filter("remove_whitespace_and_nones")
-class RemoveWhitespaceAndNones(Filter):
-
-    def apply(self, resps: list[list[str]], docs: list[dict]) -> list[list[str]]:
-        def filter_set(inst):
-            filtered_resp = []
-            for resp in inst:
-                if not resp:
-                    resp = ""
-                else:
-                    resp = resp.lstrip()
-                filtered_resp.append(resp)
-            return filtered_resp
-
-        filtered_resps = [filter_set(resp) for resp in resps]
-
-        return filtered_resps
