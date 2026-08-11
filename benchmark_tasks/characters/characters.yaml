@@ -1,0 +1,32 @@
+dataset_path: MERA-evaluation/Persona
+task: characters
+
+test_split: test
+fewshot_split: shots
+
+output_type: generate_until
+
+doc_to_text: !function utils.doc_to_text
+doc_to_target: "{{ outputs.strip() }}"
+
+
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: remove_whitespace_and_nones
+      - function: take_first
+
+process_results: !function utils.process_results
+
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+  - metric: judge_score
+    aggregation: mean
+    higher_is_better: true
+
+num_fewshot: 0
+
+metadata:
+  version: 1.0
