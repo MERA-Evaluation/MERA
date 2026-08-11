@@ -35,26 +35,8 @@
         },
         "inputs": {
             "_desc": {
-                "en": "Input data that forms the task for the model. Can include one or multiple modalities - video, audio, image, text.",
-                "ru": "Вводные данные, формирующие задание для модели. Могут включать одну или несколько модальностей - видео, аудио, изображение, текст."
-            },
-            "video": {
-                "_desc": {
-                    "en": "Path to the video file related to the question.",
-                    "ru": "Путь к файлу с видео, к которому относится вопрос."
-                }
-            },
-            "audio": {
-                "_desc": {
-                    "en": "Path to the audio file related to the question.",
-                    "ru": "Путь к файлу с аудио, к которому относится вопрос."
-                }
-            },
-            "image": {
-                "_desc": {
-                    "en": "Path to the image file related to the question.",
-                    "ru": "Путь к файлу с изображением, к которому относится вопрос."
-                }
+                "en": "Input data that forms the task for the model.",
+                "ru": "Вводные данные, формирующие задание для модели."
             },
             "question": {
                 "_desc": {
@@ -114,42 +96,6 @@
                 "_desc": {
                     "en": "Categorial features characterizing the test example.",
                     "ru": "Категории признаков, характеризующих тестовый пример."
-                }
-            },
-            "image": {
-                "_desc": {
-                    "en": "Image metadata.",
-                    "ru": "Метаданные, относящиеся к изображению."
-                },
-                "synt_source": {
-                    "_desc": {
-                        "en": "Sources used to generate or recreate data for the question, including names of generative models.",
-                        "ru": "Источники, с помощью которых сгенерированы или воссозданы данные для формирования вопроса, в том числе названия генеративных моделей."
-                    }
-                },
-                "source": {
-                    "_desc": {
-                        "en": "Information about the origin of the image — according to the image classification for MERA datasets.",
-                        "ru": "Информация о происхождении изображения — согласно классификации изображений для датасетов MERA."
-                    }
-                },
-                "type": {
-                    "_desc": {
-                        "en": "Image type — according to the image classification for MERA datasets.",
-                        "ru": "Тип изображения — согласно классификации изображений для датасетов MERA."
-                    }
-                },
-                "content": {
-                    "_desc": {
-                        "en": "Image content — according to the image classification for MERA datasets.",
-                        "ru": "Содержание изображения — согласно классификации изображений для датасетов MERA."
-                    }
-                },
-                "context": {
-                    "_desc": {
-                        "en": "Accompanying context present in the image — according to the image classification for MERA datasets.",
-                        "ru": "Сопроводительный контекст, присутствующий на изображении, — согласно классификации изображений для датасетов MERA."
-                    }
                 }
             }
         }
