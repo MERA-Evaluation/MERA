@@ -1,4 +1,4 @@
-# RuRegions
+# RussianRegions
 
 
 ## Описание задачи

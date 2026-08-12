@@ -1,5 +1,5 @@
 {
-    "dataset_name": "RWSDNew",
+    "dataset_name": "LIMUR",
     "license": "MERA_private",
     "dataset_size": 423,
     "description": "Russian reference-resolution and nonce-word reasoning dataset based on RWSD and Glokaya-kusdra-style contexts.",

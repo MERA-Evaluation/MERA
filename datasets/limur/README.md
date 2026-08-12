@@ -1,9 +1,9 @@
-# RWSDNew
+# LIMUR
 
 
 ## Task Description
 
-**RWSDNew** is a Russian-language dataset for evaluating reference resolution, syntactic ambiguity resolution, and robustness to texts with non-standard but grammatically interpretable vocabulary. It contains two task types. The first follows the [Russian Winograd Schema Dataset](https://mera.a-ai.ru/ru/text/tasks/1) setting and tests Winograd-style reference resolution. The second tests whether meaning can be recovered from grammatical, derivational, and contextual cues independently of familiar lexical meanings. A well-known example of this setting is Academician L. V. Shcherba's phrase "Glokaya kusdra shteko budlanula bokra i kurdyachit bokryonka."
+**LIMUR** is a Russian-language dataset for evaluating reference resolution, syntactic ambiguity resolution, and robustness to texts with non-standard but grammatically interpretable vocabulary. It contains two task types. The first follows the [Russian Winograd Schema Dataset](https://mera.a-ai.ru/ru/text/tasks/1) setting and tests Winograd-style reference resolution. The second tests whether meaning can be recovered from grammatical, derivational, and contextual cues independently of familiar lexical meanings. A well-known example of this setting is Academician L. V. Shcherba's phrase "Glokaya kusdra shteko budlanula bokra i kurdyachit bokryonka."
 
 The model receives a textual context, a question, and answer options. Examples of type `rwsd` also provide a reference to be matched with one option; examples of type `kusdra` require the option that correctly answers the contextual question.
 

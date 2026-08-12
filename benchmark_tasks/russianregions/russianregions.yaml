@@ -1,5 +1,5 @@
-task: ruregions
-dataset_path: MERA-evaluation/RuRegions
+task: russianregions
+dataset_path: MERA-evaluation/RussianRegions
 output_type: generate_until
 fewshot_split: shots
 test_split: test

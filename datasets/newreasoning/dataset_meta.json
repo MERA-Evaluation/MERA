@@ -1,8 +1,8 @@
 {
-    "dataset_name": "NewReason",
+    "dataset_name": "NewReasoning",
     "license": "MERA_private",
     "dataset_size": 370,
-    "description": "NewReason is a Russian-language dataset of short multiple-choice reasoning tasks with a blank marked as '_ _ _'. Each example contains a task text, up to nine answer options labeled with Russian letters, and metadata with the task type. The model must select one or more suitable options and return the answer letters in alphabetical order separated by a semicolon and a space.",
+    "description": "NewReasoning is a Russian-language dataset of short multiple-choice reasoning tasks with a blank marked as '_ _ _'. Each example contains a task text, up to nine answer options labeled with Russian letters, and metadata with the task type. The model must select one or more suitable options and return the answer letters in alphabetical order separated by a semicolon and a space.",
     "modalities": [
         "text"
     ],

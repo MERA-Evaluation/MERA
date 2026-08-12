@@ -1,8 +1,8 @@
-# NewReason
+# NewReasoning
 
 ## Task Description
 
-NewReason is a Russian-language dataset for evaluating a model's ability to solve short reasoning tasks with multiple-choice answers. Each example contains a textual task with a blank marked as `_ _ _` and a set of answer options labeled with Russian letters. The model must select one or more suitable options and return the answer letters in the required format.
+NewReasoning is a Russian-language dataset for evaluating a model's ability to solve short reasoning tasks with multiple-choice answers. Each example contains a textual task with a blank marked as `_ _ _` and a set of answer options labeled with Russian letters. The model must select one or more suitable options and return the answer letters in the required format.
 
 The dataset tests whether a model can handle logical traps, condition substitutions, changes in quantities and qualitative properties, and disrupted reasoning chains.
 
@@ -14,7 +14,7 @@ Contributors: Denis Shevelev, Alexander Kharitonov, Alexander Astafurov
 
 The task is designed for evaluating Russian-language generative models in cases where solving requires checking the task conditions rather than only recognizing a familiar pattern.
 
-NewReason helps analyze robustness to shallow templates: tasks that look similar on the surface may require different reasoning strategies, so the score reflects how well a model preserves the structure of the condition and follows the required answer format.
+NewReasoning helps analyze robustness to shallow templates: tasks that look similar on the surface may require different reasoning strategies, so the score reflects how well a model preserves the structure of the condition and follows the required answer format.
 
 ### Limitations
 
