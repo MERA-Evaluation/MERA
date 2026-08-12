@@ -1,10 +1,17 @@
-import logging
-import os
+import sys
+from pathlib import Path
 from typing import Dict, List, Any
 from lm_eval.api.answer_extraction import answer_candidates, best_score
 from transformers.data.metrics import squad_metrics
 
-eval_logger = logging.getLogger(__name__)
+# lm-eval executes this file by path, so benchmark_tasks is not importable by
+# name from here (see lm_eval.utils.import_function); the judge, shared with the
+# other tasks that report judge_score, is picked up from the directory above.
+_BENCHMARK_TASKS = str(Path(__file__).resolve().parent.parent)
+if _BENCHMARK_TASKS not in sys.path:
+    sys.path.insert(0, _BENCHMARK_TASKS)
+
+from mera_judge import compute_judge_score  # noqa: E402
 
 
 def doc_to_text(doc: Dict[str, Any]) -> str:
@@ -30,31 +37,3 @@ def process_results(doc, results):
         "exact_match": exact_score,
         "judge_score": judge_score,
     }
-
-
-
-def compute_judge_score(doc, model_answer):
-    judge_api_base = os.getenv("LM_EVAL_JUDGE_API_BASE")
-    judge_model = os.getenv("LM_EVAL_JUDGE_MODEL")
-    judge_prompt = os.getenv(
-        "LM_EVAL_RUBIN_JUDGE_PROMPT",
-        "Оцени правильность ответа модели по шкале от 1 до 10.\n"
-        "Эталон: {reference}\nОтвет модели: {prediction}\nОдно число:",
-    )
-
-    if not doc.get("outputs") or not judge_api_base or not judge_model:
-        return 0.0
-
-    try:
-        from lm_eval.api.metrics_generative import compute_llm_judge
-
-        return compute_llm_judge(
-            [model_answer],
-            [doc["outputs"]],
-            api_base=judge_api_base,
-            model=judge_model,
-            judge_prompt=judge_prompt,
-        )["llm_judge"]
-    except Exception:
-        eval_logger.warning("%s: llm judge failed, scoring 0.0", __name__, exc_info=True)
-        return 0.0
