@@ -12,6 +12,7 @@ _BENCHMARK_TASKS = str(Path(__file__).resolve().parent.parent)
 if _BENCHMARK_TASKS not in sys.path:
     sys.path.insert(0, _BENCHMARK_TASKS)
 
+from answer_norm import strip_typographic  # noqa: E402
 from mera_judge import compute_judge_score  # noqa: E402
 
 
@@ -20,7 +21,10 @@ def doc_to_text(doc: dict[str, Any]) -> str:
 
 
 def normalize(text: str) -> str:
-    return text.strip().lower()
+    # Typographic quotes and dashes are dropped so that «Зонт» reads as Зонт;
+    # the rest of the punctuation is kept, since an answer here is a word and
+    # the comparison is a membership test rather than SQuAD's.
+    return strip_typographic(text).strip().lower()
 
 
 def process_results(

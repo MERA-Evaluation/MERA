@@ -2,7 +2,6 @@ import sys
 from pathlib import Path
 
 from lm_eval.api.answer_extraction import answer_candidates, best_score
-from transformers.data.metrics import squad_metrics
 
 # lm-eval executes this file by path, so benchmark_tasks is not importable by
 # name from here (see lm_eval.utils.import_function); the judge, shared with the
@@ -11,6 +10,7 @@ _BENCHMARK_TASKS = str(Path(__file__).resolve().parent.parent)
 if _BENCHMARK_TASKS not in sys.path:
     sys.path.insert(0, _BENCHMARK_TASKS)
 
+from answer_norm import compute_exact  # noqa: E402
 from mera_judge import compute_judge_score  # noqa: E402
 
 
@@ -32,7 +32,7 @@ def process_results(doc, results):
     # a group is judged on the same number as the ungrouped metric.
     candidates = answer_candidates(results[0] if results else "")
     exact_score = best_score(
-        lambda c: squad_metrics.compute_exact(gold, c), candidates)
+        lambda c: compute_exact(gold, c), candidates)
     judge_score = best_score(
         lambda c: compute_judge_score(doc, c), candidates)
 
