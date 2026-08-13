@@ -1,6 +1,6 @@
 # IFHardBench
 
-## Task description
+## Task Description
 
 **IFHardBench** measures precise instruction following in Russian. Each of the
 1260 questions pairs a deliberately trivial, knowledge-free writing task
@@ -78,9 +78,9 @@ type, so concentrated failures cost more than spread-out ones. Read together,
 the headline says how often the whole answer is right and the balance says
 whether the model has a blind spot.
 
-## Data description
+## Data Description
 
-### Data fields
+### Data Fields
 
 - `instruction` [str] — prompt template with placeholders for the fields of
   `inputs`;
@@ -111,7 +111,7 @@ whether the model has a blind spot.
     - `annotation` — `is_solvable` and `language_correctness`, reserved for
       human acceptance marks and currently unfilled.
 
-### Data formatting example
+### Data Formatting Example
 
 ```json
 {
@@ -141,7 +141,7 @@ whether the model has a blind spot.
 }
 ```
 
-#### What the model actually sees
+#### What the Model Actually Sees
 
 The same question with `inputs` substituted into `instruction`. The JSON above
 writes the line breaks as escape sequences; this is the text that reaches the
@@ -214,7 +214,7 @@ their writing tasks do: the bank has 81 tasks for 1260 questions, so each of the
 five also occurs in `test` under different requirements. A shot demonstrates the
 shape of an answer, not the answer itself.
 
-### Dataset creation
+### Dataset Creation
 
 Questions are produced by a deterministic generator — the same seed rebuilds the
 dataset byte for byte.

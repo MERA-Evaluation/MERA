@@ -4,9 +4,9 @@
 
 The **Enantiosemy** dataset evaluates whether language models can understand words that, in the same form, can have opposite meanings depending on context. The benchmark tests the model's ability to correctly interpret enantiosemic units in one of four multiple-choice settings: selecting a suitable continuation, selecting an unsuitable continuation, identifying the meaning used in context, or identifying the meaning not used in context. The expected answer is one or several option letters.
 
-Tested model skills: Russian language proficiency, Contextual disambiguation, Linguistic-aware reasoning
+Evaluated skills: Russian language proficiency, Contextual disambiguation, Linguistic-aware reasoning
 
-Authors: Denis Shevelev, Alexander Astafurov, Alexander Kharitonov
+Contributors: Denis Shevelev, Alexander Astafurov, Alexander Kharitonov
 
 ## Motivation
 

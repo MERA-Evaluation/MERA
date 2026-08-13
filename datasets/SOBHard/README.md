@@ -1,6 +1,6 @@
 # SOBHard
 
-## Task description
+## Task Description
 
 SOBHard measures structured output between machine notations. The model is given
 a real document — sometimes two — and must return a document in another notation,
@@ -45,7 +45,7 @@ input document: these are questions where the correct action is to return an
 already-correct fragment unchanged. They are kept in the set on purpose — they
 test that the model does not break valid data.
 
-Model skills tested: Structured output, Format conversion, Format control,
+Evaluated skills: Structured output, Format conversion, Format control,
 Instruction following, Long-form exact generation
 
 Contributors: Artem Chervyakov
@@ -74,14 +74,14 @@ an arithmetic mean cannot tell an even model from an uneven one, and for a
 pipeline those are different things — hence a geometric mean over the cells,
 which penalises failing a whole class of work.
 
-## Data description
+## Data Description
 
 Two splits, divided by role rather than by size. `test` holds the 825 graded
 questions. `shots` holds the 203 rows that may be shown with their answers: ten
 demonstrations, and the 193 earlier turns of the 75 conversations. Those answers
 are the history a graded turn continues.
 
-### What is balanced
+### What Is Balanced
 
 One axis is exact, and the rest are not. Reading a rate off an axis that is not
 balanced is fine where the levels are large and misleading where they are not,
@@ -113,7 +113,7 @@ A rate over `properties` as a target is three questions wide and means nothing;
 `ini` and `properties` as sources are barely more. The corpus is uneven the same
 way: 114 files, a median of 5 questions each, and one table behind 93 of them.
 
-### Data fields
+### Data Fields
 
 - `instruction` [str] — the prompt template with slots for the question's parts
 - `inputs` [dict] — the four prompt blocks: `task` (what the work is and in which
@@ -154,7 +154,7 @@ Four blocks with text labels, always in the same order, the instruction last:
 `command` — in four editions each. How they are spread is under "What is
 balanced".
 
-### Multi-turn questions
+### Multi-turn Questions
 
 The `session` family is 75 conversations over 268 turns — thirty-six of three
 turns, thirty-five of four, four of five. The first turn shows the document;
@@ -176,7 +176,7 @@ The few-shot count is an upper bound on the number of replayed turns, not a
 number of examples: history goes to the graded turns of conversations only, and
 the other 750 questions stay single-turn under the same command.
 
-### Dataset creation
+### Dataset Creation
 
 **Sources.** 114 real files from open repositories — configurations, data dumps,
 tables, schemas — read as 139 distinct documents, since a large file is entered
@@ -221,4 +221,3 @@ turn's prompt.
   within a 1e-6 relative tolerance, strings match byte for byte.
 - `task_pass_rate` — the family's own semantics: what a comparison with the
   reference cannot see.
-

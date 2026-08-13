@@ -1,7 +1,7 @@
 # ruAIME
 
 
-## Task description
+## Task Description
 
 This dataset contains problems from the American Invitational Mathematics Examination (AIME) from 1983 to 2025. The problems cover all key areas of advanced mathematics: algebra, geometry, calculus, combinatorics, number theory, probability, and statistics. They require the model to have a deep understanding of mathematical concepts, the ability to perform multi-step transformations, identify non-obvious connections, and apply creative problem-solving approaches. The dataset is designed to evaluate models' capabilities for complex mathematical reasoning in conditions approximating olympiad-level competitions.
 
@@ -25,9 +25,9 @@ Evaluated Capabilities:
 The problem design (requiring a precise numerical answer) allows for an unambiguous evaluation of the solution's correctness. This format eliminates subjectivity in checking and focuses the assessment on the final result of the model's reasoning. The metric—the proportion of correct answers (accuracy)—is strict and interpretable: it shows what fraction of problems in the set the model can solve completely and without errors.
 
 
-## Data description
+## Data Description
 
-### Data fields
+### Data Fields
 
 Each dataset question includes data in the following fields:
 
@@ -49,7 +49,7 @@ Each dataset question includes data in the following fields:
             - `text` [str] — Problem solution text
 
 
-### Data formatting example
+### Data Formatting Example
 
 ```json
 {
@@ -97,12 +97,12 @@ Prompt example:
 ```
 
 
-### Few-shot examples
+### Few-shot Examples
 
 During evaluation, 2 demonstration examples from `shots.json` are used (`num_fewshot=2`). They follow the same data format as the test set and illustrate the expected answer format.
 
 
-### Dataset creation
+### Dataset Creation
 
 The dataset was created based on official AIME materials from 1983 to 2025. The data source was the Art of Problem Solving (AoPS) resource.
 

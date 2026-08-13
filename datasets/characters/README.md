@@ -4,9 +4,9 @@
 
 The **Characters** dataset is designed to evaluate the ability of language models to determine whether responses and questions match one of several given characters based on their personality, interests, speech patterns, and constraints. The benchmark tests a model's ability to analyze response consistency, identify the appropriate addressee for a question to obtain the most accurate answer, and verify factual correctness within a character's domain of knowledge.
 
-Model skills tested: persona consistency understanding, Russian language proficiency, factual correctness validation.
+Evaluated skills: Persona consistency understanding, Russian language proficiency, Factual correctness validation
 
-Authors: Denis Shevelev, Alexander Astafurov, Alexander Kharitonov
+Contributors: Denis Shevelev, Alexander Astafurov, Alexander Kharitonov
 
 ## Motivation
 
@@ -84,7 +84,7 @@ Each example uses six answer-option fields (`option_a`–`option_f`). Unused opt
 
 ### Data Example
 
-#### Type 1 (with an address, "which answer would this character give")
+#### Type 1 (with an Address, "Which Answer Would This Character Give")
 
 ```json
 {
@@ -107,7 +107,7 @@ Each example uses six answer-option fields (`option_a`–`option_f`). Unused opt
 }
 ```
 
-#### Type 2 (with an address, "which answer would this character never give")
+#### Type 2 (with an Address, "Which Answer Would This Character Never Give")
 
 ```json
 {
@@ -130,7 +130,7 @@ Each example uses six answer-option fields (`option_a`–`option_f`). Unused opt
 }
 ```
 
-#### Type 3 (without an address, "which character would give the clearest answer to this question")
+#### Type 3 (Without an Address, "Which Character Would Give the Clearest Answer to This Question")
 
 ```json
 {
@@ -153,7 +153,7 @@ Each example uses six answer-option fields (`option_a`–`option_f`). Unused opt
 }
 ```
 
-#### Type 4 (without an address, "to which of the listed characters is it completely pointless to ask this question")
+#### Type 4 (Without an Address, "to Which of the Listed Characters Is It Completely Pointless to Ask This Question")
 
 ```json
 {

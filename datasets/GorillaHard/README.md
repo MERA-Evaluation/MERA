@@ -1,7 +1,7 @@
 # GorillaHard
 
 
-## Task description
+## Task Description
 
 GorillaHard measures how well a model can select tools to solve a user request. Each question gives the model a catalog of 14–22 tools, one or two attached files, a request over them, and a block with format requirements. The answer is a single JSON object of one of five kinds:
 
@@ -17,7 +17,7 @@ All prompts and items in the dataset are in Russian. Scoring is multi-part and c
 
 The dataset holds **1169 questions**. It is split into difficulty tiers: `T1_medium` 16, `T2_hard` 56, `T3_expert` 329, `T4_wild` 768. By answer kind: 782 single calls, 51 plans, 199 sets of independent calls, 10 clarifications, 127 refusals.
 
-Skills tested: Tool selection, Multi-step planning, Parallel tool calls, Clarification, Instruction following, Format control, Abstention, Prompt-injection resistance, Long-context grounding, Multi-turn dialogue, Deprecated API handling
+Evaluated skills: Tool selection, Multi-step planning, Parallel tool calls, Clarification, Instruction following, Format control, Abstention, Prompt-injection resistance, Long-context grounding, Multi-turn dialogue, Deprecated API handling
 
 Contributors: Artem Chervyakov
 
@@ -33,12 +33,12 @@ Contributors: Artem Chervyakov
 **Why these metrics.** A call with the right tool but the wrong file cannot be executed, so `sample_pass_rate` is all-or-nothing over format and content at once. `balance_score` asks instead whether the model covers every difficulty lever or merely wins on the largest ones: levers enter a geometric mean with equal weight and a 0.01 floor, so the composition of the set does not move it and a failed capability costs a quarter of the score. `dialog_pass_rate` credits a dialogue only in full. The rest are diagnostic: they separate failure modes that need different fixes — format discipline, tool choice, invented names, too much or too little caution.
 
 
-## Dataset description
+## Dataset Description
 
-### Data fields
+### Data Fields
 
 - `instruction` [str] — the instruction prompt with placeholders for the question blocks;
-- `inputs`:
+- `inputs` — the task input data:
     - `question` [str] — what has to be done;
     - `context` [str] — the attached files, one or two, each under a `[файл: path]` header. The path exists only here — the question never names it;
     - `tools` [str] — the catalog as a JSON string: name, family, description, parameters and operational constraints;
@@ -47,7 +47,7 @@ Contributors: Artem Chervyakov
 - `meta` — metadata hidden from the model:
     - `id` [int] — row number;
     - `base_id` [str] — question identifier; each question ships as exactly one row;
-    - `dialog_id` [str] — dialogue identifier; rows sharing it are turns of one conversation. The evaluated turn of a dialogue is in the test split, every turn preceding it is in `shots`. For a single-turn question it equals `base_id`;
+    - `dialog_id` [str] — dialogue identifier; rows sharing it are turns of one conversation. The evaluated turn of a dialogue is in `test`, every turn preceding it is in `shots`. For a single-turn question it equals `base_id`;
     - `turn_id` [int] — turn index within the dialogue, from zero. In the test split this is always the last turn, `n_turns − 1`;
     - `n_turns` [int] — dialogue length in turns; `dialog_pass_rate` is computed over rows above one;
     - `needs_history` [str] — how the turn depends on the conversation, comma-separated: `tool` — the operation is named only in earlier turns, `args` — an argument value carries over, `trap` — the turn cancels the previous one and is self-contained on purpose; empty for first turns and single-turn questions. Every evaluated dialogue turn has a non-empty value: a turn answerable without the history would make the multi-turn part decorative;
@@ -64,7 +64,7 @@ Contributors: Artem Chervyakov
         - `cost_pick` [str] — whether the choice is decided by an operational caveat; `cost_optimal_rate` is computed over `yes`;
         - `injected_tool` [str] — the tool a planted instruction demands; `injection_resistance_rate` is computed over non-empty values.
 
-### Data example
+### Data Example
 
 Example from the `shots` split, `id=1` (the `tools` field shows 2 of 22 catalog tools; all other fields match the data).
 
@@ -131,7 +131,7 @@ The task is evaluated zero-shot: the model is shown no worked examples. The few-
 Every metric is averaged only over the rows it applies to: mixing the denominators would cap tool selection by construction and would let a model that never refuses score high on abstention. Reasoning wrapped in `<think>...</think>` is stripped before checking (an unmatched `<think>` together with everything after it); beyond that the response is scored verbatim. Argument values are canonicalised, so `5`, `5.0` and `"5"` are one value. A refusal where a call was expected is a content error, not a format error: one wrong decision is not penalised twice.
 
 
-## Dataset creation
+## Dataset Creation
 
 Every question is derived from the contents of a file: the question, the catalog and the reference answer all follow from it, and that is what makes exact automatic checking possible.
 
