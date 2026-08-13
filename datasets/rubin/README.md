@@ -7,7 +7,7 @@
 
 Evaluated skills: Culture code, Question Answering
 
-Authors: Polina Lazukova, Irina Piontkovskaya
+Contributors: Polina Lazukova, Irina Piontkovskaya
 
 
 ## Motivation
@@ -68,7 +68,7 @@ The release uses 10 values:
 
 `Song`, `Others`, `Proverb`, `Slang`, `Film`, `Riddle`, `Twister`, `Meme`, `Poems`, `Cartoon`.
 
-- `Others` aggregates rarer original domains (advertising, slogans and quotes, palindromes, counting rhymes, lullabies, etc.).
+- `Others` — aggregates rarer original domains (advertising, slogans and quotes, palindromes, counting rhymes, lullabies, etc.).
 
 
 ### Data Example

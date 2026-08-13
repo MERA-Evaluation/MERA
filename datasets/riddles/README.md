@@ -7,14 +7,16 @@
 
 Riddles encode information about an object or phenomenon through a compact set of distinctive properties, metaphor, personification, metonymy, sound imitation, and other forms of language play. The examples cover subjects ranging from traditional concepts such as the sky, road, night, day, moon, and stars to tools, occupations, and objects found in a modern home. Solving them requires the model to combine linguistic reasoning with attention to every clue in the question.
 
-Tested model skills: General reasoning, Problem solving, Metaphorical Thinking, Folklore, Language Games, Attention to Detail, Pattern recognition
+Evaluated skills: General reasoning, Problem solving, Metaphorical Thinking, Folklore, Language Games, Attention to Detail, Pattern recognition
 
-Authors: Denis Shevelev, Artem Chervyakov, Alexander Astafurov, Alexander Kharitonov
+Contributors: Denis Shevelev, Artem Chervyakov, Alexander Astafurov, Alexander Kharitonov
 
 
 ## Motivation
 
 The dataset evaluates whether advanced language models can interpret and decode information expressed through riddles, one of the oldest forms of knowledge transmission. In this format, information is compressed into a short and vivid description through metaphor and other linguistic devices.
+
+### Intended Users
 
 The results may be useful to AI researchers studying linguistic and creative reasoning and to developers of educational systems for school and preschool learning. Performance indicates whether a model can act as a solver of traditional and modern riddles, which can inform research on language-based reasoning and the development of intelligent assistants and tutoring tools.
 
@@ -43,12 +45,12 @@ Each example has a set of acceptable reference answers, including synonyms and, 
 
 Each example contains the following fields:
 
-- `instruction` [str] - a string containing the task formulation for the language model.
-- `inputs` - input data forming the task:
-    - `question` [str] - the riddle text.
-- `outputs` [str] - a string containing one or more acceptable answer words or phrases separated by the sequence `; `. A model answer is correct if it matches at least one variant.
-- `meta` - metadata:
-    - `id` [int] - example number.
+- `instruction` [str] — a string containing the task formulation for the language model.
+- `inputs` — input data forming the task:
+    - `question` [str] — the riddle text.
+- `outputs` [str] — a string containing one or more acceptable answer words or phrases separated by the sequence `; `. A model answer is correct if it matches at least one variant.
+- `meta` — metadata:
+    - `id` [int] — example number.
 
 ### Data Example
 

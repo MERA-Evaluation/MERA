@@ -6,9 +6,9 @@
 
 The dataset contains 600 examples balanced across 12 classes (11 types of comic effect plus a "not a joke" class). Each main text is paired with four additional options (А, Б, В, Г).
 
-Tested model skills: Text Analysis, Semantic Textual Similarity, Humor Detection, Humor Classification, Humor Recognition, Irony Recognition
+Evaluated skills: Text Analysis, Semantic Textual Similarity, Humor Detection, Humor Classification, Humor Recognition, Irony Recognition
 
-Authors: Denis Shevelev, Alexandra Eliseeva, Alexander Kharitonov, Alexander Astafurov
+Contributors: Denis Shevelev, Alexandra Eliseeva, Alexander Kharitonov, Alexander Astafurov
 
 ## Motivation
 

@@ -7,7 +7,7 @@
 
 В примерах на вход модели подаются текстовый контекст, вопрос и варианты ответа. В заданиях типа `rwsd` дополнительно подается референс, который нужно соотнести с одним из вариантов; в заданиях типа `kusdra` требуется выбрать вариант, правильно отвечающий на вопрос по контексту.
 
-Тестируемые навыки моделей: Russian language proficiency, Coreference resolution, Syntactic ambiguity resolution, Lexical ambiguity resolution, Morphological reasoning, Contextual reasoning.
+Проверяемые навыки: Russian language proficiency, Coreference resolution, Syntactic ambiguity resolution, Lexical ambiguity resolution, Morphological reasoning, Contextual reasoning.
 
 Авторы: Денис Шевелев, Александр Харитонов, Александр Астафуров
 

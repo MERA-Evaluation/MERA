@@ -1,7 +1,7 @@
 # SAGE
 
 
-## Task description
+## Task Description
 
 The SAGE dataset is designed to evaluate the ability of language models to automatically correct errors in Russian text. The task is formulated as a text-to-text transformation problem: converting erroneous text into its corrected version. Models are expected to correct spelling and punctuation errors without adding comments or explanations. This dataset is an improved version of the publicly available SAGE dataset (v1.1.0), published on [Hugging Face](https://huggingface.co/ai-forever/sage-v1.1.0). The dataset is intended for text-to-text models and enables quantitative evaluation of automatic text correction quality.
 
@@ -14,7 +14,7 @@ Contributors: Danil Astafurov, Ulyana Isaeva, Alena Fenogenova, Anastasia Mordas
 
 ## Motivation
 
-### Target models
+### Target Models
 The dataset is intended for generative language models capable of text editing and automatic error correction.
 
 ### Limitations
@@ -25,7 +25,7 @@ The benchmark is not intended to evaluate:
 - semantic text improvement
 - multilingual text correction
 
-### Evaluated capabilities
+### Evaluated Capabilities
 The task evaluates a model’s ability to:
 - detect different types of errors
 - correct them accurately
@@ -33,10 +33,10 @@ The task evaluates a model’s ability to:
 
 This goes beyond basic language understanding and focuses on practical text editing ability.
 
-### Intended users
+### Intended Users
 The results are intended for NLP researchers and practitioners evaluating text generation and post-processing quality.
 
-### Interpretation of metrics
+### Interpretation of Metrics
 The metrics reflect the quality of correcting spelling and punctuation errors, allowing evaluation of model strengths and weaknesses.
 
 ### Validity
@@ -45,9 +45,9 @@ The benchmark design controls key evaluation factors: stratified sampling based 
 At the same time, the benchmark has validity limitations. Some cases of Russian punctuation may allow multiple acceptable interpretations in the gold annotations. Mandatory restoration of the letter \"ё\" is an intentional design choice and may affect evaluation results for models trained on alternative writing conventions. In addition, the aggregated metric `ERRANT_F1` does not capture relationships between different error types and should be interpreted together with task-specific metrics.
 
 
-## Data description
+## Data Description
 
-### Data fields
+### Data Fields
 
 Each dataset question includes data in the following fields:
 
@@ -59,7 +59,7 @@ Each dataset question includes data in the following fields:
     - `id` [int] — Identification number of the question in the dataset.
 
 
-### Data formatting example
+### Data Formatting Example
 
 ```json
 {
@@ -113,7 +113,7 @@ Prompt example:
 ```
 
 
-### Dataset creation
+### Dataset Creation
 
 ### Data Sources
 
@@ -144,6 +144,6 @@ The initial pool consisted of 2,500 sample, of which 1,000 examples were selecte
 
 Metrics for aggregated evaluation of responses:
 
-- `SPELL_F1`: F1 score measuring the quality of spelling error correction.  
-- `PUNCT_F1`: F1 score measuring the quality of punctuation error correction.  
+- `SPELL_F1`: F1 score measuring the quality of spelling error correction.
+- `PUNCT_F1`: F1 score measuring the quality of punctuation error correction.
 - `ERRANT_F1`: an aggregated metric defined as the average of SPELL_F1 and PUNCT_F1, reflecting the overall quality of text correction.

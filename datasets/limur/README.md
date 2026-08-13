@@ -7,9 +7,9 @@
 
 The model receives a textual context, a question, and answer options. Examples of type `rwsd` also provide a reference to be matched with one option; examples of type `kusdra` require the option that correctly answers the contextual question.
 
-Tested model skills: Russian language proficiency, Coreference resolution, Syntactic ambiguity resolution, Lexical ambiguity resolution, Morphological reasoning, Contextual reasoning.
+Evaluated skills: Russian language proficiency, Coreference resolution, Syntactic ambiguity resolution, Lexical ambiguity resolution, Morphological reasoning, Contextual reasoning.
 
-Authors: Denis Shevelev, Alexander Kharitonov, Alexander Astafurov
+Contributors: Denis Shevelev, Alexander Kharitonov, Alexander Astafurov
 
 
 ## Motivation

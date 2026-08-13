@@ -6,7 +6,7 @@
 
 В датасете 600 примеров, сбалансированных по 12 классам (11 типов юмористического эффекта и класс «не анекдот»). К каждому основному тексту даны четыре дополнительных варианта (А, Б, В, Г).
 
-Тестируемые навыки моделей: Text Analysis, Semantic Textual Similarity, Humor Detection, Humor Classification, Humor Recognition, Irony Recognition
+Проверяемые навыки: Text Analysis, Semantic Textual Similarity, Humor Detection, Humor Classification, Humor Recognition, Irony Recognition
 
 Авторы: Денис Шевелев, Александра Елисеева, Александр Харитонов, Александр Астафуров
 

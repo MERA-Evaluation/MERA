@@ -110,5 +110,5 @@ Examples are annotated with four task types: А — "Task or trick", Б — "Seq
 
 The following metrics are used for aggregated evaluation:
 
-- **Exact match (EM)**: the proportion of model answers that exactly match the reference answer after extracting the string following the `Answer` marker.
+- **Exact match (EM)**: the proportion of model answers that exactly match the reference answer after extracting the string following the `Ответ:` marker.
 - **LLM judge score**: a metric where an LLM judge compares the model answer with the reference answer for each example. If the answer is judged correct, the example receives 1; if it is judged incorrect, it receives 0. The final metric value is the proportion of examples that received 1.

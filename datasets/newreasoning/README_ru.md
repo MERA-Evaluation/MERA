@@ -6,7 +6,7 @@ NewReasoning — русскоязычный датасет для оценки �
 
 Датасет проверяет устойчивость модели к логическим ловушкам, подменам условий, изменению количественных и качественных параметров и нарушению порядка рассуждения.
 
-Тестируемые навыки моделей: Reasoning, Critical Thinking, Deductive Reasoning, Inductive Reasoning, Abductive Reasoning, Analogical Reasoning, Cause-and-Effect Reasoning, Decompositional Reasoning, Case-based Reasoning, Value Reasoning.
+Проверяемые навыки: Reasoning, Critical Thinking, Deductive Reasoning, Inductive Reasoning, Abductive Reasoning, Analogical Reasoning, Cause-and-Effect Reasoning, Decompositional Reasoning, Case-based Reasoning, Value Reasoning.
 
 Авторы: Денис Шевелев, Александр Харитонов, Александр Астафуров
 
