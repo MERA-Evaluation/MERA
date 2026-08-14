@@ -1,8 +1,8 @@
 {
-    "dataset_name": "RuBIN",
+    "dataset_name": "RUBIN",
     "license": "MERA_private",
     "dataset_size": 783,
-    "description": "**RuBIN** is a Russian-language cultural-code MCQ dataset evaluating whether language models understand culture-specific phrases and phenomena (memes, slang, songs, films, folklore, tongue twisters, sayings, and related material).",
+    "description": "**RUBIN** is a Russian-language cultural-code MCQ dataset evaluating whether language models understand culture-specific phrases and phenomena (memes, slang, songs, films, folklore, tongue twisters, sayings, and related material).",
     "modalities": [
         "text"
     ],
@@ -81,8 +81,8 @@
                 "en": "whether the item is a phrase-completion question"
             },
             "is_easy": {
-                "ru": "входил ли пример в RuBIN-Easy по результатам HumanEval",
-                "en": "whether the item belonged to RuBIN-Easy according to HumanEval"
+                "ru": "входил ли пример в RUBIN-Easy по результатам HumanEval",
+                "en": "whether the item belonged to RUBIN-Easy according to HumanEval"
             }
         }
     },
