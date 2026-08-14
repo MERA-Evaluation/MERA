@@ -31,8 +31,14 @@ from lm_eval.utils import sanitize_model_name
 
 
 # Task name as it appears in the log file names -> submission file name.
-# The names on the right are the `dataset_name` values from
-# datasets/*/dataset_meta.json, which is what the leaderboard expects.
+#
+# The names on the right must equal the scoring service's own mapping in
+# `mera_scoring/src/domain/text_2_0/result_utils.py`; that is the name it opens
+# the file by. Two of them do not match `dataset_name` in
+# datasets/*/dataset_meta.json — RUBIN, and SOB-Hard, whose task class carries
+# an explicit `TASK_NAME = "SOB-Hard"`. A name that differs by case or a hyphen
+# costs the whole task without an error: the service looks for a file that is
+# not in the archive, on a case-sensitive filesystem, and scores nothing.
 TASKS: Dict[str, str] = {
     "characters": "Characters",
     "enantiosemy": "Enantiosemy",
@@ -42,10 +48,10 @@ TASKS: Dict[str, str] = {
     "limur": "LIMUR",
     "newreasoning": "NewReasoning",
     "riddles": "Riddles",
-    "rubin": "RuBIN",
+    "rubin": "RUBIN",
     "russianregions": "RussianRegions",
     "sage": "SAGE",
-    "sobhard": "SOBHard",
+    "sobhard": "SOB-Hard",
 }
 
 SAMPLES_PREFIX = "samples_"

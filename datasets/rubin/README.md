@@ -1,9 +1,9 @@
-# RuBIN
+# RUBIN
 
 
 ## Task Description
 
-**RuBIN** is a text dataset of Russian cultural-code items (HSE / Huawei). It evaluates whether models understand phrases and linguistic phenomena that are specific not only to the language itself, but to its cultural environment: memes, slang, songs, films, folklore, tongue twisters, sayings, and related material.
+**RUBIN** is a text dataset of Russian cultural-code items (HSE / Huawei). It evaluates whether models understand phrases and linguistic phenomena that are specific not only to the language itself, but to its cultural environment: memes, slang, songs, films, folklore, tongue twisters, sayings, and related material.
 
 Evaluated skills: Culture code, Question Answering
 
@@ -39,7 +39,7 @@ The task format is **multiple-choice with a single correct option** (letters А,
 
 The current MERA release contains **783** test examples and **5** few-shot examples (**788** in total).
 
-The original RuBIN pool has 5000 standardized questions. After HumanEval with native speakers (Yandex Tasks), items with human accuracy of at least 50% formed the RuBIN-Easy subset (4216 examples). This release mainly includes “hard” items (`is_easy=false`, human accuracy below 50%), plus 5 easy examples in `shots`.
+The original RUBIN pool has 5000 standardized questions. After HumanEval with native speakers (Yandex Tasks), items with human accuracy of at least 50% formed the RUBIN-Easy subset (4216 examples). This release mainly includes “hard” items (`is_easy=false`, human accuracy below 50%), plus 5 easy examples in `shots`.
 
 
 ### Data Fields
@@ -59,7 +59,7 @@ Each example contains the following fields:
     - `type` [str] — cultural category (see below);
     - `year` [str] — year of appearance / peak cultural relevance; `"Unknown"` if unavailable;
     - `is_phrase_ending` [bool] — whether the item is a phrase-completion question;
-    - `is_easy` [bool] — whether the item belonged to RuBIN-Easy according to HumanEval.
+    - `is_easy` [bool] — whether the item belonged to RUBIN-Easy according to HumanEval.
 
 
 ### Categories (`meta.type`)
