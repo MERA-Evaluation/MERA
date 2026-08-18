@@ -6,9 +6,9 @@
 
 The MERA subset focuses on 5 Dense Context (DC) question types at 3 sequence lengths (32, 64, 128 steps), totaling 15 subtasks with 50 questions each (750 total).
 
-Tested model skills: Long-context reasoning, Dense aggregation, Counting, Temporal tracking
+Evaluated skills: Long-context reasoning, Dense aggregation, Counting, Temporal tracking
 
-Authors: Boris Shirokikh, Maxim Kurkin
+Contributors: Boris Shirokikh, Maxim Kurkin
 
 ## Motivation
 

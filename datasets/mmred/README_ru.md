@@ -6,7 +6,7 @@
 
 Подмножество для MERA включает 5 типов вопросов Dense Context (DC) при 3 длинах последовательности (32, 64, 128 шагов) — итого 15 подзадач по 50 вопросов (750 вопросов).
 
-Тестируемые навыки моделей: Long-context reasoning, Dense aggregation, Counting, Temporal tracking
+Проверяемые навыки: Long-context reasoning, Dense aggregation, Counting, Temporal tracking
 
 Авторы: Борис Широких, Максим Куркин
 

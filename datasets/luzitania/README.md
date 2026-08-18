@@ -1,7 +1,7 @@
 # Luzitania
 
 
-## Task description
+## Task Description
 
 **Luzitania** is a dataset for evaluating the ability of language models to solve mathematical problems in Russian. The dataset focuses on multi-step textual reasoning and measures the model's ability to arrive at the correct answer given the problem statement.
 
@@ -17,9 +17,9 @@ Contributors: Irina Piontkovskaya, Alexey Rukhovich, Kirill Morozov, Maksim Tito
 This dataset tests the ability of models to build sequential reasoning in the mathematical domain and arrive at justified answers. The difficulty level requires models to maintain the reasoning chain and sometimes perform lengthy calculations. The dataset is not intended for evaluating multimodal capabilities or image understanding: all problem statements are textual. The dataset helps to understand how well a model maintains context, does not get "confused" in reasoning, and arrives at a justified numerical result.
 
 
-## Data description
+## Data Description
 
-### Data fields
+### Data Fields
 
 Each dataset question includes data in the following fields:
 
@@ -31,7 +31,7 @@ Each dataset question includes data in the following fields:
     - `id` [int] — Identification number of the question in the dataset.
     - `source` [str] — a string indicating the problem source (see the Dataset Creation section).
 
-### Data formatting example
+### Data Formatting Example
 
 ```json
 {
@@ -59,7 +59,7 @@ Prompt example:
 ```
 
 
-### Dataset creation
+### Dataset Creation
 
 The test set was collected from open sources, with problem statements translated into Russian where necessary. Below are all problem sources (i.e., all possible unique values in the `meta.source` field) and the number of problems from each source in the dataset.
 
@@ -71,7 +71,7 @@ The test set was collected from open sources, with problem statements translated
 | turgor | 30 |
 | chinese_olympiads_2002_2006 | 7 |
 
-#### olympiads
+#### Olympiads
 
 Problems taken from the open dataset [olympiads](https://huggingface.co/datasets/aslawliet/olympiads).
 
@@ -91,7 +91,7 @@ The MathArena group includes problems originating from the following open subset
 - [ArXivMath_Dec_2025](https://huggingface.co/datasets/MathArena/arxivmath-1225)
 - [apex](https://huggingface.co/datasets/MathArena/apex_2025)
 
-#### turgor
+#### Turgor
 
 Problems from the "Tournament of Towns".
 
