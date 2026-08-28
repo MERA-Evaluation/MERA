@@ -1,0 +1,84 @@
+dataset_path: MERA-evaluation/Complete
+task: complete
+
+
+test_split: test
+fewshot_split: test
+
+
+output_type: generate_until
+
+doc_to_text: !function utils.doc_to_text
+doc_to_target: "{{ outputs.strip() }}"
+
+
+fewshot_config:
+  sampler: default
+
+generation_kwargs:
+  do_sample: false
+
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: remove_whitespace_and_nones
+      - function: "take_first"
+
+process_results: !function utils.process_results_generative_metrics
+
+
+
+metric_list:
+  - metric: em
+    aggregation: mean
+    higher_is_better: true
+  - metric: f1
+    aggregation: mean
+    higher_is_better: true
+  - metric: f1_gen
+    aggregation: mean
+    higher_is_better: true
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+  - metric: rouge1
+    aggregation: mean
+    higher_is_better: true
+  - metric: rouge2
+    aggregation: mean
+    higher_is_better: true
+  - metric: rougeL
+    aggregation: mean
+    higher_is_better: true
+  - metric: sentence_bleu
+    aggregation: mean
+    higher_is_better: true
+  - metric: levenshtein
+    aggregation: mean
+    higher_is_better: true
+  - metric: token_overlap_f1
+    aggregation: mean
+    higher_is_better: true
+  - metric: meteor
+    aggregation: mean
+    higher_is_better: true
+  - metric: bertscore
+    aggregation: mean
+    higher_is_better: true
+  - metric: comet
+    aggregation: mean
+    higher_is_better: true
+  - metric: bleurt
+    aggregation: mean
+    higher_is_better: true
+  - metric: embedding_cosine
+    aggregation: mean
+    higher_is_better: true
+  - metric: llm_judge
+    aggregation: mean
+    higher_is_better: true
+
+num_fewshot: null
+
+metadata:
+  version: 1.0
