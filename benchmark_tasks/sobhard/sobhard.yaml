@@ -5,7 +5,14 @@ dataset_path: MERA-evaluation/SOBHard
 task: sobhard
 
 test_split: test
-fewshot_split: shots
+# fewshot_split обязан совпадать с test_split: upstream передаёт сэмплеру
+# текущий документ только при совпадении сплитов (task.py: eval_doc=doc if
+# fewshot_cfg.split == test_split else None), а без него DualDialogueSampler
+# не знает, из какого диалога тянуть историю, и многоходовые документы молча
+# теряют её. Пул тестовых строк, который харнесс при этом передаёт, сэмплер
+# не использует: сплит shots с ответами он читает сам. Подробности в
+# ../dual_samplers.py.
+fewshot_split: test
 
 output_type: generate_until
 doc_to_text: "{{instruction.format(**inputs)}}"

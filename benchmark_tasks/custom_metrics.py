@@ -1,3 +1,5 @@
+import sklearn.metrics
+import numpy as np
 from transformers.data.metrics.squad_metrics import compute_exact
 
 
@@ -39,3 +41,11 @@ def aggregate_group_score(items):
         else:
             metric_list.extend([0])
     return sum(metric_list) / len(metric_list)
+
+
+def f1_score_multiclass_macro(items):
+    unzipped_list = list(zip(*items))
+    golds = unzipped_list[0]
+    preds = unzipped_list[1]
+    fscore = sklearn.metrics.f1_score(golds, preds, average="macro")
+    return np.max(fscore)
