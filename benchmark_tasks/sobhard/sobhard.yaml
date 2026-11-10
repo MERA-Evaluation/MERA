@@ -25,10 +25,16 @@ fewshot_config:
 
 target_delimiter: "\n\n"
 
+# max_gen_toks applies only when --gen_kwargs does not set it (the CLI value
+# wins). It shares the context window with the prompt (up to ~51k tokens with
+# Qwen3's tokenizer), and the harness left-truncates the prompt to
+# window - max_gen_toks. Reference answers reach ~10.6k tokens, so 16384 leaves
+# room for them while 65536 exceeded a 40960 window and left no room for the
+# prompt at all.
 generation_kwargs:
   do_sample: false
   temperature: 0.0
-  max_gen_toks: 65536
+  max_gen_toks: 16384
   until:
     - "<|eot_id|>"
     - "<|im_end|>"
