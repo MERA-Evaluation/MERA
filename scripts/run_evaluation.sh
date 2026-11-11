@@ -8,14 +8,15 @@ PACKER="$ROOT/scripts/log_to_submission_v2.py"
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") -a MODEL_ARGS -g GEN_KWARGS [options] [-- extra lm_eval args]
+Usage: $(basename "$0") -a MODEL_ARGS [-g GEN_KWARGS] [options] [-- extra lm_eval args]
 
 Required:
   -a, --model_args ARGS     lm_eval --model_args, e.g. "pretrained=Qwen/Qwen3-8B,dtype=bfloat16"
-  -g, --gen_kwargs ARGS     lm_eval --gen_kwargs; must set max_gen_toks
-                            (the harness default of 256 empties reasoning-model answers)
 
 Options:
+  -g, --gen_kwargs ARGS     lm_eval --gen_kwargs, e.g. "do_sample=False,max_gen_toks=8192".
+                            Without max_gen_toks a task uses its yaml value, else the
+                            harness default of 256, which empties reasoning-model answers
   -m, --model ENGINE        lm_eval engine (default: hf)
   -t, --tasks T1,T2,...     subset of tasks (default: all tasks known to the packer)
   -o, --output_path DIR     logs directory (default: ./mera_results)
@@ -81,7 +82,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 [[ -n "$MODEL_ARGS" ]] || die "--model_args is required (see --help)"
-[[ "$GEN_KWARGS" == *max_gen_toks=* ]] || die "--gen_kwargs must set max_gen_toks, e.g. \"do_sample=False,max_gen_toks=8192\""
+[[ "$GEN_KWARGS" == *max_gen_toks=* ]] || echo "warning: --gen_kwargs has no max_gen_toks; tasks without it in yaml" \
+  "generate at most 256 tokens, too few for reasoning models (e.g. -g \"max_gen_toks=8192\")" >&2
 command -v lm_eval >/dev/null || die "lm_eval not found; activate the environment with the harness installed"
 
 # The packer's TASKS dict is the single list of v2 tasks: running a task it does not
@@ -97,12 +99,13 @@ done
 # ---- run tasks ----------------------------------------------------------------
 # Fixed for comparability with the leaderboard: answers are scored remotely.
 FLAGS=(
-  --model "$MODEL" --model_args "$MODEL_ARGS" --gen_kwargs "$GEN_KWARGS"
+  --model "$MODEL" --model_args "$MODEL_ARGS"
   --device "$DEVICE" --batch_size "$BATCH_SIZE"
   --include_path "$ROOT/benchmark_tasks" --output_path "$OUTPUT_PATH"
   --predict_only --log_samples --seed 1234 --verbosity ERROR
 )
 $CHAT_TEMPLATE && FLAGS+=(--apply_chat_template --fewshot_as_multiturn)
+[[ -n "$GEN_KWARGS" ]] && FLAGS+=(--gen_kwargs "$GEN_KWARGS")
 [[ -n "$LIMIT" ]] && FLAGS+=(--limit "$LIMIT")
 FLAGS+=(${EXTRA_ARGS[@]+"${EXTRA_ARGS[@]}"})
 
